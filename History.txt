@@ -1,0 +1,4 @@
+== 0.1.1 2007-11-26
+
+* 1 First release as a GEM
+  * Moved all non rails functions into this GEM from the Rails plugin http://code.google.com/p/oauth-plugin/

@@ -1,0 +1,66 @@
+h1. Ruby OAuth GEM
+
+h2. What
+
+This is a RubyGem for implementing both OAuth clients and servers in Ruby applications.
+
+See the "OAuth specs":http://oauth.googlecode.com/svn/spec/branches/1.0/drafts/7/spec.html
+
+h2. Installing
+
+<pre syntax="ruby">sudo gem install oauth</pre>
+
+
+h2. The basics
+
+This is a ruby library which is intended to be used in creating Ruby Consumer and Service Provider applications. It is NOT a Rails plugin, but could easily be used for the foundation for such a Rails plugin.
+
+As a matter of fact it has been pulled out from an "OAuth Rails Plugin":http://code.google.com/p/oauth-plugin/ which in the future will require this GEM.
+
+h2. Demonstration of usage
+
+Create a new consumer instance by passing it a configuration hash:
+
+<pre><code>@consumer=OAuth::Consumer.new( {
+    :consumer_key=>"key",
+    :consumer_secret=>"secret",
+    :site=>"https://agree2"
+    })</code></pre>
+
+Start the process by requesting a token
+
+<pre><code>@request_token=@consumer.get_request_token
+session[:request_token]=@request_token
+redirect_to @request_token.authorize_url</code></pre>
+
+When user returns create an access_token
+
+<pre><code>@access_token=@request_token.get_access_token
+@photos=@access_token.get('/photos.xml')</code></pre>
+
+h2. Documentation Wiki
+
+There is some documentation on the Google Code project for the "OAuth Rails Plugin":http://code.google.com/p/oauth-plugin/ :
+
+* "RequestToken":http://code.google.com/p/oauth-plugin/wiki/RequestToken
+* "AccessToken":http://code.google.com/p/oauth-plugin/wiki/AccessToken
+
+h2. Forum
+
+"http://groups.google.com/group/oauth-ruby":http://groups.google.com/group/oauth-ruby
+
+
+h2. How to submit patches
+
+Read the "8 steps for fixing other people's code":http://drnicwilliams.com/2007/06/01/8-steps-for-fixing-other-peoples-code/ and for section "8b: Submit patch to Google Groups":http://drnicwilliams.com/2007/06/01/8-steps-for-fixing-other-peoples-code/#8b-google-groups, use the Google Group above.
+
+The trunk repository is <code>svn://rubyforge.org/var/svn/oauth/trunk</code> for anonymous access.
+
+h2. License
+
+This code is free to use under the terms of the MIT license. 
+
+h2. Contact
+
+Comments are welcome. Send an email to "Pelle Braendgaard":mailto:pelleb@gmail.com email via the "forum":http://groups.google.com/group/oauth
+
