@@ -72,7 +72,7 @@ module OAuth
     def self.incoming(http_request)
       auth=http_request.env["HTTP_AUTHORIZATION"]
       if auth && auth[0..5]=="OAuth "
-        parameters=auth[6,auth.size].scan(/ ([^= ]+)="([^"]*)",?/).inject({}) do |h,(k,v)| 
+        parameters=auth[5,auth.size].scan(/ ([^= ]+)="([^"]*)",?/).inject({}) do |h,(k,v)| 
           h[k.to_sym]=CGI.unescape(v)
           h
         end
@@ -83,6 +83,7 @@ module OAuth
         _path=http_request.request_uri
 #        _path=http_request.path+'?'+non_auth
       end
+      return false unless  parameters[:oauth_consumer_key]&&parameters[:oauth_nonce]&&parameters[:oauth_timestamp]&&parameters[:oauth_signature_method]&&parameters[:oauth_signature]&&parameters[:oauth_version]
       if http_request.post?||http_request.put?
         Request.new(http_request.method,"http://#{http_request.host_with_port}",_path,parameters,http_request.raw_post,{'Content-Type'=>http_request.content_type})
       else

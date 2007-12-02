@@ -10,6 +10,7 @@ h2. Installing
 
 <pre syntax="ruby">sudo gem install oauth</pre>
 
+You can also install it from the "oauth rubyforge project":http://rubyforge.org/projects/oauth/.
 
 h2. The basics
 

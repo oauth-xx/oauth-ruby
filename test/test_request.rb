@@ -1,7 +1,4 @@
-require 'rubygems'
 require 'test/unit'
-require 'action_controller'
-require 'action_controller/test_process'
 require 'oauth'
 class RequestTest < Test::Unit::TestCase
   include OAuth::Key
@@ -278,5 +275,7 @@ class RequestTest < Test::Unit::TestCase
     assert_equal "file=vacation.jpg&size=original",@request.body
   end
 
-  
+  def test_empty_http_request_should_return_false
+    assert !OAuth::Request.incoming(ActionController::TestRequest.new())
+  end
 end

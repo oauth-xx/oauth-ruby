@@ -1,3 +1,8 @@
+== 0.1.2 2007-12-1
+
+* 1 Fixed a problem where incoming request didn't check whether oauth parameters where missing. While not giving unauthorized access it did cause extra processing where not necessary.
+* 2 Includes Pat's fix for getting the realm out.
+
 == 0.1.1 2007-11-26
 
 * 1 First release as a GEM
