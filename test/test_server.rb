@@ -1,5 +1,5 @@
 require 'test/unit'
-require 'oauth'
+require 'oauth/server'
 class ServerTest < Test::Unit::TestCase
   def setup
     @server=OAuth::Server.new "http://test.com"
@@ -37,11 +37,4 @@ class ServerTest < Test::Unit::TestCase
     assert_equal "http://test.com/oauth/access_token",@consumer.access_token_url
   end  
   
-  def test_verify_request
-    @consumer=@server.create_consumer 
-    @request=@consumer.signed_request :get,@consumer.request_token_path
-    assert @request.signed?
-    
-    assert @request.verify?(@consumer.secret)
-  end
 end

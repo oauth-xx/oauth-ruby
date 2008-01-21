@@ -33,7 +33,7 @@
     <h1>Ruby OAuth GEM</h1>
     <div id="version" class="clickable" onclick='document.location = "http://rubyforge.org/projects/oauth"; return false'>
       <p>Get Version</p>
-      <a href="http://rubyforge.org/projects/oauth" class="numbers">0.1.1</a>
+      <a href="http://rubyforge.org/projects/oauth" class="numbers">0.2.0</a>
     </div>
     <h2>What</h2>
 
@@ -41,13 +41,16 @@
 	<p>This is a RubyGem for implementing both OAuth clients and servers in Ruby applications.</p>
 
 
-	<p>See the <a href="http://oauth.googlecode.com/svn/spec/branches/1.0/drafts/7/spec.html">OAuth specs</a></p>
+	<p>See the <a href="http://oauth.net/core/1.0/">OAuth specs</a></p>
 
 
 	<h2>Installing</h2>
 
 
 	<p><pre class='syntax'><span class="ident">sudo</span> <span class="ident">gem</span> <span class="ident">install</span> <span class="ident">oauth</span></pre></p>
+
+
+	<p>You can also install it from the <a href="http://rubyforge.org/projects/oauth/">oauth rubyforge project</a>.</p>
 
 
 	<h2>The basics</h2>
@@ -65,9 +68,7 @@
 	<p>Create a new consumer instance by passing it a configuration hash:</p>
 
 
-<pre><code>@consumer=OAuth::Consumer.new( {
-    :consumer_key=&gt;"key",
-    :consumer_secret=&gt;"secret",
+<pre><code>@consumer=OAuth::Consumer.new( "key","secret", {
     :site=&gt;"https://agree2" 
     })</code></pre>
 
@@ -108,7 +109,7 @@ redirect_to @request_token.authorize_url</code></pre>
 	<p>Read the <a href="http://drnicwilliams.com/2007/06/01/8-steps-for-fixing-other-peoples-code/">8 steps for fixing other people&#8217;s code</a> and for section <a href="http://drnicwilliams.com/2007/06/01/8-steps-for-fixing-other-peoples-code/#8b-google-groups">8b: Submit patch to Google Groups</a>, use the Google Group above.</p>
 
 
-	<p>The trunk repository is <code>svn://rubyforge.org/var/svn/oauth/trunk</code> for anonymous access.</p>
+	<p>The trunk repository is <code>http://oauth.rubyforge.org/svn/trunk/</code> for anonymous access.</p>
 
 
 	<h2>License</h2>
@@ -120,9 +121,9 @@ redirect_to @request_token.authorize_url</code></pre>
 	<h2>Contact</h2>
 
 
-	<p>Comments are welcome. Send an email to <a href="mailto:pelleb@gmail.com">Pelle Braendgaard</a> email via the <a href="http://groups.google.com/group/oauth">forum</a></p>
+	<p>Comments are welcome. Send an email to <a href="mailto:pelleb@gmail.com">Pelle Braendgaard</a> email via the <a href="http://groups.google.com/group/oauth-ruby">OAuth Ruby mailing list</a></p>
     <p class="coda">
-      <a href="FIXME email">FIXME full name</a>, 26th November 2007<br>
+      <a href="FIXME email">FIXME full name</a>, 21st January 2008<br>
       Theme extended from <a href="http://rb2js.rubyforge.org/">Paul Battley</a>
     </p>
 </div>

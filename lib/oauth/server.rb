@@ -1,7 +1,9 @@
+require 'oauth/helper'
+require 'oauth/consumer'
 module OAuth
   # This is mainly used to create consumer credentials and can pretty much be ignored if you want to create your own
   class Server
-    include OAuth::Key
+    include OAuth::Helper
     attr_accessor :base_url
     
     @@server_paths={
@@ -20,19 +22,20 @@ module OAuth
     end
     
     def generate_consumer_credentials(params={})
-      ConsumerCredentials.new( *generate_credentials)
+      Consumer.new( *generate_credentials)
     end
 
     # mainly for testing purposes
     def create_consumer
       credentials=generate_credentials
-      Consumer.new( {
-        :site=>base_url,
-        :consumer_key=>credentials[0],
-        :consumer_secret=>credentials[1],
-        :request_token_path=>request_token_path,
-        :authorize_path=>authorize_path,
-        :access_token_path=>access_token_path
+      Consumer.new( 
+        credentials[0],
+        credentials[1],
+        {
+          :site=>base_url,
+          :request_token_path=>request_token_path,
+          :authorize_path=>authorize_path,
+          :access_token_path=>access_token_path
       })
     end
         
