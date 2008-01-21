@@ -1,6 +1,6 @@
 require 'oauth/version'
 
-AUTHOR = ['Pelle Braendgaard','Blaine Cook','Larry Halff']  # can also be an array of Authors
+AUTHOR = ['Pelle Braendgaard','Blaine Cook','Larry Halff','Jesse Clark']  # can also be an array of Authors
 EMAIL = "pelleb@gmail.com"
 DESCRIPTION = "OAuth Core Ruby implementation"
 GEM_NAME = 'oauth' # what ppl will type to install your gem
