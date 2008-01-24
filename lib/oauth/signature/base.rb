@@ -22,7 +22,7 @@ module OAuth::Signature
       raise TypeError unless request.kind_of?(OAuth::RequestProxy::Base)
       @request = request
       if block_given?
-        @token_secret, @consumer_secret = yield block.arity == 1 ? token : [token, consumer_key,nonce]
+        @token_secret, @consumer_secret = yield block.arity == 1 ? token : [token, consumer_key,nonce,request.timestamp]
       else
         @consumer_secret = options[:consumer].secret
         @token_secret = options[:token] ? options[:token].secret : ''

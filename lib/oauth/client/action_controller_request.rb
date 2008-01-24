@@ -18,11 +18,11 @@ module ActionController
     end
 
     def self.use_oauth?
-      @use_oauth
+      @use_oauth && @oauth_options
     end
 
     def configure_oauth(consumer = nil, token = nil, options = {})
-      @options = { :consumer => consumer,
+      @oauth_options = { :consumer => consumer,
                    :token => token,
                    :scheme => 'header',
                    :signature_method => nil,
@@ -32,9 +32,9 @@ module ActionController
 
     def apply_oauth!
       return unless ActionController::TestRequest.use_oauth?
-      @oauth_helper = OAuth::Client::Helper.new(self, @options.merge( { :request_uri => request_uri } ))
+      @oauth_helper = OAuth::Client::Helper.new(self, @oauth_options.merge( { :request_uri => request_uri } ))
 
-      self.send("set_oauth_#{@options[:scheme]}")
+      self.send("set_oauth_#{@oauth_options[:scheme]}")
     end
 
     def set_oauth_header
