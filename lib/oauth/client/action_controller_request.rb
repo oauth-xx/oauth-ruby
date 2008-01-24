@@ -4,8 +4,9 @@ require 'action_controller/test_process'
 
 module ActionController
   class Base
-    def process_with_oauth(request)
+    def process_with_oauth(request,response=nil)
       request.apply_oauth!
+      process_without_oauth(request,response)
     end
 
     alias_method_chain :process, :oauth
@@ -33,7 +34,7 @@ module ActionController
       return unless ActionController::TestRequest.use_oauth?
       @oauth_helper = OAuth::Client::Helper.new(self, @options.merge( { :request_uri => request_uri } ))
 
-      self.send("set_oauth_#{options[:scheme]}")
+      self.send("set_oauth_#{@options[:scheme]}")
     end
 
     def set_oauth_header
