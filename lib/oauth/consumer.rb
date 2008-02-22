@@ -1,4 +1,5 @@
 require 'net/http'
+require 'net/https'
 require 'oauth/client/net_http'
 module OAuth
   class Consumer
@@ -70,7 +71,7 @@ module OAuth
     end
     
     def http
-      @http ||= Net::HTTP.new(uri.host, uri.port)
+      @http ||= create_http
     end
     
     # will change
@@ -158,6 +159,13 @@ module OAuth
 
     protected
     
+    #Instantiates the http object
+    def create_http
+      http_object=Net::HTTP.new(uri.host, uri.port)
+      http_object.use_ssl = true if uri.scheme=="https"
+      http_object
+    end
+    
     # create the http request object for a given http_method and path
     def create_http_request(http_method,path,*arguments)
       http_method=http_method.to_sym
@@ -168,8 +176,10 @@ module OAuth
       case http_method
       when :post
         request=Net::HTTP::Post.new(path,headers)
+        request["Content-Length"]=0 # Default to 0
       when :put
         request=Net::HTTP::Put.new(path,headers)
+        request["Content-Length"]=0 # Default to 0
       when :get
         request=Net::HTTP::Get.new(path,headers)
       when :delete
@@ -183,6 +193,7 @@ module OAuth
         request.set_form_data(data)
       elsif data
         request.body=data.to_s
+        request["Content-Length"]=request.body.length
       end
       request
     end
