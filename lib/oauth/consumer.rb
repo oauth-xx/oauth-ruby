@@ -14,7 +14,7 @@ module OAuth
       :access_token_path=>'/oauth/access_token',
       
       # How do we send the oauth values to the server see 
-      # http://oauth.googlecode.com/svn/spec/branches/1.0/drafts/6/spec.html#consumer_req_param for more info
+      # http://oauth.net/core/1.0/#consumer_req_param for more info
       #
       # Possible values:
       #
@@ -66,27 +66,32 @@ module OAuth
       @secret = consumer_secret
     end
     
+    # The default http method
     def http_method
       @http_method||=@options[:http_method]||:post
     end
     
+    # The HTTP object for the site. The HTTP Object is what you get when you do Net::HTTP.new
     def http
       @http ||= create_http
     end
     
-    # will change
+    # Contains the root URI for this site
     def uri(url=nil)
       @uri||=URI.parse(url||site)
     end
     
-    # Get a Request Token
+    # Makes a request to the service for a new OAuth::RequestToken
+    #   
+    #  @request_token=@consumer.get_request_token
+    #
     def get_request_token
       response=token_request(http_method,request_token_path)
       OAuth::RequestToken.new(self,response[:oauth_token],response[:oauth_token_secret])
     end
     
     # Creates, signs and performs an http request.
-    # It's recommended to use the Token classes to set this up correctly.
+    # It's recommended to use the OAuth::Token classes to set this up correctly.
     # The arguments parameters are a hash or string encoded set of parameters if it's a post request as well as optional http headers.
     # 
     #   @consumer.request(:get,'/people',@token,{:scheme=>:query_string})

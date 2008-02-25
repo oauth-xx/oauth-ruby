@@ -59,7 +59,7 @@
 	<p>This is a ruby library which is intended to be used in creating Ruby Consumer and Service Provider applications. It is <span class="caps">NOT</span> a Rails plugin, but could easily be used for the foundation for such a Rails plugin.</p>
 
 
-	<p>As a matter of fact it has been pulled out from an <a href="http://code.google.com/p/oauth-plugin/">OAuth Rails Plugin</a> which in the future will require this <span class="caps">GEM</span>.</p>
+	<p>As a matter of fact it has been pulled out from an <a href="http://code.google.com/p/oauth-plugin/">OAuth Rails Plugin</a> which now requires this <span class="caps">GEM</span>.</p>
 
 
 	<h2>Demonstration of usage</h2>
@@ -84,6 +84,12 @@ redirect_to @request_token.authorize_url</code></pre>
 
 <pre><code>@access_token=@request_token.get_access_token
 @photos=@access_token.get('/photos.xml')</code></pre>
+
+	<p>For more detailed instructions I have written this <a href="http://stakeventures.com/articles/2008/02/23/developing-oauth-clients-in-ruby">OAuth Client Tutorial</a> and <a href="http://stakeventures.com/articles/2007/11/26/how-to-turn-your-rails-site-into-an-oauth-provider">How to turn your rails site into an OAuth Provider</a>.</p>
+
+
+	<p>Finally be sure to check out the <a href="http://oauth.rubyforge.org/rdoc/">OAuth RDoc Manual</a>.</p>
+
 
 	<h2>Documentation Wiki</h2>
 
@@ -123,7 +129,7 @@ redirect_to @request_token.authorize_url</code></pre>
 
 	<p>Comments are welcome. Send an email to <a href="mailto:pelleb@gmail.com">Pelle Braendgaard</a> email via the <a href="http://groups.google.com/group/oauth-ruby">OAuth Ruby mailing list</a></p>
     <p class="coda">
-      <a href="FIXME email">FIXME full name</a>, 21st January 2008<br>
+      <a href="FIXME email">FIXME full name</a>, 25th February 2008<br>
       Theme extended from <a href="http://rb2js.rubyforge.org/">Paul Battley</a>
     </p>
 </div>
