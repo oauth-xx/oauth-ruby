@@ -16,7 +16,7 @@ h2. The basics
 
 This is a ruby library which is intended to be used in creating Ruby Consumer and Service Provider applications. It is NOT a Rails plugin, but could easily be used for the foundation for such a Rails plugin.
 
-As a matter of fact it has been pulled out from an "OAuth Rails Plugin":http://code.google.com/p/oauth-plugin/ which in the future will require this GEM.
+As a matter of fact it has been pulled out from an "OAuth Rails Plugin":http://code.google.com/p/oauth-plugin/ which now requires this GEM.
 
 h2. Demonstration of usage
 
@@ -36,6 +36,10 @@ When user returns create an access_token
 
 <pre><code>@access_token=@request_token.get_access_token
 @photos=@access_token.get('/photos.xml')</code></pre>
+
+For more detailed instructions I have written this "OAuth Client Tutorial":http://stakeventures.com/articles/2008/02/23/developing-oauth-clients-in-ruby and "How to turn your rails site into an OAuth Provider ":http://stakeventures.com/articles/2007/11/26/how-to-turn-your-rails-site-into-an-oauth-provider.
+
+Finally be sure to check out the "OAuth RDoc Manual":http://oauth.rubyforge.org/rdoc/.
 
 h2. Documentation Wiki
 
