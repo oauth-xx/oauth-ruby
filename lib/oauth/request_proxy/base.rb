@@ -46,5 +46,31 @@ module OAuth::RequestProxy
     def signature
       parameters['oauth_signature'] || ""
     end
+    
+    protected
+    
+    def header_params
+      %w( X-HTTP_AUTHORIZATION Authorization HTTP_AUTHORIZATION ).each do |header|
+        next unless request.env.include?(header)
+
+        header = request.env[header]
+        next unless header[0,6] == 'OAuth '
+
+        oauth_param_string = header[6,header.length].split(/[,=]/)
+        oauth_param_string.map! { |v| unescape(v.strip) }
+        oauth_param_string.map! { |v| v =~ /^\".*\"$/ ? v[1..-2] : v }
+        oauth_params = Hash[*oauth_param_string.flatten]
+        oauth_params.reject! { |k,v| k !~ /^oauth_/ }
+
+        return oauth_params
+      end
+
+      return {}
+    end
+    
+    def unescape(value)
+      URI.unescape(value.gsub('+', '%2B'))
+    end
+    
   end
 end

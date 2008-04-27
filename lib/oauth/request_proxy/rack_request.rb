@@ -1,19 +1,17 @@
-require 'rubygems'
-require 'active_support'
-require 'action_controller/request'
 require 'oauth/request_proxy/base'
 require 'uri'
+require 'rack'
 
 module OAuth::RequestProxy
-  class ActionControllerRequest < OAuth::RequestProxy::Base
-    proxies ActionController::AbstractRequest
-
+  class RackRequest < OAuth::RequestProxy::Base
+    proxies Rack::Request
+    
     def method
-      request.method.to_s.upcase
+      request.request_method
     end
-
+    
     def uri
-      uri = URI.parse(request.protocol + request.host + request.port_string + request.path)
+      uri = URI.parse(request.url)
       uri.query = nil
       uri.to_s
     end
@@ -23,20 +21,22 @@ module OAuth::RequestProxy
         options[:parameters] || {}
       else
         params = request_params.merge(query_params).merge(header_params)
-        params.stringify_keys! if params.respond_to?(:stringify_keys!)
         params.merge(options[:parameters] || {})
       end
     end
-
+    
+    def signature
+      parameters['oauth_signature']
+    end
+    
     protected
 
     def query_params
-      request.query_parameters
+      request.GET
     end
 
     def request_params
-      request.request_parameters
+      request.params
     end
-
   end
 end
