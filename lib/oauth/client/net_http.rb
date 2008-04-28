@@ -2,6 +2,8 @@ require 'oauth/client/helper'
 require 'oauth/request_proxy/net_http'
 
 class Net::HTTPRequest
+  include OAuth::Helper
+
   def oauth!(http, consumer = nil, token = nil, options = {})
     options = { :request_uri => oauth_full_request_uri(http),
                 :consumer => consumer,
@@ -67,6 +69,6 @@ class Net::HTTPRequest
 
     @path = uri.to_s
 
-    @path << "&oauth_signature=#{@oauth_helper.signature}"
+    @path << "&oauth_signature=#{escape(@oauth_helper.signature)}"
   end
 end
