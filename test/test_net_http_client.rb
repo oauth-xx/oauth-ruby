@@ -52,7 +52,7 @@ class NetHTTPClientTest < Test::Unit::TestCase
     uri = URI.parse(request.path)
     assert_equal '/test', uri.path
     assert_equal nil, uri.fragment
-    assert_equal "key=value&oauth_consumer_key=consumer_key_86cad9&oauth_nonce=225579211881198842005988698334675835446&oauth_signature=1oO2izFav1GP4kEH2EskwXkCRFg=&oauth_signature_method=HMAC-SHA1&oauth_timestamp=1199645624&oauth_token=token_411a7f&oauth_version=1.0", uri.query.split("&").sort.join("&")
+    assert_equal "key=value&oauth_consumer_key=consumer_key_86cad9&oauth_nonce=225579211881198842005988698334675835446&oauth_signature=1oO2izFav1GP4kEH2EskwXkCRFg%3D&oauth_signature_method=HMAC-SHA1&oauth_timestamp=1199645624&oauth_token=token_411a7f&oauth_version=1.0", uri.query.split("&").sort.join("&")
     assert_equal nil, request['authorization']
   end
 
@@ -64,7 +64,7 @@ class NetHTTPClientTest < Test::Unit::TestCase
     uri = URI.parse(request.path)
     assert_equal '/test', uri.path
     assert_equal nil, uri.fragment
-    assert_equal "key=value&oauth_consumer_key=consumer_key_86cad9&oauth_nonce=225579211881198842005988698334675835446&oauth_signature=26g7wHTtNO6ZWJaLltcueppHYiI=&oauth_signature_method=HMAC-SHA1&oauth_timestamp=1199645624&oauth_token=token_411a7f&oauth_version=1.0", uri.query.split("&").sort.join('&')
+    assert_equal "key=value&oauth_consumer_key=consumer_key_86cad9&oauth_nonce=225579211881198842005988698334675835446&oauth_signature=26g7wHTtNO6ZWJaLltcueppHYiI%3D&oauth_signature_method=HMAC-SHA1&oauth_timestamp=1199645624&oauth_token=token_411a7f&oauth_version=1.0", uri.query.split("&").sort.join('&')
     assert_equal nil, request.body
     assert_equal nil, request['authorization']
   end
@@ -78,7 +78,7 @@ class NetHTTPClientTest < Test::Unit::TestCase
     uri = URI.parse(request.path)
     assert_equal '/test', uri.path
     assert_equal nil, uri.fragment
-    assert_equal "key=value&oauth_consumer_key=consumer_key_86cad9&oauth_nonce=225579211881198842005988698334675835446&oauth_signature=4kSU8Zd1blWo3W6qJH7eaRTMkg0=&oauth_signature_method=HMAC-SHA1&oauth_timestamp=1199645624&oauth_token=token_411a7f&oauth_version=1.0", uri.query.split("&").sort.join('&')
+    assert_equal "key=value&oauth_consumer_key=consumer_key_86cad9&oauth_nonce=225579211881198842005988698334675835446&oauth_signature=4kSU8Zd1blWo3W6qJH7eaRTMkg0%3D&oauth_signature_method=HMAC-SHA1&oauth_timestamp=1199645624&oauth_token=token_411a7f&oauth_version=1.0", uri.query.split("&").sort.join('&')
     assert_equal "key2=value2", request.body
     assert_equal nil, request['authorization']
   end
