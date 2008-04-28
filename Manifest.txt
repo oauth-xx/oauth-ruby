@@ -16,6 +16,7 @@ lib/oauth/request_proxy.rb
 lib/oauth/request_proxy/action_controller_request.rb
 lib/oauth/request_proxy/base.rb
 lib/oauth/request_proxy/net_http.rb
+lib/oauth/request_proxy/rack_request.rb
 lib/oauth/server.rb
 lib/oauth/signature.rb
 lib/oauth/signature/base.rb
@@ -43,6 +44,7 @@ test/test_helper.rb
 test/test_hmac_sha1.rb
 test/test_net_http_client.rb
 test/test_net_http_request_proxy.rb
+test/test_rack_request_proxy.rb
 test/test_signature.rb
 test/test_signature_base.rb
 test/test_token.rb
