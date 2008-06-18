@@ -203,6 +203,11 @@ module OAuth
       request
     end
     
-    
+    # Unset cached http instance because it cannot be marshalled when
+    # it has already been used and use_ssl is set to true
+    def marshal_dump(*args)
+      @http = nil
+      self
+    end
   end
 end
