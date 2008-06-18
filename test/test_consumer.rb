@@ -87,6 +87,41 @@ class ConsumerTest < Test::Unit::TestCase
     assert_equal "OAuth realm=\"\", oauth_nonce=\"225579211881198842005988698334675835446\", oauth_signature_method=\"HMAC-SHA1\", oauth_token=\"token_411a7f\", oauth_timestamp=\"1199645624\", oauth_consumer_key=\"consumer_key_86cad9\", oauth_signature=\"1oO2izFav1GP4kEH2EskwXkCRFg%3D\", oauth_version=\"1.0\"", request['authorization']
   end
 
+  def test_that_setting_signature_method_on_consumer_effects_signing
+    require 'oauth/signature/plaintext'
+    request = Net::HTTP::Get.new(@request_uri.path)
+    consumer = @consumer.dup
+    consumer.options[:signature_method] = 'PLAINTEXT'
+    token = OAuth::ConsumerToken.new(consumer, 'token_411a7f', '3196ffd991c8ebdb')
+    token.sign!(request, {:nonce => @nonce, :timestamp => @timestamp})
+    
+    assert_no_match /oauth_signature_method="HMAC-SHA1"/, request['authorization']
+    assert_match    /oauth_signature_method="PLAINTEXT"/, request['authorization']
+  end
+
+  def test_that_setting_signature_method_on_consumer_effects_signature_base_string
+    require 'oauth/signature/plaintext'
+    request = Net::HTTP::Get.new(@request_uri.path)
+    consumer = @consumer.dup
+    consumer.options[:signature_method] = 'PLAINTEXT'
+    
+    request = Net::HTTP::Get.new('/')
+    signature_base_string = consumer.signature_base_string(request)
+
+    assert_no_match /HMAC-SHA1/, signature_base_string
+    assert_equal "#{consumer.secret}%26", signature_base_string
+  end
+
+  def test_that_plaintext_signature_works
+    require 'oauth/signature/plaintext'
+    consumer = OAuth::Consumer.new("key", "secret", 
+      :site => "http://term.ie", :signature_method => 'PLAINTEXT')
+    access_token = OAuth::AccessToken.new(consumer, 'accesskey', 'accesssecret')
+    response = access_token.get("/oauth/example/echo_api.php?echo=hello")
+
+    assert_equal 'echo=hello', response.body
+  end
+
   def test_that_signing_auth_headers_on_post_requests_works
     request = Net::HTTP::Post.new(@request_uri.path)
     request.set_form_data( @request_parameters )

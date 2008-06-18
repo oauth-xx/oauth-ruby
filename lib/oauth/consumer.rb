@@ -6,7 +6,7 @@ module OAuth
     
     @@default_options={
       # Signature method used by server. Defaults to HMAC-SHA1
-      :oauth_signature_method=>'HMAC-SHA1',
+      :signature_method => 'HMAC-SHA1',
       
       # default paths on site. These are the same as the defaults set up by the generators
       :request_token_path=>'/oauth/request_token',
@@ -121,12 +121,12 @@ module OAuth
 
     # Sign the Request object. Use this if you have an externally generated http request object you want to sign.
     def sign!(request,token=nil, request_options = {})
-      request.oauth!(http,self,token,{:scheme=>scheme}.merge(request_options))
+      request.oauth!(http, self, token, options.merge(request_options))
     end
     
     # Return the signature_base_string
     def signature_base_string(request,token=nil, request_options = {})
-      request.signature_base_string(http,self,token,{:scheme=>scheme}.merge(request_options))
+      request.signature_base_string(http, self, token, options.merge(request_options))
     end
 
     def site
