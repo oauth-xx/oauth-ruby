@@ -13,7 +13,13 @@ module OAuth::Signature::RSA
     private
 
     def digest
-      private_key = OpenSSL::PKey::RSA.new(request.consumer.secret)
+      private_key = OpenSSL::PKey::RSA.new(
+        if options[:private_key_file]
+          IO.read(options[:private_key_file])
+        else
+          request.consumer.secret
+        end
+      )
       private_key.sign(OpenSSL::Digest::SHA1.new, signature_base_string)
     end
   end
