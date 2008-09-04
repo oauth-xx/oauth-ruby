@@ -85,8 +85,8 @@ module OAuth
     #   
     #  @request_token=@consumer.get_request_token
     #
-    def get_request_token
-      response=token_request(http_method,request_token_path)
+    def get_request_token(request_options={}, *arguments)
+      response=token_request(http_method,request_token_path, nil, request_options, *arguments)
       OAuth::RequestToken.new(self,response[:oauth_token],response[:oauth_token_secret])
     end
     
