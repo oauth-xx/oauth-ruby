@@ -75,7 +75,7 @@ module OAuth
     def request(http_method, path, *arguments)
       request_uri = URI.parse(path)
       site_uri = consumer.uri
-      is_service_uri_different = (request_uri.host && request_uri != site_uri)
+      is_service_uri_different = (request_uri.absolute? && request_uri != site_uri)
       consumer.uri(request_uri) if is_service_uri_different
       resp = super(http_method, path, *arguments)
       # NOTE: reset for wholesomeness? meaning that we admit only AccessToken service calls may use different URIs?
