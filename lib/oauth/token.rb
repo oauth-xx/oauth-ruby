@@ -69,6 +69,20 @@ module OAuth
   
   # The Access Token is used for the actual "real" web service calls thatyou perform against the server
   class AccessToken<ConsumerToken
+
+    # The less intrusive way. Otherwise, if we are to do it correctly inside consumer,
+    # we need to restructure and touch more methods: requst(), sign!(), etc.
+    def request(http_method, path, *arguments)
+      request_uri = URI.parse(path)
+      site_uri = consumer.uri
+      is_service_uri_different = (request_uri != site_uri)
+      consumer.uri(request_uri) if is_service_uri_different
+      resp = super(http_method, path, *arguments)
+      # NOTE: reset for wholesomeness? meaning that we admit only AccessToken service calls may use different URIs?
+      # so reset in case consumer is still used for other token-management tasks subsequently?
+      consumer.uri(site_uri) if is_service_uri_different
+      resp
+    end
     
     # Make a regular get request using AccessToken
     #
