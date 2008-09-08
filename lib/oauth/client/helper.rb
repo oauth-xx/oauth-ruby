@@ -56,7 +56,7 @@ module OAuth::Client
 
     def header
       parameters = oauth_parameters
-      parameters.merge!( { 'oauth_signature' => signature( { :parameters => parameters } ) } )
+      parameters.merge!( { 'oauth_signature' => signature( options.merge({ :parameters => parameters }) ) } )
 
       header_params_str = parameters.map { |k,v| "#{k}=\"#{escape(v)}\"" }.join(', ')
 

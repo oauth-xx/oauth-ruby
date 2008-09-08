@@ -7,6 +7,8 @@ module OAuth::Signature
   class Base
     include OAuth::Helper
     
+    attr_accessor :options
+    
     def self.implements(signature_method)
       OAuth::Signature.available_methods[signature_method] = self
     end
@@ -21,11 +23,12 @@ module OAuth::Signature
     def initialize(request, options = {}, &block)
       raise TypeError unless request.kind_of?(OAuth::RequestProxy::Base)
       @request = request
+      @options = options
       if block_given?
         @token_secret, @consumer_secret = yield block.arity == 1 ? token : [token, consumer_key,nonce,request.timestamp]
       else
-        @consumer_secret = options[:consumer].secret
-        @token_secret = options[:token] ? options[:token].secret : ''
+        @consumer_secret = @options[:consumer].secret
+        @token_secret = @options[:token] ? @options[:token].secret : ''
       end
     end
 

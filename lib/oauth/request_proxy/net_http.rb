@@ -44,7 +44,10 @@ module OAuth::RequestProxy::Net
       end
 
       def query_string
-        [ query_params, post_params, auth_header_params ].compact.join('&')
+        params = [ query_params, auth_header_params ]
+        is_form_urlencoded = request['Content-Type'] != nil && request['Content-Type'].downcase == 'application/x-www-form-urlencoded'
+        params << post_params if method.to_s.upcase == 'POST' && is_form_urlencoded
+        params.compact.join('&')
       end
       
       def query_params
