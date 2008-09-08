@@ -77,8 +77,13 @@ module OAuth
     end
     
     # Contains the root URI for this site
-    def uri(url=nil)
-      @uri||=URI.parse(url||site)
+    def uri(custom_uri=nil)
+      if custom_uri
+        @uri = custom_uri
+        @http = create_http # yike, oh well. less intrusive this way
+      else  # if no custom passed, we use existing, which, if unset, is set to site uri
+        @uri ||= URI.parse(site)
+      end
     end
     
     # Makes a request to the service for a new OAuth::RequestToken
