@@ -1,3 +1,4 @@
+- Fixed rsa verification, so you can actually create an OAuth server yourself now using Ruby and RSA
 - Added better testing for RSA
 - Fixed issue where token was being included for rsa signatures
 - Scott Hill added support for a private_key_file option for rsa signatures 
