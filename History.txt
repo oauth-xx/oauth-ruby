@@ -1,3 +1,9 @@
+- Added better testing for RSA
+- Fixed issue where token was being included for rsa signatures
+- Scott Hill added support for a private_key_file option for rsa signatures 
+- Scott Hill fixed several edge cases where parameters were incorrectly being signed
+- Patch from choonkeat fixing a problem with rsa signing.
+
 == 0.2.2 2008-2-22 Lets actually support SSL release
 
 It didn't actually use https when required.
