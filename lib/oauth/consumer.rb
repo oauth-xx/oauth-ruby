@@ -135,7 +135,7 @@ module OAuth
     end
 
     def site
-      @options[:site]
+      @options[:site].to_s
     end
 
     def scheme
