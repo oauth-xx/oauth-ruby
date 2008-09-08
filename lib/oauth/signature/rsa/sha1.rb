@@ -6,12 +6,30 @@ module OAuth::Signature::RSA
     implements 'rsa-sha1'
 
     def ==(cmp_signature)
-      public_key = OpenSSL::PKey::RSA.new(consumer_secret)
-      public_key.verify(OpenSSL::Digest::SHA1.new, cmp_signature, signature_base_string)
+      public_key.verify(OpenSSL::Digest::SHA1.new, Base64.decode64(cmp_signature.is_a?(Array) ? cmp_signature.first : cmp_signature), signature_base_string)
     end
 
+    def public_key
+      if consumer_secret.is_a?(String)
+        decode_public_key
+      elsif consumer_secret.is_a?(OpenSSL::X509::Certificate)
+        consumer_secret.public_key
+      else
+        consumer_secret
+      end
+    end
+    
     private
-
+    
+    def decode_public_key
+      case consumer_secret
+      when /-----BEGIN CERTIFICATE-----/
+        OpenSSL::X509::Certificate.new( consumer_secret).public_key
+      else
+        OpenSSL::PKey::RSA.new( consumer_secret)
+      end
+    end
+    
     def digest
       private_key = OpenSSL::PKey::RSA.new(
         if options[:private_key_file]
