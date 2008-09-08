@@ -33,103 +33,50 @@
     <h1>Ruby OAuth GEM</h1>
     <div id="version" class="clickable" onclick='document.location = "http://rubyforge.org/projects/oauth"; return false'>
       <p>Get Version</p>
-      <a href="http://rubyforge.org/projects/oauth" class="numbers">0.2.4</a>
+      <a href="http://rubyforge.org/projects/oauth" class="numbers">0.2.5</a>
     </div>
     <h2>What</h2>
-
-
-	<p>This is a RubyGem for implementing both OAuth clients and servers in Ruby applications.</p>
-
-
-	<p>See the <a href="http://oauth.net/core/1.0/">OAuth specs</a></p>
-
-
-	<h2>Installing</h2>
-
-
-	<p><pre class='syntax'><span class="ident">sudo</span> <span class="ident">gem</span> <span class="ident">install</span> <span class="ident">oauth</span></pre></p>
-
-
-	<p>You can also install it from the <a href="http://rubyforge.org/projects/oauth/">oauth rubyforge project</a>.</p>
-
-
-	<h2>The basics</h2>
-
-
-	<p>This is a ruby library which is intended to be used in creating Ruby Consumer and Service Provider applications. It is <span class="caps">NOT</span> a Rails plugin, but could easily be used for the foundation for such a Rails plugin.</p>
-
-
-	<p>As a matter of fact it has been pulled out from an <a href="http://code.google.com/p/oauth-plugin/">OAuth Rails Plugin</a> which now requires this <span class="caps">GEM</span>.</p>
-
-
-	<h2>Demonstration of usage</h2>
-
-
-	<p>Create a new consumer instance by passing it a configuration hash:</p>
-
-
+<p>This is a RubyGem for implementing both OAuth clients and servers in Ruby applications.</p>
+<p>See the <a href="http://oauth.net/core/1.0/">OAuth specs</a></p>
+<h2>Installing</h2>
+<p><pre class='syntax'><span class="ident">sudo</span> <span class="ident">gem</span> <span class="ident">install</span> <span class="ident">oauth</span></pre></p>
+<p>You can also install it from the <a href="http://rubyforge.org/projects/oauth/">oauth rubyforge project</a>.</p>
+<p>The source code is now hosted on the <a href="http://github.com/pelle/oauth/tree/master">OAuth GitHub Project</a></p>
+<h2>The basics</h2>
+<p>This is a ruby library which is intended to be used in creating Ruby Consumer and Service Provider applications. It is <span class="caps">NOT</span> a Rails plugin, but could easily be used for the foundation for such a Rails plugin.</p>
+<p>As a matter of fact it has been pulled out from an <a href="http://code.google.com/p/oauth-plugin/">OAuth Rails Plugin</a> which now requires this <span class="caps">GEM</span>.</p>
+<h2>Demonstration of usage</h2>
+<p>Create a new consumer instance by passing it a configuration hash:</p>
 <pre><code>@consumer=OAuth::Consumer.new( "key","secret", {
-    :site=&gt;"https://agree2" 
+    :site=&gt;"https://agree2"
     })</code></pre>
-
-	<p>Start the process by requesting a token</p>
-
-
+<p>Start the process by requesting a token</p>
 <pre><code>@request_token=@consumer.get_request_token
 session[:request_token]=@request_token
 redirect_to @request_token.authorize_url</code></pre>
-
-	<p>When user returns create an access_token</p>
-
-
+<p>When user returns create an access_token</p>
 <pre><code>@access_token=@request_token.get_access_token
 @photos=@access_token.get('/photos.xml')</code></pre>
-
-	<p>For more detailed instructions I have written this <a href="http://stakeventures.com/articles/2008/02/23/developing-oauth-clients-in-ruby">OAuth Client Tutorial</a> and <a href="http://stakeventures.com/articles/2007/11/26/how-to-turn-your-rails-site-into-an-oauth-provider">How to turn your rails site into an OAuth Provider</a>.</p>
-
-
-	<p>Finally be sure to check out the <a href="http://oauth.rubyforge.org/rdoc/">OAuth RDoc Manual</a>.</p>
-
-
-	<h2>Documentation Wiki</h2>
-
-
-	<p>There is some documentation on the Google Code project for the <a href="http://code.google.com/p/oauth-plugin/">OAuth Rails Plugin</a> :</p>
-
-
-	<ul>
+<p>For more detailed instructions I have written this <a href="http://stakeventures.com/articles/2008/02/23/developing-oauth-clients-in-ruby">OAuth Client Tutorial</a> and &quot;How to turn your rails site into an OAuth Provider &quot;:http://stakeventures.com/articles/2007/11/26/how-to-turn-your-rails-site-into-an-oauth-provider.</p>
+<p>Finally be sure to check out the <a href="http://oauth.rubyforge.org/rdoc/">OAuth RDoc Manual</a>.</p>
+<h2>Documentation Wiki</h2>
+<p>There is some documentation on the Google Code project for the <a href="http://code.google.com/p/oauth-plugin/">OAuth Rails Plugin</a> :</p>
+<ul>
 	<li><a href="http://code.google.com/p/oauth-plugin/wiki/RequestToken">RequestToken</a></li>
-		<li><a href="http://code.google.com/p/oauth-plugin/wiki/AccessToken">AccessToken</a></li>
-	</ul>
-
-
-	<h2>Forum</h2>
-
-
-	<p><a href="http://groups.google.com/group/oauth-ruby">http://groups.google.com/group/oauth-ruby</a></p>
-
-
-	<h2>How to submit patches</h2>
-
-
-	<p>Read the <a href="http://drnicwilliams.com/2007/06/01/8-steps-for-fixing-other-peoples-code/">8 steps for fixing other people&#8217;s code</a> and for section <a href="http://drnicwilliams.com/2007/06/01/8-steps-for-fixing-other-peoples-code/#8b-google-groups">8b: Submit patch to Google Groups</a>, use the Google Group above.</p>
-
-
-	<p>The trunk repository is <code>http://oauth.rubyforge.org/svn/trunk/</code> for anonymous access.</p>
-
-
-	<h2>License</h2>
-
-
-	<p>This code is free to use under the terms of the <span class="caps">MIT</span> license.</p>
-
-
-	<h2>Contact</h2>
-
-
-	<p>Comments are welcome. Send an email to <a href="mailto:pelleb@gmail.com">Pelle Braendgaard</a> email via the <a href="http://groups.google.com/group/oauth-ruby">OAuth Ruby mailing list</a></p>
+	<li><a href="http://code.google.com/p/oauth-plugin/wiki/AccessToken">AccessToken</a></li>
+</ul>
+<h2>Forum</h2>
+<p><a href="http://groups.google.com/group/oauth-ruby">http://groups.google.com/group/oauth-ruby</a></p>
+<h2>How to submit patches</h2>
+<p>Read the <a href="http://drnicwilliams.com/2007/06/01/8-steps-for-fixing-other-peoples-code/">8 steps for fixing other people&#8217;s code</a>.</p>
+<p>The source code is now hosted on the <a href="http://github.com/pelle/oauth/tree/master">OAuth GitHub Project</a></p>
+<p>To submit a patch, please fork the oauth project and create a patch with tests. Once you&#8217;re happy with it send a pull request and post a message to the google group.</p>
+<h2>License</h2>
+<p>This code is free to use under the terms of the <span class="caps">MIT</span> license.</p>
+<h2>Contact</h2>
+<p>Comments are welcome. Send an email to <a href="mailto:pelleb@gmail.com">Pelle Braendgaard</a> email via the <a href="http://groups.google.com/group/oauth-ruby">OAuth Ruby mailing list</a></p>
     <p class="coda">
-      <a href="FIXME email">FIXME full name</a>, 25th February 2008<br>
+      <a href="FIXME email">FIXME full name</a>, 8th September 2008<br>
       Theme extended from <a href="http://rb2js.rubyforge.org/">Paul Battley</a>
     </p>
 </div>

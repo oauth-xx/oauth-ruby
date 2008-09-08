@@ -12,7 +12,7 @@ h2. Installing
 
 You can also install it from the "oauth rubyforge project":http://rubyforge.org/projects/oauth/.
 
-The source code is now hosted on GitHub at http://github.com/pelle/oauth/tree/master
+The source code is now hosted on the "OAuth GitHub Project":http://github.com/pelle/oauth/tree/master
 
 h2. The basics
 
@@ -59,7 +59,7 @@ h2. How to submit patches
 
 Read the "8 steps for fixing other people's code":http://drnicwilliams.com/2007/06/01/8-steps-for-fixing-other-peoples-code/.
 
-The source code is hosted on GitHub at http://github.com/pelle/oauth/tree/master
+The source code is now hosted on the "OAuth GitHub Project":http://github.com/pelle/oauth/tree/master
 
 To submit a patch, please fork the oauth project and create a patch with tests. Once you're happy with it send a pull request and post a message to the google group.
 
