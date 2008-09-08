@@ -33,7 +33,7 @@ module OAuth::Signature
     end
 
     def signature
-      Base64.encode64(digest).chomp
+      Base64.encode64(digest).chomp.gsub(/\n/,'')
     end
 
     def ==(cmp_signature)
