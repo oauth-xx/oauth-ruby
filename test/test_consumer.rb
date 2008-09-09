@@ -1,3 +1,5 @@
+require 'rubygems'
+gem 'oauth'
 require 'test/unit'
 require 'oauth/consumer'
 require 'oauth/signature/rsa/sha1'
@@ -86,7 +88,7 @@ class ConsumerTest < Test::Unit::TestCase
     
     assert_equal 'GET', request.method
     assert_equal '/test?key=value', request.path
-    assert_equal "OAuth realm=\"\", oauth_nonce=\"225579211881198842005988698334675835446\", oauth_signature_method=\"HMAC-SHA1\", oauth_token=\"token_411a7f\", oauth_timestamp=\"1199645624\", oauth_consumer_key=\"consumer_key_86cad9\", oauth_signature=\"1oO2izFav1GP4kEH2EskwXkCRFg%3D\", oauth_version=\"1.0\"", request['authorization']
+    assert_equal "OAuth realm=\"\", oauth_nonce=\"225579211881198842005988698334675835446\", oauth_signature_method=\"HMAC-SHA1\", oauth_token=\"token_411a7f\", oauth_timestamp=\"1199645624\", oauth_consumer_key=\"consumer_key_86cad9\", oauth_signature=\"1oO2izFav1GP4kEH2EskwXkCRFg%3D\", oauth_version=\"1.0\"".split(', ').sort, request['authorization'].split(', ').sort
   end
 
   def test_that_setting_signature_method_on_consumer_effects_signing
@@ -133,7 +135,7 @@ class ConsumerTest < Test::Unit::TestCase
     assert_equal 'POST', request.method
     assert_equal '/test', request.path
     assert_equal 'key=value', request.body
-    assert_equal "OAuth realm=\"\", oauth_nonce=\"225579211881198842005988698334675835446\", oauth_signature_method=\"HMAC-SHA1\", oauth_token=\"token_411a7f\", oauth_timestamp=\"1199645624\", oauth_consumer_key=\"consumer_key_86cad9\", oauth_signature=\"26g7wHTtNO6ZWJaLltcueppHYiI%3D\", oauth_version=\"1.0\"", request['authorization']
+    assert_equal "OAuth realm=\"\", oauth_nonce=\"225579211881198842005988698334675835446\", oauth_signature_method=\"HMAC-SHA1\", oauth_token=\"token_411a7f\", oauth_timestamp=\"1199645624\", oauth_consumer_key=\"consumer_key_86cad9\", oauth_signature=\"26g7wHTtNO6ZWJaLltcueppHYiI%3D\", oauth_version=\"1.0\"".split(', ').sort, request['authorization'].split(', ').sort
   end
  
   def test_that_signing_post_params_works
@@ -152,7 +154,7 @@ class ConsumerTest < Test::Unit::TestCase
     
     assert_equal 'GET', request.method
     assert_equal '/test?key=value', request.path
-    assert_equal "OAuth realm=\"\", oauth_nonce=\"225579211881198842005988698334675835446\", oauth_signature_method=\"HMAC-SHA1\", oauth_token=\"token_411a7f\", oauth_timestamp=\"1199645624\", oauth_consumer_key=\"consumer_key_86cad9\", oauth_signature=\"1oO2izFav1GP4kEH2EskwXkCRFg%3D\", oauth_version=\"1.0\"", request['authorization']
+    assert_equal "OAuth realm=\"\", oauth_nonce=\"225579211881198842005988698334675835446\", oauth_signature_method=\"HMAC-SHA1\", oauth_token=\"token_411a7f\", oauth_timestamp=\"1199645624\", oauth_consumer_key=\"consumer_key_86cad9\", oauth_signature=\"1oO2izFav1GP4kEH2EskwXkCRFg%3D\", oauth_version=\"1.0\"".split(', ').sort, request['authorization'].split(', ').sort
   end
 
   def test_that_using_auth_headers_on_post_on_create_signed_requests_works
@@ -160,7 +162,7 @@ class ConsumerTest < Test::Unit::TestCase
     assert_equal 'POST', request.method
     assert_equal '/test', request.path
     assert_equal 'key=value', request.body
-    assert_equal "OAuth realm=\"\", oauth_nonce=\"225579211881198842005988698334675835446\", oauth_signature_method=\"HMAC-SHA1\", oauth_token=\"token_411a7f\", oauth_timestamp=\"1199645624\", oauth_consumer_key=\"consumer_key_86cad9\", oauth_signature=\"26g7wHTtNO6ZWJaLltcueppHYiI%3D\", oauth_version=\"1.0\"", request['authorization']
+    assert_equal "OAuth realm=\"\", oauth_nonce=\"225579211881198842005988698334675835446\", oauth_signature_method=\"HMAC-SHA1\", oauth_token=\"token_411a7f\", oauth_timestamp=\"1199645624\", oauth_consumer_key=\"consumer_key_86cad9\", oauth_signature=\"26g7wHTtNO6ZWJaLltcueppHYiI%3D\", oauth_version=\"1.0\"".split(', ').sort, request['authorization'].split(', ').sort
   end
 
   def test_that_signing_post_params_works
