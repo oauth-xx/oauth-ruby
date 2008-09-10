@@ -99,8 +99,8 @@ class ConsumerTest < Test::Unit::TestCase
     token = OAuth::ConsumerToken.new(consumer, 'token_411a7f', '3196ffd991c8ebdb')
     token.sign!(request, {:nonce => @nonce, :timestamp => @timestamp})
     
-    assert_no_match /oauth_signature_method="HMAC-SHA1"/, request['authorization']
-    assert_match    /oauth_signature_method="PLAINTEXT"/, request['authorization']
+    assert_no_match( /oauth_signature_method="HMAC-SHA1"/, request['authorization'])
+    assert_match(    /oauth_signature_method="PLAINTEXT"/, request['authorization'])
   end
 
   def test_that_setting_signature_method_on_consumer_effects_signature_base_string
@@ -112,8 +112,8 @@ class ConsumerTest < Test::Unit::TestCase
     request = Net::HTTP::Get.new('/')
     signature_base_string = consumer.signature_base_string(request)
 
-    assert_no_match /HMAC-SHA1/, signature_base_string
-    assert_equal "#{consumer.secret}%26", signature_base_string
+    assert_no_match( /HMAC-SHA1/, signature_base_string)
+    assert_equal( "#{consumer.secret}%26", signature_base_string)
   end
 
   def test_that_plaintext_signature_works
@@ -271,8 +271,8 @@ class ConsumerTest < Test::Unit::TestCase
     
     # Because this is a POST request, create_http_request should take the first element of *arguments
     # and turn it into URL-encoded data in the body of the POST.
-    assert_match /^<- "scope=http%3a%2f%2fwww.google.com%2fcalendar%2ffeeds%20http%3a%2f%2fpicasaweb.google.com%2fdata"/,
-      debug
+    assert_match( /^<- "scope=http%3a%2f%2fwww.google.com%2fcalendar%2ffeeds%20http%3a%2f%2fpicasaweb.google.com%2fdata"/,
+      debug)
   end
 
   protected

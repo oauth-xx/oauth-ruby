@@ -1,3 +1,7 @@
+== 0.2.7 2008-9-10 The lets fix the last release release
+
+There was an error in the RSA requests using oauth tokens. Thanks to Philip Lipu Tsai for noticing this.
+
 == 0.2.6 2008-9-9 The lets RSA release
 
 - Bill Kocik's fix for Ruby 1.8.7
