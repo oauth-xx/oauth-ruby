@@ -5,7 +5,7 @@ require 'oauth/signature/rsa/sha1'
 class TestSignatureRsaSha1 < Test::Unit::TestCase
   
   def setup
-    @request = Net::HTTP::Get.new('/photos?file=vacaction.jpg&size=original&oauth_version=1.0&oauth_consumer_key=dpf43f3p2l4k3l03&oauth_token=nnch734d00sl2jdk&oauth_timestamp=1196666512&oauth_nonce=13917289812797014437&oauth_signature_method=RSA-SHA1')
+    @request = Net::HTTP::Get.new('/photos?file=vacaction.jpg&size=original&oauth_version=1.0&oauth_consumer_key=dpf43f3p2l4k3l03&oauth_timestamp=1196666512&oauth_nonce=13917289812797014437&oauth_signature_method=RSA-SHA1')
 
     @consumer = OAuth::Consumer.new('dpf43f3p2l4k3l03', OpenSSL::PKey::RSA.new(IO.read(File.dirname(__FILE__) + "/keys/rsa.pem")))
     

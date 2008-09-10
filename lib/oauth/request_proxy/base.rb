@@ -24,7 +24,6 @@ module OAuth::RequestProxy
     def parameters_for_signature
       p = parameters.dup
       p.delete("oauth_signature")
-      p.delete("oauth_token") if signature_method=='RSA-SHA1'
       p
     end
 
