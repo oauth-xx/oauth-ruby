@@ -71,7 +71,7 @@ module OAuth
   class AccessToken<ConsumerToken
 
     # The less intrusive way. Otherwise, if we are to do it correctly inside consumer,
-    # we need to restructure and touch more methods: requst(), sign!(), etc.
+    # we need to restructure and touch more methods: request(), sign!(), etc.
     def request(http_method, path, *arguments)
       request_uri = URI.parse(path)
       site_uri = consumer.uri
