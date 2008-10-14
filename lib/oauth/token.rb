@@ -27,7 +27,14 @@ module OAuth
 
   # Superclass for tokens used by OAuth Clients
   class ConsumerToken < Token
-    attr_accessor :consumer
+    attr_accessor :consumer, :params
+    attr_reader   :response
+
+    def self.from_hash(consumer, hash)
+      token = self.new(consumer, hash[:oauth_token], hash[:oauth_token_secret])
+      token.params = hash
+      token
+    end
 
     def initialize(consumer, token="", secret="")
       super(token, secret)
@@ -40,7 +47,7 @@ module OAuth
     #   @token.request(:post, '/people', @person.to_xml, { 'Content-Type' => 'application/xml' })
     #
     def request(http_method, path, *arguments)
-      response = consumer.request(http_method, path, self, {}, *arguments)
+      @response = consumer.request(http_method, path, self, {}, *arguments)
     end
 
     # Sign a request generated elsewhere using Net:HTTP::Post.new or friends
@@ -53,21 +60,31 @@ module OAuth
   # This is normally created by the Consumer object.
   class RequestToken < ConsumerToken
 
-    # Returns the authorization url that you need to use for redirecting the user
-    def authorize_url
-      consumer.authorize_url + "?oauth_token=" + CGI.escape(token)
+    # Generate an authorization URL for user authorization
+    def authorize_url(params = nil)
+      params = (params || {}).merge(:oauth_token => self.token)
+      build_authorize_url(consumer.authorize_url, params)
     end
 
     # exchange for AccessToken on server
     def get_access_token(options = {})
       response = consumer.token_request(consumer.http_method, (consumer.access_token_url? ? consumer.access_token_url : consumer.access_token_path), self, options)
-      OAuth::AccessToken.new(consumer, response[:oauth_token], response[:oauth_token_secret])
+      OAuth::AccessToken.from_hash(consumer, response)
+    end
+
+  protected
+
+    # construct an authorization url
+    def build_authorize_url(base_url, params)
+      uri = URI.parse(base_url.to_s)
+      # TODO doesn't handle array values correctly
+      uri.query = params.map { |k,v| [k, CGI.escape(v)] * "=" } * "&"
+      uri.to_s
     end
   end
 
-  # The Access Token is used for the actual "real" web service calls thatyou perform against the server
+  # The Access Token is used for the actual "real" web service calls that you perform against the server
   class AccessToken < ConsumerToken
-
     # The less intrusive way. Otherwise, if we are to do it correctly inside consumer,
     # we need to restructure and touch more methods: request(), sign!(), etc.
     def request(http_method, path, *arguments)
@@ -75,11 +92,11 @@ module OAuth
       site_uri = consumer.uri
       is_service_uri_different = (request_uri.absolute? && request_uri != site_uri)
       consumer.uri(request_uri) if is_service_uri_different
-      resp = super(http_method, path, *arguments)
+      @response = super(http_method, path, *arguments)
       # NOTE: reset for wholesomeness? meaning that we admit only AccessToken service calls may use different URIs?
       # so reset in case consumer is still used for other token-management tasks subsequently?
       consumer.uri(site_uri) if is_service_uri_different
-      resp
+      @response
     end
 
     # Make a regular GET request using AccessToken
