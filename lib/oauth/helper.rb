@@ -1,13 +1,12 @@
 require 'openssl'
 require 'base64'
-require 'cgi'
 
 module OAuth
   module Helper
     extend self
 
     def escape(value)
-      CGI.escape(value.to_s).gsub("%7E", '~').gsub("+", "%20")
+      URI::escape(value.to_s, OAuth::RESERVED_CHARACTERS)
     end
 
     def generate_key(size=32)
