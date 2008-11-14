@@ -30,7 +30,7 @@ module OAuth
   class ConsumerToken<Token
     attr_accessor :consumer
 
-    def initialize(consumer,token,secret)
+    def initialize(consumer,token="",secret="")
       super token,secret
       @consumer=consumer
     end
