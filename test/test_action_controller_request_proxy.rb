@@ -5,9 +5,10 @@ require 'action_controller/test_process'
 
 class ActionControllerRequestProxyTest < Test::Unit::TestCase
 
-  def request_proxy(parameters)
+  def request_proxy(parameters={})
     request = ActionController::TestRequest.new({}, parameters)
     request.env['CONTENT_TYPE'] = 'application/x-www-form-urlencoded'
+    yield request if block_given?
     OAuth::RequestProxy.proxy(request)
   end
  
