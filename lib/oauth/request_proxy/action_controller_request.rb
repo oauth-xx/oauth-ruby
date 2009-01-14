@@ -6,7 +6,7 @@ require 'uri'
 
 module OAuth::RequestProxy
   class ActionControllerRequest < OAuth::RequestProxy::Base
-    proxies ActionController::AbstractRequest
+    proxies(defined?(ActionController::AbstractRequest) ? ActionController::AbstractRequest : ActionController::Request)
 
     def method
       request.method.to_s.upcase
