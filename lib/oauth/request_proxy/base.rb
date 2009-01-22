@@ -53,7 +53,7 @@ module OAuth::RequestProxy
     # See 9.1.2 in specs
     def normalized_uri
       u=URI.parse(uri)
-      "#{u.scheme.downcase}://#{u.host.downcase}#{(u.scheme.downcase=='http'&&u.port!=80)||(u.scheme.downcase=='https'&&u.port!=443) ? ":#{u.port}" : ""}#{u.path}"
+      "#{u.scheme.downcase}://#{u.host.downcase}#{(u.scheme.downcase=='http'&&u.port!=80)||(u.scheme.downcase=='https'&&u.port!=443) ? ":#{u.port}" : ""}#{(u.path&&u.path!='') ? u.path : '/'}"
     end
     
     # See 9.1.1. in specs Normalize Request Parameters

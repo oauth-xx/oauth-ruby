@@ -24,6 +24,14 @@ class ConstructRequestUrlTest < OAuthCase
     assert_request_url("http://example.com/resource","HTTP://Example.com:80/resource?id=123")
   end
   
+  def test_simple_url_with_ending_slash
+    assert_request_url("http://example.com/","http://example.com/")
+  end
+
+  def test_simple_url_without_ending_slash
+    assert_request_url("http://example.com/","http://example.com")
+  end
+  
   def test_of_normalized_http
     assert_request_url("http://example.com/resource","http://example.com/resource")
   end
