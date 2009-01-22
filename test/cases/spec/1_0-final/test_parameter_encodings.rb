@@ -15,12 +15,24 @@ require File.dirname(__FILE__) + '/../../oauth_case'
 class ParameterEncodingTest < OAuthCase
   include OAuth::Helper
   
-  def test_encodings1
+  def test_encodings_alpha_num
     assert_encoding('abcABC123','abcABC123')
   end
   
-  def test_encodings2
+  def test_encodings_non_escaped
     assert_encoding('-._~','-._~')
+  end
+
+  def test_encodings_percent
+    assert_encoding('%25','%')
+  end
+
+  def test_encodings_plus
+    assert_encoding('%2B','+')
+  end
+
+  def test_encodings_query_param_symbols
+    assert_encoding('%26%3D%2A','&=*')
   end
   
   protected
