@@ -239,18 +239,18 @@ class ConsumerTest < Test::Unit::TestCase
   #
   # It also generates "warning: using default DH parameters." which I
   # don't know how to get rid of
-  def test_serialization_with_https
-    consumer = OAuth::Consumer.new('token', 'secret', :site => 'https://plazes.net')
-    consumer.http.verify_mode = OpenSSL::SSL::VERIFY_NONE
-    consumer.http.get('/')
-    
-    assert_nothing_raised do
-      # Specifically this should not raise TypeError: no marshal_dump
-      # is defined for class OpenSSL::SSL::SSLContext
-      Marshal.dump(consumer)
-    end
-  end
-  
+#  def test_serialization_with_https
+#    consumer = OAuth::Consumer.new('token', 'secret', :site => 'https://plazes.net')
+#    consumer.http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+#    consumer.http.get('/')
+#    
+#    assert_nothing_raised do
+#      # Specifically this should not raise TypeError: no marshal_dump
+#      # is defined for class OpenSSL::SSL::SSLContext
+#      Marshal.dump(consumer)
+#    end
+#  end
+#  
   def test_get_request_token_with_custom_arguments
     @consumer=OAuth::Consumer.new( 
         "key",

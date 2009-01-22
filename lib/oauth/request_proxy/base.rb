@@ -1,7 +1,10 @@
 require 'oauth/request_proxy'
+require 'oauth/helper'
 
 module OAuth::RequestProxy
   class Base
+    include OAuth::Helper
+
     def self.proxies(klass)
       OAuth::RequestProxy.available_proxies[klass] = self
     end
@@ -46,6 +49,25 @@ module OAuth::RequestProxy
     def signature
       parameters['oauth_signature'] || ""
     end
+    
+    # See 9.1.2 in specs
+    def normalized_uri
+      u=URI.parse(uri)
+      "#{u.scheme.downcase}://#{u.host.downcase}#{u.path}"
+    end
+    
+    # See 9.1.1. in specs Normalize Request Parameters
+    def normalized_params
+#      parameters_for_signature.sort.map { |k,v| [escape(k), escape(v)] * "=" }.join("&")
+      parameters_for_signature.sort.map { |k,v| [k,v] * "=" }.join("&")
+    end
+    
+    # See 9.1 in specs
+    def signature_base_string
+      base = [method, normalized_uri, normalized_params]
+      base.map { |v| escape(v) }.join("&")
+    end
+    
     
     protected
     

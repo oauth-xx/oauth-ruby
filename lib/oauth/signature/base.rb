@@ -60,11 +60,9 @@ module OAuth::Signature
     end
 
     def signature_base_string
-      normalized_params = request.parameters_for_signature.sort.map { |k,v| [escape(k), escape(v)] * "=" }.join("&")
-      base = [request.method, request.uri, normalized_params]
-      sbs = base.map { |v| escape(v) }.join("&")
+      request.signature_base_string
     end
-
+    
     private
 
     def token
