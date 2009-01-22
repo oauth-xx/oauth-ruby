@@ -57,11 +57,18 @@ class NormalizeRequestParametersTest < OAuthCase
   
   # This example contradicts the first example from the specs. I think.
   def test_wiki4
-    assert_normalized "a=x%20y&a=x%21y","a=x!y&a=x+y"
+    # This is straight from the wiki
+    #    assert_normalized "a=x%20y&a=x%21y","a=x!y&a=x+y"
+    # This I believe is correct. 
+    assert_normalized "a=x!y&a=x+y","a=x!y&a=x+y"
+    
   end
 
   def test_wiki5
-    assert_normalized "x=a&x%21y=a",{"x!y"=>'a','x'=>'a'}
+    # This is straight from the wiki
+    #    assert_normalized "x=a&x%21y=a",{"x!y"=>'a','x'=>'a'}
+    # This I believe is correct. 
+    assert_normalized "x=a&x!y=a",{"x!y"=>'a','x'=>'a'}
   end
 
   protected
