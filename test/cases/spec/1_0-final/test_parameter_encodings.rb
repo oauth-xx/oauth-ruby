@@ -34,6 +34,26 @@ class ParameterEncodingTest < OAuthCase
   def test_encodings_query_param_symbols
     assert_encoding('%26%3D%2A','&=*')
   end
+
+  def test_encodings_utf_lf
+    assert_encoding('U+000A','%0A')
+  end
+
+  def test_encodings_utf_space
+    assert_encoding('U+0020','%20')
+  end
+
+  def test_encodings_utf_007f
+    assert_encoding('U+007F','%7F')
+  end
+
+  def test_encodings_utf_0080
+    assert_encoding('U+0080','%C2%80')
+  end
+
+  def test_encodings_utf_3001
+    assert_encoding('U+3001','%E3%80%81')
+  end
   
   protected
   
