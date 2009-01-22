@@ -35,7 +35,7 @@ module OAuth
             if verbose?
               stdout.puts "Method: #{request.method}"
               stdout.puts "URI: #{request.uri}"
-              stdout.puts "Normalized params: #{request.normalized_params}"
+              stdout.puts "Normalized params: #{request.normalized_parameters}"
               stdout.puts "Signature base string: #{request.signature_base_string}"
             end
           end

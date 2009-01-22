@@ -83,6 +83,6 @@ class NormalizeRequestParametersTest < OAuthCase
   end
   
   def normalize_request_parameters(params={})
-    request(params).normalized_params
+    request(params).normalized_parameters
   end
 end
