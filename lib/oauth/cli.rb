@@ -35,7 +35,7 @@ module OAuth
             if verbose?
               stdout.puts "Method: #{request.method}"
               stdout.puts "URI: #{request.uri}"
-              stdout.puts "Params: #{request.parameters.inspect}"
+              stdout.puts "Normalized params: #{request.normalized_params}"
               stdout.puts "Signature base string: #{request.signature_base_string}"
             end
           end
@@ -66,11 +66,11 @@ module OAuth
         options[:oauth_signature_method] = "HMAC-SHA1"
 
         opts.on("--consumer-key KEY", "Specifies the consumer key to use.") do |v|
-          options[:consumer_key] = v
+          options[:oauth_consumer_key] = v
         end
 
         opts.on("--consumer-secret SECRET", "Specifies the consumer secret to use.") do |v|
-          options[:consumer_secret] = v
+          options[:oauth_consumer_secret] = v
         end
 
         opts.on("--method METHOD", "Specifies the method (e.g. GET) to use when signing.") do |v|
@@ -108,13 +108,11 @@ module OAuth
         "oauth_consumer_key"     => options[:oauth_consumer_key],
         "oauth_token"            => options[:oauth_token],
         "oauth_signature_method" => options[:oauth_signature_method]
-      }
-
-      # TODO merge params
+      }.merge(CGI.parse(options[:params]))
     end
 
     def sufficient_options?
-      options[:consumer_key] && options[:consumer_secret] && options[:method] && options[:uri]
+      options[:oauth_consumer_key] && options[:oauth_consumer_secret] && options[:method] && options[:uri]
     end
 
     def usage
