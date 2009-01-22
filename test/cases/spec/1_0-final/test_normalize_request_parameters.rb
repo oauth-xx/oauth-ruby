@@ -39,8 +39,12 @@ class NormalizeRequestParametersTest < OAuthCase
   
   def test_spec_example
     assert_normalized 'a=1&c=hi%20there&f=25&f=50&f=a&z=p&z=t', { 'a' => 1, 'c' => 'hi there', 'f' => ['a', '50', '25'], 'z' => ['p', 't'] }
+
+  def test_sorts_parameters_correctly
+    # values for 'f' are scrambled
+    assert_normalized 'a=1&c=hi%20there&f=5&f=70&f=a&z=p&z=t', { 'a' => 1, 'c' => 'hi%20there', 'f' => ['a', '70', '5'], 'z' => ['p', 't'] }
   end
-  
+
   def test_empty
     assert_normalized "",{}
   end
