@@ -2,6 +2,8 @@ Fix in plain text signatures to bug found by Andrew Arrow. Who contributed new n
 
 == 0.3.0
 
+* Correctly handle multi-valued parameters
+* Added #normalized_parameters to OAuth::RequestProxy::Base
 * OAuth::Signature.sign and friends now yield the RequestProxy instead of the
   token when the passed block's arity is 1.
 * Token requests are made to the configured URL rather than generating a
