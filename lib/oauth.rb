@@ -1,3 +1,3 @@
-$:.unshift File.dirname(__FILE__)
-
-module OAuth; end
+require 'oauth/client/helper'
+require 'oauth/signature/hmac/sha1'
+require 'oauth/request_proxy/mock_request'
