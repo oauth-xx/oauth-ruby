@@ -24,11 +24,26 @@ module OAuth::Signature
       raise TypeError unless request.kind_of?(OAuth::RequestProxy::Base)
       @request = request
       @options = options
+
       if block_given?
+
+        # consumer secret and token secret need to be looked up based on pieces of the request
         @token_secret, @consumer_secret = yield block.arity == 1 ? token : [token, consumer_key,nonce,request.timestamp]
+
       else
-        @consumer_secret = @options[:consumer].secret
-        @token_secret = @options[:token] ? @options[:token].secret : ''
+        ## consumer secret was determined beforehand
+
+        @consumer_secret = options[:consumer].secret if options[:consumer]
+
+        # presence of :consumer_secret option will override any Consumer that's provided
+        @consumer_secret = options[:consumer_secret] if options[:consumer_secret]
+
+        ## token secret was determined beforehand
+
+        @token_secret = options[:token].secret if options[:token]
+
+        # presence of :token_secret option will override any Token that's provided
+        @token_secret = options[:token_secret] if options[:token_secret]
       end
     end
 
