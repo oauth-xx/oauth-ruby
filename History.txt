@@ -1,5 +1,10 @@
 Fix in plain text signatures to bug found by Andrew Arrow. Who contributed new new unit tests for plain text sigs.
 
+== 0.3.0
+
+* OAuth::Signature.sign and friends now yield the RequestProxy instead of the
+  token when the passed block's arity is 1.
+
 == 0.2.7 2008-9-10 The lets fix the last release release
 
 There was an error in the RSA requests using oauth tokens. Thanks to Philip Lipu Tsai for noticing this.

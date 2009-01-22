@@ -28,7 +28,7 @@ module OAuth::Signature
       if block_given?
 
         # consumer secret and token secret need to be looked up based on pieces of the request
-        @token_secret, @consumer_secret = yield block.arity == 1 ? token : [token, consumer_key,nonce,request.timestamp]
+        @token_secret, @consumer_secret = yield block.arity == 1 ? request : [token, consumer_key,nonce,request.timestamp]
 
       else
         ## consumer secret was determined beforehand
