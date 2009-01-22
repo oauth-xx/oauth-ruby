@@ -29,7 +29,16 @@ module OAuth
           signature = OAuth::Signature.sign \
             request,
             :consumer_secret => options[:oauth_consumer_secret],
-            :token_secret    => options[:oauth_token_secret]
+            :token_secret    => options[:oauth_token_secret] do |request|
+
+            # while we have access to the request being signed, display some internals
+            if verbose?
+              stdout.puts "Method: #{request.method}"
+              stdout.puts "URI: #{request.uri}"
+              stdout.puts "Params: #{request.parameters.inspect}"
+              stdout.puts "Signature base string: #{request.signature_base_string}"
+            end
+          end
 
           if verbose?
             stdout.puts "Signature:         #{signature}"
