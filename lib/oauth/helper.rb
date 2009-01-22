@@ -2,6 +2,8 @@ require 'openssl'
 require 'base64'
 module OAuth
   module Helper
+    extend self
+
     def escape(value)
       CGI.escape(value.to_s).gsub("%7E", '~').gsub("+", "%20")
     end
