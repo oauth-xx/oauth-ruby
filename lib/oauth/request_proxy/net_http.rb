@@ -14,8 +14,6 @@ module OAuth::RequestProxy::Net
 
       def uri
         uri = options[:uri]
-        uri = URI.parse(uri) unless uri.kind_of?(URI)
-        uri.query = nil
         uri.to_s
       end
 

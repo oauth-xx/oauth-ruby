@@ -24,6 +24,26 @@ class ConstructRequestUrlTest < OAuthCase
     assert_request_url("http://example.com/resource","HTTP://Example.com:80/resource?id=123")
   end
   
+  def test_of_normalized_http
+    assert_request_url("http://example.com/resource","http://example.com/resource")
+  end
+
+  def test_of_https
+    assert_request_url("https://example.com/resource","HTTPS://Example.com:443/resource?id=123")
+  end
+
+  def test_of_normalized_http
+    assert_request_url("https://example.com/resource","https://example.com/resource")
+  end
+  
+  def test_of_http_with_non_standard_port
+    assert_request_url("http://example.com:8080/resource","http://example.com:8080/resource")
+  end
+  
+  def test_of_https_with_non_standard_port
+    assert_request_url("https://example.com:8080/resource","https://example.com:8080/resource")
+  end
+  
   protected
   
   
