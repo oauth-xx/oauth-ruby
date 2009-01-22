@@ -31,7 +31,7 @@ end
 REV = nil 
 # UNCOMMENT IF REQUIRED: 
 # REV = `svn info`.each {|line| if line =~ /^Revision:/ then k,v = line.split(': '); break v.chomp; else next; end} rescue nil
-VERS = Oauth::VERSION::STRING + (REV ? ".#{REV}" : "")
+VERS = OAuth::VERSION::STRING + (REV ? ".#{REV}" : "")
 RDOC_OPTS = ['--quiet', '--title', 'oauth documentation',
     "--opname", "index.html",
     "--line-numbers", 

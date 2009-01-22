@@ -13,7 +13,7 @@ require 'syntax/convertors/html'
 require 'erb'
 require File.dirname(__FILE__) + '/../lib/oauth/version.rb'
 
-version  = Oauth::VERSION::STRING
+version  = OAuth::VERSION::STRING
 download = 'http://rubyforge.org/projects/oauth'
 
 class Fixnum
