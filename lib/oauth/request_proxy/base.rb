@@ -63,10 +63,10 @@ module OAuth::RequestProxy
         if values.is_a?(Array)
           # multiple values were provided for a single key
           values.sort.collect do |v|
-            [k, v] * "="
+            [escape(k),escape(v)] * "="
           end
         else
-          [k, values] * "="
+          [escape(k),escape(values)] * "="
         end
       end * "&"
     end

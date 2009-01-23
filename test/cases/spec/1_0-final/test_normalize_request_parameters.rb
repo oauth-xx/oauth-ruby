@@ -27,17 +27,23 @@ require File.dirname(__FILE__) + '/../../oauth_case'
 class NormalizeRequestParametersTest < OAuthCase
   
   def test_parameters_for_signature
-    params={'a'=>1, 'c'=>'hi%20there', 'f'=>'25', 'f'=>'50', 'f'=>'a', 'z'=>'p', 'z'=>'t'}
+    params={'a'=>1, 'c'=>'hi there', 'f'=>'25', 'f'=>'50', 'f'=>'a', 'z'=>'p', 'z'=>'t'}
     assert_equal params,request(params).parameters_for_signature
+  end
+
+
+  def test_parameters_for_signature_removes_oauth_signature
+    params={'a'=>1, 'c'=>'hi there', 'f'=>'25', 'f'=>'50', 'f'=>'a', 'z'=>'p', 'z'=>'t'}
+    assert_equal params,request(params.merge({'oauth_signature'=>'blalbla'})).parameters_for_signature
   end
   
   def test_spec_example
-    assert_normalized 'a=1&c=hi%20there&f=25&f=50&f=a&z=p&z=t', { 'a' => 1, 'c' => 'hi%20there', 'f' => ['25', '50', 'a'], 'z' => ['p', 't'] }
+    assert_normalized 'a=1&c=hi%20there&f=25&f=50&f=a&z=p&z=t', { 'a' => 1, 'c' => 'hi there', 'f' => ['25', '50', 'a'], 'z' => ['p', 't'] }
   end
 
   def test_sorts_parameters_correctly
     # values for 'f' are scrambled
-    assert_normalized 'a=1&c=hi%20there&f=25&f=50&f=a&z=p&z=t', { 'a' => 1, 'c' => 'hi%20there', 'f' => ['a', '50', '25'], 'z' => ['p', 't'] }
+    assert_normalized 'a=1&c=hi%20there&f=5&f=70&f=a&z=p&z=t', { 'a' => 1, 'c' => 'hi there', 'f' => ['a', '70', '5'], 'z' => ['p', 't'] }
   end
 
   def test_empty
@@ -62,18 +68,12 @@ class NormalizeRequestParametersTest < OAuthCase
   
   # This example contradicts the first example from the specs. I think.
   def test_wiki4
-    # This is straight from the wiki
-    #    assert_normalized "a=x%20y&a=x%21y","a=x!y&a=x+y"
-    # This I believe is correct. 
-    assert_normalized "a=x!y&a=x+y","a=x!y&a=x+y"
+    assert_normalized "a=x%20y&a=x%21y",{a=>["x!y","x+y"]}
     
   end
 
   def test_wiki5
-    # This is straight from the wiki
-    #    assert_normalized "x=a&x%21y=a",{"x!y"=>'a','x'=>'a'}
-    # This I believe is correct. 
-    assert_normalized "x=a&x!y=a",{"x!y"=>'a','x'=>'a'}
+    assert_normalized "x=a&x%21y=a",{"x!y"=>'a','x'=>'a'}
   end
 
   protected
