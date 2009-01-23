@@ -32,6 +32,11 @@ module OAuth
       def uri
         [@request.from.strip.to_s, @request.to.strip.to_s].join("&")
       end
+      
+      def normalized_uri
+        uri
+      end
+      
     end
   end
 end

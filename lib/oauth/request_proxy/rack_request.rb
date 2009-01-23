@@ -11,9 +11,7 @@ module OAuth::RequestProxy
     end
     
     def uri
-      uri = URI.parse(request.url)
-      uri.query = nil
-      uri.to_s
+      request.url
     end
 
     def parameters

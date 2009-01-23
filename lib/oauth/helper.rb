@@ -1,5 +1,6 @@
 require 'openssl'
 require 'base64'
+require 'cgi'
 module OAuth
   module Helper
     extend self

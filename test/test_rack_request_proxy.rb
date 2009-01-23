@@ -11,7 +11,7 @@ class RackRequestProxyTest < Test::Unit::TestCase
 
     expected_parameters = {'key' => 'value'}
     assert_equal expected_parameters, request_proxy.parameters
-    assert_equal 'http://example.com/test', request_proxy.uri
+    assert_equal 'http://example.com/test', request_proxy.normalized_uri
     assert_equal 'GET', request_proxy.method
   end
 
@@ -22,7 +22,7 @@ class RackRequestProxyTest < Test::Unit::TestCase
 
     expected_parameters = {'key' => 'value'}
     assert_equal expected_parameters, request_proxy.parameters
-    assert_equal 'http://example.com/test', request_proxy.uri
+    assert_equal 'http://example.com/test', request_proxy.normalized_uri
     assert_equal 'POST', request_proxy.method
   end
 
@@ -33,7 +33,7 @@ class RackRequestProxyTest < Test::Unit::TestCase
 
     expected_parameters = {'key' => 'value', 'key2' => 'value2'}
     assert_equal expected_parameters, request_proxy.parameters
-    assert_equal 'http://example.com/test', request_proxy.uri
+    assert_equal 'http://example.com/test', request_proxy.normalized_uri
     assert_equal 'POST', request_proxy.method
   end
 

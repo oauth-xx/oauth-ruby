@@ -44,6 +44,38 @@ class NormalizeRequestParametersTest < OAuthCase
     assert_normalized "",{}
   end
   
+  
+  # These are from the wiki http://wiki.oauth.net/TestCases
+  # in the section Normalize Request Parameters
+    
+  def test_wiki1
+    assert_normalized "name=",{"name"=>nil}
+  end
+  
+  def test_wiki2
+    assert_normalized "a=b",{'a'=>'b'}
+  end
+  
+  def test_wiki3
+    assert_normalized "a=b&c=d",{'a'=>'b','c'=>'d'}
+  end
+  
+  # This example contradicts the first example from the specs. I think.
+  def test_wiki4
+    # This is straight from the wiki
+    #    assert_normalized "a=x%20y&a=x%21y","a=x!y&a=x+y"
+    # This I believe is correct. 
+    assert_normalized "a=x!y&a=x+y","a=x!y&a=x+y"
+    
+  end
+
+  def test_wiki5
+    # This is straight from the wiki
+    #    assert_normalized "x=a&x%21y=a",{"x!y"=>'a','x'=>'a'}
+    # This I believe is correct. 
+    assert_normalized "x=a&x!y=a",{"x!y"=>'a','x'=>'a'}
+  end
+
   protected
   
   
