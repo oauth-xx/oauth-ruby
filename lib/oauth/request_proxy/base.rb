@@ -58,7 +58,7 @@ module OAuth::RequestProxy
     
     # See 9.1.1. in specs Normalize Request Parameters
     def normalized_params
-      parameters_for_signature.sort.map { |k,v| [k,v] * "=" }.join("&")
+      parameters_for_signature.sort.map { |k,v| [escape(k),escape(v)] * "=" }.join("&")
     end
     
     # See 9.1 in specs
