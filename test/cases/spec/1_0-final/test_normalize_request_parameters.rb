@@ -43,7 +43,7 @@ class NormalizeRequestParametersTest < OAuthCase
 
   def test_sorts_parameters_correctly
     # values for 'f' are scrambled
-    assert_normalized 'a=1&c=hi%20there&f=5&f=70&f=a&z=p&z=t', { 'a' => 1, 'c' => 'hi%20there', 'f' => ['a', '70', '5'], 'z' => ['p', 't'] }
+    assert_normalized 'a=1&c=hi%20there&f=5&f=70&f=a&z=p&z=t', { 'a' => 1, 'c' => 'hi there', 'f' => ['a', '70', '5'], 'z' => ['p', 't'] }
   end
 
   def test_empty
@@ -68,7 +68,7 @@ class NormalizeRequestParametersTest < OAuthCase
   
   # This example contradicts the first example from the specs. I think.
   def test_wiki4
-    assert_normalized "a=x%20y&a=x%21y","a=x!y&a=x+y"
+    assert_normalized "a=x%20y&a=x%21y",{a=>["x!y","x+y"]}
     
   end
 
