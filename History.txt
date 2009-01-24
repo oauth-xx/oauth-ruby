@@ -2,15 +2,15 @@ Fix in plain text signatures to bug found by Andrew Arrow. Who contributed new n
 
 == 0.3.0
 
-* Support ActionController::Request from Edge Rails
-* Correctly handle multi-valued parameters
-* Added #normalized_parameters to OAuth::RequestProxy::Base
+* Support ActionController::Request from Edge Rails (László Bácsi)
+* Correctly handle multi-valued parameters (Seth)
+* Added #normalized_parameters to OAuth::RequestProxy::Base (Pelle)
 * OAuth::Signature.sign and friends now yield the RequestProxy instead of the
-  token when the passed block's arity is 1.
+  token when the passed block's arity is 1. (Seth)
 * Token requests are made to the configured URL rather than generating a
   potentially incorrect one.  (Kellan Elliott-McCrea)
-* Command-line app for generating signatures.
-* Improved test-cases and compatibility for encoding issues.
+* Command-line app for generating signatures. (Seth)
+* Improved test-cases and compatibility for encoding issues. (Pelle)
 
 == 0.2.7 2008-9-10 The lets fix the last release release
 
