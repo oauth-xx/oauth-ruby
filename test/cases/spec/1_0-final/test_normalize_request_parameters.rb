@@ -53,7 +53,7 @@ class NormalizeRequestParametersTest < OAuthCase
   
   # These are from the wiki http://wiki.oauth.net/TestCases
   # in the section Normalize Request Parameters
-    
+  # Parameters have already been x-www-form-urlencoded (i.e. + = <space>)
   def test_wiki1
     assert_normalized "name=",{"name"=>nil}
   end
@@ -66,9 +66,8 @@ class NormalizeRequestParametersTest < OAuthCase
     assert_normalized "a=b&c=d",{'a'=>'b','c'=>'d'}
   end
   
-  # This example contradicts the first example from the specs. I think.
   def test_wiki4
-    assert_normalized "a=x%20y&a=x%21y",{a=>["x!y","x+y"]}
+    assert_normalized "a=x%20y&a=x%21y",{'a'=>["x!y","x y"]}
     
   end
 
