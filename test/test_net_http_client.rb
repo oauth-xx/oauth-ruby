@@ -19,7 +19,7 @@ class NetHTTPClientTest < Test::Unit::TestCase
     
     assert_equal 'GET', request.method
     assert_equal '/test?key=value', request.path
-    assert_equal "OAuth realm=\"\", oauth_nonce=\"225579211881198842005988698334675835446\", oauth_signature_method=\"HMAC-SHA1\", oauth_token=\"token_411a7f\", oauth_timestamp=\"1199645624\", oauth_consumer_key=\"consumer_key_86cad9\", oauth_signature=\"1oO2izFav1GP4kEH2EskwXkCRFg%3D\", oauth_version=\"1.0\"".split(', ').sort, request['authorization'].split(', ').sort
+    assert_equal "OAuth oauth_nonce=\"225579211881198842005988698334675835446\", oauth_signature_method=\"HMAC-SHA1\", oauth_token=\"token_411a7f\", oauth_timestamp=\"1199645624\", oauth_consumer_key=\"consumer_key_86cad9\", oauth_signature=\"1oO2izFav1GP4kEH2EskwXkCRFg%3D\", oauth_version=\"1.0\"".split(', ').sort, request['authorization'].split(', ').sort
   end
 
   def test_that_using_auth_headers_on_post_requests_works
@@ -30,7 +30,7 @@ class NetHTTPClientTest < Test::Unit::TestCase
     assert_equal 'POST', request.method
     assert_equal '/test', request.path
     assert_equal 'key=value', request.body
-    assert_equal "OAuth realm=\"\", oauth_nonce=\"225579211881198842005988698334675835446\", oauth_signature_method=\"HMAC-SHA1\", oauth_token=\"token_411a7f\", oauth_timestamp=\"1199645624\", oauth_consumer_key=\"consumer_key_86cad9\", oauth_signature=\"26g7wHTtNO6ZWJaLltcueppHYiI%3D\", oauth_version=\"1.0\"".split(', ').sort, request['authorization'].split(', ').sort
+    assert_equal "OAuth oauth_nonce=\"225579211881198842005988698334675835446\", oauth_signature_method=\"HMAC-SHA1\", oauth_token=\"token_411a7f\", oauth_timestamp=\"1199645624\", oauth_consumer_key=\"consumer_key_86cad9\", oauth_signature=\"26g7wHTtNO6ZWJaLltcueppHYiI%3D\", oauth_version=\"1.0\"".split(', ').sort, request['authorization'].split(', ').sort
   end
  
   def test_that_using_post_params_works
@@ -115,7 +115,7 @@ class NetHTTPClientTest < Test::Unit::TestCase
  
     request = Net::HTTP::Get.new(request_uri.path)
     signature_base_string=request.signature_base_string(http, consumer, nil, {:scheme=>:query_string,:nonce => nonce, :timestamp => timestamp})
-    assert_equal "GET&http%3A%2F%2Fterm.ie%2Foauth%2Fexample%2Frequest_token.php&oauth_consumer_key%3Dkey%26oauth_nonce%3D#{nonce}%26oauth_signature_method%3DHMAC-SHA1%26oauth_timestamp%3D#{timestamp}%26oauth_token%3D%26oauth_version%3D1.0",signature_base_string
+    assert_equal "GET&http%3A%2F%2Fterm.ie%2Foauth%2Fexample%2Frequest_token.php&oauth_consumer_key%3Dkey%26oauth_nonce%3D#{nonce}%26oauth_signature_method%3DHMAC-SHA1%26oauth_timestamp%3D#{timestamp}%26oauth_version%3D1.0",signature_base_string
  
 #    request = Net::HTTP::Get.new(request_uri.path)
     request.oauth!(http, consumer, nil, {:scheme=>:query_string,:nonce => nonce, :timestamp => timestamp})
@@ -135,21 +135,21 @@ class NetHTTPClientTest < Test::Unit::TestCase
     request.body = "<?xml version=\"1.0\"?><foo><bar>baz</bar></foo>"
     request["Content-Type"] = "application/xml"
     signature_base_string=request.signature_base_string(@http, @consumer, nil, { :nonce => @nonce, :timestamp => @timestamp })
-    assert_equal "PUT&http%3A%2F%2Fexample.com%2Ftest&oauth_consumer_key%3Dconsumer_key_86cad9%26oauth_nonce%3D225579211881198842005988698334675835446%26oauth_signature_method%3DHMAC-SHA1%26oauth_timestamp%3D1199645624%26oauth_token%3D%26oauth_version%3D1.0", signature_base_string
+    assert_equal "PUT&http%3A%2F%2Fexample.com%2Ftest&oauth_consumer_key%3Dconsumer_key_86cad9%26oauth_nonce%3D225579211881198842005988698334675835446%26oauth_signature_method%3DHMAC-SHA1%26oauth_timestamp%3D1199645624%26oauth_version%3D1.0", signature_base_string
   end
 
   def test_that_put_bodies_not_signed_even_if_form_urlencoded
     request = Net::HTTP::Put.new(@request_uri.path)
     request.set_form_data( { 'key2' => 'value2' } )
     signature_base_string=request.signature_base_string(@http, @consumer, nil, { :nonce => @nonce, :timestamp => @timestamp })
-    assert_equal "PUT&http%3A%2F%2Fexample.com%2Ftest&oauth_consumer_key%3Dconsumer_key_86cad9%26oauth_nonce%3D225579211881198842005988698334675835446%26oauth_signature_method%3DHMAC-SHA1%26oauth_timestamp%3D1199645624%26oauth_token%3D%26oauth_version%3D1.0", signature_base_string
+    assert_equal "PUT&http%3A%2F%2Fexample.com%2Ftest&oauth_consumer_key%3Dconsumer_key_86cad9%26oauth_nonce%3D225579211881198842005988698334675835446%26oauth_signature_method%3DHMAC-SHA1%26oauth_timestamp%3D1199645624%26oauth_version%3D1.0", signature_base_string
   end
   
   def test_that_post_bodies_signed_if_form_urlencoded
     request = Net::HTTP::Post.new(@request_uri.path)
     request.set_form_data( { 'key2' => 'value2' } )
     signature_base_string=request.signature_base_string(@http, @consumer, nil, { :nonce => @nonce, :timestamp => @timestamp })
-    assert_equal "POST&http%3A%2F%2Fexample.com%2Ftest&key2%3Dvalue2%26oauth_consumer_key%3Dconsumer_key_86cad9%26oauth_nonce%3D225579211881198842005988698334675835446%26oauth_signature_method%3DHMAC-SHA1%26oauth_timestamp%3D1199645624%26oauth_token%3D%26oauth_version%3D1.0", signature_base_string
+    assert_equal "POST&http%3A%2F%2Fexample.com%2Ftest&key2%3Dvalue2%26oauth_consumer_key%3Dconsumer_key_86cad9%26oauth_nonce%3D225579211881198842005988698334675835446%26oauth_signature_method%3DHMAC-SHA1%26oauth_timestamp%3D1199645624%26oauth_version%3D1.0", signature_base_string
   end
   
   def test_that_post_bodies_not_signed_if_other_content_type
@@ -157,7 +157,7 @@ class NetHTTPClientTest < Test::Unit::TestCase
     request.body = "<?xml version=\"1.0\"?><foo><bar>baz</bar></foo>"
     request["Content-Type"] = "application/xml"
     signature_base_string=request.signature_base_string(@http, @consumer, nil, { :nonce => @nonce, :timestamp => @timestamp })
-    assert_equal "POST&http%3A%2F%2Fexample.com%2Ftest&oauth_consumer_key%3Dconsumer_key_86cad9%26oauth_nonce%3D225579211881198842005988698334675835446%26oauth_signature_method%3DHMAC-SHA1%26oauth_timestamp%3D1199645624%26oauth_token%3D%26oauth_version%3D1.0", signature_base_string
+    assert_equal "POST&http%3A%2F%2Fexample.com%2Ftest&oauth_consumer_key%3Dconsumer_key_86cad9%26oauth_nonce%3D225579211881198842005988698334675835446%26oauth_signature_method%3DHMAC-SHA1%26oauth_timestamp%3D1199645624%26oauth_version%3D1.0", signature_base_string
   end
 
   protected
