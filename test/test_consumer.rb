@@ -1,5 +1,4 @@
 require 'rubygems'
-gem 'oauth'
 require 'test/unit'
 require 'oauth/consumer'
 require 'oauth/signature/rsa/sha1'
