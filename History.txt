@@ -1,4 +1,6 @@
-Fix in plain text signatures to bug found by Andrew Arrow. Who contributed new new unit tests for plain text sigs.
+== 0.3.1
+
+* Michael Wood identified a problem with relative and absolute token request paths. This should now be fixed and is tested for both cases.
 
 == 0.3.0
 
@@ -13,6 +15,7 @@ Fix in plain text signatures to bug found by Andrew Arrow. Who contributed new n
 * Improved test-cases and compatibility for encoding issues. (Pelle)
 
 == 0.2.7 2008-9-10 The lets fix the last release release
+Fix in plain text signatures to bug found by Andrew Arrow. Who contributed new new unit tests for plain text sigs.
 
 There was an error in the RSA requests using oauth tokens. Thanks to Philip Lipu Tsai for noticing this.
 
