@@ -91,7 +91,7 @@ module OAuth
     #  @request_token=@consumer.get_request_token
     #
     def get_request_token(request_options={}, *arguments)
-      response=token_request(http_method,request_token_url, nil, request_options, *arguments)
+      response=token_request(http_method,(request_token_url? ? request_token_url : request_token_path), nil, request_options, *arguments)
       OAuth::RequestToken.new(self,response[:oauth_token],response[:oauth_token_secret])
     end
     
@@ -103,7 +103,14 @@ module OAuth
     #   @consumer.request(:post,'/people',@token,{},@person.to_xml,{ 'Content-Type' => 'application/xml' })
     #
     def request(http_method,path, token=nil,request_options={},*arguments)
-      http.request(create_signed_request(http_method,path,token,request_options,*arguments))
+      if path=~/^\//
+        _http=http
+      else
+        _http=create_http(path)
+        _uri=URI.parse(path)
+        path="#{_uri.path}#{_uri.query ? "?#{_uri.query}" : ""}"
+      end
+      _http.request(create_signed_request(http_method,path,token,request_options,*arguments))
     end
     
     # Creates and signs an http request.
@@ -159,20 +166,37 @@ module OAuth
       @options[:request_token_url]||site+request_token_path
     end
 
+    def request_token_url?
+      @options[:request_token_url]!=nil
+    end
+    
     def authorize_url
       @options[:authorize_url]||site+authorize_path
+    end
+    
+    def authorize_url?
+      @options[:authorize_url]!=nil
     end
 
     def access_token_url
       @options[:access_token_url]||site+access_token_path
     end
 
+    def access_token_url?
+      @options[:access_token_url]!=nil
+    end
+
     protected
     
     #Instantiates the http object
-    def create_http
-      http_object=Net::HTTP.new(uri.host, uri.port)
-      http_object.use_ssl = true if uri.scheme=="https"
+    def create_http(_url=nil)
+      if _url.nil?||_url[0]=~/^\//
+        our_uri=URI.parse(site)
+      else
+        our_uri=URI.parse(_url)
+      end
+      http_object=Net::HTTP.new(our_uri.host, our_uri.port)
+      http_object.use_ssl = true if our_uri.scheme=="https"
       http_object
     end
     

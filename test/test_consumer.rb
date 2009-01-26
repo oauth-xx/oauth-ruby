@@ -208,6 +208,51 @@ class ConsumerTest < Test::Unit::TestCase
         :access_token_path=>"/oauth/example/access_token.php",
         :authorize_path=>"/oauth/example/authorize.php"
         })
+    assert_equal "http://term.ie/oauth/example/request_token.php",@consumer.request_token_url
+    assert_equal "http://term.ie/oauth/example/access_token.php",@consumer.access_token_url
+
+    assert !@consumer.request_token_url?, "Should not use fully qualified request token url"
+    assert !@consumer.access_token_url?, "Should not use fully qualified access token url"
+    assert !@consumer.authorize_url?, "Should not use fully qualified url"
+
+    @request_token=@consumer.get_request_token
+    assert_not_nil @request_token
+    assert_equal "requestkey",@request_token.token
+    assert_equal "requestsecret",@request_token.secret
+    assert_equal "http://term.ie/oauth/example/authorize.php?oauth_token=requestkey",@request_token.authorize_url
+
+    @access_token=@request_token.get_access_token
+    assert_not_nil @access_token
+    assert_equal "accesskey",@access_token.token
+    assert_equal "accesssecret",@access_token.secret
+    
+    @response=@access_token.get("/oauth/example/echo_api.php?ok=hello&test=this")
+    assert_not_nil @response
+    assert_equal "200",@response.code
+    assert_equal( "ok=hello&test=this",@response.body)
+    
+    @response=@access_token.post("/oauth/example/echo_api.php",{'ok'=>'hello','test'=>'this'})
+    assert_not_nil @response
+    assert_equal "200",@response.code
+    assert_equal( "ok=hello&test=this",@response.body)    
+  end
+
+  def test_get_token_sequence_using_fqdn
+    @consumer=OAuth::Consumer.new( 
+        "key",
+        "secret",
+        {
+        :site=>"http://term.ie",
+        :request_token_url=>"http://term.ie/oauth/example/request_token.php",
+        :access_token_url=>"http://term.ie/oauth/example/access_token.php",
+        :authorize_url=>"http://term.ie/oauth/example/authorize.php"
+        })
+    assert_equal "http://term.ie/oauth/example/request_token.php",@consumer.request_token_url
+    assert_equal "http://term.ie/oauth/example/access_token.php",@consumer.access_token_url
+
+    assert @consumer.request_token_url?, "Should use fully qualified request token url"
+    assert @consumer.access_token_url?, "Should use fully qualified access token url"
+    assert @consumer.authorize_url?, "Should use fully qualified url"
     
     @request_token=@consumer.get_request_token
     assert_not_nil @request_token
