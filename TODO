@@ -24,3 +24,7 @@ Example applications for:
 In addition to providing best practices of use, these can also be part of
 the pre-release checks to make sure that there have been no regressions.
 
+Random TODOs:
+* finish CLI
+* sensible Exception hierarchy
+
