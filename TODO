@@ -12,3 +12,15 @@ Common use-cases should be streamlined:
   errors, if available).
 * I want to host an OAuth-enabled web service.
 * I want to test my OAuth-enabled web service (i.e. test helpers)
+
+Example applications for:
+* Ning
+* Fire Eagle
+* Google (blogger, contacts)
+* Twitter
+* YOS / YQL
+* Netflix
+
+In addition to providing best practices of use, these can also be part of
+the pre-release checks to make sure that there have been no regressions.
+
