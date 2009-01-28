@@ -56,6 +56,8 @@ module OAuth
       end
     end
 
+  protected
+
     def extract_command_and_parse_options(arguments)
       @command = arguments[-1]
       parse_options(arguments[0..-1])
