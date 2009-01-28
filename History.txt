@@ -1,6 +1,7 @@
 == 0.3.1
 
-* Michael Wood identified a problem with relative and absolute token request paths. This should now be fixed and is tested for both cases.
+* Fixed a problem with relative and absolute token request paths. (Michael
+  Wood)
 
 == 0.3.0
 
@@ -15,23 +16,25 @@
 * Improved test-cases and compatibility for encoding issues. (Pelle)
 
 == 0.2.7 2008-9-10 The lets fix the last release release
-Fix in plain text signatures to bug found by Andrew Arrow. Who contributed new new unit tests for plain text sigs.
 
-There was an error in the RSA requests using oauth tokens. Thanks to Philip Lipu Tsai for noticing this.
+* Fixed plain text signatures (Andrew Arrow)
+* Fixed RSA requests using OAuthTokens. (Philip Lipu Tsai)
 
 == 0.2.6 2008-9-9 The lets RSA release
 
-- Bill Kocik's fix for Ruby 1.8.7
-- Fixed rsa verification, so you can actually create an OAuth server yourself now using Ruby and RSA
-- Added better testing for RSA
-- Fixed issue where token was being included for rsa signatures
-- Chris Mear added support for a private_key_file option for rsa signatures 
-- Scott Hill fixed several edge cases where parameters were incorrectly being signed
-- Patch from choonkeat fixing a problem with rsa signing.
+* Improved support for Ruby 1.8.7 (Bill Kocik)
+* Fixed RSA verification to support RSA providers
+  now using Ruby and RSA
+* Improved RSA testing
+* Omit token when signing with RSA
+* Added support for 'private_key_file' option for RSA signatures (Chris Mear)
+* Fixed several edge cases where params were being incorrectly signed (Scott
+  Hill)
+* Fixed RSA signing (choonkeat)
 
 == 0.2.2 2008-2-22 Lets actually support SSL release
 
-It didn't actually use https when required.
+* Use HTTPS when required.
 
 == 0.2 2008-1-19 All together now release
 
@@ -39,10 +42,11 @@ This is a big release, where we have merged the efforts of various parties into 
 
 == 0.1.2 2007-12-1
 
-* 1 Fixed a problem where incoming request didn't check whether oauth parameters where missing. While not giving unauthorized access it did cause extra processing where not necessary.
-* 2 Includes Pat's fix for getting the realm out.
+* Fixed checks for missing OAuth params to improve performance
+* Includes Pat's fix for getting the realm out.
 
 == 0.1.1 2007-11-26
 
-* 1 First release as a GEM
-  * Moved all non rails functions into this GEM from the Rails plugin http://code.google.com/p/oauth-plugin/
+* First release as a GEM
+* Moved all non-Rails functionality from the Rails plugin:
+  http://code.google.com/p/oauth-plugin/
