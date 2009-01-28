@@ -8,8 +8,3 @@ begin
 rescue LoadError
   nil
 end
-
-def requests(request)
-  Marshal.load(File.read(File.dirname(__FILE__) + '/fixtures/' + request))
-end
-

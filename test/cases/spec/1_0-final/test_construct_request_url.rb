@@ -40,7 +40,7 @@ class ConstructRequestUrlTest < OAuthCase
     assert_request_url("https://example.com/resource","HTTPS://Example.com:443/resource?id=123")
   end
 
-  def test_of_normalized_http
+  def test_of_normalized_https
     assert_request_url("https://example.com/resource","https://example.com/resource")
   end
   

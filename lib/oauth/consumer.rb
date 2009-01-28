@@ -29,7 +29,8 @@ module OAuth
       :oauth_version=>"1.0"
     }
     
-    attr_accessor :site,:options, :key, :secret,:http
+    attr_accessor :options, :key, :secret
+    attr_writer   :site, :http
     
     
     # Create a new consumer instance by passing it a configuration hash:
