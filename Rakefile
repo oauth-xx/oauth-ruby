@@ -18,7 +18,9 @@ $hoe = Hoe.new('oauth', OAuth::VERSION) do |p|
     ['ruby-hmac','>= 0.3.1']
   ]
   p.extra_dev_deps = [
-    ['newgem', ">= #{::Newgem::VERSION}"]
+    ['newgem', ">= #{::Newgem::VERSION}"],
+    ['actionpack'],
+    ['rack']
   ]
   
   p.clean_globs |= %w[**/.DS_Store tmp *.log **/.*.sw? *.gem .config **/.DS_Store]
