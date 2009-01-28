@@ -7,7 +7,7 @@ require 'oauth/signature/hmac/sha1'
 module OAuth::Client
   class Helper
     include OAuth::Helper
-    
+
     def initialize(request, options = {})
       @request = request
       @options = options
@@ -43,20 +43,20 @@ module OAuth::Client
 
     def signature(extra_options = {})
       OAuth::Signature.sign(@request, { :uri      => options[:request_uri],
-                                                    :consumer => options[:consumer],
-                                                    :token    => options[:token] }.merge(extra_options) )
+                                        :consumer => options[:consumer],
+                                        :token    => options[:token] }.merge(extra_options) )
     end
 
     def signature_base_string(extra_options = {})
-      OAuth::Signature.signature_base_string(@request, { :uri      => options[:request_uri],
-                                                    :consumer => options[:consumer],
-                                                    :token    => options[:token],
-                                                    :parameters => oauth_parameters}.merge(extra_options) )
+      OAuth::Signature.signature_base_string(@request, { :uri        => options[:request_uri],
+                                                         :consumer   => options[:consumer],
+                                                         :token      => options[:token],
+                                                         :parameters => oauth_parameters}.merge(extra_options) )
     end
 
     def header
       parameters = oauth_parameters
-      parameters.merge!( { 'oauth_signature' => signature( options.merge({ :parameters => parameters }) ) } )
+      parameters.merge!('oauth_signature' => signature(options.merge(:parameters => parameters)))
 
       header_params_str = parameters.map { |k,v| "#{k}=\"#{escape(v)}\"" }.join(', ')
 
@@ -69,7 +69,7 @@ module OAuth::Client
     end
 
     def parameters_with_oauth
-      oauth_parameters.merge( parameters )
+      oauth_parameters.merge(parameters)
     end
   end
 end

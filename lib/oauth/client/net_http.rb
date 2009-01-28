@@ -6,42 +6,47 @@ class Net::HTTPRequest
   include OAuth::Helper
 
   def oauth!(http, consumer = nil, token = nil, options = {})
-    options = { :request_uri => oauth_full_request_uri(http),
-                :consumer => consumer,
-                :token => token,
-                :scheme => 'header',
+    options = { :request_uri      => oauth_full_request_uri(http),
+                :consumer         => consumer,
+                :token            => token,
+                :scheme           => 'header',
                 :signature_method => nil,
-                :nonce => nil,
-                :timestamp => nil }.merge(options)
+                :nonce            => nil,
+                :timestamp        => nil }.merge(options)
 
     @oauth_helper = OAuth::Client::Helper.new(self, options)
     self.send("set_oauth_#{options[:scheme]}")
   end
 
   def signature_base_string(http, consumer = nil, token = nil, options = {})
-    options = { :request_uri => oauth_full_request_uri(http),
-                :consumer => consumer,
-                :token => token,
-                :scheme => 'header',
+    options = { :request_uri      => oauth_full_request_uri(http),
+                :consumer         => consumer,
+                :token            => token,
+                :scheme           => 'header',
                 :signature_method => nil,
-                :nonce => nil,
-                :timestamp => nil }.merge(options)
+                :nonce            => nil,
+                :timestamp        => nil }.merge(options)
 
     OAuth::Client::Helper.new(self, options).signature_base_string
   end
-  
+
   def oauth_helper
     @oauth_helper
   end
-  private
+
+private
 
   def oauth_full_request_uri(http)
     uri = URI.parse(self.path)
     uri.host = http.address
     uri.port = http.port
-    if http.respond_to?(:use_ssl?)
-      uri.scheme = http.use_ssl? ? 'https' : 'http'
+
+    if http.respond_to?(:use_ssl?) && http.use_ssl?
+      uri.scheme = "https"
+    else
+      uri.scheme = "http"
     end
+
     uri.to_s
   end
 

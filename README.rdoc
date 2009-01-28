@@ -24,20 +24,18 @@ As a matter of fact it has been pulled out from an OAuth Rails Plugin http://cod
 
 Create a new consumer instance by passing it a configuration hash:
 
-  @consumer=OAuth::Consumer.new( "key","secret", {
-    :site=>"https://agree2"
-    })
+  @consumer = OAuth::Consumer.new("key","secret", :site => "https://agree2")
 
 Start the process by requesting a token
 
-  @request_token=@consumer.get_request_token
-  session[:request_token]=@request_token
+  @request_token = @consumer.get_request_token
+  session[:request_token] = @request_token
   redirect_to @request_token.authorize_url
 
 When user returns create an access_token
 
-  @access_token=@request_token.get_access_token
-  @photos=@access_token.get('/photos.xml')
+  @access_token = @request_token.get_access_token
+  @photos = @access_token.get('/photos.xml')
 
 For more detailed instructions I have written this OAuth Client Tutorial http://stakeventures.com/articles/2008/02/23/developing-oauth-clients-in-ruby and "How to turn your rails site into an OAuth Provider ":http://stakeventures.com/articles/2007/11/26/how-to-turn-your-rails-site-into-an-oauth-provider .
 

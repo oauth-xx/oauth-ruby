@@ -15,9 +15,9 @@ module OAuth::Signature
     def signature_base_string
       secret
     end
-    
+
     def secret
-      escape super
+      escape(super)
     end
   end
 end

@@ -6,9 +6,10 @@ require 'base64'
 module OAuth::Signature
   class Base
     include OAuth::Helper
-    
+
     attr_accessor :options
-    
+    attr_reader :token_secret, :consumer_secret, :request
+
     def self.implements(signature_method)
       OAuth::Signature.available_methods[signature_method] = self
     end
@@ -17,8 +18,6 @@ module OAuth::Signature
       return @digest_class if digest_class.nil?
       @digest_class = digest_class
     end
-
-    attr_reader :token_secret, :consumer_secret, :request
 
     def initialize(request, options = {}, &block)
       raise TypeError unless request.kind_of?(OAuth::RequestProxy::Base)
@@ -62,17 +61,17 @@ module OAuth::Signature
     def signature_base_string
       request.signature_base_string
     end
-    
-    private
+
+  private
 
     def token
       request.token
     end
-    
+
     def consumer_key
       request.consumer_key
     end
-    
+
     def nonce
       request.nonce
     end
@@ -84,6 +83,5 @@ module OAuth::Signature
     def digest
       self.class.digest_class.digest(signature_base_string)
     end
-
   end
 end

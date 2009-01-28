@@ -50,13 +50,13 @@ module OAuth::RequestProxy
     def signature
       parameters['oauth_signature'] || ""
     end
-    
+
     # See 9.1.2 in specs
     def normalized_uri
-      u=URI.parse(uri)
-      "#{u.scheme.downcase}://#{u.host.downcase}#{(u.scheme.downcase=='http'&&u.port!=80)||(u.scheme.downcase=='https'&&u.port!=443) ? ":#{u.port}" : ""}#{(u.path&&u.path!='') ? u.path : '/'}"
+      u = URI.parse(uri)
+      "#{u.scheme.downcase}://#{u.host.downcase}#{(u.scheme.downcase == 'http' && u.port != 80) || (u.scheme.downcase == 'https' && u.port != 443) ? ":#{u.port}" : ""}#{(u.path && u.path != '') ? u.path : '/'}"
     end
-    
+
     # See 9.1.1. in specs Normalize Request Parameters
     def normalized_parameters
       parameters_for_signature.sort.map do |k, values|
@@ -71,16 +71,15 @@ module OAuth::RequestProxy
         end
       end * "&"
     end
-    
+
     # See 9.1 in specs
     def signature_base_string
       base = [method, normalized_uri, normalized_parameters]
       base.map { |v| escape(v) }.join("&")
     end
-    
-    
-    protected
-    
+
+  protected
+
     def header_params
       %w( X-HTTP_AUTHORIZATION Authorization HTTP_AUTHORIZATION ).each do |header|
         next unless request.env.include?(header)
@@ -99,10 +98,9 @@ module OAuth::RequestProxy
 
       return {}
     end
-    
+
     def unescape(value)
       URI.unescape(value.gsub('+', '%2B'))
     end
-    
   end
 end

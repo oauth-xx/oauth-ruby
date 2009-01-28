@@ -25,7 +25,7 @@ module OAuth::RequestProxy::Net
         end
       end
 
-      private
+    private
 
       def all_parameters
         request_params = CGI.parse(query_string)
@@ -47,7 +47,7 @@ module OAuth::RequestProxy::Net
         params << post_params if method.to_s.upcase == 'POST' && is_form_urlencoded
         params.compact.join('&')
       end
-      
+
       def query_params
         URI.parse(request.path).query
       end

@@ -25,7 +25,7 @@ module OAuth::RequestProxy
         params.merge(options[:parameters] || {})
       end
     end
-    
+
     # Override from OAuth::RequestProxy::Base to avoid roundtrip
     # conversion to Hash or Array and thus preserve the original
     # parameter names
@@ -40,7 +40,7 @@ module OAuth::RequestProxy
           params << CGI.unescape(request.raw_post)
         end
       end
-      
+
       params.
         join('&').split('&').
         reject { |kv| kv =~ /^oauth_signature=.*/}.
@@ -48,7 +48,7 @@ module OAuth::RequestProxy
         map { |p| p.split('=') }
     end
 
-    protected
+  protected
 
     def query_params
       request.query_parameters

@@ -5,11 +5,11 @@ require 'rack'
 module OAuth::RequestProxy
   class RackRequest < OAuth::RequestProxy::Base
     proxies Rack::Request
-    
+
     def method
       request.request_method
     end
-    
+
     def uri
       request.url
     end
@@ -22,12 +22,12 @@ module OAuth::RequestProxy
         params.merge(options[:parameters] || {})
       end
     end
-    
+
     def signature
       parameters['oauth_signature']
     end
-    
-    protected
+
+  protected
 
     def query_params
       request.GET

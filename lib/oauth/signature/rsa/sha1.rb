@@ -18,9 +18,9 @@ module OAuth::Signature::RSA
         consumer_secret
       end
     end
-    
-    private
-    
+
+  private
+
     def decode_public_key
       case consumer_secret
       when /-----BEGIN CERTIFICATE-----/
@@ -29,7 +29,7 @@ module OAuth::Signature::RSA
         OpenSSL::PKey::RSA.new( consumer_secret)
       end
     end
-    
+
     def digest
       private_key = OpenSSL::PKey::RSA.new(
         if options[:private_key_file]
@@ -38,6 +38,7 @@ module OAuth::Signature::RSA
           consumer_secret
         end
       )
+
       private_key.sign(OpenSSL::Digest::SHA1.new, signature_base_string)
     end
   end
