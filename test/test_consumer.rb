@@ -164,7 +164,7 @@ class ConsumerTest < Test::Unit::TestCase
     assert_equal "OAuth oauth_nonce=\"225579211881198842005988698334675835446\", oauth_signature_method=\"HMAC-SHA1\", oauth_token=\"token_411a7f\", oauth_timestamp=\"1199645624\", oauth_consumer_key=\"consumer_key_86cad9\", oauth_signature=\"26g7wHTtNO6ZWJaLltcueppHYiI%3D\", oauth_version=\"1.0\"".split(', ').sort, request['authorization'].split(', ').sort
   end
 
-  def test_that_signing_post_params_works
+  def test_that_signing_post_params_works_2
     request=@consumer.create_signed_request(:post,@request_uri.path,@token,{:scheme => 'body', :nonce => @nonce, :timestamp => @timestamp},@request_parameters,{})
 
     assert_equal 'POST', request.method
