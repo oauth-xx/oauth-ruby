@@ -67,7 +67,7 @@ module OAuth
 
     # The default http method
     def http_method
-      @http_method || = @options[:http_method] || :post
+      @http_method ||= @options[:http_method] || :post
     end
 
     # The HTTP object for the site. The HTTP Object is what you get when you do Net::HTTP.new
