@@ -40,7 +40,6 @@ script/destroy
 script/generate
 script/txt2html
 setup.rb
-specs.txt
 tasks/deployment.rake
 tasks/environment.rake
 tasks/website.rake
