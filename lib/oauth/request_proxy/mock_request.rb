@@ -28,6 +28,14 @@ module OAuth
         @request["method"]
       end
 
+      def normalized_uri
+        super
+      rescue
+        # if this is a non-standard URI, it may not parse properly
+        # in that case, assume that it's already been normalized
+        uri
+      end
+
       def uri
         @request["uri"]
       end
