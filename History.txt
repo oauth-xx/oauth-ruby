@@ -1,9 +1,16 @@
-== 0.3.1
+== 0.3.2
+
+* Fixed signature calculation when both options and a block were provided to
+  OAuth::Signature::Base#initialize. (Seth)
+* Added help to the 'oauth' CLI. (Seth)
+* Fixed a problem when attempting to normalize MockRequest URIs. (Seth)
+
+== 0.3.1 2009-1-26
 
 * Fixed a problem with relative and absolute token request paths. (Michael
   Wood)
 
-== 0.3.0
+== 0.3.0 2009-1-25
 
 * Support ActionController::Request from Edge Rails (László Bácsi)
 * Correctly handle multi-valued parameters (Seth)
