@@ -37,7 +37,7 @@ module OAuth::RequestProxy
         params << header_params.to_query
         params << request.query_string unless request.query_string.blank?
         if request.content_type == Mime::Type.lookup("application/x-www-form-urlencoded")
-          params << CGI.unescape(request.raw_post)
+          params << request.raw_post
         end
       end
 
@@ -45,7 +45,7 @@ module OAuth::RequestProxy
         join('&').split('&').
         reject { |kv| kv =~ /^oauth_signature=.*/}.
         reject(&:blank?).
-        map { |p| p.split('=') }
+        map { |p| p.split('=').map{|esc| CGI.unescape(esc)} }
     end
 
   protected
