@@ -14,6 +14,8 @@ module OAuth
       Base64.encode64(OpenSSL::Random.random_bytes(size)).gsub(/\W/, '')
     end
 
+    alias_method :generate_nonce, :generate_key
+
     def generate_timestamp
       Time.now.to_i.to_s
     end
