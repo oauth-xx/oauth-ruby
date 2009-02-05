@@ -1,4 +1,4 @@
-require 'test/unit'
+require File.dirname(__FILE__) + '/test_helper'
 require 'oauth/server'
 class ServerTest < Test::Unit::TestCase
   def setup
