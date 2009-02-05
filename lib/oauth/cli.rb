@@ -38,11 +38,13 @@ module OAuth
             end
             stdout.puts
 
-            stdout.puts "Parameters:"
-            request.non_oauth_parameters.each do |k,v|
-              stdout.puts "  " + [k, v] * ": "
+            if request.non_oauth_parameters.any?
+              stdout.puts "Parameters:"
+              request.non_oauth_parameters.each do |k,v|
+                stdout.puts "  " + [k, v] * ": "
+              end
+              stdout.puts
             end
-            stdout.puts
           end
 
           request.sign! \
