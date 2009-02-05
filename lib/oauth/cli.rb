@@ -106,7 +106,7 @@ module OAuth
         options[:oauth_signature_method] = "HMAC-SHA1"
         options[:oauth_timestamp] = OAuth::Helper.generate_timestamp
         options[:oauth_version] = "1.0"
-        options[:params] = ""
+        options[:params] = []
 
         opts.on("--consumer-key KEY", "Specifies the consumer key to use.") do |v|
           options[:oauth_consumer_key] = v
@@ -125,7 +125,7 @@ module OAuth
         end
 
         opts.on("--parameters PARAMS", "Specifies the parameters to use when signing.") do |v|
-          options[:params] = v
+          options[:params] << v
         end
 
         opts.on("--signature-method METHOD", "Specifies the signature method to use; defaults to HMAC-SHA1.") do |v|
@@ -176,9 +176,13 @@ module OAuth
     end
 
     def prepare_parameters
-      escaped_pairs = options[:params].split(/[&,]/).collect do |pair|
-        Hash[*pair.split("=")].collect do |k,v|
-          [CGI.escape(k.strip), CGI.escape(v.strip)] * "="
+      escaped_pairs = options[:params].collect do |pair|
+        if pair =~ /:/
+          Hash[*pair.split(":", 2)].collect do |k,v|
+            [CGI.escape(k.strip), CGI.escape(v.strip)] * "="
+          end
+        else
+          pair
         end
       end
 
