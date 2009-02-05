@@ -16,13 +16,51 @@ module OAuth::RequestProxy
       @options = options
     end
 
-    def token
+    ## OAuth parameters
+
+    def oauth_consumer_key
+      parameters['oauth_consumer_key']
+    end
+
+    def oauth_nonce
+      parameters['oauth_nonce']
+    end
+
+    def oauth_signature
+      # TODO can this be nil?
+      parameters['oauth_signature'] || ""
+    end
+
+    def oauth_signature_method
+      case parameters['oauth_signature_method']
+      when Array
+        parameters['oauth_signature_method'].first
+      else
+        parameters['oauth_signature_method']
+      end
+    end
+
+    def oauth_timestamp
+      parameters['oauth_timestamp']
+    end
+
+    def oauth_token
       parameters['oauth_token']
     end
 
-    def consumer_key
-      parameters['oauth_consumer_key']
+    def oauth_version
+      parameters["oauth_version"]
     end
+
+    # TODO deprecate these
+    alias_method :consumer_key,     :oauth_consumer_key
+    alias_method :token,            :oauth_token
+    alias_method :nonce,            :oauth_nonce
+    alias_method :timestamp,        :oauth_timestamp
+    alias_method :signature,        :oauth_signature
+    alias_method :signature_method, :oauth_signature_method
+
+    ## Parameter accessors
 
     def parameters
       raise NotImplementedError, "Must be implemented by subclasses"
@@ -38,27 +76,6 @@ module OAuth::RequestProxy
 
     def non_oauth_parameters
       parameters.reject { |k,v| OAuth::PARAMETERS.include?(k) }
-    end
-
-    def nonce
-      parameters['oauth_nonce']
-    end
-
-    def timestamp
-      parameters['oauth_timestamp']
-    end
-
-    def signature_method
-      case parameters['oauth_signature_method']
-      when Array
-        parameters['oauth_signature_method'].first
-      else
-        parameters['oauth_signature_method']
-      end
-    end
-
-    def signature
-      parameters['oauth_signature'] || ""
     end
 
     # See 9.1.2 in specs
