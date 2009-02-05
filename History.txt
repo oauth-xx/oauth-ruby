@@ -1,5 +1,7 @@
 == 0.3.2
 
+* Fixed ActionController parameter escaping behavior (Thiago Arrais, László
+  Bácsi, Brett Gibson, et al)
 * Fixed signature calculation when both options and a block were provided to
   OAuth::Signature::Base#initialize. (Seth)
 * Added help to the 'oauth' CLI. (Seth)
