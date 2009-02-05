@@ -53,14 +53,34 @@ module OAuth
 
           if verbose?
             stdout.puts "Method: #{request.method}"
-            stdout.puts "Base URI: #{request.uri}"
-            stdout.puts "Normalized params: #{request.normalized_parameters}"
+            stdout.puts "URI: #{request.uri}"
+            stdout.puts "Normalized params: #{request.normalized_parameters}" unless options[:xmpp]
             stdout.puts "Signature base string: #{request.signature_base_string}"
-            stdout.puts "OAuth Request URI: #{request.signed_uri}"
-            stdout.puts "URI: #{request.signed_uri(false)}"
-            stdout.puts "Authorization header: #{request.oauth_header(:realm => options[:realm])}"
-            stdout.puts "Signature:         #{request.signature}"
-            stdout.puts "Escaped signature: #{OAuth::Helper.escape(request.signature)}"
+
+            if options[:xmpp]
+              stdout.puts
+              stdout.puts "XMPP Stanza:"
+              stdout.puts <<-EOS
+  <oauth xmlns='urn:xmpp:tmp:oauth'>
+    <oauth_consumer_key>#{request.oauth_consumer_key}</oauth_consumer_key>
+    <oauth_token>#{request.oauth_token}</oauth_token>
+    <oauth_signature_method>#{request.oauth_signature_method}</oauth_signature_method>
+    <oauth_signature>#{request.oauth_signature}</oauth_signature>
+    <oauth_timestamp>#{request.oauth_timestamp}</oauth_timestamp>
+    <oauth_nonce>#{request.oauth_nonce}</oauth_nonce>
+    <oauth_version>#{request.oauth_version}</oauth_version>
+  </oauth>
+              EOS
+              stdout.puts
+              stdout.puts "Note: You may want to use bare JIDs in your URI."
+              stdout.puts
+            else
+              stdout.puts "OAuth Request URI: #{request.signed_uri}"
+              stdout.puts "Request URI: #{request.signed_uri(false)}"
+              stdout.puts "Authorization header: #{request.oauth_header(:realm => options[:realm])}"
+            end
+            stdout.puts "Signature:         #{request.oauth_signature}"
+            stdout.puts "Escaped signature: #{OAuth::Helper.escape(request.oauth_signature)}"
           else
             stdout.puts signature
           end
@@ -138,6 +158,11 @@ module OAuth
 
         opts.on("--no-version", "Omit oauth_version.") do
           options[:oauth_version] = nil
+        end
+
+        opts.on("--xmpp", "Generate XMPP stanzas.") do
+          options[:xmpp] = true
+          options[:method] ||= "iq"
         end
 
         opts.on("-v", "--verbose", "Be verbose.") do
