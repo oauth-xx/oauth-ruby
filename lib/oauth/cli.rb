@@ -37,6 +37,12 @@ module OAuth
               stdout.puts "  " + [k, v] * ": "
             end
             stdout.puts
+
+            stdout.puts "Parameters:"
+            request.non_oauth_parameters.each do |k,v|
+              stdout.puts "  " + [k, v] * ": "
+            end
+            stdout.puts
           end
 
           request.sign! \
@@ -48,8 +54,8 @@ module OAuth
             stdout.puts "Base URI: #{request.uri}"
             stdout.puts "Normalized params: #{request.normalized_parameters}"
             stdout.puts "Signature base string: #{request.signature_base_string}"
-            stdout.puts "Request URI: #{request.signed_uri}"
-            stdout.puts "Normalized URI: #{request.normalized_uri}"
+            stdout.puts "OAuth Request URI: #{request.signed_uri}"
+            stdout.puts "URI: #{request.signed_uri(false)}"
             stdout.puts "Authorization header: #{request.oauth_header(:realm => options[:realm])}"
             stdout.puts "Signature:         #{request.signature}"
             stdout.puts "Escaped signature: #{OAuth::Helper.escape(request.signature)}"
@@ -143,6 +149,17 @@ module OAuth
     end
 
     def prepare_parameters
+      escaped_pairs = options[:params].split("&").collect do |pair|
+        Hash[*pair.split("=")].collect do |k,v|
+          puts "k: #{k}"
+          puts "v: #{v}"
+          [CGI.escape(k), CGI.escape(v)] * "="
+        end
+      end
+
+      querystring = escaped_pairs * "&"
+      cli_params = CGI.parse(querystring)
+
       {
         "oauth_consumer_key"     => options[:oauth_consumer_key],
         "oauth_nonce"            => options[:oauth_nonce],
@@ -150,7 +167,7 @@ module OAuth
         "oauth_token"            => options[:oauth_token],
         "oauth_signature_method" => options[:oauth_signature_method],
         "oauth_version"          => options[:oauth_version]
-      }.reject { |k,v| v.nil? || v == "" }.merge(CGI.parse(options[:params]))
+      }.reject { |k,v| v.nil? || v == "" }.merge(cli_params)
     end
 
     def sufficient_options?

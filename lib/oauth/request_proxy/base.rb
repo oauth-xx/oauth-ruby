@@ -24,12 +24,20 @@ module OAuth::RequestProxy
       parameters['oauth_consumer_key']
     end
 
+    def parameters
+      raise NotImplementedError, "Must be implemented by subclasses"
+    end
+
     def parameters_for_signature
       parameters.reject { |k,v| k == "oauth_signature" }
     end
 
     def oauth_parameters
       parameters.select { |k,v| OAuth::PARAMETERS.include?(k) }.reject { |k,v| v == "" }
+    end
+
+    def non_oauth_parameters
+      parameters.reject { |k,v| OAuth::PARAMETERS.include?(k) }
     end
 
     def nonce
@@ -86,9 +94,15 @@ module OAuth::RequestProxy
     end
 
     # URI, including OAuth parameters
-    def signed_uri
+    def signed_uri(with_oauth = true)
       if signed?
-        [uri, normalize(parameters)] * "?"
+        if with_oauth
+          params = parameters
+        else
+          params = non_oauth_parameters
+        end
+
+        [uri, normalize(params)] * "?"
       else
         STDERR.puts "This request has not yet been signed!"
       end
