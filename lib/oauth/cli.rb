@@ -151,11 +151,9 @@ module OAuth
     end
 
     def prepare_parameters
-      escaped_pairs = options[:params].split("&").collect do |pair|
+      escaped_pairs = options[:params].split(/[&,]/).collect do |pair|
         Hash[*pair.split("=")].collect do |k,v|
-          puts "k: #{k}"
-          puts "v: #{v}"
-          [CGI.escape(k), CGI.escape(v)] * "="
+          [CGI.escape(k.strip), CGI.escape(v.strip)] * "="
         end
       end
 
