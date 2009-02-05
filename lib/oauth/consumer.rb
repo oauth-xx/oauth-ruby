@@ -102,7 +102,7 @@ module OAuth
     #   @consumer.request(:post, '/people', @token, {}, @person.to_xml, { 'Content-Type' => 'application/xml' })
     #
     def request(http_method, path, token = nil, request_options = {}, *arguments)
-      if path = ~/^\//
+      if path =~ /^\//
         _http = http
       else
         _http = create_http(path)

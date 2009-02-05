@@ -29,13 +29,14 @@ module OAuth
 
     # mainly for testing purposes
     def create_consumer
-      Consumer.new(*generate_credentials,
+      creds = generate_credentials
+      Consumer.new(creds[0], creds[1],
         {
           :site               => base_url,
           :request_token_path => request_token_path,
           :authorize_path     => authorize_path,
           :access_token_path  => access_token_path
-      })
+        })
     end
 
     def request_token_path
