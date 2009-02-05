@@ -24,29 +24,35 @@ module OAuth
       if sufficient_options? && valid_command?
         case command
         when "sign"
+          parameters = prepare_parameters
+
           request = OAuth::RequestProxy.proxy \
              "method"     => options[:method],
              "uri"        => options[:uri],
-             "parameters" => prepare_parameters
-
-          # can't pass options unless they respond to :secret, so use this alternative
-          signature = OAuth::Signature.sign \
-            request,
-            :consumer_secret => options[:oauth_consumer_secret],
-            :token_secret    => options[:oauth_token_secret] do |request|
-
-            # while we have access to the request being signed, display some internals
-            if verbose?
-              stdout.puts "Method: #{request.method}"
-              stdout.puts "URI: #{request.uri}"
-              stdout.puts "Normalized params: #{request.normalized_parameters}"
-              stdout.puts "Signature base string: #{request.signature_base_string}"
-            end
-          end
+             "parameters" => parameters
 
           if verbose?
-            stdout.puts "Signature:         #{signature}"
-            stdout.puts "Escaped signature: #{OAuth::Helper.escape(signature)}"
+            stdout.puts "OAuth parameters:"
+            request.oauth_parameters.each do |k,v|
+              stdout.puts "  " + [k, v] * ": "
+            end
+            stdout.puts
+          end
+
+          request.sign! \
+            :consumer_secret => options[:oauth_consumer_secret],
+            :token_secret    => options[:oauth_token_secret]
+
+          if verbose?
+            stdout.puts "Method: #{request.method}"
+            stdout.puts "Base URI: #{request.uri}"
+            stdout.puts "Normalized params: #{request.normalized_parameters}"
+            stdout.puts "Signature base string: #{request.signature_base_string}"
+            stdout.puts "Request URI: #{request.signed_uri}"
+            stdout.puts "Normalized URI: #{request.normalized_uri}"
+            stdout.puts "Authorization header: #{request.oauth_header(:realm => options[:realm])}"
+            stdout.puts "Signature:         #{request.signature}"
+            stdout.puts "Escaped signature: #{OAuth::Helper.escape(request.signature)}"
           else
             stdout.puts signature
           end
@@ -68,7 +74,11 @@ module OAuth
         opts.banner = "Usage: #{$0} [options] <command>"
 
         # defaults
+        options[:oauth_nonce] = OAuth::Helper.generate_key
         options[:oauth_signature_method] = "HMAC-SHA1"
+        options[:oauth_timestamp] = OAuth::Helper.generate_timestamp
+        options[:oauth_version] = "1.0"
+        options[:params] = ""
 
         opts.on("--consumer-key KEY", "Specifies the consumer key to use.") do |v|
           options[:oauth_consumer_key] = v
@@ -80,6 +90,10 @@ module OAuth
 
         opts.on("--method METHOD", "Specifies the method (e.g. GET) to use when signing.") do |v|
           options[:method] = v
+        end
+
+        opts.on("--nonce NONCE", "Specifies the none to use.") do |v|
+          options[:oauth_nonce] = v
         end
 
         opts.on("--parameters PARAMS", "Specifies the parameters to use when signing.") do |v|
@@ -94,12 +108,28 @@ module OAuth
           options[:oauth_token_secret] = v
         end
 
+        opts.on("--timestamp TIMESTAMP", "Specifies the timestamp to use.") do |v|
+          options[:oauth_timestamp] = v
+        end
+
         opts.on("--token TOKEN", "Specifies the token to use.") do |v|
           options[:oauth_token] = v
         end
 
+        opts.on("--realm REALM", "Specifies the realm to use.") do |v|
+          options[:realm] = v
+        end
+
         opts.on("--uri URI", "Specifies the URI to use when signing.") do |v|
           options[:uri] = v
+        end
+
+        opts.on("--version VERSION", "Specifies the OAuth version to use.") do |v|
+          options[:oauth_version] = v
+        end
+
+        opts.on("--no-version", "Omit oauth_version.") do
+          options[:oauth_version] = nil
         end
 
         opts.on("-v", "--verbose", "Be verbose.") do
@@ -115,9 +145,12 @@ module OAuth
     def prepare_parameters
       {
         "oauth_consumer_key"     => options[:oauth_consumer_key],
+        "oauth_nonce"            => options[:oauth_nonce],
+        "oauth_timestamp"        => options[:oauth_timestamp],
         "oauth_token"            => options[:oauth_token],
-        "oauth_signature_method" => options[:oauth_signature_method]
-      }.merge(CGI.parse(options[:params]))
+        "oauth_signature_method" => options[:oauth_signature_method],
+        "oauth_version"          => options[:oauth_version]
+      }.reject { |k,v| v.nil? || v == "" }.merge(CGI.parse(options[:params]))
     end
 
     def sufficient_options?

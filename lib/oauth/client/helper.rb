@@ -26,10 +26,6 @@ module OAuth::Client
       options[:timestamp] ||= generate_timestamp
     end
 
-    def generate_timestamp
-      Time.now.to_i.to_s
-    end
-
     def oauth_parameters
       {
         'oauth_consumer_key'     => options[:consumer].key,
