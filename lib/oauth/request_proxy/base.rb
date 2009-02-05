@@ -25,9 +25,11 @@ module OAuth::RequestProxy
     end
 
     def parameters_for_signature
-      p = parameters.dup
-      p.delete("oauth_signature")
-      p
+      parameters.reject { |k,v| k == "oauth_signature" }
+    end
+
+    def oauth_parameters
+      parameters.select { |k,v| OAuth::PARAMETERS.include?(k) }.reject { |k,v| v == "" }
     end
 
     def nonce
@@ -59,23 +61,45 @@ module OAuth::RequestProxy
 
     # See 9.1.1. in specs Normalize Request Parameters
     def normalized_parameters
-      parameters_for_signature.sort.map do |k, values|
+      normalize(parameters_for_signature)
+    end
 
-        if values.is_a?(Array)
-          # multiple values were provided for a single key
-          values.sort.collect do |v|
-            [escape(k),escape(v)] * "="
-          end
-        else
-          [escape(k),escape(values)] * "="
-        end
-      end * "&"
+    def sign(options = {})
+      OAuth::Signature.sign(self, options)
+    end
+
+    def sign!(options = {})
+      parameters["oauth_signature"] = sign(options)
+      @signed = true
+      signature
     end
 
     # See 9.1 in specs
     def signature_base_string
       base = [method, normalized_uri, normalized_parameters]
       base.map { |v| escape(v) }.join("&")
+    end
+
+    # Has this request been signed yet?
+    def signed?
+      @signed
+    end
+
+    # URI, including OAuth parameters
+    def signed_uri
+      if signed?
+        [uri, normalize(parameters)] * "?"
+      else
+        STDERR.puts "This request has not yet been signed!"
+      end
+    end
+
+    # Authorization header for OAuth
+    def oauth_header(options = {})
+      header_params_str = oauth_parameters.map { |k,v| "#{k}=\"#{escape(v)}\"" }.join(', ')
+
+      realm = "realm=\"#{options[:realm]}\", " if options[:realm]
+      "OAuth #{realm}#{header_params_str}"
     end
 
   protected
@@ -97,10 +121,6 @@ module OAuth::RequestProxy
       end
 
       return {}
-    end
-
-    def unescape(value)
-      URI.unescape(value.gsub('+', '%2B'))
     end
   end
 end

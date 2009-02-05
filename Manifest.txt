@@ -6,6 +6,7 @@ Rakefile
 TODO
 bin/oauth
 lib/oauth.rb
+lib/oauth/oauth.rb
 lib/oauth/cli.rb
 lib/oauth/client.rb
 lib/oauth/client/action_controller_request.rb
