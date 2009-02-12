@@ -6,14 +6,14 @@ require 'oauth/version'
 # Generate all the Rake tasks
 # Run 'rake -T' to see list of generated tasks (from gem root directory)
 $hoe = Hoe.new('oauth', OAuth::VERSION) do |p|
-  p.author = ['Pelle Braendgaard','Blaine Cook','Larry Halff','Jesse Clark','Jon Crosby', 'Seth Fitzsimmons']  
+  p.author = ['Pelle Braendgaard','Blaine Cook','Larry Halff','Jesse Clark','Jon Crosby', 'Seth Fitzsimmons']
   p.email = "pelleb@gmail.com"
   p.description = "OAuth Core Ruby implementation"
   p.summary = p.description
   p.changes              = p.paragraphs_of("History.txt", 0..1).join("\n\n")
   p.rubyforge_name       = p.name # TODO this is default value
   p.url = "http://oauth.rubyforge.org"
-  
+
   p.extra_deps         = [
     ['ruby-hmac','>= 0.3.1']
   ]
@@ -22,7 +22,7 @@ $hoe = Hoe.new('oauth', OAuth::VERSION) do |p|
     ['actionpack'],
     ['rack']
   ]
-  
+
   p.clean_globs |= %w[**/.DS_Store tmp *.log **/.*.sw? *.gem .config **/.DS_Store]
   path = (p.rubyforge_name == p.name) ? p.rubyforge_name : "\#{p.rubyforge_name}/\#{p.name}"
   p.remote_rdoc_dir = File.join(path.gsub(/^#{p.rubyforge_name}\/?/,''), 'rdoc')
