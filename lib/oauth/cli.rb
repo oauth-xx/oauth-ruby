@@ -3,7 +3,10 @@ require 'oauth'
 
 module OAuth
   class CLI
-    SUPPORTED_COMMANDS = %w(debug sign)
+    SUPPORTED_COMMANDS = {
+      "debug" => "Verbosely generate an OAuth signature",
+      "sign"  => "Generate an OAuth signature"
+    }
 
     attr_reader :command
     attr_reader :options
@@ -212,13 +215,13 @@ module OAuth
       stdout.puts option_parser.help
       stdout.puts
       stdout.puts "Available commands:"
-      SUPPORTED_COMMANDS.each do |command|
-        puts "   #{command.ljust(15)}"
+      SUPPORTED_COMMANDS.each do |command, desc|
+        puts "   #{command.ljust(15)}#{desc}"
       end
     end
 
     def valid_command?
-      SUPPORTED_COMMANDS.include?(command)
+      SUPPORTED_COMMANDS.keys.include?(command)
     end
 
     def verbose?
