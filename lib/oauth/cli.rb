@@ -3,7 +3,7 @@ require 'oauth'
 
 module OAuth
   class CLI
-    SUPPORTED_COMMANDS = %w(sign)
+    SUPPORTED_COMMANDS = %w(debug sign)
 
     attr_reader :command
     attr_reader :options
@@ -22,6 +22,11 @@ module OAuth
       extract_command_and_parse_options(arguments)
 
       if sufficient_options? && valid_command?
+        if command == "debug"
+          @command = "sign"
+          @options[:verbose] = true
+        end
+
         case command
         when "sign"
           parameters = prepare_parameters
