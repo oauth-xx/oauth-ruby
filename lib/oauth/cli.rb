@@ -82,7 +82,7 @@ module OAuth
             stdout.puts "Signature:         #{request.oauth_signature}"
             stdout.puts "Escaped signature: #{OAuth::Helper.escape(request.oauth_signature)}"
           else
-            stdout.puts signature
+            stdout.puts request.oauth_signature
           end
         end
       else
