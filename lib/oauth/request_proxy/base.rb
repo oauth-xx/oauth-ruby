@@ -142,10 +142,10 @@ module OAuth::RequestProxy
         header = request.env[header]
         next unless header[0,6] == 'OAuth '
 
-        oauth_param_string = header[6,header.length].split(/[,=]/)
-        oauth_param_string.map! { |v| unescape(v.strip) }
-        oauth_param_string.map! { |v| v =~ /^\".*\"$/ ? v[1..-2] : v }
-        oauth_params = Hash[*oauth_param_string.flatten]
+        # parse the header into a Hash
+        oauth_params = OAuth::Helper.parse_header(header)
+
+        # remove non-OAuth parameters
         oauth_params.reject! { |k,v| k !~ /^oauth_/ }
 
         return oauth_params

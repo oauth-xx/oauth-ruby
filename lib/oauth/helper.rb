@@ -33,6 +33,21 @@ module OAuth
       end * "&"
     end
 
+    # Parse an Authorization / WWW-Authenticate header into a hash
+    def parse_header(header)
+      # decompose
+      params = header[6,header.length].split(/[,=]/)
+
+      # strip and unescape
+      params.map! { |v| unescape(v.strip) }
+
+      # strip quotes
+      params.map! { |v| v =~ /^\".*\"$/ ? v[1..-2] : v }
+
+      # convert into a Hash
+      Hash[*params.flatten]
+    end
+
     def unescape(value)
       URI.unescape(value.gsub('+', '%2B'))
     end
