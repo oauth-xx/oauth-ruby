@@ -64,7 +64,7 @@ private
   end
 
   def set_oauth_query_string
-    oauth_params_str = @oauth_helper.oauth_parameters.map { |k,v| "#{k}=#{v}" }.join("&")
+    oauth_params_str = @oauth_helper.oauth_parameters.map { |k,v| [escape(k), escape(v)] * "=" }.join("&")
 
     uri = URI.parse(path)
     if !uri.query || uri.query == ''
