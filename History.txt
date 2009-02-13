@@ -1,5 +1,6 @@
 == 0.3.2
 
+* Verify SSL certificates if CA certificates are available (Seth)
 * Fixed ActionController parameter escaping behavior (Thiago Arrais, László
   Bácsi, Brett Gibson, et al)
 * Fixed signature calculation when both options and a block were provided to

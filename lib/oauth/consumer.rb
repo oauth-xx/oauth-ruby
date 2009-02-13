@@ -3,6 +3,15 @@ require 'net/https'
 require 'oauth/client/net_http'
 module OAuth
   class Consumer
+    # determine the certificate authority path to verify SSL certs
+    CA_FILES = %w(/etc/ssl/certs/ca-certificates.crt /usr/share/curl/curl-ca-bundle.crt)
+    CA_FILES.each do |ca_file|
+      if File.exists?(ca_file)
+        CA_FILE = ca_file
+        break
+      end
+    end
+    CA_FILE = nil unless defined?(CA_FILE)
 
     @@default_options = {
       # Signature method used by server. Defaults to HMAC-SHA1
@@ -197,7 +206,16 @@ module OAuth
       end
 
       http_object = Net::HTTP.new(our_uri.host, our_uri.port)
-      http_object.use_ssl = true if our_uri.scheme == "https"
+
+      http_object.use_ssl = (our_uri.scheme == 'https')
+
+      if CA_FILE
+        http_object.ca_file = CA_FILE
+        http_object.verify_mode = OpenSSL::SSL::VERIFY_PEER
+        http_object.verify_depth = 5
+      else
+        http_object.verify_mode = OpenSSL::SSL::VERIFY_NONE
+      end
 
       http_object
     end
