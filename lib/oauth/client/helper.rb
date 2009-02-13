@@ -34,7 +34,7 @@ module OAuth::Client
         'oauth_timestamp'        => timestamp,
         'oauth_nonce'            => nonce,
         'oauth_version'          => '1.0'
-      }.reject { |k,v| v == "" }
+      }.reject { |k,v| v.to_s == "" }
     end
 
     def signature(extra_options = {})
