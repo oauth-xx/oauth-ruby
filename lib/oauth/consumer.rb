@@ -111,15 +111,13 @@ module OAuth
     #   @consumer.request(:post, '/people', @token, {}, @person.to_xml, { 'Content-Type' => 'application/xml' })
     #
     def request(http_method, path, token = nil, request_options = {}, *arguments)
-      if path =~ /^\//
-        _http = http
-      else
-        _http = create_http(path)
+      if path !~ /^\//
+        @http = create_http(path)
         _uri = URI.parse(path)
         path = "#{_uri.path}#{_uri.query ? "?#{_uri.query}" : ""}"
       end
 
-      _http.request(create_signed_request(http_method, path, token, request_options, *arguments))
+      http.request(create_signed_request(http_method, path, token, request_options, *arguments))
     end
 
     # Creates and signs an http request.
