@@ -2,4 +2,4 @@
 
 require "oauth/cli"
 
-OAuth::CLI.execute(STDOUT, ARGV)
+OAuth::CLI.execute(STDOUT, STDIN, STDERR, ARGV)

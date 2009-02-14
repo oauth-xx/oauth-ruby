@@ -4,24 +4,32 @@ require 'oauth'
 module OAuth
   class CLI
     SUPPORTED_COMMANDS = {
-      "debug" => "Verbosely generate an OAuth signature",
-      "sign"  => "Generate an OAuth signature"
+      "authorize" => "Obtain an access token and secret for a user",
+      "debug"     => "Verbosely generate an OAuth signature",
+      "sign"      => "Generate an OAuth signature"
     }
 
     attr_reader :command
     attr_reader :options
-    attr_reader :stdout
+    attr_reader :stdout, :stdin
 
-    def self.execute(stdout, arguments = [])
-      self.new.execute(stdout, arguments)
+    def self.execute(stdout, stdin, stderr, arguments = [])
+      self.new.execute(stdout, stdin, stderr, arguments)
     end
 
     def initialize
       @options = {}
+
+      # don't dump a backtrace on a ^C
+      trap(:INT) {
+        exit
+      }
     end
 
-    def execute(stdout, arguments = [])
+    def execute(stdout, stdin, stderr, arguments = [])
       @stdout = stdout
+      @stdin  = stdin
+      @stderr = stderr
       extract_command_and_parse_options(arguments)
 
       if sufficient_options? && valid_command?
@@ -31,6 +39,40 @@ module OAuth
         end
 
         case command
+        # TODO move command logic elsewhere
+        when "authorize"
+          # Y! token authority requires realm=yahoo.com when headers are in use
+          # TODO remove :scheme when that's been fixed
+          # TODO determine endpoints w/ X-RDS-Simple
+          consumer = OAuth::Consumer.new \
+            options[:oauth_consumer_key],
+            options[:oauth_consumer_secret],
+            :access_token_url  => options[:access_token_url],
+            :authorize_url     => options[:authorize_url],
+            :request_token_url => options[:request_token_url],
+            :scheme            => :query_string
+
+          # get a request token
+          request_token = consumer.get_request_token
+
+          stdout.puts "Please visit this url to authorize:"
+          stdout.puts request_token.authorize_url
+
+          stdout.puts "Press return to continue..."
+          stdin.gets
+
+          begin
+            # get an access token
+            access_token = request_token.get_access_token
+
+            stdout.puts "Response:"
+            access_token.params.each do |k,v|
+              stdout.puts "  #{k}: #{v}"
+            end
+          rescue OAuth::Problem => e
+            stderr.puts "A problem occurred while attempting to obtain an access token:"
+            stderr.puts e
+          end
         when "sign"
           parameters = prepare_parameters
 
@@ -116,6 +158,8 @@ module OAuth
         options[:oauth_version] = "1.0"
         options[:params] = []
 
+        ## Common Options
+
         opts.on("--consumer-key KEY", "Specifies the consumer key to use.") do |v|
           options[:oauth_consumer_key] = v
         end
@@ -123,6 +167,8 @@ module OAuth
         opts.on("--consumer-secret SECRET", "Specifies the consumer secret to use.") do |v|
           options[:oauth_consumer_secret] = v
         end
+
+        ## Options for signing
 
         opts.on("--method METHOD", "Specifies the method (e.g. GET) to use when signing.") do |v|
           options[:method] = v
@@ -176,6 +222,20 @@ module OAuth
         opts.on("-v", "--verbose", "Be verbose.") do
           options[:verbose] = true
         end
+
+        ## Options for authorization
+
+        opts.on("--access-token-url URL", "Specifies the access token URL.") do |v|
+          options[:access_token_url] = v
+        end
+
+        opts.on("--authorize-url URL", "Specifies the authorization URL.") do |v|
+          options[:authorize_url] = v
+        end
+
+        opts.on("--request-token-url URL", "Specifies the request token URL.") do |v|
+          options[:request_token_url] = v
+        end
       end
     end
 
@@ -208,7 +268,16 @@ module OAuth
     end
 
     def sufficient_options?
-      options[:oauth_consumer_key] && options[:oauth_consumer_secret] && options[:method] && options[:uri]
+      case command
+      # TODO move command logic elsewhere
+      when "authorize"
+        options[:oauth_consumer_key] && options[:oauth_consumer_secret] &&
+          options[:access_token_url] && options[:authorize_url] &&
+          options[:request_token_url]
+      else
+        options[:oauth_consumer_key] && options[:oauth_consumer_secret] &&
+          options[:method] && options[:uri]
+      end
     end
 
     def usage
