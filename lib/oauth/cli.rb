@@ -69,7 +69,7 @@ module OAuth
             access_token.params.each do |k,v|
               stdout.puts "  #{k}: #{v}"
             end
-          rescue OAuth::Problem => e
+          rescue OAuth::Unauthorized => e
             stderr.puts "A problem occurred while attempting to obtain an access token:"
             stderr.puts e
           end

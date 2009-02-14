@@ -157,7 +157,12 @@ module OAuth
       if response.code == "200"
         CGI.parse(response.body).inject({}) { |h,(k,v)| h[k.to_sym] = v.first; h }
       else
-        response.error!
+        case response.code.to_i
+        when 401
+          raise OAuth::Unauthorized, response
+        else
+          response.error!
+        end
       end
     end
 
