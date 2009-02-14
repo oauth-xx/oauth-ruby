@@ -1,6 +1,8 @@
 require 'net/http'
 require 'net/https'
 require 'oauth/client/net_http'
+require 'oauth/errors'
+
 module OAuth
   class Consumer
     # determine the certificate authority path to verify SSL certs
@@ -117,7 +119,28 @@ module OAuth
         path = "#{_uri.path}#{_uri.query ? "?#{_uri.query}" : ""}"
       end
 
-      http.request(create_signed_request(http_method, path, token, request_options, *arguments))
+      rsp = http.request(create_signed_request(http_method, path, token, request_options, *arguments))
+
+      # check for an error reported by the Problem Reporting extension
+      # (http://wiki.oauth.net/ProblemReporting)
+      # note: a 200 may actually be an error; check for an oauth_problem key to be sure
+      if !(headers = rsp.to_hash["www-authenticate"]).nil? &&
+        (h = headers.select { |h| h =~ /^OAuth / }).any? &&
+        h.first =~ /oauth_problem/
+
+        # puts "Header: #{h.first}"
+
+        # TODO doesn't handle broken responses from api.login.yahoo.com
+        # remove debug code when done
+        params = OAuth::Helper.parse_header(h.first)
+
+        # puts "Params: #{params.inspect}"
+        # puts "Body: #{rsp.body}"
+
+        raise OAuth::Problem.new(params.delete("oauth_problem"), rsp, params)
+      end
+
+      rsp
     end
 
     # Creates and signs an http request.
