@@ -143,7 +143,7 @@ class ConsumerTest < Test::Unit::TestCase
 
     assert_equal 'POST', request.method
     assert_equal '/test', request.path
-    assert_equal "key=value&oauth_consumer_key=consumer_key_86cad9&oauth_nonce=225579211881198842005988698334675835446&oauth_signature=iMZaUTbQof%2fHMFyIde%2bOIkhW5is%3d&oauth_signature_method=HMAC-SHA1&oauth_timestamp=1199645624&oauth_token=token_411a7f&oauth_version=1.0", request.body.split("&").sort.join("&")
+    assert_equal "key=value&oauth_consumer_key=consumer_key_86cad9&oauth_nonce=225579211881198842005988698334675835446&oauth_signature=26g7wHTtNO6ZWJaLltcueppHYiI%3d&oauth_signature_method=HMAC-SHA1&oauth_timestamp=1199645624&oauth_token=token_411a7f&oauth_version=1.0", request.body.split("&").sort.join("&")
     assert_equal nil, request['authorization']
   end
 
