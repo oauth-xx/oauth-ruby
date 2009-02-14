@@ -124,7 +124,7 @@ module OAuth
 
     # Creates and signs an http request.
     # It's recommended to use the Token classes to set this up correctly
-    def create_signed_request(http_method, path, token = nil,request_options = {}, *arguments)
+    def create_signed_request(http_method, path, token = nil, request_options = {}, *arguments)
       request = create_http_request(http_method, path, *arguments)
       sign!(request, token, request_options)
       request
@@ -141,12 +141,12 @@ module OAuth
     end
 
     # Sign the Request object. Use this if you have an externally generated http request object you want to sign.
-    def sign!(request, token=nil, request_options = {})
+    def sign!(request, token = nil, request_options = {})
       request.oauth!(http, self, token, options.merge(request_options))
     end
 
     # Return the signature_base_string
-    def signature_base_string(request, token=nil, request_options = {})
+    def signature_base_string(request, token = nil, request_options = {})
       request.signature_base_string(http, self, token, options.merge(request_options))
     end
 
@@ -176,7 +176,7 @@ module OAuth
     end
 
     def request_token_url?
-      @options[:request_token_url]!=nil
+      @options.has_key?(:request_token_url)
     end
 
     def authorize_url
@@ -184,7 +184,7 @@ module OAuth
     end
 
     def authorize_url?
-      @options[:authorize_url]!=nil
+      @options.has_key?(:authorize_url)
     end
 
     def access_token_url
@@ -192,7 +192,7 @@ module OAuth
     end
 
     def access_token_url?
-      @options[:access_token_url]!=nil
+      @options.has_key?(:access_token_url)
     end
 
   protected

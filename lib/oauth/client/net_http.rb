@@ -5,6 +5,8 @@ require 'oauth/request_proxy/net_http'
 class Net::HTTPRequest
   include OAuth::Helper
 
+  attr_reader :oauth_helper
+
   def oauth!(http, consumer = nil, token = nil, options = {})
     options = { :request_uri      => oauth_full_request_uri(http),
                 :consumer         => consumer,
@@ -28,10 +30,6 @@ class Net::HTTPRequest
                 :timestamp        => nil }.merge(options)
 
     OAuth::Client::Helper.new(self, options).signature_base_string
-  end
-
-  def oauth_helper
-    @oauth_helper
   end
 
 private
@@ -67,7 +65,7 @@ private
     oauth_params_str = @oauth_helper.oauth_parameters.map { |k,v| [escape(k), escape(v)] * "=" }.join("&")
 
     uri = URI.parse(path)
-    if !uri.query || uri.query == ''
+    if uri.query.to_s == ""
       uri.query = oauth_params_str
     else
       uri.query = uri.query + "&" + oauth_params_str
@@ -75,6 +73,6 @@ private
 
     @path = uri.to_s
 
-    @path << "&oauth_signature=#{escape(@oauth_helper.signature)}"
+    @path << "&oauth_signature=#{escape(oauth_helper.signature)}"
   end
 end
