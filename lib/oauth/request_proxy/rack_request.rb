@@ -7,7 +7,7 @@ module OAuth::RequestProxy
     proxies Rack::Request
 
     def method
-      request.request_method
+      request.env["rack.methodoverride.original_method"] || request.request_method
     end
 
     def uri
