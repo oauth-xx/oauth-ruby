@@ -154,15 +154,18 @@ module OAuth
     # Creates a request and parses the result as url_encoded. This is used internally for the RequestToken and AccessToken requests.
     def token_request(http_method, path, token = nil, request_options = {}, *arguments)
       response = request(http_method, path, token, request_options, *arguments)
-      if response.code == "200"
+
+      case response.code.to_i
+
+      when (200..299)
         CGI.parse(response.body).inject({}) { |h,(k,v)| h[k.to_sym] = v.first; h }
+      when (300..399)
+        # this is a redirect
+        response.error!
+      when (400..499)
+        raise OAuth::Unauthorized, response
       else
-        case response.code.to_i
-        when 401
-          raise OAuth::Unauthorized, response
-        else
-          response.error!
-        end
+        response.error!
       end
     end
 
