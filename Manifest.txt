@@ -17,6 +17,7 @@ lib/oauth/consumer.rb
 lib/oauth/errors.rb
 lib/oauth/errors/error.rb
 lib/oauth/errors/problem.rb
+lib/oauth/errors/unauthorized.rb
 lib/oauth/helper.rb
 lib/oauth/oauth_test_helper.rb
 lib/oauth/request_proxy.rb
