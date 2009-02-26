@@ -1,5 +1,4 @@
 require 'oauth/signature/hmac/base'
-require 'rubygems'
 require 'hmac-sha1'
 
 module OAuth::Signature::HMAC
