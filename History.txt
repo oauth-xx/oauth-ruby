@@ -1,12 +1,16 @@
 == 0.3.2
 
+* 2xx statuses should be treated as success (Anders Conbere)
+* Support applications using the MethodOverride Rack middleware (László Bácsi)
+* `authorize` command for `oauth` CLI (Seth)
+* Initial support for Problem Reporting extension (Seth)
 * Verify SSL certificates if CA certificates are available (Seth)
 * Fixed ActionController parameter escaping behavior (Thiago Arrais, László
   Bácsi, Brett Gibson, et al)
 * Fixed signature calculation when both options and a block were provided to
-  OAuth::Signature::Base#initialize. (Seth)
-* Added help to the 'oauth' CLI. (Seth)
-* Fixed a problem when attempting to normalize MockRequest URIs. (Seth)
+  OAuth::Signature::Base#initialize (Seth)
+* Added help to the 'oauth' CLI (Seth)
+* Fixed a problem when attempting to normalize MockRequest URIs (Seth)
 
 == 0.3.1 2009-1-26
 
