@@ -12,7 +12,7 @@ See the OAuth specs http://oauth.net/core/1.0/
 
 You can also install it from the oauth rubyforge project http://rubyforge.org/projects/oauth/.
 
-The source code is now hosted on the OAuth GitHub Project http://github.com/pelle/oauth/tree/master
+The source code is now hosted on the OAuth GitHub Project http://github.com/mojodna/oauth
 
 == The basics
 
@@ -57,7 +57,7 @@ http://groups.google.com/group/oauth-ruby
 
 Read the "8 steps for fixing other people's code" http://drnicwilliams.com/2007/06/01/8-steps-for-fixing-other-peoples-code/.
 
-The source code is now hosted on the OAuth GitHub Project http://github.com/pelle/oauth/tree/master
+The source code is now hosted on the OAuth GitHub Project http://github.com/mojodna/oauth
 
 To submit a patch, please fork the oauth project and create a patch with tests. Once you're happy with it send a pull request and post a message to the google group.
 
