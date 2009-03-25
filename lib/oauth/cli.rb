@@ -111,7 +111,7 @@ module OAuth
               stdout.puts
               stdout.puts "XMPP Stanza:"
               stdout.puts <<-EOS
-  <oauth xmlns='urn:xmpp:tmp:oauth'>
+  <oauth xmlns='urn:xmpp:oauth:0'>
     <oauth_consumer_key>#{request.oauth_consumer_key}</oauth_consumer_key>
     <oauth_token>#{request.oauth_token}</oauth_token>
     <oauth_signature_method>#{request.oauth_signature_method}</oauth_signature_method>
