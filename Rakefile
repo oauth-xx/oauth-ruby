@@ -7,7 +7,7 @@ require 'oauth/version'
 # Run 'rake -T' to see list of generated tasks (from gem root directory)
 $hoe = Hoe.new('oauth', OAuth::VERSION) do |p|
   p.author = ['Pelle Braendgaard','Blaine Cook','Larry Halff','Jesse Clark','Jon Crosby', 'Seth Fitzsimmons']
-  p.email = "pelleb@gmail.com"
+  p.email = "oauth-ruby@googlegroups.com"
   p.description = "OAuth Core Ruby implementation"
   p.summary = p.description
   p.changes              = p.paragraphs_of("History.txt", 0..1).join("\n\n")
