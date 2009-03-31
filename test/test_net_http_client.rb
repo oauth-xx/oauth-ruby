@@ -16,7 +16,7 @@ class NetHTTPClientTest < Test::Unit::TestCase
   def test_that_using_auth_headers_on_get_requests_works
     request = Net::HTTP::Get.new(@request_uri.path + "?" + request_parameters_to_s)
     request.oauth!(@http, @consumer, @token, {:nonce => @nonce, :timestamp => @timestamp})
-    
+
     assert_equal 'GET', request.method
     assert_equal '/test?key=value', request.path
     assert_equal "OAuth oauth_nonce=\"225579211881198842005988698334675835446\", oauth_signature_method=\"HMAC-SHA1\", oauth_token=\"token_411a7f\", oauth_timestamp=\"1199645624\", oauth_consumer_key=\"consumer_key_86cad9\", oauth_signature=\"1oO2izFav1GP4kEH2EskwXkCRFg%3D\", oauth_version=\"1.0\"".split(', ').sort, request['authorization'].split(', ').sort
@@ -32,17 +32,6 @@ class NetHTTPClientTest < Test::Unit::TestCase
     assert_equal 'key=value', request.body
     assert_equal "OAuth oauth_nonce=\"225579211881198842005988698334675835446\", oauth_signature_method=\"HMAC-SHA1\", oauth_token=\"token_411a7f\", oauth_timestamp=\"1199645624\", oauth_consumer_key=\"consumer_key_86cad9\", oauth_signature=\"26g7wHTtNO6ZWJaLltcueppHYiI%3D\", oauth_version=\"1.0\"".split(', ').sort, request['authorization'].split(', ').sort
   end
- 
-  def test_that_using_post_params_works
-    request = Net::HTTP::Post.new(@request_uri.path)
-    request.set_form_data( @request_parameters )
-    request.oauth!(@http, @consumer, @token, {:scheme => 'body', :nonce => @nonce, :timestamp => @timestamp})
-
-    assert_equal 'POST', request.method
-    assert_equal '/test', request.path
-    assert_equal "key=value&oauth_consumer_key=consumer_key_86cad9&oauth_nonce=225579211881198842005988698334675835446&oauth_signature=26g7wHTtNO6ZWJaLltcueppHYiI%3d&oauth_signature_method=HMAC-SHA1&oauth_timestamp=1199645624&oauth_token=token_411a7f&oauth_version=1.0", request.body.split("&").sort.join("&")
-    assert_equal nil, request['authorization']
-  end
 
   def test_that_using_get_params_works
     request = Net::HTTP::Get.new(@request_uri.path + "?" + request_parameters_to_s)
@@ -56,7 +45,18 @@ class NetHTTPClientTest < Test::Unit::TestCase
     assert_equal nil, request['authorization']
   end
 
-  def test_that_using_get_params_works_with_post_requests
+  def test_that_using_post_params_works
+    request = Net::HTTP::Post.new(@request_uri.path)
+    request.set_form_data( @request_parameters )
+    request.oauth!(@http, @consumer, @token, {:scheme => 'body', :nonce => @nonce, :timestamp => @timestamp})
+
+    assert_equal 'POST', request.method
+    assert_equal '/test', request.path
+    assert_equal "key=value&oauth_consumer_key=consumer_key_86cad9&oauth_nonce=225579211881198842005988698334675835446&oauth_signature=26g7wHTtNO6ZWJaLltcueppHYiI%3d&oauth_signature_method=HMAC-SHA1&oauth_timestamp=1199645624&oauth_token=token_411a7f&oauth_version=1.0", request.body.split("&").sort.join("&")
+    assert_equal nil, request['authorization']
+  end
+
+  def test_that_using_post_with_uri_params_works
     request = Net::HTTP::Post.new(@request_uri.path + "?" + request_parameters_to_s)
     request.oauth!(@http, @consumer, @token, {:scheme => 'query_string', :nonce => @nonce, :timestamp => @timestamp})
 
@@ -69,7 +69,7 @@ class NetHTTPClientTest < Test::Unit::TestCase
     assert_equal nil, request['authorization']
   end
 
-  def test_that_using_get_params_works_with_post_requests_that_have_post_bodies
+  def test_that_using_post_with_uri_and_form_params_works
     request = Net::HTTP::Post.new(@request_uri.path + "?" + request_parameters_to_s)
     request.set_form_data( { 'key2' => 'value2' } )
     request.oauth!(@http, @consumer, @token, {:scheme => :query_string, :nonce => @nonce, :timestamp => @timestamp})
@@ -82,8 +82,8 @@ class NetHTTPClientTest < Test::Unit::TestCase
     assert_equal "key2=value2", request.body
     assert_equal nil, request['authorization']
   end
-  
-  
+
+
   def test_example_from_specs
     consumer=OAuth::Consumer.new("dpf43f3p2l4k3l03","kd94hf93k423kf44")
     token = OAuth::Token.new('nnch734d00sl2jdk', 'pfkkdhi9sl3r4s00')
@@ -101,22 +101,22 @@ class NetHTTPClientTest < Test::Unit::TestCase
 
     assert_equal 'GET', request.method
     assert_equal 'OAuth realm="http://photos.example.net/", oauth_nonce="kllo9940pd9333jh", oauth_signature_method="HMAC-SHA1", oauth_token="nnch734d00sl2jdk", oauth_timestamp="1191242096", oauth_consumer_key="dpf43f3p2l4k3l03", oauth_signature="tR3%2BTy81lMeYAr%2FFid0kMTYa%2FWM%3D", oauth_version="1.0"'.split(', ').sort, request['authorization'].split(', ').sort
-    
+
   end
-  
+
   def test_step_by_step_token_request
-    consumer=OAuth::Consumer.new( 
+    consumer=OAuth::Consumer.new(
         "key",
         "secret")
     request_uri = URI.parse('http://term.ie/oauth/example/request_token.php')
     nonce = rand(2**128).to_s
     timestamp = Time.now.to_i.to_s
     http = Net::HTTP.new(request_uri.host, request_uri.port)
- 
+
     request = Net::HTTP::Get.new(request_uri.path)
     signature_base_string=request.signature_base_string(http, consumer, nil, {:scheme=>:query_string,:nonce => nonce, :timestamp => timestamp})
     assert_equal "GET&http%3A%2F%2Fterm.ie%2Foauth%2Fexample%2Frequest_token.php&oauth_consumer_key%3Dkey%26oauth_nonce%3D#{nonce}%26oauth_signature_method%3DHMAC-SHA1%26oauth_timestamp%3D#{timestamp}%26oauth_version%3D1.0",signature_base_string
- 
+
 #    request = Net::HTTP::Get.new(request_uri.path)
     request.oauth!(http, consumer, nil, {:scheme=>:query_string,:nonce => nonce, :timestamp => timestamp})
     assert_equal 'GET', request.method
@@ -129,7 +129,7 @@ class NetHTTPClientTest < Test::Unit::TestCase
 #    assert_equal request['authorization'],response.body
     assert_equal "oauth_token=requestkey&oauth_token_secret=requestsecret",response.body
   end
-  
+
   def test_that_put_bodies_not_signed
     request = Net::HTTP::Put.new(@request_uri.path)
     request.body = "<?xml version=\"1.0\"?><foo><bar>baz</bar></foo>"
@@ -144,14 +144,14 @@ class NetHTTPClientTest < Test::Unit::TestCase
     signature_base_string=request.signature_base_string(@http, @consumer, nil, { :nonce => @nonce, :timestamp => @timestamp })
     assert_equal "PUT&http%3A%2F%2Fexample.com%2Ftest&oauth_consumer_key%3Dconsumer_key_86cad9%26oauth_nonce%3D225579211881198842005988698334675835446%26oauth_signature_method%3DHMAC-SHA1%26oauth_timestamp%3D1199645624%26oauth_version%3D1.0", signature_base_string
   end
-  
+
   def test_that_post_bodies_signed_if_form_urlencoded
     request = Net::HTTP::Post.new(@request_uri.path)
     request.set_form_data( { 'key2' => 'value2' } )
     signature_base_string=request.signature_base_string(@http, @consumer, nil, { :nonce => @nonce, :timestamp => @timestamp })
     assert_equal "POST&http%3A%2F%2Fexample.com%2Ftest&key2%3Dvalue2%26oauth_consumer_key%3Dconsumer_key_86cad9%26oauth_nonce%3D225579211881198842005988698334675835446%26oauth_signature_method%3DHMAC-SHA1%26oauth_timestamp%3D1199645624%26oauth_version%3D1.0", signature_base_string
   end
-  
+
   def test_that_post_bodies_not_signed_if_other_content_type
     request = Net::HTTP::Post.new(@request_uri.path)
     request.body = "<?xml version=\"1.0\"?><foo><bar>baz</bar></foo>"
