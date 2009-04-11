@@ -1,5 +1,6 @@
 require 'net/http'
 require 'net/https'
+require 'oauth/oauth'
 require 'oauth/client/net_http'
 require 'oauth/errors'
 
