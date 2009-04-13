@@ -2,6 +2,7 @@
 
 * Corrected OAuth XMPP namespace (Seth)
 * Improved error handling for invalid Authorization headers (Matt Sanford)
+* Fixed signatures for non-ASCII under $KCODE other than 'u' (Matt Sanford)
 
 == 0.3.2 2009-03-23
 
