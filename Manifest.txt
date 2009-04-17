@@ -68,6 +68,7 @@ test/test_helper.rb
 test/test_hmac_sha1.rb
 test/test_net_http_client.rb
 test/test_net_http_request_proxy.rb
+test/test_oauth_helper.rb
 test/test_rack_request_proxy.rb
 test/test_request_token.rb
 test/test_rsa_sha1.rb

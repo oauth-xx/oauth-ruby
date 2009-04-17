@@ -1,6 +1,7 @@
 == 0.3.3 / 0.4.0
 
 * Corrected OAuth XMPP namespace (Seth)
+* Improved error handling for invalid Authorization headers (Matt Sanford)
 
 == 0.3.2 2009-03-23
 
