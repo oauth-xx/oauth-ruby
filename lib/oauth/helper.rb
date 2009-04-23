@@ -41,11 +41,12 @@ module OAuth
       # odd number of arguments - must be a malformed header.
       raise OAuth::Problem.new("Invalid authorization header") if params.size % 2 != 0
 
-      # strip and unescape
-      params.map! { |v| unescape(v.strip) }
-
-      # strip quotes
-      params.map! { |v| v =~ /^\".*\"$/ ? v[1..-2] : v }
+      params.map! do |v|
+        # strip and unescape
+        val = unescape(v.strip)
+        # strip quotes
+        val.sub(/^\"(.*)\"$/, '\1')
+      end
 
       # convert into a Hash
       Hash[*params.flatten]
