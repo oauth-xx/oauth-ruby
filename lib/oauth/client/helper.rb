@@ -50,6 +50,15 @@ module OAuth::Client
                                                          :parameters => oauth_parameters}.merge(extra_options) )
     end
 
+    def amend_user_agent_header(headers)
+      @oauth_ua_string ||= "OAuth gem v#{OAuth::VERSION}"
+      if headers['User-Agent']
+        headers['User-Agent'] += " (#{@oauth_ua_string})"
+      else
+        headers['User-Agent'] = @oauth_ua_string
+      end
+    end
+
     def header
       parameters = oauth_parameters
       parameters.merge!('oauth_signature' => signature(options.merge(:parameters => parameters)))

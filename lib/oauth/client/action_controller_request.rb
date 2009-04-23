@@ -34,6 +34,7 @@ module ActionController
       return unless ActionController::TestRequest.use_oauth? && @oauth_options
 
       @oauth_helper = OAuth::Client::Helper.new(self, @oauth_options.merge(:request_uri => request_uri))
+      @oauth_helper.amend_user_agent_header(env)
 
       self.send("set_oauth_#{@oauth_options[:scheme]}")
     end

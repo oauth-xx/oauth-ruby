@@ -7,6 +7,14 @@ class Net::HTTPRequest
 
   attr_reader :oauth_helper
 
+  # Add the OAuth information to an HTTP request. Depending on the <tt>options[:scheme]</tt> setting
+  # this may add a header, additional query string parameters, or additional POST body parameters.
+  # The default scheme is +header+, in which the OAuth parameters as put into the +Authorization+
+  # header.
+  #
+  # This method also modifies the <tt>User-Agent</tt> header to add the OAuth gem version.
+  #
+  # See Also: {OAuth core spec version 1.0, section 5.4.1}[http://oauth.net/core/1.0#rfc.section.5.4.1]
   def oauth!(http, consumer = nil, token = nil, options = {})
     options = { :request_uri      => oauth_full_request_uri(http),
                 :consumer         => consumer,
@@ -17,9 +25,17 @@ class Net::HTTPRequest
                 :timestamp        => nil }.merge(options)
 
     @oauth_helper = OAuth::Client::Helper.new(self, options)
+    @oauth_helper.amend_user_agent_header(self)
     self.send("set_oauth_#{options[:scheme]}")
   end
 
+  # Create a string suitable for signing for an HTTP request. This process involves parameter
+  # normalization as specified in the OAuth specification. The exact normalization also depends
+  # on the <tt>options[:scheme]</tt> being used so this must match what will be used for the request
+  # itself. The default scheme is +header+, in which the OAuth parameters as put into the +Authorization+
+  # header.
+  #
+  # See Also: {OAuth core spec version 1.0, section 9.1.1}[http://oauth.net/core/1.0#rfc.section.9.1.1]
   def signature_base_string(http, consumer = nil, token = nil, options = {})
     options = { :request_uri      => oauth_full_request_uri(http),
                 :consumer         => consumer,
