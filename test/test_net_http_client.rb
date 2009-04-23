@@ -1,5 +1,6 @@
 require File.dirname(__FILE__) + '/test_helper.rb'
 require 'oauth/client/net_http'
+require 'oauth/version'
 
 class NetHTTPClientTest < Test::Unit::TestCase
 
@@ -31,6 +32,23 @@ class NetHTTPClientTest < Test::Unit::TestCase
     assert_equal '/test', request.path
     assert_equal 'key=value', request.body
     assert_equal "OAuth oauth_nonce=\"225579211881198842005988698334675835446\", oauth_signature_method=\"HMAC-SHA1\", oauth_token=\"token_411a7f\", oauth_timestamp=\"1199645624\", oauth_consumer_key=\"consumer_key_86cad9\", oauth_signature=\"26g7wHTtNO6ZWJaLltcueppHYiI%3D\", oauth_version=\"1.0\"".split(', ').sort, request['authorization'].split(', ').sort
+  end
+
+  def test_that_version_is_added_to_existing_user_agent
+    request = Net::HTTP::Post.new(@request_uri.path)
+    request['User-Agent'] = "MyApp"
+    request.set_form_data( @request_parameters )
+    request.oauth!(@http, @consumer, @token, {:nonce => @nonce, :timestamp => @timestamp})
+
+    assert_equal "MyApp (OAuth gem v#{OAuth::VERSION})", request['User-Agent']
+  end
+
+  def test_that_version_is_set_when_no_user_agent
+    request = Net::HTTP::Post.new(@request_uri.path)
+    request.set_form_data( @request_parameters )
+    request.oauth!(@http, @consumer, @token, {:nonce => @nonce, :timestamp => @timestamp})
+
+    assert_equal "OAuth gem v#{OAuth::VERSION}", request['User-Agent']
   end
 
   def test_that_using_get_params_works
