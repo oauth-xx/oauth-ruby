@@ -27,6 +27,5 @@ the pre-release checks to make sure that there have been no regressions.
 Random TODOs:
 * finish CLI
 * sensible Exception hierarchy
-* User Agent
 * Tokens as Modules
 * don't tie to Net::HTTP
