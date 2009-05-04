@@ -7,6 +7,7 @@
   incorrectly signed (Marcos Wright Kuhns)
 * Support for arguments in OAuth::Consumer#get_access_token (Matt Sanford)
 * Add gem version to user-agent header (Matt Sanford)
+* Handle input from aggressive form encoding libraries (Matt Wood)
 
 == 0.3.2 2009-03-23
 
