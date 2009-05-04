@@ -1,4 +1,4 @@
-== 0.3.3 / 0.4.0
+== 0.3.3 2009-05-04
 
 * Corrected OAuth XMPP namespace (Seth)
 * Improved error handling for invalid Authorization headers (Matt Sanford)
