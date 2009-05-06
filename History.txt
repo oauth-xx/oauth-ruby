@@ -1,6 +1,8 @@
 == 0.3.4
 
 * OAuth::Client::Helper uses OAuth::VERSION (chadisfaction)
+* Fix OAuth::RequestProxy::ActionControllerRequest's handling of params
+  (Tristan Groléat)
 
 == 0.3.3 2009-05-04
 

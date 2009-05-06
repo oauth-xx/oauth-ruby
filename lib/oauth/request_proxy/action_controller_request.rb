@@ -44,7 +44,7 @@ module OAuth::RequestProxy
         join('&').split('&').
         reject(&:blank?).
         map { |p| p.split('=').map{|esc| CGI.unescape(esc)} }.
-        reject { |kv| kv =~ /^oauth_signature=.*/}
+        reject { |kv| kv[0] == 'oauth_signature'}
     end
 
   protected
