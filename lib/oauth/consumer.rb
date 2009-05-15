@@ -298,8 +298,19 @@ module OAuth
       if data.is_a?(Hash)
         request.set_form_data(data)
       elsif data
-        request.body = data.to_s
-        request["Content-Length"] = request.body.length
+        if data.respond_to?(:read)
+          request.body_stream = data
+          if data.respond_to?(:length)
+            request["Content-Length"] = data.length
+          elsif data.respond_to?(:stat) && data.stat.respond_to?(:size)
+            request["Content-Length"] = data.stat.size
+          else
+            raise ArgumentError, "Don't know how to send a body_stream that doesn't respond to .length or .stat.size"
+          end
+        else
+          request.body = data.to_s
+          request["Content-Length"] = request.body.length
+        end
       end
 
       request

@@ -1,6 +1,7 @@
 require File.dirname(__FILE__) + '/test_helper'
 require 'oauth/consumer'
 require 'oauth/signature/rsa/sha1'
+require 'stringio'
 
 
 # This performs testing against Andy Smith's test server http://term.ie/oauth/example/
@@ -318,10 +319,43 @@ class ConsumerTest < Test::Unit::TestCase
       debug)
   end
 
+  def test_post_with_body_stream
+    @consumer=OAuth::Consumer.new( 
+        "key",
+        "secret",
+        {
+        :site=>"http://term.ie",
+        :request_token_path=>"/oauth/example/request_token.php",
+        :access_token_path=>"/oauth/example/access_token.php",
+        :authorize_path=>"/oauth/example/authorize.php"
+        })
+    
+    
+    @request_token=@consumer.get_request_token
+    @access_token=@request_token.get_access_token
+
+    request_body_string = "Hello, hello, hello"
+    request_body_stream = StringIO.new( request_body_string )
+
+    @response=@access_token.post("/oauth/example/echo_api.php",request_body_stream)
+    assert_not_nil @response
+    assert_equal "200",@response.code
+
+    request_body_file = File.open(__FILE__)
+
+    @response=@access_token.post("/oauth/example/echo_api.php",request_body_file)
+    assert_not_nil @response
+    assert_equal "200",@response.code
+
+    # unfortunately I don't know of a way to test that the body data was received correctly since the test server at http://term.ie
+    # echos back any non-oauth parameters but not the body.  However, this does test that the request is still correctly signed 
+    # (including the Content-Length header) and that the server received Content-Length bytes of body since it won't process the
+    # request & respond until the full body length is received.
+  end
+
   protected
 
   def request_parameters_to_s
     @request_parameters.map { |k,v| "#{k}=#{v}" }.join("&")
   end
-  
 end
