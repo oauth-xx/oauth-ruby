@@ -42,9 +42,6 @@ module OAuth
         case command
         # TODO move command logic elsewhere
         when "authorize"
-          # Y! token authority requires realm=yahoo.com when headers are in use
-          # TODO remove :scheme when that's been fixed
-          # TODO determine endpoints w/ X-RDS-Simple
           consumer = OAuth::Consumer.new \
             options[:oauth_consumer_key],
             options[:oauth_consumer_secret],
