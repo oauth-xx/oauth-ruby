@@ -13,6 +13,7 @@ module OAuth
     def initialize(consumer, token="", secret="")
       super(token, secret)
       @consumer = consumer
+      @params   = {}
     end
 
     # Make a signed request using given http_method to the path

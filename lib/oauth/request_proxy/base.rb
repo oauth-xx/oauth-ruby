@@ -18,6 +18,10 @@ module OAuth::RequestProxy
 
     ## OAuth parameters
 
+    def oauth_callback
+      parameters['oauth_callback']
+    end
+
     def oauth_consumer_key
       parameters['oauth_consumer_key']
     end
@@ -46,6 +50,10 @@ module OAuth::RequestProxy
 
     def oauth_token
       parameters['oauth_token']
+    end
+
+    def oauth_verifier
+      parameters['oauth_verifier']
     end
 
     def oauth_version
