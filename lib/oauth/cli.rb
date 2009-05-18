@@ -48,7 +48,7 @@ module OAuth
             :access_token_url  => options[:access_token_url],
             :authorize_url     => options[:authorize_url],
             :request_token_url => options[:request_token_url],
-            :scheme            => :query_string
+            :scheme            => options[:scheme]
 
           # get a request token
           request_token = consumer.get_request_token
@@ -156,7 +156,9 @@ module OAuth
       parse_options(arguments[0..-1])
     end
 
-    def option_parser
+    def option_parser(arguments)
+      # TODO add realm parameter
+      # TODO add user-agent parameter
       option_parser = OptionParser.new do |opts|
         opts.banner = "Usage: #{$0} [options] <command>"
 
@@ -166,6 +168,7 @@ module OAuth
         options[:oauth_timestamp] = OAuth::Helper.generate_timestamp
         options[:oauth_version] = "1.0"
         options[:params] = []
+        options[:scheme] = :header
 
         ## Common Options
 
@@ -177,7 +180,19 @@ module OAuth
           options[:oauth_consumer_secret] = v
         end
 
-        ## Options for signing
+        opts.on("-H", "--header", "Use the 'Authorization' header for OAuth parameters (default).") do
+          options[:scheme] = :header
+        end
+
+        opts.on("-Q", "--query-string", "Use the query string for OAuth parameters.") do
+          options[:scheme] = :query_string
+        end
+
+        opts.on("-O", "--options FILE", "Read options from a file") do |v|
+          arguments.unshift(*open(v).readlines.map { |l| l.chomp.split(" ") }.flatten)
+        end
+
+        ## Options for signing and making requests
 
         opts.on("--method METHOD", "Specifies the method (e.g. GET) to use when signing.") do |v|
           options[:method] = v
@@ -249,7 +264,7 @@ module OAuth
     end
 
     def parse_options(arguments)
-      option_parser.parse!(arguments)
+      option_parser(arguments).parse!(arguments)
     end
 
     def prepare_parameters

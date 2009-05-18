@@ -1,5 +1,7 @@
 == 0.3.5
 * `query` CLI command to access protected resources (Seth)
+* Added -H, -Q CLI options for specifying the authorization scheme (Seth)
+* Added -O CLI option for specifying a file containing options (Seth)
 
 == 0.3.4 2009-05-06
 
