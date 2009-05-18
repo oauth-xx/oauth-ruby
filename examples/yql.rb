@@ -39,6 +39,6 @@ consumer = OAuth::Consumer.new \
 
 access_token = OAuth::AccessToken.new(consumer)
 
-response = access_token.request(:get, url = "/v1/yql?q=#{OAuth::Helper.escape(query)}&format=json")
+response = access_token.request(:get, "/v1/yql?q=#{OAuth::Helper.escape(query)}&format=json")
 rsp = JSON.parse(response.body)
 pp rsp
