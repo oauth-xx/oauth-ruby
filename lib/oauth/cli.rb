@@ -6,6 +6,7 @@ module OAuth
     SUPPORTED_COMMANDS = {
       "authorize" => "Obtain an access token and secret for a user",
       "debug"     => "Verbosely generate an OAuth signature",
+      "query"     => "Query a protected resource",
       "sign"      => "Generate an OAuth signature"
     }
 
@@ -73,6 +74,17 @@ module OAuth
             stderr.puts "A problem occurred while attempting to obtain an access token:"
             stderr.puts e
           end
+        when "query"
+          consumer = OAuth::Consumer.new \
+            options[:oauth_consumer_key],
+            options[:oauth_consumer_secret],
+            :scheme => options[:scheme]
+
+          access_token = OAuth::AccessToken.new(consumer, options[:oauth_token], options[:oauth_token_secret])
+
+          response = access_token.request(options[:method].downcase.to_sym, options[:uri])
+          puts "#{response.code} #{response.message}"
+          puts response.body
         when "sign"
           parameters = prepare_parameters
 
