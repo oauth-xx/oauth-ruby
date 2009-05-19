@@ -97,6 +97,11 @@ module OAuth
       end
     end
 
+    def get_access_token(request_token, request_options = {}, *arguments)
+      response = token_request(http_method, (access_token_url? ? access_token_url : access_token_path), request_token, request_options, *arguments)
+      OAuth::AccessToken.from_hash(self, response)
+    end
+
     # Makes a request to the service for a new OAuth::RequestToken
     #
     #  @request_token = @consumer.get_request_token
