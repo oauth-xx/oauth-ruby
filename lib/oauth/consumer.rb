@@ -106,6 +106,9 @@ module OAuth
     #
     #  @request_token = @consumer.get_request_token
     #
+    # To include application-specific parameters:
+    #
+    #  @request_token = @consumer.get_request_token({}, :foo => "bar")
     def get_request_token(request_options = {}, *arguments)
       response = token_request(http_method, (request_token_url? ? request_token_url : request_token_path), nil, request_options, *arguments)
       OAuth::RequestToken.new(self, response[:oauth_token], response[:oauth_token_secret])
@@ -113,7 +116,10 @@ module OAuth
 
     # Creates, signs and performs an http request.
     # It's recommended to use the OAuth::Token classes to set this up correctly.
-    # The arguments parameters are a hash or string encoded set of parameters if it's a post request as well as optional http headers.
+    # request_options take precedence over consumer-wide options when signing
+    #   a request.
+    # arguments are POST and PUT bodies (a Hash, string-encoded parameters, or
+    #   absent), followed by additional HTTP headers.
     #
     #   @consumer.request(:get,  '/people', @token, { :scheme => :query_string })
     #   @consumer.request(:post, '/people', @token, {}, @person.to_xml, { 'Content-Type' => 'application/xml' })
