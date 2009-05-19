@@ -170,7 +170,14 @@ module OAuth
       case response.code.to_i
 
       when (200..299)
-        CGI.parse(response.body).inject({}) { |h,(k,v)| h[k.to_sym] = v.first; h }
+        # symbolize keys
+        # TODO this could be considered unexpected behavior; symbols or not?
+        # TODO this also drops subsequent values from multi-valued keys
+        CGI.parse(response.body).inject({}) do |h,(k,v)|
+          h[k.to_sym] = v.first
+          h[k]        = v.first
+          h
+        end
       when (300..399)
         # this is a redirect
         response.error!
