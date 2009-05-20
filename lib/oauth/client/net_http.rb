@@ -11,6 +11,12 @@ class Net::HTTPRequest
   # this may add a header, additional query string parameters, or additional POST body parameters.
   # The default scheme is +header+, in which the OAuth parameters as put into the +Authorization+
   # header.
+  # 
+  # * http - Configured Net::HTTP instance
+  # * consumer - OAuth::Consumer instance
+  # * token - OAuth::Token instance
+  # * options - Request-specific options (e.g. +request_uri+, +consumer+, +token+, +scheme+,
+  #   +signature_method+, +nonce+, +timestamp+)
   #
   # This method also modifies the <tt>User-Agent</tt> header to add the OAuth gem version.
   #
@@ -34,7 +40,13 @@ class Net::HTTPRequest
   # on the <tt>options[:scheme]</tt> being used so this must match what will be used for the request
   # itself. The default scheme is +header+, in which the OAuth parameters as put into the +Authorization+
   # header.
-  #
+  # 
+  # * http - Configured Net::HTTP instance
+  # * consumer - OAuth::Consumer instance
+  # * token - OAuth::Token instance
+  # * options - Request-specific options (e.g. +request_uri+, +consumer+, +token+, +scheme+,
+  #   +signature_method+, +nonce+, +timestamp+)
+  # 
   # See Also: {OAuth core spec version 1.0, section 9.1.1}[http://oauth.net/core/1.0#rfc.section.9.1.1]
   def signature_base_string(http, consumer = nil, token = nil, options = {})
     options = { :request_uri      => oauth_full_request_uri(http),
