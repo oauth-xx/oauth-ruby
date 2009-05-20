@@ -117,7 +117,11 @@ module OAuth
     #
     # TODO oauth_callback should be a mandatory parameter
     def get_request_token(request_options = {}, *arguments)
-      response = token_request(http_method, (request_token_url? ? request_token_url : request_token_path), nil, {:oauth_callback => OAuth::OUT_OF_BAND}.merge(request_options), *arguments)
+      # if oauth_callback wasn't provided, it is assumed that oauth_verifiers
+      # will be exchanged out of band
+      request_options[:oauth_callback] ||= OAuth::OUT_OF_BAND
+
+      response = token_request(http_method, (request_token_url? ? request_token_url : request_token_path), nil, request_options, *arguments)
       OAuth::RequestToken.from_hash(self, response)
     end
 
