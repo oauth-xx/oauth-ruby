@@ -13,6 +13,7 @@ class ConsumerTest < Test::Unit::TestCase
         'consumer_key_86cad9', '5888bf0345e5d237',
         {
         :site=>"http://blabla.bla",
+        :proxy=>"http://user:password@proxy.bla:8080",
         :request_token_path=>"/oauth/example/request_token.php",
         :access_token_path=>"/oauth/example/access_token.php",
         :authorize_path=>"/oauth/example/authorize.php",
@@ -31,6 +32,7 @@ class ConsumerTest < Test::Unit::TestCase
     assert_equal "consumer_key_86cad9",@consumer.key
     assert_equal "5888bf0345e5d237",@consumer.secret
     assert_equal "http://blabla.bla",@consumer.site
+    assert_equal "http://user:password@proxy.bla:8080",@consumer.proxy
     assert_equal "/oauth/example/request_token.php",@consumer.request_token_path
     assert_equal "/oauth/example/access_token.php",@consumer.access_token_path
     assert_equal "http://blabla.bla/oauth/example/request_token.php",@consumer.request_token_url
@@ -50,6 +52,7 @@ class ConsumerTest < Test::Unit::TestCase
     assert_equal "key",@consumer.key
     assert_equal "secret",@consumer.secret
     assert_equal "http://twitter.com",@consumer.site
+    assert_nil    @consumer.proxy
     assert_equal "/oauth/request_token",@consumer.request_token_path
     assert_equal "/oauth/access_token",@consumer.access_token_path
     assert_equal "http://twitter.com/oauth/request_token",@consumer.request_token_url

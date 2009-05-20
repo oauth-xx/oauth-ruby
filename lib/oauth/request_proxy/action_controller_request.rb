@@ -1,4 +1,5 @@
 require 'active_support'
+require 'action_controller'
 require 'action_controller/request'
 require 'oauth/request_proxy/base'
 require 'uri'

@@ -25,6 +25,7 @@ module OAuth
       :authorize_path     => '/oauth/authorize',
       :access_token_path  => '/oauth/access_token',
 
+      :proxy              => nil,
       # How do we send the oauth values to the server see
       # http://oauth.net/core/1.0/#consumer_req_param for more info
       #
@@ -254,6 +255,10 @@ module OAuth
       @options.has_key?(:access_token_url)
     end
 
+    def proxy
+      @options[:proxy]
+    end
+
   protected
 
     # Instantiates the http object
@@ -264,7 +269,12 @@ module OAuth
         our_uri = URI.parse(_url)
       end
 
-      http_object = Net::HTTP.new(our_uri.host, our_uri.port)
+      if proxy.nil?
+        http_object = Net::HTTP.new(our_uri.host, our_uri.port)
+      else
+        proxy_uri = proxy.is_a?(URI) ? proxy : URI.parse(proxy)
+        http_object = Net::HTTP.new(our_uri.host, our_uri.port, proxy_uri.host, proxy_uri.port, proxy_uri.user, proxy_uri.password)
+      end
 
       http_object.use_ssl = (our_uri.scheme == 'https')
 
