@@ -1,7 +1,10 @@
 == 0.3.5
+
 * `query` CLI command to access protected resources (Seth)
 * Added -H, -Q CLI options for specifying the authorization scheme (Seth)
 * Added -O CLI option for specifying a file containing options (Seth)
+* Support streamable body contents for large request bodies (Seth Cousins)
+* Support for OAuth 1.0a (Seth)
 
 == 0.3.4 2009-05-06
 
