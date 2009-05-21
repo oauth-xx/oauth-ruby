@@ -29,11 +29,13 @@ module OAuth::Client
 
     def oauth_parameters
       {
+        'oauth_callback'         => options[:oauth_callback],
         'oauth_consumer_key'     => options[:consumer].key,
         'oauth_token'            => options[:token] ? options[:token].token : '',
         'oauth_signature_method' => options[:signature_method],
         'oauth_timestamp'        => timestamp,
         'oauth_nonce'            => nonce,
+        'oauth_verifier'         => options[:oauth_verifier],
         'oauth_version'          => '1.0'
       }.reject { |k,v| v.to_s == "" }
     end
