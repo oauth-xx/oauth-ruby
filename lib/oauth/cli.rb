@@ -208,6 +208,8 @@ module OAuth
 
         ## Options for signing and making requests
 
+        opts.separator("\n  options for signing and querying")
+
         opts.on("--method METHOD", "Specifies the method (e.g. GET) to use when signing.") do |v|
           options[:method] = v
         end
@@ -262,6 +264,8 @@ module OAuth
         end
 
         ## Options for authorization
+
+        opts.separator("\n  options for authorization")
 
         opts.on("--access-token-url URL", "Specifies the access token URL.") do |v|
           options[:access_token_url] = v
