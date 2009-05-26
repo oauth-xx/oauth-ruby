@@ -43,47 +43,54 @@ module OAuth
         case command
         # TODO move command logic elsewhere
         when "authorize"
-          consumer = OAuth::Consumer.new \
-            options[:oauth_consumer_key],
-            options[:oauth_consumer_secret],
-            :access_token_url  => options[:access_token_url],
-            :authorize_url     => options[:authorize_url],
-            :request_token_url => options[:request_token_url],
-            :scheme            => options[:scheme]
-
-          # parameters for OAuth 1.0a
-          oauth_verifier = nil
-
-          # get a request token
-          request_token = consumer.get_request_token(:oauth_callback => options[:oauth_callback])
-
-          if request_token.callback_confirmed?
-            stdout.puts "Server appears to support OAuth 1.0a; enabling support."
-            options[:version] = "1.0a"
-          end
-
-          stdout.puts "Please visit this url to authorize:"
-          stdout.puts request_token.authorize_url
-
-          if options[:version] == "1.0a"
-            stdout.puts "Please enter the verification code provided by the SP (oauth_verifier):"
-            oauth_verifier = stdin.gets.chomp
-          else
-            stdout.puts "Press return to continue..."
-            stdin.gets
-          end
-
           begin
-            # get an access token
-            access_token = request_token.get_access_token(:oauth_verifier => oauth_verifier)
+            consumer = OAuth::Consumer.new \
+              options[:oauth_consumer_key],
+              options[:oauth_consumer_secret],
+              :access_token_url  => options[:access_token_url],
+              :authorize_url     => options[:authorize_url],
+              :request_token_url => options[:request_token_url],
+              :scheme            => options[:scheme]
 
-            stdout.puts "Response:"
-            access_token.params.each do |k,v|
-              stdout.puts "  #{k}: #{v}" unless k.is_a?(Symbol)
+            # parameters for OAuth 1.0a
+            oauth_verifier = nil
+
+            # get a request token
+            request_token = consumer.get_request_token(:oauth_callback => options[:oauth_callback])
+
+            if request_token.callback_confirmed?
+              stdout.puts "Server appears to support OAuth 1.0a; enabling support."
+              options[:version] = "1.0a"
+            end
+
+            stdout.puts "Please visit this url to authorize:"
+            stdout.puts request_token.authorize_url
+
+            if options[:version] == "1.0a"
+              stdout.puts "Please enter the verification code provided by the SP (oauth_verifier):"
+              oauth_verifier = stdin.gets.chomp
+            else
+              stdout.puts "Press return to continue..."
+              stdin.gets
+            end
+
+            begin
+              # get an access token
+              access_token = request_token.get_access_token(:oauth_verifier => oauth_verifier)
+
+              stdout.puts "Response:"
+              access_token.params.each do |k,v|
+                stdout.puts "  #{k}: #{v}" unless k.is_a?(Symbol)
+              end
+            rescue OAuth::Unauthorized => e
+              stderr.puts "A problem occurred while attempting to obtain an access token:"
+              stderr.puts e
+              stderr.puts e.request.body
             end
           rescue OAuth::Unauthorized => e
-            stderr.puts "A problem occurred while attempting to obtain an access token:"
+            stderr.puts "A problem occurred while attempting to authorize:"
             stderr.puts e
+            stderr.puts e.request.body
           end
         when "query"
           consumer = OAuth::Consumer.new \
