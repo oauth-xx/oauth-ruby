@@ -169,7 +169,7 @@ module OAuth
       parse_options(arguments[0..-1])
     end
 
-    def option_parser(arguments)
+    def option_parser(arguments = "")
       # TODO add realm parameter
       # TODO add user-agent parameter
       option_parser = OptionParser.new do |opts|
