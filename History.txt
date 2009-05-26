@@ -5,6 +5,7 @@
 * Added -O CLI option for specifying a file containing options (Seth)
 * Support streamable body contents for large request bodies (Seth Cousins)
 * Support for OAuth 1.0a (Seth)
+* Added proxy support to OAuth::Consumer (Marshall Huss)
 
 == 0.3.4 2009-05-06
 
