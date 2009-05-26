@@ -7,7 +7,8 @@ module OAuth
       "authorize" => "Obtain an access token and secret for a user",
       "debug"     => "Verbosely generate an OAuth signature",
       "query"     => "Query a protected resource",
-      "sign"      => "Generate an OAuth signature"
+      "sign"      => "Generate an OAuth signature",
+      "version"   => "Display the current version of the library"
     }
 
     attr_reader :command
@@ -156,6 +157,8 @@ module OAuth
           else
             stdout.puts request.oauth_signature
           end
+        when "version"
+          puts "OAuth for Ruby #{OAuth::VERSION}"
         end
       else
         usage
@@ -246,8 +249,12 @@ module OAuth
           options[:uri] = v
         end
 
-        opts.on("--version VERSION", "Specifies the OAuth version to use.") do |v|
-          options[:oauth_version] = v
+        opts.on(:OPTIONAL, "--version VERSION", "Specifies the OAuth version to use.") do |v|
+          if v
+            options[:oauth_version] = v
+          else
+            @command = "version"
+          end
         end
 
         opts.on("--no-version", "Omit oauth_version.") do
@@ -320,6 +327,8 @@ module OAuth
         options[:oauth_consumer_key] && options[:oauth_consumer_secret] &&
           options[:access_token_url] && options[:authorize_url] &&
           options[:request_token_url]
+      when "version"
+        true
       else
         options[:oauth_consumer_key] && options[:oauth_consumer_secret] &&
           options[:method] && options[:uri]
