@@ -6,6 +6,7 @@
 * Support streamable body contents for large request bodies (Seth Cousins)
 * Support for OAuth 1.0a (Seth)
 * Added proxy support to OAuth::Consumer (Marshall Huss)
+* Added --scope CLI option for Google's 'scope' parameter (Seth)
 
 == 0.3.4 2009-05-06
 

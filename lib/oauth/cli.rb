@@ -56,7 +56,7 @@ module OAuth
             oauth_verifier = nil
 
             # get a request token
-            request_token = consumer.get_request_token(:oauth_callback => options[:oauth_callback])
+            request_token = consumer.get_request_token({ :oauth_callback => options[:oauth_callback] }, { :scope => options[:scope] })
 
             if request_token.callback_confirmed?
               stdout.puts "Server appears to support OAuth 1.0a; enabling support."
@@ -295,6 +295,10 @@ module OAuth
 
         opts.on("--request-token-url URL", "Specifies the request token URL.") do |v|
           options[:request_token_url] = v
+        end
+
+        opts.on("--scope SCOPE", "Specifies the scope (Google-specific).") do |v|
+          options[:scope] = v
         end
       end
     end
