@@ -1,4 +1,4 @@
-== 0.3.5
+== 0.3.5 2009-06-03
 
 * `query` CLI command to access protected resources (Seth)
 * Added -H, -Q CLI options for specifying the authorization scheme (Seth)
