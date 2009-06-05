@@ -100,7 +100,7 @@ module OAuth
 
           access_token = OAuth::AccessToken.new(consumer, options[:oauth_token], options[:oauth_token_secret])
 
-          response = access_token.request(options[:method].downcase.to_sym, options[:uri])
+          response = access_token.request(options[:method].downcase.to_sym, options[:uri], prepare_parameters)
           puts "#{response.code} #{response.message}"
           puts response.body
         when "sign"
