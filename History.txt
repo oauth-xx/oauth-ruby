@@ -1,7 +1,11 @@
+== 0.3.6
+
+* Added -B CLI option to use the :body authentication scheme (Seth)
+
 == 0.3.5 2009-06-03
 
 * `query` CLI command to access protected resources (Seth)
-* Added -H, -Q CLI options for specifying the authorization scheme (Seth)
+* Added -H, -Q CLI options for specifying the authentication scheme (Seth)
 * Added -O CLI option for specifying a file containing options (Seth)
 * Support streamable body contents for large request bodies (Seth Cousins)
 * Support for OAuth 1.0a (Seth)

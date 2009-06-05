@@ -196,6 +196,10 @@ module OAuth
 
         ## Common Options
 
+        opts.on("-B", "--body", "Use the request body for OAuth parameters.") do
+          options[:scheme] = :body
+        end
+
         opts.on("--consumer-key KEY", "Specifies the consumer key to use.") do |v|
           options[:oauth_consumer_key] = v
         end
