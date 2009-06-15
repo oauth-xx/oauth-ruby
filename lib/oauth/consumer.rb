@@ -294,7 +294,8 @@ module OAuth
       http_method = http_method.to_sym
 
       if [:post, :put].include?(http_method)
-        data = (arguments.shift || {}).reject { |k,v| v.nil? }
+        data = arguments.shift
+        data.reject! { |k,v| v.nil? } if data.is_a?(Hash)
       end
 
       headers = arguments.first.is_a?(Hash) ? arguments.shift : {}
