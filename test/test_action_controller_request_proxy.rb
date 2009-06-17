@@ -7,6 +7,7 @@ require 'action_controller/test_process'
 class ActionControllerRequestProxyTest < Test::Unit::TestCase
   def request_proxy(request_method = :get, uri_params = {}, body_params = {})
     request = ActionController::TestRequest.new
+    request.set_REQUEST_URI('/')
 
     case request_method
     when :post
