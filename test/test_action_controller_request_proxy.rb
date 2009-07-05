@@ -1,10 +1,9 @@
 require File.dirname(__FILE__) + '/test_helper.rb'
-require 'oauth/request_proxy/action_controller_request.rb'
+require 'oauth/request_proxy/action_controller_request'
 require 'action_controller'
 require 'action_controller/test_process'
 
 class ActionControllerRequestProxyTest < Test::Unit::TestCase
-
   def request_proxy(request_method = :get, uri_params = {}, body_params = {})
     request = ActionController::TestRequest.new
 
@@ -17,6 +16,7 @@ class ActionControllerRequestProxyTest < Test::Unit::TestCase
 
     request.env['REQUEST_URI'] = '/'
     request.env['RAW_POST_DATA'] = body_params.to_query
+    request.env['QUERY_STRING'] = body_params.to_query
     request.env['CONTENT_TYPE'] = 'application/x-www-form-urlencoded'
 
     yield request if block_given?

@@ -1,5 +1,5 @@
 require 'test/unit'
-require File.dirname(__FILE__) + '/../lib/oauth'
+$LOAD_PATH << File.dirname(__FILE__) + '/../lib/'
 
 begin
   # load redgreen unless running from within TextMate (in which case ANSI
