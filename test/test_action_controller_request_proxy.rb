@@ -1,6 +1,6 @@
 require File.dirname(__FILE__) + '/test_helper.rb'
+
 require 'oauth/request_proxy/action_controller_request'
-require 'action_controller'
 require 'action_controller/test_process'
 
 class ActionControllerRequestProxyTest < Test::Unit::TestCase
@@ -20,7 +20,7 @@ class ActionControllerRequestProxyTest < Test::Unit::TestCase
     request.env['CONTENT_TYPE'] = 'application/x-www-form-urlencoded'
 
     yield request if block_given?
-    OAuth::RequestProxy.proxy(request, :parameters=>uri_params)
+    OAuth::RequestProxy.proxy(request, :parameters => uri_params)
   end
 
   def test_that_proxy_simple_get_request_works_with_query_params
@@ -47,7 +47,7 @@ class ActionControllerRequestProxyTest < Test::Unit::TestCase
     assert_equal 'PUT', request_proxy.method
   end
 
-  def test_that_proxy_simple_put_request_works_with_post_params
+  def test_that_proxy_simple_get_request_works_with_post_params
     request_proxy = request_proxy(:get, {}, {'key'=>'value'})
 
     expected_parameters = []
@@ -71,7 +71,7 @@ class ActionControllerRequestProxyTest < Test::Unit::TestCase
     assert_equal 'PUT', request_proxy.method
   end
 
-  def test_that_proxy_simple_put_request_works_with_mixed_params
+  def test_that_proxy_simple_get_request_works_with_mixed_params
     request_proxy = request_proxy(:get, {'key'=>'value'}, {'key2'=>'value2'})
 
     expected_parameters = [["key", "value"]]
