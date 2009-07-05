@@ -1,6 +1,4 @@
 require File.dirname(__FILE__) + '/test_helper.rb'
-require 'oauth/client/net_http'
-require 'oauth/version'
 
 class NetHTTPClientTest < Test::Unit::TestCase
 

@@ -1,6 +1,4 @@
 require File.dirname(__FILE__) + '/test_helper.rb'
-require 'oauth/token'
-require 'oauth/consumer'
 
 class StubbedToken < OAuth::RequestToken
   define_method :build_authorize_url_promoted do |root_domain, params|

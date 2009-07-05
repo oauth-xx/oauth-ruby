@@ -1,6 +1,4 @@
 require File.dirname(__FILE__) + '/test_helper.rb'
-require 'oauth/token'
-require 'oauth/consumer'
 
 class TestAccessToken < Test::Unit::TestCase
   def setup

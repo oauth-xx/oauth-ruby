@@ -1,5 +1,4 @@
 require File.dirname(__FILE__) + '/test_helper.rb'
-require 'oauth/helper'
 
 class TestOAuthHelper < Test::Unit::TestCase
 

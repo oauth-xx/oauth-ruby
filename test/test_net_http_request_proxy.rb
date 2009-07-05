@@ -1,5 +1,4 @@
 require File.dirname(__FILE__) + '/test_helper.rb'
-require 'oauth/request_proxy/net_http'
 
 class NetHTTPRequestProxyTest < Test::Unit::TestCase
 

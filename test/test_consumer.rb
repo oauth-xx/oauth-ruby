@@ -1,8 +1,6 @@
 require File.dirname(__FILE__) + '/test_helper'
-require 'oauth/consumer'
-require 'oauth/signature/rsa/sha1'
-require 'stringio'
 
+require 'stringio'
 
 # This performs testing against Andy Smith's test server http://term.ie/oauth/example/
 # Thanks Andy.
