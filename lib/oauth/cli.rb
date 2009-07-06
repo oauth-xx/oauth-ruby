@@ -50,13 +50,14 @@ module OAuth
               :access_token_url  => options[:access_token_url],
               :authorize_url     => options[:authorize_url],
               :request_token_url => options[:request_token_url],
-              :scheme            => options[:scheme]
+              :scheme            => options[:scheme],
+              :http_method       => options[:method].to_s.downcase.to_sym
 
             # parameters for OAuth 1.0a
             oauth_verifier = nil
 
             # get a request token
-            request_token = consumer.get_request_token({ :oauth_callback => options[:oauth_callback] }, { :scope => options[:scope] })
+            request_token = consumer.get_request_token({ :oauth_callback => options[:oauth_callback] }, { "scope" => options[:scope] })
 
             if request_token.callback_confirmed?
               stdout.puts "Server appears to support OAuth 1.0a; enabling support."
@@ -190,6 +191,7 @@ module OAuth
         options[:oauth_signature_method] = "HMAC-SHA1"
         options[:oauth_timestamp] = OAuth::Helper.generate_timestamp
         options[:oauth_version] = "1.0"
+        options[:method] = :post
         options[:params] = []
         options[:scheme] = :header
         options[:version] = "1.0"
