@@ -15,6 +15,7 @@ class ActionControllerRequestProxyTest < Test::Unit::TestCase
       request.env['REQUEST_METHOD'] = 'PUT'
     end
 
+    request.env['REQUEST_URI'] = '/'
     request.env['RAW_POST_DATA'] = body_params.to_query
     request.env['CONTENT_TYPE'] = 'application/x-www-form-urlencoded'
 
