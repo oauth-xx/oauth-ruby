@@ -101,7 +101,13 @@ module OAuth
 
           access_token = OAuth::AccessToken.new(consumer, options[:oauth_token], options[:oauth_token_secret])
 
-          response = access_token.request(options[:method].downcase.to_sym, options[:uri], prepare_parameters)
+          # append params to the URL
+          uri = URI.parse(options[:uri])
+          params = prepare_parameters.map { |k,v| v.map { |v2| "#{URI.encode(k)}=#{URI.encode(v2)}" } * "&" }
+          uri.query = [uri.query, *params].reject { |x| x.nil? } * "&"
+          p uri.to_s
+
+          response = access_token.request(options[:method].downcase.to_sym, uri.to_s)
           puts "#{response.code} #{response.message}"
           puts response.body
         when "sign"
