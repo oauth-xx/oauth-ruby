@@ -1,6 +1,7 @@
 == 0.3.6
 
 * Added -B CLI option to use the :body authentication scheme (Seth)
+* Added :ca_file consumer option to allow consumer specific certificate override. (Pelle)
 
 == 0.3.5 2009-06-03
 
