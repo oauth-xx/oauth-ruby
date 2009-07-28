@@ -39,6 +39,9 @@ module OAuth
       # Default http method used for OAuth Token Requests (defaults to :post)
       :http_method   => :post,
 
+      # Add a custom ca_file for consumer
+      # :ca_file       => '/etc/certs.pem'
+
       :oauth_version => "1.0"
     }
 
@@ -278,8 +281,8 @@ module OAuth
 
       http_object.use_ssl = (our_uri.scheme == 'https')
 
-      if CA_FILE
-        http_object.ca_file = CA_FILE
+      if @options[:ca_file] || CA_FILE
+        http_object.ca_file = @options[:ca_file] || CA_FILE
         http_object.verify_mode = OpenSSL::SSL::VERIFY_PEER
         http_object.verify_depth = 5
       else
