@@ -1,5 +1,6 @@
 require 'openssl'
 require 'base64'
+require 'enumerator'
 
 module OAuth
   module Helper
@@ -70,9 +71,30 @@ module OAuth
       # convert into a Hash
       Hash[*params.flatten]
     end
-
+    
+    # A secure version of equals meant to avoid timing attacks as specified here
+    # http://codahale.com/a-lesson-in-timing-attacks/
+    def secure_equals(a,b)
+      return a==b unless a.is_a?(String)&&b.is_a?(String)
+      result = 0
+      bytes(a).zip(bytes(b)).each do |x,y|
+        result |= (x ^ y)
+      end
+      (result == 0) && (a.length == b.length)
+    end
+    
     def unescape(value)
       URI.unescape(value.gsub('+', '%2B'))
+    end
+    
+    # Creates a per byte enumerator for a string regardless of RUBY VERSION
+    def bytes(a)
+      return [] if a.nil?
+      if a.respond_to?(:bytes)
+        a.bytes
+      else
+        Enumerable::Enumerator.new(a, :each_byte)
+      end
     end
   end
 end

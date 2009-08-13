@@ -55,7 +55,7 @@ module OAuth::Signature
     end
 
     def ==(cmp_signature)
-      Base64.decode64(signature) == Base64.decode64(cmp_signature)
+      secure_equals(Base64.decode64(signature), Base64.decode64(cmp_signature))
     end
 
     def verify

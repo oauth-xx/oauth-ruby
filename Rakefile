@@ -1,10 +1,13 @@
-%w[rubygems rake rake/clean fileutils newgem rubigen].each { |f| require f }
+%w[rubygems rake rake/clean fileutils].each { |f| require f }
 $LOAD_PATH << File.dirname(__FILE__) + '/lib'
 require 'oauth'
 require 'oauth/version'
 
 begin
   require 'hoe'
+  require 'newgem'
+  require 'rubigen'
+  
   # Generate all the Rake tasks
   # Run 'rake -T' to see list of generated tasks (from gem root directory)
   $hoe = Hoe.new('oauth', OAuth::VERSION) do |p|
