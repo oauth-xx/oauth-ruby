@@ -1,4 +1,4 @@
-== 0.3.6
+== 0.3.6 2009-09-14
 
 * Added -B CLI option to use the :body authentication scheme (Seth)
 * Respect `--method` in `authorize` CLI command (Seth)
