@@ -101,8 +101,8 @@ module OAuth
       end
     end
 
-    def get_access_token(request_token, request_options = {}, *arguments)
-      response = token_request(http_method, (access_token_url? ? access_token_url : access_token_path), request_token, request_options, *arguments)
+    def get_access_token(request_token, request_options = {}, *arguments, &block)
+      response = token_request(http_method, (access_token_url? ? access_token_url : access_token_path), request_token, request_options, *arguments, &block)
       OAuth::AccessToken.from_hash(self, response)
     end
 
@@ -120,12 +120,20 @@ module OAuth
     #  @request_token = @consumer.get_request_token({}, :foo => "bar")
     #
     # TODO oauth_callback should be a mandatory parameter
-    def get_request_token(request_options = {}, *arguments)
+    def get_request_token(request_options = {}, *arguments, &block)
       # if oauth_callback wasn't provided, it is assumed that oauth_verifiers
       # will be exchanged out of band
       request_options[:oauth_callback] ||= OAuth::OUT_OF_BAND
 
-      response = token_request(http_method, (request_token_url? ? request_token_url : request_token_path), nil, request_options, *arguments)
+      if block_given?
+        response = token_request(http_method,
+                                 (request_token_url? ? request_token_url : request_token_path),
+                                 nil,
+                                 request_options,
+                                 *arguments, &block)
+      else
+        response = token_request(http_method, (request_token_url? ? request_token_url : request_token_path), nil, request_options, *arguments)
+      end
       OAuth::RequestToken.from_hash(self, response)
     end
 
@@ -185,13 +193,17 @@ module OAuth
       case response.code.to_i
 
       when (200..299)
-        # symbolize keys
-        # TODO this could be considered unexpected behavior; symbols or not?
-        # TODO this also drops subsequent values from multi-valued keys
-        CGI.parse(response.body).inject({}) do |h,(k,v)|
-          h[k.to_sym] = v.first
-          h[k]        = v.first
-          h
+        if block_given?
+          yield response.body
+        else
+          # symbolize keys
+          # TODO this could be considered unexpected behavior; symbols or not?
+          # TODO this also drops subsequent values from multi-valued keys
+          CGI.parse(response.body).inject({}) do |h,(k,v)|
+            h[k.to_sym] = v.first
+            h[k]        = v.first
+            h
+          end
         end
       when (300..399)
         # this is a redirect
