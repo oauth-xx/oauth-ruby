@@ -20,7 +20,8 @@ $hoe = Hoe.new('oauth', OAuth::VERSION) do |p|
   p.extra_dev_deps = [
     ['newgem', ">= #{::Newgem::VERSION}"],
     ['actionpack'],
-    ['rack']
+    ['rack'],
+    ['mocha'],
   ]
 
   p.clean_globs |= %w[**/.DS_Store tmp *.log **/.*.sw? *.gem .config **/.DS_Store]
