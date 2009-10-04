@@ -6,8 +6,18 @@ require 'cgi'
 
 module OAuth::RequestProxy::Typhoeus
   class Request < OAuth::RequestProxy::Base
-    proxies Typhoeus::Request
-    
+    # Proxy for signing Typhoeus::Request requests
+    # Usage example:   
+    # oauth_params = {:consumer => oauth_consumer, :token => access_token}      
+    # req = Typhoeus::Request.new(uri, options)
+    # oauth_helper = OAuth::Client::Helper.new(req, oauth_params.merge(:request_uri => uri))      
+    # req.headers.merge!({"Authorization" => oauth_helper.header})
+    # hydra = Typhoeus::Hydra.new()
+    # hydra.queue(req)
+    # hydra.run
+    # response = req.response
+    proxies Typhoeus::Request        
+
     def method
       request.method.to_s.upcase
     end
@@ -23,7 +33,7 @@ module OAuth::RequestProxy::Typhoeus
         post_parameters.merge(query_parameters).merge(options[:parameters] || {})
       end
     end
-
+    
     private
     
     def query_parameters
