@@ -17,12 +17,12 @@ module OAuth::RequestProxy::Typhoeus
     end
     
     def parameters
-        if options[:clobber_request]
-          options[:parameters]
-        else
-          post_parameters.merge(query_parameters).merge(options[:parameters] || {})
-        end
+      if options[:clobber_request]
+        options[:parameters]
+      else
+        post_parameters.merge(query_parameters).merge(options[:parameters] || {})
       end
+    end
 
     private
     
