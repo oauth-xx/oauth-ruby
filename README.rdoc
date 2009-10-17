@@ -37,6 +37,17 @@ When user returns create an access_token
   @access_token = @request_token.get_access_token
   @photos = @access_token.get('/photos.xml')
 
+Now that you have an access token, you can use Typhoeus to interact with the OAuth provider if you choose.
+
+  oauth_params = {:consumer => oauth_consumer, :token => access_token}
+  hydra = Typhoeus::Hydra.new
+  req = Typhoeus::Request.new(uri, options) 
+  oauth_helper = OAuth::Client::Helper.new(req, oauth_params.merge(:request_uri => uri))
+  req.headers.merge!({"Authorization" => oauth_helper.header}) # Signs the request
+  hydra.queue(req)
+  hydra.run
+  @response = req.response
+
 For more detailed instructions I have written this OAuth Client Tutorial http://stakeventures.com/articles/2008/02/23/developing-oauth-clients-in-ruby and "How to turn your rails site into an OAuth Provider ":http://stakeventures.com/articles/2007/11/26/how-to-turn-your-rails-site-into-an-oauth-provider .
 
 Finally be sure to check out the OAuth RDoc Manual http://oauth.rubyforge.org/rdoc/ .
