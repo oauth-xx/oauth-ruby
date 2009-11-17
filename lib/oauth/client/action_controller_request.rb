@@ -5,7 +5,7 @@ require 'action_controller/test_process'
 module ActionController
   class Base
     def process_with_oauth(request, response=nil)
-      request.apply_oauth!
+      request.apply_oauth! if request.respond_to?(:apply_oauth!)
       process_without_oauth(request, response)
     end
 
