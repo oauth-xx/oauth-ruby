@@ -18,6 +18,11 @@ module OAuth::Signature
       return @digest_class if digest_class.nil?
       @digest_class = digest_class
     end
+    
+    def self.digest_klass(digest_klass = nil)
+      return @digest_klass if digest_klass.nil?
+      @digest_klass = digest_klass
+    end
 
     def initialize(request, options = {}, &block)
       raise TypeError unless request.kind_of?(OAuth::RequestProxy::Base)
