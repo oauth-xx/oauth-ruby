@@ -10,7 +10,7 @@ module OAuth::Signature::HMAC
         # use stdlib
         require 'digest/hmac'
         self.class.digest_class Object.module_eval("::Digest::#{self.class.digest_klass}")
-        Digest::HMAC.hexdigest(secret, signature_base_string, self.class.digest_class)
+        Digest::HMAC.digest(secret, signature_base_string, self.class.digest_class)
       else 
         # use gem
         self.class.digest_class Object.module_eval("::HMAC::#{self.class.digest_klass}")

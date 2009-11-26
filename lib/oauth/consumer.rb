@@ -186,13 +186,14 @@ module OAuth
     def create_signed_request(http_method, path, token = nil, request_options = {}, *arguments)
       request = create_http_request(http_method, path, *arguments)
       sign!(request, token, request_options)
+      puts request.to_hash.inspect
+      puts request.path.inspect
       request
     end
 
     # Creates a request and parses the result as url_encoded. This is used internally for the RequestToken and AccessToken requests.
     def token_request(http_method, path, token = nil, request_options = {}, *arguments)
       response = request(http_method, path, token, request_options, *arguments)
-
       case response.code.to_i
 
       when (200..299)

@@ -81,14 +81,14 @@ private
   end
 
   def set_oauth_body
-    self.set_form_data(@oauth_helper.parameters_with_oauth)
+    self.set_form_data(@oauth_helper.stringify_keys(@oauth_helper.parameters_with_oauth))
     params_with_sig = @oauth_helper.parameters.merge(:oauth_signature => @oauth_helper.signature)
-    self.set_form_data(params_with_sig)
+    self.set_form_data(@oauth_helper.stringify_keys(params_with_sig))
   end
 
   def set_oauth_query_string
     oauth_params_str = @oauth_helper.oauth_parameters.map { |k,v| [escape(k), escape(v)] * "=" }.join("&")
-
+    puts "oauth_params_str: #{oauth_params_str}"
     uri = URI.parse(path)
     if uri.query.to_s == ""
       uri.query = oauth_params_str

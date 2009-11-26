@@ -74,5 +74,13 @@ module OAuth
     def unescape(value)
       URI.unescape(value.gsub('+', '%2B'))
     end
+    
+    def stringify_keys(hash)
+      new_h = {}
+      hash.each do |k, v| 
+        new_h[k.to_s] = v.is_a?(Hash) ? stringify_keys(v) : v
+      end
+      new_h
+    end
   end
 end
