@@ -92,7 +92,7 @@ class ConsumerTest < Test::Unit::TestCase
     correct_params = "oauth_nonce=\"225579211881198842005988698334675835446\", oauth_signature_method=\"HMAC-SHA1\", oauth_token=\"token_411a7f\", oauth_timestamp=\"1199645624\", oauth_consumer_key=\"consumer_key_86cad9\", oauth_signature=\"1oO2izFav1GP4kEH2EskwXkCRFg%3D\", oauth_version=\"1.0\""
     auth_intro, auth_params = request['authorization'].split(' ', 2)
     assert_equal auth_intro, 'OAuth'
-    assert_equal correct_params.split(', ').sort, auth_params.split(', ').sort
+    assert_matching_headers correct_params, request['authorization']
   end
 
   def test_that_setting_signature_method_on_consumer_effects_signing
@@ -104,7 +104,7 @@ class ConsumerTest < Test::Unit::TestCase
     token.sign!(request, {:nonce => @nonce, :timestamp => @timestamp})
 
     assert_no_match( /oauth_signature_method="HMAC-SHA1"/, request['authorization'])
-    assert_match(    /oauth_signature_method="PLAINTEXT"/, request['authorization'])
+    assert_match(/oauth_signature_method="PLAINTEXT"/, request['authorization'])
   end
 
   def test_that_setting_signature_method_on_consumer_effects_signature_base_string
@@ -142,7 +142,7 @@ class ConsumerTest < Test::Unit::TestCase
     correct_params = "oauth_nonce=\"225579211881198842005988698334675835446\", oauth_signature_method=\"HMAC-SHA1\", oauth_token=\"token_411a7f\", oauth_timestamp=\"1199645624\", oauth_consumer_key=\"consumer_key_86cad9\", oauth_signature=\"26g7wHTtNO6ZWJaLltcueppHYiI%3D\", oauth_version=\"1.0\""
     auth_intro, auth_params = request['authorization'].split(' ', 2)
     assert_equal auth_intro, 'OAuth'
-    assert_equal correct_params.split(', ').sort, auth_params.split(', ').sort
+    assert_matching_headers correct_params, request['authorization']
   end
 
   def test_that_signing_post_params_works
@@ -161,7 +161,7 @@ class ConsumerTest < Test::Unit::TestCase
     correct_params = "oauth_nonce=\"225579211881198842005988698334675835446\", oauth_signature_method=\"HMAC-SHA1\", oauth_token=\"token_411a7f\", oauth_timestamp=\"1199645624\", oauth_consumer_key=\"consumer_key_86cad9\", oauth_signature=\"1oO2izFav1GP4kEH2EskwXkCRFg%3D\", oauth_version=\"1.0\""
     auth_intro, auth_params = request['authorization'].split(' ', 2)
     assert_equal auth_intro, 'OAuth'
-    assert_equal correct_params.split(', ').sort, auth_params.split(', ').sort
+    assert_matching_headers correct_params, request['authorization']
   end
 
   def test_that_using_auth_headers_on_post_on_create_signed_requests_works
@@ -172,7 +172,7 @@ class ConsumerTest < Test::Unit::TestCase
     correct_params = "oauth_nonce=\"225579211881198842005988698334675835446\", oauth_signature_method=\"HMAC-SHA1\", oauth_token=\"token_411a7f\", oauth_timestamp=\"1199645624\", oauth_consumer_key=\"consumer_key_86cad9\", oauth_signature=\"26g7wHTtNO6ZWJaLltcueppHYiI%3D\", oauth_version=\"1.0\""
     auth_intro, auth_params = request['authorization'].split(' ', 2)
     assert_equal auth_intro, 'OAuth'
-    assert_equal correct_params.split(', ').sort, auth_params.split(', ').sort
+    assert_matching_headers correct_params, request['authorization']
   end
 
   def test_that_block_is_not_mandatory_for_getting_an_access_token
@@ -374,5 +374,9 @@ class ConsumerTest < Test::Unit::TestCase
     stub_http_response.stubs(:code).returns(200)
     stub_http_response.stubs(:body).tap {|expectation| expectation.returns(expected_body) unless expected_body.nil? }
     return stub_http_response
+  end
+  
+  def request_parameters_to_s
+    @request_parameters.map { |k,v| "#{k}=#{v}" }.join("&")
   end
 end

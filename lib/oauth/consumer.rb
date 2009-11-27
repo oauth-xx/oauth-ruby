@@ -3,6 +3,7 @@ require 'net/https'
 require 'oauth/oauth'
 require 'oauth/client/net_http'
 require 'oauth/errors'
+require 'cgi'
 
 module OAuth
   class Consumer
@@ -163,7 +164,7 @@ module OAuth
       # (http://wiki.oauth.net/ProblemReporting)
       # note: a 200 may actually be an error; check for an oauth_problem key to be sure
       if !(headers = rsp.to_hash["www-authenticate"]).nil? &&
-        (h = headers.select { |h| h =~ /^OAuth / }).any? &&
+        (h = headers.select { |hdr| hdr =~ /^OAuth / }).any? &&
         h.first =~ /oauth_problem/
 
         # puts "Header: #{h.first}"
@@ -186,8 +187,6 @@ module OAuth
     def create_signed_request(http_method, path, token = nil, request_options = {}, *arguments)
       request = create_http_request(http_method, path, *arguments)
       sign!(request, token, request_options)
-      puts request.to_hash.inspect
-      puts request.path.inspect
       request
     end
 

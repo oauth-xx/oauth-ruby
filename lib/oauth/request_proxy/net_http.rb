@@ -29,12 +29,13 @@ module OAuth::RequestProxy::Net
 
       def all_parameters
         request_params = CGI.parse(param_string)
+
         if options[:parameters]
           options[:parameters].each do |k,v|
-            if request_params.has_key?(k)
+            if request_params.has_key?(k) && v
               request_params[k] << v
             else
-              request_params[k] = [v].flatten
+              request_params[k] = [v]
             end
           end
         end

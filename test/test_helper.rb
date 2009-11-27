@@ -12,3 +12,14 @@ require 'oauth'
 # rescue LoadError
 #   nil
 # end
+
+class Test::Unit::TestCase
+  
+  def assert_matching_headers(expected, actual)
+    # transform into sorted arrays
+    expected = expected.split(/(,|\s)/).reject {|v| v == '' || v =~ /^[\,\s]+/}.sort
+    actual   = actual.split(/(,|\s)/).reject {|v| v == '' || v =~ /^[\,\s]+/}.sort
+    assert_equal expected, actual
+  end
+  
+end

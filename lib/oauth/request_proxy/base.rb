@@ -33,7 +33,7 @@ module OAuth::RequestProxy
 
     def oauth_signature
       # TODO can this be nil?
-      parameters['oauth_signature'] || ""
+      [parameters['oauth_signature']].flatten.first || ""
     end
 
     def oauth_signature_method

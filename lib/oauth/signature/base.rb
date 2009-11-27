@@ -10,8 +10,10 @@ module OAuth::Signature
     attr_accessor :options
     attr_reader :token_secret, :consumer_secret, :request
 
-    def self.implements(signature_method)
-      OAuth::Signature.available_methods[signature_method] = self
+    def self.implements(signature_method = nil)
+      return @implements if signature_method.nil? 
+      @implements = signature_method
+      OAuth::Signature.available_methods[@implements] = self
     end
 
     def self.digest_class(digest_class = nil)
@@ -42,7 +44,6 @@ module OAuth::Signature
 
       # presence of :token_secret option will override any Token that's provided
       @token_secret = options[:token_secret] if options[:token_secret]
-
 
       # override secrets based on the values returned from the block (if any)
       if block_given?
