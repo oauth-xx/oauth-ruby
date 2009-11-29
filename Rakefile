@@ -5,12 +5,13 @@ require 'oauth/version'
 
 # Generate all the Rake tasks
 # Run 'rake -T' to see list of generated tasks (from gem root directory)
-$hoe = Hoe.new('oauth', OAuth::VERSION) do |p|
+$hoe = Hoe.spec 'oauth' do |p|
   p.author = ['Pelle Braendgaard','Blaine Cook','Larry Halff','Jesse Clark','Jon Crosby', 'Seth Fitzsimmons']
   p.email = "oauth-ruby@googlegroups.com"
   p.description = "OAuth Core Ruby implementation"
   p.summary = p.description
   p.changes              = p.paragraphs_of("History.txt", 0..1).join("\n\n")
+  p.readme_file = "README.rdoc"
   p.rubyforge_name       = p.name # TODO this is default value
   p.url = "http://oauth.rubyforge.org"
 
