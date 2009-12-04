@@ -42,7 +42,7 @@ module OAuth::RequestProxy::Net
       end
 
       def param_string
-        is_post = method.to_s.upcase == 'POST' && form_url_encoded?
+        is_post = method.to_s.upcase == 'POST' && form_url_encoded? && !post_params.nil? && !post_params.empty?
         [(query_params unless is_post), auth_header_params, (post_params if is_post)].
           compact.join('&')
       end
