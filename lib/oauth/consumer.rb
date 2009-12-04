@@ -154,7 +154,10 @@ module OAuth
         path = "#{_uri.path}#{_uri.query ? "?#{_uri.query}" : ""}"
       end
 
-      rsp = http.request(create_signed_request(http_method, path, token, request_options, *arguments))
+      # override the request with your own, this is useful for file uploads which Net::HTTP does not do
+      req = create_signed_request(http_method, path, token, request_options, *arguments)
+      return nil if block_given? and yield(req) == :done
+      rsp = http.request(req)
 
       # check for an error reported by the Problem Reporting extension
       # (http://wiki.oauth.net/ProblemReporting)
