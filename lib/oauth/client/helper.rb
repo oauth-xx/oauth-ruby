@@ -43,7 +43,9 @@ module OAuth::Client
     def signature(extra_options = {})
       OAuth::Signature.sign(@request, { :uri      => options[:request_uri],
                                         :consumer => options[:consumer],
-                                        :token    => options[:token] }.merge(extra_options) )
+                                        :token    => options[:token],
+                                        :unsigned_parameters => options[:unsigned_parameters]
+      }.merge(extra_options) )
     end
 
     def signature_base_string(extra_options = {})
