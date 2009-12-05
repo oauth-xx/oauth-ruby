@@ -88,14 +88,29 @@ class ConsumerTest < Test::Unit::TestCase
 
     hash = @consumer.token_request(:get, "")
 
-    assert_equal "token", hash[:oauth_token]
-    assert_equal "secret", hash[:oauth_token_secret]
+  def test_that_setting_signature_method_on_consumer_effects_signature_base_string
+    require 'oauth/signature/plaintext'
+    request = Net::HTTP::Get.new(@request_uri.path)
+    consumer = @consumer.dup
+    consumer.options[:signature_method] = 'PLAINTEXT'
+    
+    request = Net::HTTP::Get.new('/')
+    signature_base_string = consumer.signature_base_string(request)
+
+    assert_no_match( /HMAC-SHA1/, signature_base_string)
+    assert_equal( "#{consumer.secret}&", signature_base_string)
   end
 
-  def test_can_provided_a_block_to_interpret_token_response
-    @consumer.expects(:request).returns(create_stub_http_response)
-
-    hash = @consumer.token_request(:get, '') {{ :oauth_token => 'token', :oauth_token_secret => 'secret' }}
+  def test_that_plaintext_signature_works
+    require 'oauth/signature/plaintext'
+    # Invalid test because server expects double-escaped signature
+    # consumer = OAuth::Consumer.new("key", "secret", 
+    #       :site => "http://term.ie", :signature_method => 'PLAINTEXT')
+    #     access_token = OAuth::AccessToken.new(consumer, 'accesskey', 'accesssecret')
+    #     response = access_token.get("/oauth/example/echo_api.php?echo=hello")
+    # 
+    #     assert_equal 'echo=hello', response.body
+  end
 
     assert_equal 'token', hash[:oauth_token]
     assert_equal 'secret', hash[:oauth_token_secret]
