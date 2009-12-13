@@ -9,7 +9,7 @@ module OAuth::Signature
     end
 
     def ==(cmp_signature)
-      signature == escape(cmp_signature)
+      signature.to_s == cmp_signature.to_s
     end
 
     def signature_base_string
@@ -17,7 +17,7 @@ module OAuth::Signature
     end
 
     def secret
-      escape(super)
+      super
     end
   end
 end

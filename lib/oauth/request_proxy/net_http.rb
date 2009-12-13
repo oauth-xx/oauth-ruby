@@ -28,7 +28,7 @@ module OAuth::RequestProxy::Net
     private
 
       def all_parameters
-        request_params = CGI.parse(query_string)
+        request_params = CGI.parse(param_string)
         if options[:parameters]
           options[:parameters].each do |k,v|
             if request_params.has_key?(k)
@@ -41,11 +41,14 @@ module OAuth::RequestProxy::Net
         request_params
       end
 
-      def query_string
-        params = [ query_params, auth_header_params ]
-        is_form_urlencoded = request['Content-Type'] != nil && request['Content-Type'].downcase == 'application/x-www-form-urlencoded'
-        params << post_params if method.to_s.upcase == 'POST' && is_form_urlencoded
-        params.compact.join('&')
+      def param_string
+        is_post = method.to_s.upcase == 'POST' && form_url_encoded? && !post_params.nil? && !post_params.empty?
+        [(query_params unless is_post), auth_header_params, (post_params if is_post)].
+          compact.join('&')
+      end
+
+      def form_url_encoded?
+        request['Content-Type'] != nil && request['Content-Type'].downcase == 'application/x-www-form-urlencoded'
       end
 
       def query_params

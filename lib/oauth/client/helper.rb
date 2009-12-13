@@ -36,14 +36,16 @@ module OAuth::Client
         'oauth_timestamp'        => timestamp,
         'oauth_nonce'            => nonce,
         'oauth_verifier'         => options[:oauth_verifier],
-        'oauth_version'          => '1.0'
+        'oauth_version'          => (options[:oauth_version] || '1.0')
       }.reject { |k,v| v.to_s == "" }
     end
 
     def signature(extra_options = {})
       OAuth::Signature.sign(@request, { :uri      => options[:request_uri],
                                         :consumer => options[:consumer],
-                                        :token    => options[:token] }.merge(extra_options) )
+                                        :token    => options[:token],
+                                        :unsigned_parameters => options[:unsigned_parameters]
+      }.merge(extra_options) )
     end
 
     def signature_base_string(extra_options = {})
@@ -66,7 +68,7 @@ module OAuth::Client
       parameters = oauth_parameters
       parameters.merge!('oauth_signature' => signature(options.merge(:parameters => parameters)))
 
-      header_params_str = parameters.map { |k,v| "#{k}=\"#{escape(v)}\"" }.join(', ')
+      header_params_str = parameters.sort.map { |k,v| "#{k}=\"#{escape(v)}\"" }.join(', ')
 
       realm = "realm=\"#{options[:realm]}\", " if options[:realm]
       "OAuth #{realm}#{header_params_str}"
