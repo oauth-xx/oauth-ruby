@@ -90,8 +90,6 @@ class ConsumerTest < Test::Unit::TestCase
     assert_equal 'GET', request.method
     assert_equal '/test?key=value', request.path
     correct_params = "oauth_nonce=\"225579211881198842005988698334675835446\", oauth_signature_method=\"HMAC-SHA1\", oauth_token=\"token_411a7f\", oauth_timestamp=\"1199645624\", oauth_consumer_key=\"consumer_key_86cad9\", oauth_signature=\"1oO2izFav1GP4kEH2EskwXkCRFg%3D\", oauth_version=\"1.0\""
-    auth_intro, auth_params = request['authorization'].split(' ', 2)
-    assert_equal auth_intro, 'OAuth'
     assert_matching_headers correct_params, request['authorization']
   end
 
@@ -140,8 +138,6 @@ class ConsumerTest < Test::Unit::TestCase
     assert_equal '/test', request.path
     assert_equal 'key=value', request.body
     correct_params = "oauth_nonce=\"225579211881198842005988698334675835446\", oauth_signature_method=\"HMAC-SHA1\", oauth_token=\"token_411a7f\", oauth_timestamp=\"1199645624\", oauth_consumer_key=\"consumer_key_86cad9\", oauth_signature=\"26g7wHTtNO6ZWJaLltcueppHYiI%3D\", oauth_version=\"1.0\""
-    auth_intro, auth_params = request['authorization'].split(' ', 2)
-    assert_equal auth_intro, 'OAuth'
     assert_matching_headers correct_params, request['authorization']
   end
 
@@ -150,14 +146,6 @@ class ConsumerTest < Test::Unit::TestCase
     request.set_form_data( @request_parameters )
     @token.sign!(request, {:scheme => 'body', :nonce => @nonce, :timestamp => @timestamp})
   end
-  
-  def test_that_can_provide_a_block_to_interpret_a_request_token_response
-    @consumer.expects(:request).returns(create_stub_http_response)
-    token = @consumer.get_request_token {{ :oauth_token => 'token', :oauth_token_secret => 'secret' }}
-
-    assert_equal 'token', token.token
-    assert_equal 'secret', token.secret
-  end
     
   def test_that_using_auth_headers_on_get_on_create_signed_requests_works
     request=@consumer.create_signed_request(:get,@request_uri.path+ "?" + request_parameters_to_s,@token,{:nonce => @nonce, :timestamp => @timestamp},@request_parameters)
@@ -165,8 +153,6 @@ class ConsumerTest < Test::Unit::TestCase
     assert_equal 'GET', request.method
     assert_equal '/test?key=value', request.path
     correct_params = "oauth_nonce=\"225579211881198842005988698334675835446\", oauth_signature_method=\"HMAC-SHA1\", oauth_token=\"token_411a7f\", oauth_timestamp=\"1199645624\", oauth_consumer_key=\"consumer_key_86cad9\", oauth_signature=\"1oO2izFav1GP4kEH2EskwXkCRFg%3D\", oauth_version=\"1.0\""
-    auth_intro, auth_params = request['authorization'].split(' ', 2)
-    assert_equal auth_intro, 'OAuth'
     assert_matching_headers correct_params, request['authorization']
   end
 
@@ -176,13 +162,8 @@ class ConsumerTest < Test::Unit::TestCase
     assert_equal '/test', request.path
     assert_equal 'key=value', request.body
     correct_params = "oauth_nonce=\"225579211881198842005988698334675835446\", oauth_signature_method=\"HMAC-SHA1\", oauth_token=\"token_411a7f\", oauth_timestamp=\"1199645624\", oauth_consumer_key=\"consumer_key_86cad9\", oauth_signature=\"26g7wHTtNO6ZWJaLltcueppHYiI%3D\", oauth_version=\"1.0\""
-    auth_intro, auth_params = request['authorization'].split(' ', 2)
-    assert_equal auth_intro, 'OAuth'
     assert_matching_headers correct_params, request['authorization']
-  end
 
-  def test_that_block_is_not_mandatory_for_getting_an_access_token
-    stub_token = mock
     @consumer.expects(:request).returns(create_stub_http_response("oauth_token=token&oauth_token_secret=secret"))
 
     assert_equal 'POST', request.method
@@ -192,27 +173,27 @@ class ConsumerTest < Test::Unit::TestCase
   end
 
   def test_step_by_step_token_request
+    stub_token = mock
+  
     @consumer=OAuth::Consumer.new(
-        "key",
-        "secret",
-        {
-        :site=>"http://term.ie",
-        :request_token_path=>"/oauth/example/request_token.php",
-        :access_token_path=>"/oauth/example/access_token.php",
-        :authorize_path=>"/oauth/example/authorize.php",
-        :scheme=>:header
-        })
-    options={:nonce=>'nonce',:timestamp=>Time.now.to_i.to_s}
-
-    request = Net::HTTP::Get.new("/oauth/example/request_token.php")
-    signature_base_string=@consumer.signature_base_string(request,nil,options)
-    assert_equal "GET&http%3A%2F%2Fterm.ie%2Foauth%2Fexample%2Frequest_token.php&oauth_consumer_key%3Dkey%26oauth_nonce%3D#{options[:nonce]}%26oauth_signature_method%3DHMAC-SHA1%26oauth_timestamp%3D#{options[:timestamp]}%26oauth_version%3D1.0",signature_base_string
-    @consumer.sign!(request, nil,options)
-
-    assert_equal 'token', token.token
-    assert_equal 'secret', token.secret
-  end
-
+          "key",
+          "secret",
+          {
+          :site=>"http://term.ie",
+          :request_token_path=>"/oauth/example/request_token.php",
+          :access_token_path=>"/oauth/example/access_token.php",
+          :authorize_path=>"/oauth/example/authorize.php",
+          :scheme=>:header
+          })
+      options={:nonce=>'nonce',:timestamp=>Time.now.to_i.to_s}
+    
+      request = Net::HTTP::Get.new("/oauth/example/request_token.php")
+      signature_base_string=@consumer.signature_base_string(request,nil,options)
+      assert_equal "GET&http%3A%2F%2Fterm.ie%2Foauth%2Fexample%2Frequest_token.php&oauth_consumer_key%3Dkey%26oauth_nonce%3D#{options[:nonce]}%26oauth_signature_method%3DHMAC-SHA1%26oauth_timestamp%3D#{options[:timestamp]}%26oauth_version%3D1.0",signature_base_string
+      @consumer.sign!(request, nil,options)
+    
+    end
+  
   def test_get_token_sequence
     @consumer=OAuth::Consumer.new(
         "key",
@@ -226,7 +207,7 @@ class ConsumerTest < Test::Unit::TestCase
     assert_equal "http://term.ie/oauth/example/request_token.php",@consumer.request_token_url
     assert_equal "http://term.ie/oauth/example/access_token.php",@consumer.access_token_url
 
-    token = @consumer.get_access_token(stub_token) {{ :oauth_token => 'token', :oauth_token_secret => 'secret' }}
+    # token = @consumer.get_access_token(stub_token) {{ :oauth_token => 'token', :oauth_token_secret => 'secret' }}
 
     @request_token = @consumer.get_request_token
     assert_not_nil @request_token
@@ -250,20 +231,6 @@ class ConsumerTest < Test::Unit::TestCase
     assert_equal( "ok=hello&test=this",@response.body)
   end
   
-  def test_that_not_setting_ignore_callback_will_include_oauth_callback_in_request_options 
-    request_options = {}
-    @consumer.stubs(:request).returns(create_stub_http_response)
-    @consumer.get_request_token(request_options) {{ :oauth_token => 'token', :oauth_token_secret => 'secret' }}
-    assert_equal 'oob', request_options[:oauth_callback]
-  end
-  
-  def test_that_setting_ignore_callback_will_exclude_oauth_callback_in_request_options
-    request_options = { :exclude_callback=> true }
-    @consumer.stubs(:request).returns(create_stub_http_response)
-    @consumer.get_request_token(request_options) {{ :oauth_token => 'token', :oauth_token_secret => 'secret' }}
-    assert_nil request_options[:oauth_callback]
-  end
-
   def test_get_token_sequence_using_fqdn
     @consumer=OAuth::Consumer.new(
         "key",
@@ -380,12 +347,60 @@ class ConsumerTest < Test::Unit::TestCase
     # request & respond until the full body length is received.
   end
   
+  def test_that_can_provide_a_block_to_interpret_a_request_token_response
+    @consumer.expects(:request).returns(create_stub_http_response)
+
+    token = @consumer.get_request_token {{ :oauth_token => 'token', :oauth_token_secret => 'secret' }}
+
+    assert_equal 'token', token.token
+    assert_equal 'secret', token.secret
+  end
+
+  def test_that_block_is_not_mandatory_for_getting_an_access_token
+    stub_token = mock
+    @consumer.expects(:request).returns(create_stub_http_response("oauth_token=token&oauth_token_secret=secret"))
+
+    token = @consumer.get_access_token(stub_token)
+
+    assert_equal 'token', token.token
+    assert_equal 'secret', token.secret
+  end
+  
+  def test_that_can_provide_a_block_to_interpret_an_access_token_response
+    stub_token = mock
+    @consumer.expects(:request).returns(create_stub_http_response)
+
+    token = @consumer.get_access_token(stub_token) {{ :oauth_token => 'token', :oauth_token_secret => 'secret' }}
+
+    assert_equal 'token', token.token
+    assert_equal 'secret', token.secret
+  end
+  
+  def test_that_not_setting_ignore_callback_will_include_oauth_callback_in_request_options 
+    request_options = {}
+    @consumer.stubs(:request).returns(create_stub_http_response)
+
+    @consumer.get_request_token(request_options) {{ :oauth_token => 'token', :oauth_token_secret => 'secret' }}
+
+    assert_equal 'oob', request_options[:oauth_callback]
+  end
+
+  def test_that_setting_ignore_callback_will_exclude_oauth_callback_in_request_options
+    request_options = { :exclude_callback=> true }
+    @consumer.stubs(:request).returns(create_stub_http_response)
+
+    @consumer.get_request_token(request_options) {{ :oauth_token => 'token', :oauth_token_secret => 'secret' }}
+
+    assert_nil request_options[:oauth_callback]
+  end
+  
   private
 
   def create_stub_http_response expected_body=nil
     stub_http_response = stub
     stub_http_response.stubs(:code).returns(200)
     stub_http_response.stubs(:body).tap {|expectation| expectation.returns(expected_body) unless expected_body.nil? }
+    stub_http_response
   end
   
   def request_parameters_to_s
