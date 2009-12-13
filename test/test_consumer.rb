@@ -149,10 +149,16 @@ class ConsumerTest < Test::Unit::TestCase
     request = Net::HTTP::Post.new(@request_uri.path)
     request.set_form_data( @request_parameters )
     @token.sign!(request, {:scheme => 'body', :nonce => @nonce, :timestamp => @timestamp})
-
+  end
+  
   def test_that_can_provide_a_block_to_interpret_a_request_token_response
     @consumer.expects(:request).returns(create_stub_http_response)
+    token = @consumer.get_request_token {{ :oauth_token => 'token', :oauth_token_secret => 'secret' }}
 
+    assert_equal 'token', token.token
+    assert_equal 'secret', token.secret
+  end
+    
   def test_that_using_auth_headers_on_get_on_create_signed_requests_works
     request=@consumer.create_signed_request(:get,@request_uri.path+ "?" + request_parameters_to_s,@token,{:nonce => @nonce, :timestamp => @timestamp},@request_parameters)
 
@@ -247,6 +253,16 @@ class ConsumerTest < Test::Unit::TestCase
   def test_that_not_setting_ignore_callback_will_include_oauth_callback_in_request_options 
     request_options = {}
     @consumer.stubs(:request).returns(create_stub_http_response)
+    @consumer.get_request_token(request_options) {{ :oauth_token => 'token', :oauth_token_secret => 'secret' }}
+    assert_equal 'oob', request_options[:oauth_callback]
+  end
+  
+  def test_that_setting_ignore_callback_will_exclude_oauth_callback_in_request_options
+    request_options = { :exclude_callback=> true }
+    @consumer.stubs(:request).returns(create_stub_http_response)
+    @consumer.get_request_token(request_options) {{ :oauth_token => 'token', :oauth_token_secret => 'secret' }}
+    assert_nil request_options[:oauth_callback]
+  end
 
   def test_get_token_sequence_using_fqdn
     @consumer=OAuth::Consumer.new(
@@ -287,9 +303,6 @@ class ConsumerTest < Test::Unit::TestCase
     assert_equal( "ok=hello&test=this",@response.body)
   end
 
-  def test_that_setting_ignore_callback_will_exclude_oauth_callback_in_request_options
-    request_options = { :exclude_callback=> true }
-    @consumer.stubs(:request).returns(create_stub_http_response)
 
   # This test does an actual https request (the result doesn't matter)
   # to initialize the same way as get_request_token does. Can be any
@@ -373,6 +386,5 @@ class ConsumerTest < Test::Unit::TestCase
     stub_http_response = stub
     stub_http_response.stubs(:code).returns(200)
     stub_http_response.stubs(:body).tap {|expectation| expectation.returns(expected_body) unless expected_body.nil? }
-    return stub_http_response
   end
 end
