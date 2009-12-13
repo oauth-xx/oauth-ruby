@@ -1,7 +1,4 @@
 require File.dirname(__FILE__) + '/test_helper'
-require 'mocha'
-
-require 'stringio'
 
 # This performs testing against Andy Smith's test server http://term.ie/oauth/example/
 # Thanks Andy.
