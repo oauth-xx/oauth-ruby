@@ -1,5 +1,5 @@
-require 'test_helper.rb'
 gem 'actionpack','2.2.2'
+require File.dirname(__FILE__) + '/test_helper.rb'
 
 require 'oauth/request_proxy/action_controller_request'
 require 'action_controller/test_process'
@@ -117,16 +117,16 @@ class ActionControllerRequestProxyTest < Test::Unit::TestCase
       request_proxy(:post, { :foo => [123, 456] }).parameters_for_signature.sort
     )
   end
-  
-  # TestRequest never actually parses QUERY_STRING
-  #
-  # def test_query_string_parameter_values_should_be_cgi_unescaped
-  #   request = request_proxy(:get) do |r|
-  #     r.query_string = 'url=http%3A%2F%2Ffoo.com%2F%3Fa%3Db%26c%3Dd'
-  #   end
-  #   assert_equal(
-  #     [['url', 'http://foo.com/?a=b&c=d']],
-  #     request.parameters_for_signature.sort
-  #   )
-  # end
+
+  # TODO disabled; ActionController::TestRequest does not appear to parse
+  # QUERY_STRING
+  def x_test_query_string_parameter_values_should_be_cgi_unescaped
+    request = request_proxy do |r|
+      r.env['QUERY_STRING'] = 'url=http%3A%2F%2Ffoo.com%2F%3Fa%3Db%26c%3Dd'
+    end
+    assert_equal(
+      [['url', 'http://foo.com/?a=b&c=d']],
+      request.parameters_for_signature.sort
+    )
+  end
 end

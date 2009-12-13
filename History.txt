@@ -4,12 +4,9 @@
 * Exclude `oauth_callback` with :exclude_callback (Neill Pearman)
 * Strip extraneous spaces and line breaks from access_token responses
   (observed in the wild with Yahoo!'s OAuth+OpenID hybrid) (Eric Hartmann)
-* Resolve usage of body vs. query parameters when signing (Greg Weber)
 * Stop double-escaping PLAINTEXT signatures (Jimmy Zimmerman)
 * OAuth::Client::Helper won't override the specified `oauth_version`
   (Philip Kromer)
-* OAuth::Client::Helper sorts authorization header params for better
-  interop (Philip Kromer)
 * Added OAuth::RequestProxy::Typhoeus as an alternative to Net::HTTP
   (Bill Kocik)
 
