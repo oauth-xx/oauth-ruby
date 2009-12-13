@@ -36,6 +36,19 @@ class NetHTTPClientTest < Test::Unit::TestCase
     assert_equal '/test?key=value', request.path
     assert_equal "OAuth oauth_nonce=\"225579211881198842005988698334675835446\", oauth_signature_method=\"PLAINTEXT\", oauth_token=\"token_411a7f\", oauth_timestamp=\"1199645624\", oauth_consumer_key=\"consumer_key_86cad9\", oauth_signature=\"5888bf0345e5d237%263196ffd991c8ebdb\", oauth_version=\"1.0\"".split(', ').sort, request['authorization'].split(', ').sort
   end
+  
+  def test_that_using_auth_headers_on_get_requests_works_with_plaintext
+    require 'oauth/signature/plaintext'
+    c = OAuth::Consumer.new('consumer_key_86cad9', '5888bf0345e5d237',{
+      :signature_method => 'PLAINTEXT'
+    })
+    request = Net::HTTP::Get.new(@request_uri.path + "?" + request_parameters_to_s)
+    request.oauth!(@http, c, @token, {:nonce => @nonce, :timestamp => @timestamp, :signature_method => 'PLAINTEXT'})
+
+    assert_equal 'GET', request.method
+    assert_equal '/test?key=value', request.path
+    assert_equal "OAuth oauth_nonce=\"225579211881198842005988698334675835446\", oauth_signature_method=\"PLAINTEXT\", oauth_token=\"token_411a7f\", oauth_timestamp=\"1199645624\", oauth_consumer_key=\"consumer_key_86cad9\", oauth_signature=\"5888bf0345e5d237%263196ffd991c8ebdb\", oauth_version=\"1.0\"".split(', ').sort, request['authorization'].split(', ').sort
+  end
 
   def test_that_using_auth_headers_on_post_requests_works
     request = Net::HTTP::Post.new(@request_uri.path)
