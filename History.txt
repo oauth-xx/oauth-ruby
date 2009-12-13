@@ -10,6 +10,8 @@
   (Philip Kromer)
 * OAuth::Client::Helper sorts authorization header params for better
   interop (Philip Kromer)
+* Added OAuth::RequestProxy::Typhoeus as an alternative to Net::HTTP
+  (Bill Kocik)
 
 == 0.3.6 2009-09-14
 
