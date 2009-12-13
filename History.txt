@@ -7,6 +7,8 @@
 * Stop double-escaping PLAINTEXT signatures (Jimmy Zimmerman)
 * OAuth::Client::Helper won't override the specified `oauth_version`
   (Philip Kromer)
+* Added OAuth::RequestProxy::Typhoeus as an alternative to Net::HTTP
+  (Bill Kocik)
 
 == 0.3.6 2009-09-14
 
