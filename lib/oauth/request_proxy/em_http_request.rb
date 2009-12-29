@@ -6,6 +6,9 @@ require 'cgi'
 module OAuth::RequestProxy::EventMachine
   class HttpRequest < OAuth::RequestProxy::Base
     
+    # A Proxy for use when you need to sign EventMachine::HttpClient instances.
+    # It needs to be called once the client is construct but before data is sent.
+    # Also see oauth/client/em-http
     proxies ::EventMachine::HttpClient
     
     # Request in this con
