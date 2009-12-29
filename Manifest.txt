@@ -13,6 +13,7 @@ lib/oauth/client.rb
 lib/oauth/client/action_controller_request.rb
 lib/oauth/client/helper.rb
 lib/oauth/client/net_http.rb
+lib/oauth/client/em_http.rb
 lib/oauth/consumer.rb
 lib/oauth/errors.rb
 lib/oauth/errors/error.rb
@@ -27,6 +28,7 @@ lib/oauth/request_proxy/jabber_request.rb
 lib/oauth/request_proxy/mock_request.rb
 lib/oauth/request_proxy/net_http.rb
 lib/oauth/request_proxy/rack_request.rb
+lib/oauth/request_proxy/em_http_request.rb
 lib/oauth/server.rb
 lib/oauth/signature.rb
 lib/oauth/signature/base.rb
