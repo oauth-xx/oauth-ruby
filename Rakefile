@@ -9,7 +9,7 @@ begin
     s.name = %q{oauth}
     s.version = OAuth::VERSION
     s.date = %q{2009-08-10}
-    s.authors = ['Pelle Braendgaard','Blaine Cook','Larry Halff','Jesse Clark','Jon Crosby', 'Seth Fitzsimmons']
+    s.authors = ["Pelle Braendgaard", "Blaine Cook", "Larry Halff", "Jesse Clark", "Jon Crosby", "Seth Fitzsimmons", "Matt Sanford", "Aaron Quint"]
     s.email = "oauth-ruby@googlegroups.com"
     s.description = "OAuth Core Ruby implementation"
     s.summary = s.description
