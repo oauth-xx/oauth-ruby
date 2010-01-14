@@ -13,8 +13,7 @@ module OAuth::RequestProxy::Net
       end
 
       def uri
-        uri = options[:uri]
-        uri.to_s
+        options[:uri].to_s
       end
 
       def parameters
