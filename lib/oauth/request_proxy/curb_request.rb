@@ -1,20 +1,18 @@
-require 'oauth/request_proxy/base'
+  require 'oauth/request_proxy/base'
 require 'curb'
 require 'uri'
 require 'cgi'
 
 module OAuth::RequestProxy::Curl
   class Easy < OAuth::RequestProxy::Base
-    # Proxy for signing Typhoeus::Request requests
+    # Proxy for signing Curl::Easy requests
     # Usage example:   
     # oauth_params = {:consumer => oauth_consumer, :token => access_token}      
-    # req = Typhoeus::Request.new(uri, options)
+    # req = Curl::Easy.new(uri)
     # oauth_helper = OAuth::Client::Helper.new(req, oauth_params.merge(:request_uri => uri))      
     # req.headers.merge!({"Authorization" => oauth_helper.header})
-    # hydra = Typhoeus::Hydra.new()
-    # hydra.queue(req)
-    # hydra.run
-    # response = req.response
+    # req.http_get
+    # response = req.body_str
     proxies ::Curl::Easy        
 
     def uri
