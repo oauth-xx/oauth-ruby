@@ -14,7 +14,11 @@ module OAuth::RequestProxy::Curl
     # req.http_get
     # response = req.body_str
     proxies ::Curl::Easy        
-
+    
+    def method
+      nil
+    end
+    
     def uri
       options[:uri].to_s
     end
