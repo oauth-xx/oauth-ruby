@@ -33,12 +33,7 @@ class EventMachine::HttpClient
                 :timestamp        => nil }.merge(options)
 
     @oauth_helper = OAuth::Client::Helper.new(self, options)
-
-    # TODO this isn't executing properly, so it's currently hard-coded to the
-    # only supported scheme
-    # self.send("set_oauth_#{options[:scheme]}")
-
-    set_oauth_header
+    self.__send__(:"set_oauth_#{options[:scheme]}")
   end
 
   # Create a string suitable for signing for an HTTP request. This process involves parameter
@@ -66,7 +61,7 @@ class EventMachine::HttpClient
     OAuth::Client::Helper.new(self, options).signature_base_string
   end
 
-private
+  protected
 
   # Since we expect to get the host etc details from the http instance (...),
   # we create a fake url here. Surely this is a horrible, horrible idea?

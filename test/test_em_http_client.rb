@@ -21,7 +21,7 @@ class EmHttpClientTest < Test::Unit::TestCase
     assert_equal 'GET', request.method
     assert_equal '/test', request.normalize_uri.path
     assert_equal "key=value", request.normalize_uri.query
-    assert_equal "OAuth oauth_nonce=\"225579211881198842005988698334675835446\", oauth_signature_method=\"HMAC-SHA1\", oauth_token=\"token_411a7f\", oauth_timestamp=\"1199645624\", oauth_consumer_key=\"consumer_key_86cad9\", oauth_signature=\"1oO2izFav1GP4kEH2EskwXkCRFg%3D\", oauth_version=\"1.0\""[6..-1].split(', ').sort, authz_header(request)[6..-1].split(', ').sort
+    assert_equal_authz_headers "OAuth oauth_nonce=\"225579211881198842005988698334675835446\", oauth_signature_method=\"HMAC-SHA1\", oauth_token=\"token_411a7f\", oauth_timestamp=\"1199645624\", oauth_consumer_key=\"consumer_key_86cad9\", oauth_signature=\"1oO2izFav1GP4kEH2EskwXkCRFg%3D\", oauth_version=\"1.0\"", authz_header(request)
   end
   
   def test_that_using_auth_headers_on_get_requests_works_with_plaintext
@@ -35,7 +35,7 @@ class EmHttpClientTest < Test::Unit::TestCase
     assert_equal 'GET', request.method
     assert_equal '/test', request.normalize_uri.path
     assert_equal "key=value", request.normalize_uri.query
-    assert_equal "OAuth oauth_nonce=\"225579211881198842005988698334675835446\", oauth_signature_method=\"PLAINTEXT\", oauth_token=\"token_411a7f\", oauth_timestamp=\"1199645624\", oauth_consumer_key=\"consumer_key_86cad9\", oauth_signature=\"5888bf0345e5d237%263196ffd991c8ebdb\", oauth_version=\"1.0\""[6..-1].split(', ').sort, authz_header(request)[6..-1].split(', ').sort
+    assert_equal_authz_headers "OAuth oauth_nonce=\"225579211881198842005988698334675835446\", oauth_signature_method=\"PLAINTEXT\", oauth_token=\"token_411a7f\", oauth_timestamp=\"1199645624\", oauth_consumer_key=\"consumer_key_86cad9\", oauth_signature=\"5888bf0345e5d237%263196ffd991c8ebdb\", oauth_version=\"1.0\"", authz_header(request)
   end
 
   def test_that_using_auth_headers_on_post_requests_works
@@ -45,7 +45,7 @@ class EmHttpClientTest < Test::Unit::TestCase
     assert_equal 'POST', request.method
     assert_equal '/test', request.uri.path
     assert_equal 'key=value', request.normalize_body
-    assert_equal "OAuth oauth_nonce=\"225579211881198842005988698334675835446\", oauth_signature_method=\"HMAC-SHA1\", oauth_token=\"token_411a7f\", oauth_timestamp=\"1199645624\", oauth_consumer_key=\"consumer_key_86cad9\", oauth_signature=\"26g7wHTtNO6ZWJaLltcueppHYiI%3D\", oauth_version=\"1.0\""[6..-1].split(', ').sort, authz_header(request)[6..-1].split(', ').sort
+    assert_equal_authz_headers "OAuth oauth_nonce=\"225579211881198842005988698334675835446\", oauth_signature_method=\"HMAC-SHA1\", oauth_token=\"token_411a7f\", oauth_timestamp=\"1199645624\", oauth_consumer_key=\"consumer_key_86cad9\", oauth_signature=\"26g7wHTtNO6ZWJaLltcueppHYiI%3D\", oauth_version=\"1.0\"", authz_header(request)
   end
   
   protected
@@ -62,7 +62,13 @@ class EmHttpClientTest < Test::Unit::TestCase
   
   def authz_header(request)
     headers = request.options[:head] || {}
-    headers['Authorization']
+    headers['Authorization'].to_s
+  end
+
+  def assert_equal_authz_headers(expected, actual)
+    assert !actual.nil?
+    assert_equal expected[0,6], actual[0, 6]
+    assert_equal expected[6..1].split(', ').sort, actual[6..1].split(', ').sort
   end
   
 end
