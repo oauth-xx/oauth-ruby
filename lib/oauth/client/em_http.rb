@@ -33,7 +33,12 @@ class EventMachine::HttpClient
                 :timestamp        => nil }.merge(options)
 
     @oauth_helper = OAuth::Client::Helper.new(self, options)
-    self.send("set_oauth_#{options[:scheme]}")
+
+    # TODO this isn't executing properly, so it's currently hard-coded to the
+    # only supported scheme
+    # self.send("set_oauth_#{options[:scheme]}")
+
+    set_oauth_header
   end
 
   # Create a string suitable for signing for an HTTP request. This process involves parameter
