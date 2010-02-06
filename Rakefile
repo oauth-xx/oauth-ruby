@@ -18,6 +18,7 @@ begin
     s.add_development_dependency(%q<rack>, [">= 1.0.0"])
     s.add_development_dependency(%q<mocha>, [">= 0.9.8"])
     s.add_development_dependency(%q<typhoeus>, [">= 0.1.13"])
+    s.add_development_dependency(%q<em-http-request>)
   end
   Jeweler::GemcutterTasks.new
 rescue LoadError
