@@ -50,6 +50,8 @@ Now that you have an access token, you can use Typhoeus to interact with the OAu
 
 For more detailed instructions I have written this OAuth Client Tutorial http://stakeventures.com/articles/2008/02/23/developing-oauth-clients-in-ruby and "How to turn your rails site into an OAuth Provider ":http://stakeventures.com/articles/2007/11/26/how-to-turn-your-rails-site-into-an-oauth-provider .
 
+If you wish to use em-http-request, you can find an example "in the official em-http-request repository":http://github.com/igrigorik/em-http-request/blob/master/examples/oauth-tweet.rb
+
 Finally be sure to check out the OAuth RDoc Manual http://oauth.rubyforge.org/rdoc/ .
 
 == Documentation Wiki
