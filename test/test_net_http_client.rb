@@ -18,7 +18,10 @@ class NetHTTPClientTest < Test::Unit::TestCase
 
     assert_equal 'GET', request.method
     assert_equal '/test?key=value', request.path
-    assert_equal "OAuth oauth_nonce=\"225579211881198842005988698334675835446\", oauth_signature_method=\"HMAC-SHA1\", oauth_token=\"token_411a7f\", oauth_timestamp=\"1199645624\", oauth_consumer_key=\"consumer_key_86cad9\", oauth_signature=\"1oO2izFav1GP4kEH2EskwXkCRFg%3D\", oauth_version=\"1.0\"".split(', ').sort, request['authorization'].split(', ').sort
+    correct_sorted_params = "oauth_nonce=\"225579211881198842005988698334675835446\", oauth_signature_method=\"HMAC-SHA1\", oauth_token=\"token_411a7f\", oauth_timestamp=\"1199645624\", oauth_consumer_key=\"consumer_key_86cad9\", oauth_signature=\"1oO2izFav1GP4kEH2EskwXkCRFg%3D\", oauth_version=\"1.0\""
+    auth_intro, auth_params = request['authorization'].split(' ', 2)
+    assert_equal auth_intro, 'OAuth'
+    assert_matching_headers correct_sorted_params, request['authorization']
   end
   
   def test_that_using_auth_headers_on_get_requests_works_with_plaintext
@@ -31,7 +34,20 @@ class NetHTTPClientTest < Test::Unit::TestCase
 
     assert_equal 'GET', request.method
     assert_equal '/test?key=value', request.path
-    assert_equal "OAuth oauth_nonce=\"225579211881198842005988698334675835446\", oauth_signature_method=\"PLAINTEXT\", oauth_token=\"token_411a7f\", oauth_timestamp=\"1199645624\", oauth_consumer_key=\"consumer_key_86cad9\", oauth_signature=\"5888bf0345e5d237%263196ffd991c8ebdb\", oauth_version=\"1.0\"".split(', ').sort, request['authorization'].split(', ').sort
+    assert_matching_headers "oauth_nonce=\"225579211881198842005988698334675835446\", oauth_signature_method=\"PLAINTEXT\", oauth_token=\"token_411a7f\", oauth_timestamp=\"1199645624\", oauth_consumer_key=\"consumer_key_86cad9\", oauth_signature=\"1oO2izFav1GP4kEH2EskwXkCRFg%3D\", oauth_version=\"1.0\"", request['authorization']
+  end
+  
+  def test_that_using_auth_headers_on_get_requests_works_with_plaintext
+    require 'oauth/signature/plaintext'
+    c = OAuth::Consumer.new('consumer_key_86cad9', '5888bf0345e5d237',{
+      :signature_method => 'PLAINTEXT'
+    })
+    request = Net::HTTP::Get.new(@request_uri.path + "?" + request_parameters_to_s)
+    request.oauth!(@http, c, @token, {:nonce => @nonce, :timestamp => @timestamp, :signature_method => 'PLAINTEXT'})
+
+    assert_equal 'GET', request.method
+    assert_equal '/test?key=value', request.path
+    assert_matching_headers "oauth_nonce=\"225579211881198842005988698334675835446\", oauth_signature_method=\"PLAINTEXT\", oauth_token=\"token_411a7f\", oauth_timestamp=\"1199645624\", oauth_consumer_key=\"consumer_key_86cad9\", oauth_signature=\"5888bf0345e5d237%263196ffd991c8ebdb\", oauth_version=\"1.0\"", request['authorization']
   end
 
   def test_that_using_auth_headers_on_post_requests_works
@@ -42,7 +58,8 @@ class NetHTTPClientTest < Test::Unit::TestCase
     assert_equal 'POST', request.method
     assert_equal '/test', request.path
     assert_equal 'key=value', request.body
-    assert_equal "OAuth oauth_nonce=\"225579211881198842005988698334675835446\", oauth_signature_method=\"HMAC-SHA1\", oauth_token=\"token_411a7f\", oauth_timestamp=\"1199645624\", oauth_consumer_key=\"consumer_key_86cad9\", oauth_signature=\"26g7wHTtNO6ZWJaLltcueppHYiI%3D\", oauth_version=\"1.0\"".split(', ').sort, request['authorization'].split(', ').sort
+    correct_sorted_params = "oauth_nonce=\"225579211881198842005988698334675835446\", oauth_signature_method=\"HMAC-SHA1\", oauth_token=\"token_411a7f\", oauth_timestamp=\"1199645624\", oauth_consumer_key=\"consumer_key_86cad9\", oauth_signature=\"26g7wHTtNO6ZWJaLltcueppHYiI%3D\", oauth_version=\"1.0\""
+    assert_matching_headers correct_sorted_params, request['authorization']
   end
 
   def test_that_version_is_added_to_existing_user_agent
@@ -149,11 +166,12 @@ class NetHTTPClientTest < Test::Unit::TestCase
     assert_equal 'GET&http%3A%2F%2Fphotos.example.net%2Fphotos&file%3Dvacation.jpg%26oauth_consumer_key%3Ddpf43f3p2l4k3l03%26oauth_nonce%3Dkllo9940pd9333jh%26oauth_signature_method%3DHMAC-SHA1%26oauth_timestamp%3D1191242096%26oauth_token%3Dnnch734d00sl2jdk%26oauth_version%3D1.0%26size%3Doriginal',signature_base_string
 
 #    request = Net::HTTP::Get.new(request_uri.path + "?" + request_uri.query)
-    request.oauth!(http, consumer, token, {:nonce => nonce, :timestamp => timestamp,:realm=>"http://photos.example.net/"})
+    request.oauth!(http, consumer, token, {:nonce => nonce, :timestamp => timestamp, :realm=>"http://photos.example.net/"})
 
     assert_equal 'GET', request.method
-    assert_equal 'OAuth realm="http://photos.example.net/", oauth_nonce="kllo9940pd9333jh", oauth_signature_method="HMAC-SHA1", oauth_token="nnch734d00sl2jdk", oauth_timestamp="1191242096", oauth_consumer_key="dpf43f3p2l4k3l03", oauth_signature="tR3%2BTy81lMeYAr%2FFid0kMTYa%2FWM%3D", oauth_version="1.0"'.split(', ').sort, request['authorization'].split(', ').sort
-
+    correct_sorted_params = 'oauth_nonce="kllo9940pd9333jh", oauth_signature_method="HMAC-SHA1", oauth_token="nnch734d00sl2jdk", oauth_timestamp="1191242096", oauth_consumer_key="dpf43f3p2l4k3l03", oauth_signature="tR3%2BTy81lMeYAr%2FFid0kMTYa%2FWM%3D", oauth_version="1.0"'.split(', ').sort
+    correct_sorted_params.unshift 'OAuth realm="http://photos.example.net/"'
+    assert_equal correct_sorted_params, request['authorization'].split(', ').sort
   end
 
   def test_step_by_step_token_request

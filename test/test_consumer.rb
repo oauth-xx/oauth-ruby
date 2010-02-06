@@ -8,7 +8,7 @@ require 'stringio'
 # This also means you have to be online to be able to run these.
 class ConsumerTest < Test::Unit::TestCase
   def setup
-    @consumer=OAuth::Consumer.new( 
+    @consumer=OAuth::Consumer.new(
         'consumer_key_86cad9', '5888bf0345e5d237',
         {
         :site=>"http://blabla.bla",
@@ -26,7 +26,7 @@ class ConsumerTest < Test::Unit::TestCase
     @timestamp = "1199645624"
     @consumer.http=Net::HTTP.new(@request_uri.host, @request_uri.port)
   end
-  
+
   def test_initializer
     assert_equal "consumer_key_86cad9",@consumer.key
     assert_equal "5888bf0345e5d237",@consumer.secret

@@ -3,6 +3,7 @@ require 'net/https'
 require 'oauth/oauth'
 require 'oauth/client/net_http'
 require 'oauth/errors'
+require 'cgi'
 
 module OAuth
   class Consumer
@@ -75,9 +76,9 @@ module OAuth
       @secret = consumer_secret
 
       # ensure that keys are symbols
-      @options = @@default_options.merge(options.inject({}) { |options, (key, value)|
-        options[key.to_sym] = value
-        options
+      @options = @@default_options.merge(options.inject({}) { |opts, (key, value)|
+        opts[key.to_sym] = value
+        opts
       })
     end
 
@@ -163,7 +164,7 @@ module OAuth
       # (http://wiki.oauth.net/ProblemReporting)
       # note: a 200 may actually be an error; check for an oauth_problem key to be sure
       if !(headers = rsp.to_hash["www-authenticate"]).nil? &&
-        (h = headers.select { |h| h =~ /^OAuth / }).any? &&
+        (h = headers.select { |hdr| hdr =~ /^OAuth / }).any? &&
         h.first =~ /oauth_problem/
 
         # puts "Header: #{h.first}"
@@ -192,7 +193,6 @@ module OAuth
     # Creates a request and parses the result as url_encoded. This is used internally for the RequestToken and AccessToken requests.
     def token_request(http_method, path, token = nil, request_options = {}, *arguments)
       response = request(http_method, path, token, request_options, *arguments)
-
       case response.code.to_i
 
       when (200..299)
@@ -313,7 +313,6 @@ module OAuth
 
       if [:post, :put].include?(http_method)
         data = arguments.shift
-        data.reject! { |k,v| v.nil? } if data.is_a?(Hash)
       end
 
       headers = arguments.first.is_a?(Hash) ? arguments.shift : {}
@@ -336,7 +335,9 @@ module OAuth
       end
 
       if data.is_a?(Hash)
-        request.set_form_data(data)
+        form_data = {}
+        data.each {|k,v| form_data[k.to_s] = v if !v.nil?} 
+        request.set_form_data(form_data)
       elsif data
         if data.respond_to?(:read)
           request.body_stream = data

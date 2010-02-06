@@ -1,6 +1,7 @@
 require File.dirname(__FILE__) + '/test_helper.rb'
 require 'oauth/request_proxy/typhoeus_request'
 require 'typhoeus'
+
 class TyphoeusRequestProxyTest < Test::Unit::TestCase
 
   def test_that_proxy_simple_get_request_works

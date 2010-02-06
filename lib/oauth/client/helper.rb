@@ -57,7 +57,8 @@ module OAuth::Client
 
     def amend_user_agent_header(headers)
       @oauth_ua_string ||= "OAuth gem v#{OAuth::VERSION}"
-      if headers['User-Agent']
+      # Net::HTTP in 1.9 appends Ruby
+      if headers['User-Agent'] && headers['User-Agent'] != 'Ruby' 
         headers['User-Agent'] += " (#{@oauth_ua_string})"
       else
         headers['User-Agent'] = @oauth_ua_string
@@ -68,7 +69,7 @@ module OAuth::Client
       parameters = oauth_parameters
       parameters.merge!('oauth_signature' => signature(options.merge(:parameters => parameters)))
 
-      header_params_str = parameters.map { |k,v| "#{k}=\"#{escape(v)}\"" }.join(', ')
+      header_params_str = parameters.sort.map { |k,v| "#{k}=\"#{escape(v)}\"" }.join(', ')
 
       realm = "realm=\"#{options[:realm]}\", " if options[:realm]
       "OAuth #{realm}#{header_params_str}"
