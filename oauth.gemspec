@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{oauth}
-  s.version = "0.3.6"
+  s.version = "0.3.7.pre1"
 
-  s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
+  s.required_rubygems_version = Gem::Requirement.new("> 1.3.1") if s.respond_to? :required_rubygems_version=
   s.authors = ["Pelle Braendgaard", "Blaine Cook", "Larry Halff", "Jesse Clark", "Jon Crosby", "Seth Fitzsimmons", "Matt Sanford", "Aaron Quint"]
-  s.date = %q{2010-01-01}
+  s.date = %q{2010-02-15}
   s.default_executable = %q{oauth}
   s.description = %q{OAuth Core Ruby implementation}
   s.email = %q{oauth-ruby@googlegroups.com}
@@ -33,6 +33,7 @@ Gem::Specification.new do |s|
      "lib/oauth/cli.rb",
      "lib/oauth/client.rb",
      "lib/oauth/client/action_controller_request.rb",
+     "lib/oauth/client/em_http.rb",
      "lib/oauth/client/helper.rb",
      "lib/oauth/client/net_http.rb",
      "lib/oauth/consumer.rb",
@@ -47,6 +48,8 @@ Gem::Specification.new do |s|
      "lib/oauth/request_proxy.rb",
      "lib/oauth/request_proxy/action_controller_request.rb",
      "lib/oauth/request_proxy/base.rb",
+     "lib/oauth/request_proxy/curb_request.rb",
+     "lib/oauth/request_proxy/em_http_request.rb",
      "lib/oauth/request_proxy/jabber_request.rb",
      "lib/oauth/request_proxy/mock_request.rb",
      "lib/oauth/request_proxy/net_http.rb",
@@ -90,6 +93,9 @@ Gem::Specification.new do |s|
      "test/test_access_token.rb",
      "test/test_action_controller_request_proxy.rb",
      "test/test_consumer.rb",
+     "test/test_curb_request_proxy.rb",
+     "test/test_em_http_client.rb",
+     "test/test_em_http_request_proxy.rb",
      "test/test_helper.rb",
      "test/test_hmac_sha1.rb",
      "test/test_net_http_client.rb",
@@ -125,6 +131,9 @@ Gem::Specification.new do |s|
      "test/test_access_token.rb",
      "test/test_action_controller_request_proxy.rb",
      "test/test_consumer.rb",
+     "test/test_curb_request_proxy.rb",
+     "test/test_em_http_client.rb",
+     "test/test_em_http_request_proxy.rb",
      "test/test_helper.rb",
      "test/test_hmac_sha1.rb",
      "test/test_net_http_client.rb",
@@ -151,17 +160,20 @@ Gem::Specification.new do |s|
       s.add_development_dependency(%q<rack>, [">= 1.0.0"])
       s.add_development_dependency(%q<mocha>, [">= 0.9.8"])
       s.add_development_dependency(%q<typhoeus>, [">= 0.1.13"])
+      s.add_development_dependency(%q<em-http-request>, [">= 0"])
     else
       s.add_dependency(%q<actionpack>, [">= 2.2.0"])
       s.add_dependency(%q<rack>, [">= 1.0.0"])
       s.add_dependency(%q<mocha>, [">= 0.9.8"])
       s.add_dependency(%q<typhoeus>, [">= 0.1.13"])
+      s.add_dependency(%q<em-http-request>, [">= 0"])
     end
   else
     s.add_dependency(%q<actionpack>, [">= 2.2.0"])
     s.add_dependency(%q<rack>, [">= 1.0.0"])
     s.add_dependency(%q<mocha>, [">= 0.9.8"])
     s.add_dependency(%q<typhoeus>, [">= 0.1.13"])
+    s.add_dependency(%q<em-http-request>, [">= 0"])
   end
 end
 
