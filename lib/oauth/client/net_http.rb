@@ -80,6 +80,13 @@ private
     self['Authorization'] = @oauth_helper.header
   end
 
+  # FIXME: if you're using a POST body and query string parameters, this method
+  # will move query string parameters into the body unexpectedly. This may
+  # cause problems with non-x-www-form-urlencoded bodies submitted to URLs
+  # containing query string params. If duplicate parameters are present in both
+  # places, all instances should be included when calculating the signature
+  # base string.
+
   def set_oauth_body
     self.set_form_data(@oauth_helper.stringify_keys(@oauth_helper.parameters_with_oauth))
     params_with_sig = @oauth_helper.parameters.merge(:oauth_signature => @oauth_helper.signature)
