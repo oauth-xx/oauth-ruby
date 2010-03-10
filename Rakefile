@@ -14,7 +14,7 @@ begin
     s.description = "OAuth Core Ruby implementation"
     s.summary = s.description
     s.rubyforge_project = %q{oauth}
-    s.add_development_dependency(%q<actionpack>, [">= 2.2.0"])
+    s.add_development_dependency(%q<actionpack>, [">= 2.2.0", "<2.3.0"])
     s.add_development_dependency(%q<rack>, [">= 1.0.0"])
     s.add_development_dependency(%q<mocha>, [">= 0.9.8"])
     s.add_development_dependency(%q<typhoeus>, [">= 0.1.13"])
