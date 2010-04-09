@@ -76,10 +76,10 @@ module OAuth
       @secret = consumer_secret
 
       # ensure that keys are symbols
-      @options = @@default_options.merge(options.inject({}) { |opts, (key, value)|
+      @options = @@default_options.merge(options.inject({}) do |opts, (key, value)|
         opts[key.to_sym] = value
         opts
-      })
+      end)
     end
 
     # The default http method
@@ -128,10 +128,10 @@ module OAuth
 
       if block_given?
         response = token_request(http_method,
-                                 (request_token_url? ? request_token_url : request_token_path),
-                                 nil,
-                                 request_options,
-                                 *arguments, &block)
+        (request_token_url? ? request_token_url : request_token_path),
+        nil,
+        request_options,
+        *arguments, &block)
       else
         response = token_request(http_method, (request_token_url? ? request_token_url : request_token_path), nil, request_options, *arguments)
       end
@@ -277,7 +277,7 @@ module OAuth
       @options[:proxy]
     end
 
-  protected
+    protected
 
     # Instantiates the http object
     def create_http(_url = nil)
@@ -358,9 +358,7 @@ module OAuth
     end
 
     def marshal_dump(*args)
-      {:key => @key,
-       :secret => @secret,
-       :options => @options}
+      {:key => @key, :secret => @secret, :options => @options}
     end
 
     def marshal_load(data)
