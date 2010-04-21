@@ -24,6 +24,10 @@ module OAuth::RequestProxy::Net
         end
       end
 
+      def body
+        request.body
+      end
+
     private
 
       def all_parameters

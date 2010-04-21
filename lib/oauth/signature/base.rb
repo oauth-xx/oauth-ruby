@@ -26,6 +26,11 @@ module OAuth::Signature
       @digest_klass = digest_klass
     end
 
+    def self.hash_class(hash_class = nil)
+      return @hash_class if hash_class.nil?
+      @hash_class = hash_class
+    end
+
     def initialize(request, options = {}, &block)
       raise TypeError unless request.kind_of?(OAuth::RequestProxy::Base)
       @request = request
@@ -70,6 +75,14 @@ module OAuth::Signature
 
     def signature_base_string
       request.signature_base_string
+    end
+
+    def body_hash
+      if self.class.hash_class
+        Base64.encode64(self.class.hash_class.digest(request.body || '')).chomp.gsub(/\n/,'')
+      else
+        nil # no body hash algorithm defined, so don't generate one
+      end
     end
 
   private
