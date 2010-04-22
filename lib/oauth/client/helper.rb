@@ -2,7 +2,6 @@ require 'oauth/client'
 require 'oauth/consumer'
 require 'oauth/helper'
 require 'oauth/token'
-require 'oauth/version'
 require 'oauth/signature/hmac/sha1'
 
 module OAuth::Client

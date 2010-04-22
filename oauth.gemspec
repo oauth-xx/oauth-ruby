@@ -5,24 +5,24 @@
 
 Gem::Specification.new do |s|
   s.name = %q{oauth}
-  s.version = "0.3.7.pre1"
+  s.version = "0.4.0"
 
-  s.required_rubygems_version = Gem::Requirement.new("> 1.3.1") if s.respond_to? :required_rubygems_version=
+  s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Pelle Braendgaard", "Blaine Cook", "Larry Halff", "Jesse Clark", "Jon Crosby", "Seth Fitzsimmons", "Matt Sanford", "Aaron Quint"]
-  s.date = %q{2010-03-09}
+  s.date = %q{2010-04-21}
   s.default_executable = %q{oauth}
   s.description = %q{OAuth Core Ruby implementation}
   s.email = %q{oauth-ruby@googlegroups.com}
   s.executables = ["oauth"]
   s.extra_rdoc_files = [
-    "README.rdoc",
+    "LICENSE",
+     "README.rdoc",
      "TODO"
   ]
   s.files = [
     ".gitignore",
-     "History.txt",
-     "License.txt",
-     "Manifest.txt",
+     "HISTORY",
+     "LICENSE",
      "README.rdoc",
      "Rakefile",
      "TODO",
@@ -73,12 +73,7 @@ Gem::Specification.new do |s|
      "lib/oauth/tokens/request_token.rb",
      "lib/oauth/tokens/server_token.rb",
      "lib/oauth/tokens/token.rb",
-     "lib/oauth/version.rb",
      "oauth.gemspec",
-     "script/destroy",
-     "script/generate",
-     "script/txt2html",
-     "setup.rb",
      "tasks/deployment.rake",
      "tasks/environment.rake",
      "tasks/website.rake",
@@ -156,14 +151,14 @@ Gem::Specification.new do |s|
     s.specification_version = 3
 
     if Gem::Version.new(Gem::RubyGemsVersion) >= Gem::Version.new('1.2.0') then
-      s.add_development_dependency(%q<actionpack>, [">= 2.2.0", "< 2.3"])
+      s.add_development_dependency(%q<actionpack>, [">= 2.2.0", "< 2.3.0"])
       s.add_development_dependency(%q<rack>, [">= 1.0.0"])
       s.add_development_dependency(%q<mocha>, [">= 0.9.8"])
       s.add_development_dependency(%q<typhoeus>, [">= 0.1.13"])
       s.add_development_dependency(%q<em-http-request>, [">= 0"])
       s.add_development_dependency(%q<curb>, [">= 0.6.6.0"])
     else
-      s.add_dependency(%q<actionpack>, [">= 2.2.0", "< 2.3"])
+      s.add_dependency(%q<actionpack>, [">= 2.2.0", "< 2.3.0"])
       s.add_dependency(%q<rack>, [">= 1.0.0"])
       s.add_dependency(%q<mocha>, [">= 0.9.8"])
       s.add_dependency(%q<typhoeus>, [">= 0.1.13"])
@@ -171,7 +166,7 @@ Gem::Specification.new do |s|
       s.add_dependency(%q<curb>, [">= 0.6.6.0"])
     end
   else
-    s.add_dependency(%q<actionpack>, [">= 2.2.0", "< 2.3"])
+    s.add_dependency(%q<actionpack>, [">= 2.2.0", "< 2.3.0"])
     s.add_dependency(%q<rack>, [">= 1.0.0"])
     s.add_dependency(%q<mocha>, [">= 0.9.8"])
     s.add_dependency(%q<typhoeus>, [">= 0.1.13"])

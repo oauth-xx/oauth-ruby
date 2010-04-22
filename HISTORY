@@ -1,6 +1,7 @@
-== 0.3.7
+== 0.4.0 2010-04-20
 * Added computation of oauth_body_hash as per OAuth Request Body Hash 1.0
   Draft 4 (Michael Reinsch)
+* Added the optional `oauth_session_handle` parameter for the Yahoo implementation (Will Bailey)
 * Better marshalling implementation (Yoan Blanc)
 * Added optional block to OAuth::Consumer.get_*_token (Neill Pearman)
 * Exclude `oauth_callback` with :exclude_callback (Neill Pearman)
@@ -15,6 +16,7 @@
 * Support for Typhoeus (Bill Kocik)
 * Support for em-http (EventMachine) (Darcy Laycock)
 * Support for curb (André Luis Leal Cardoso Junior)
+* New website (Aaron Quint)
 
 == 0.3.6 2009-09-14
 

@@ -1,7 +1,6 @@
 %w[rubygems rake rake/clean rake/testtask fileutils].each { |f| require f }
 $LOAD_PATH << File.dirname(__FILE__) + '/lib'
 require 'oauth'
-require 'oauth/version'
 
 begin
   require 'jeweler'
