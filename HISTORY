@@ -1,4 +1,5 @@
-== 0.4.0 2010-04-20
+== 0.4.0 2010-04-22
+
 * Added computation of oauth_body_hash as per OAuth Request Body Hash 1.0
   Draft 4 (Michael Reinsch)
 * Added the optional `oauth_session_handle` parameter for the Yahoo implementation (Will Bailey)
