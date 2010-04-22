@@ -20,19 +20,14 @@ class Net::HTTPRequest
   #
   # This method also modifies the <tt>User-Agent</tt> header to add the OAuth gem version.
   #
-  # See Also: {OAuth core spec version 1.0, section 5.4.1}[http://oauth.net/core/1.0#rfc.section.5.4.1]
+  # See Also: {OAuth core spec version 1.0, section 5.4.1}[http://oauth.net/core/1.0#rfc.section.5.4.1],
+  #           {OAuth Request Body Hash 1.0 Draft 4}[http://oauth.googlecode.com/svn/spec/ext/body_hash/1.0/drafts/4/spec.html]
   def oauth!(http, consumer = nil, token = nil, options = {})
-    options = { :request_uri      => oauth_full_request_uri(http),
-                :consumer         => consumer,
-                :token            => token,
-                :scheme           => 'header',
-                :signature_method => nil,
-                :nonce            => nil,
-                :timestamp        => nil }.merge(options)
-
-    @oauth_helper = OAuth::Client::Helper.new(self, options)
+    helper_options = oauth_helper_options(http, consumer, token, options)
+    @oauth_helper = OAuth::Client::Helper.new(self, helper_options)
     @oauth_helper.amend_user_agent_header(self)
-    self.send("set_oauth_#{options[:scheme]}")
+    @oauth_helper.hash_body if oauth_body_hash_required?
+    self.send("set_oauth_#{helper_options[:scheme]}")
   end
 
   # Create a string suitable for signing for an HTTP request. This process involves parameter
@@ -47,20 +42,26 @@ class Net::HTTPRequest
   # * options - Request-specific options (e.g. +request_uri+, +consumer+, +token+, +scheme+,
   #   +signature_method+, +nonce+, +timestamp+)
   # 
-  # See Also: {OAuth core spec version 1.0, section 9.1.1}[http://oauth.net/core/1.0#rfc.section.9.1.1]
+  # See Also: {OAuth core spec version 1.0, section 9.1.1}[http://oauth.net/core/1.0#rfc.section.9.1.1],
+  #           {OAuth Request Body Hash 1.0 Draft 4}[http://oauth.googlecode.com/svn/spec/ext/body_hash/1.0/drafts/4/spec.html]
   def signature_base_string(http, consumer = nil, token = nil, options = {})
-    options = { :request_uri      => oauth_full_request_uri(http),
-                :consumer         => consumer,
-                :token            => token,
-                :scheme           => 'header',
-                :signature_method => nil,
-                :nonce            => nil,
-                :timestamp        => nil }.merge(options)
-
-    OAuth::Client::Helper.new(self, options).signature_base_string
+    helper_options = oauth_helper_options(http, consumer, token, options)
+    oauth_helper = OAuth::Client::Helper.new(self, helper_options)
+    oauth_helper.hash_body if oauth_body_hash_required?
+    oauth_helper.signature_base_string
   end
 
 private
+
+  def oauth_helper_options(http, consumer, token, options)
+    { :request_uri      => oauth_full_request_uri(http),
+      :consumer         => consumer,
+      :token            => token,
+      :scheme           => 'header',
+      :signature_method => nil,
+      :nonce            => nil,
+      :timestamp        => nil }.merge(options)
+  end
 
   def oauth_full_request_uri(http)
     uri = URI.parse(self.path)
@@ -74,6 +75,10 @@ private
     end
 
     uri.to_s
+  end
+
+  def oauth_body_hash_required?
+    request_body_permitted? && content_type != "application/x-www-form-urlencoded"
   end
 
   def set_oauth_header

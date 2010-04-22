@@ -35,6 +35,11 @@ module OAuth
       self.build(request, options, &block).signature_base_string
     end
 
+    # Create the body hash for a request
+    def self.body_hash(request, options = {}, &block)
+      self.build(request, options, &block).body_hash
+    end
+
     class UnknownSignatureMethod < Exception; end
   end
 end

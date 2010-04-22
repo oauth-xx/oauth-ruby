@@ -29,6 +29,7 @@ module OAuth::Client
 
     def oauth_parameters
       {
+        'oauth_body_hash'        => options[:body_hash],
         'oauth_callback'         => options[:oauth_callback],
         'oauth_consumer_key'     => options[:consumer].key,
         'oauth_token'            => options[:token] ? options[:token].token : '',
@@ -54,6 +55,10 @@ module OAuth::Client
                                                          :consumer   => options[:consumer],
                                                          :token      => options[:token],
                                                          :parameters => oauth_parameters}.merge(extra_options) )
+    end
+
+    def hash_body
+      @options[:body_hash] = OAuth::Signature.body_hash(@request, :parameters => oauth_parameters)
     end
 
     def amend_user_agent_header(headers)

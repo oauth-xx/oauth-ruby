@@ -1,4 +1,6 @@
 == 0.3.7
+* Added computation of oauth_body_hash as per OAuth Request Body Hash 1.0
+  Draft 4 (Michael Reinsch)
 * Better marshalling implementation (Yoan Blanc)
 * Added optional block to OAuth::Consumer.get_*_token (Neill Pearman)
 * Exclude `oauth_callback` with :exclude_callback (Neill Pearman)
