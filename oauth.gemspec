@@ -104,12 +104,7 @@ Gem::Specification.new do |s|
      "test/test_signature_base.rb",
      "test/test_signature_plain_text.rb",
      "test/test_token.rb",
-     "test/test_typhoeus_request_proxy.rb",
-     "website/index.html",
-     "website/index.txt",
-     "website/javascripts/rounded_corners_lite.inc.js",
-     "website/stylesheets/screen.css",
-     "website/template.rhtml"
+     "test/test_typhoeus_request_proxy.rb"
   ]
   s.rdoc_options = ["--charset=UTF-8"]
   s.require_paths = ["lib"]
