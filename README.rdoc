@@ -1,4 +1,4 @@
-= Ruby OAuth GEM
+= Ruby OAuth
 
 == What
 
@@ -10,9 +10,7 @@ See the OAuth specs http://oauth.net/core/1.0/
 
   sudo gem install oauth
 
-You can also install it from the oauth rubyforge project http://rubyforge.org/projects/oauth/.
-
-The source code is now hosted on the OAuth GitHub Project http://github.com/mojodna/oauth
+The source code is now hosted on the OAuth GitHub Project http://github.com/oauth/oauth-ruby
 
 == The basics
 
@@ -37,27 +35,26 @@ When user returns create an access_token
   @access_token = @request_token.get_access_token
   @photos = @access_token.get('/photos.xml')
 
-For more detailed instructions I have written this OAuth Client Tutorial http://stakeventures.com/articles/2008/02/23/developing-oauth-clients-in-ruby and "How to turn your rails site into an OAuth Provider ":http://stakeventures.com/articles/2007/11/26/how-to-turn-your-rails-site-into-an-oauth-provider .
+Now that you have an access token, you can use Typhoeus to interact with the OAuth provider if you choose.
 
-Finally be sure to check out the OAuth RDoc Manual http://oauth.rubyforge.org/rdoc/ .
+  oauth_params = {:consumer => oauth_consumer, :token => access_token}
+  hydra = Typhoeus::Hydra.new
+  req = Typhoeus::Request.new(uri, options) 
+  oauth_helper = OAuth::Client::Helper.new(req, oauth_params.merge(:request_uri => uri))
+  req.headers.merge!({"Authorization" => oauth_helper.header}) # Signs the request
+  hydra.queue(req)
+  hydra.run
+  @response = req.response
 
-== Documentation Wiki
 
-There is some documentation on the Google Code project for the "OAuth Rails Plugin":http://code.google.com/p/oauth-plugin/ :
+== More Information
 
-* RequestToken http://code.google.com/p/oauth-plugin/wiki/RequestToken
-* AccessToken http://code.google.com/p/oauth-plugin/wiki/AccessToken
-
-== Forum
-
-http://groups.google.com/group/oauth-ruby
-
+* RDoc: http://rdoc.info/projects/oauth/oauth-ruby/
+* Mailing List/Google Group: http://groups.google.com/group/oauth-ruby
 
 == How to submit patches
 
-Read the "8 steps for fixing other people's code" http://drnicwilliams.com/2007/06/01/8-steps-for-fixing-other-peoples-code/.
-
-The source code is now hosted on the OAuth GitHub Project http://github.com/mojodna/oauth
+The source code is now hosted on the OAuth GitHub Project http://github.com/oauth/oauth-ruby
 
 To submit a patch, please fork the oauth project and create a patch with tests. Once you're happy with it send a pull request and post a message to the google group.
 
@@ -67,5 +64,7 @@ This code is free to use under the terms of the MIT license.
 
 == Contact
 
-Comments are welcome. Send an email to "Pelle Braendgaard" pelleb@gmail.com email via the OAuth Ruby mailing list http://groups.google.com/group/oauth-ruby
+OAuth Ruby has been created and maintained by a large number of talented individuals. 
+The current maintainer is Aaron Quint (quirkey).
 
+Comments are welcome. Send an email to via the OAuth Ruby mailing list http://groups.google.com/group/oauth-ruby

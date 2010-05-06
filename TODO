@@ -29,3 +29,4 @@ Random TODOs:
 * sensible Exception hierarchy
 * Tokens as Modules
 * don't tie to Net::HTTP
+* Take a look at Curb HTTP Verbs

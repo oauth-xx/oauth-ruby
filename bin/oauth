@@ -1,4 +1,4 @@
-#!/usr/bin/env ruby -w -rubygems
+#!/usr/bin/env ruby
 
 require "oauth/cli"
 

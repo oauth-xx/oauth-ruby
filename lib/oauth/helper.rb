@@ -1,6 +1,5 @@
 require 'openssl'
 require 'base64'
-require 'enumerator'
 
 module OAuth
   module Helper
@@ -11,6 +10,8 @@ module OAuth
     # See Also: {OAuth core spec version 1.0, section 5.1}[http://oauth.net/core/1.0#rfc.section.5.1]
     def escape(value)
       URI::escape(value.to_s, OAuth::RESERVED_CHARACTERS)
+    rescue ArgumentError
+      URI::escape(value.to_s.force_encoding(Encoding::UTF_8), OAuth::RESERVED_CHARACTERS)
     end
 
     # Generate a random key of up to +size+ bytes. The value returned is Base64 encoded with non-word
@@ -71,30 +72,17 @@ module OAuth
       # convert into a Hash
       Hash[*params.flatten]
     end
-    
-    # A secure version of equals meant to avoid timing attacks as specified here
-    # http://codahale.com/a-lesson-in-timing-attacks/
-    def secure_equals(a,b)
-      return a==b unless a.is_a?(String)&&b.is_a?(String)
-      result = 0
-      bytes(a).zip(bytes(b)).each do |x,y|
-        result |= (x ^ y)
-      end
-      (result == 0) && (a.length == b.length)
-    end
-    
+
     def unescape(value)
       URI.unescape(value.gsub('+', '%2B'))
     end
     
-    # Creates a per byte enumerator for a string regardless of RUBY VERSION
-    def bytes(a)
-      return [] if a.nil?
-      if a.respond_to?(:bytes)
-        a.bytes
-      else
-        Enumerable::Enumerator.new(a, :each_byte)
+    def stringify_keys(hash)
+      new_h = {}
+      hash.each do |k, v| 
+        new_h[k.to_s] = v.is_a?(Hash) ? stringify_keys(v) : v
       end
+      new_h
     end
   end
 end
