@@ -34,7 +34,7 @@ module OAuth::RequestProxy
     end
 
     def request_params
-      request.params
+      request.POST
     end
   end
 end
