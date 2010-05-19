@@ -1,5 +1,10 @@
-require File.dirname(__FILE__) + '/test_helper.rb'
-require 'oauth/client/em_http'
+require 'test_helper'
+begin
+  require 'oauth/client/em_http'
+rescue LoadError => e
+  warn "! problem loading em-http, skipping these tests: #{e}"
+  return
+end
 
 class EmHttpClientTest < Test::Unit::TestCase
 

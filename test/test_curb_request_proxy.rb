@@ -1,6 +1,13 @@
-require File.dirname(__FILE__) + '/test_helper.rb'
-require 'oauth/request_proxy/curb_request'
-require 'curb'
+require 'test_helper'
+
+begin
+  require 'oauth/request_proxy/curb_request'
+  require 'curb'
+rescue LoadError => e
+  warn "! problems loading curb, skipping these tests: #{e}"
+  return
+end
+
 
 class CurbRequestProxyTest < Test::Unit::TestCase
 

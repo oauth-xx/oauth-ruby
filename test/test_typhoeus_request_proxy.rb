@@ -1,6 +1,13 @@
-require File.dirname(__FILE__) + '/test_helper.rb'
-require 'oauth/request_proxy/typhoeus_request'
-require 'typhoeus'
+require 'test_helper'
+
+begin
+  require 'oauth/request_proxy/typhoeus_request'
+  require 'typhoeus'
+rescue LoadError => e
+  warn "! problem loading typhoeus, skipping these tests: #{e}"
+  return
+end
+
 
 class TyphoeusRequestProxyTest < Test::Unit::TestCase
 

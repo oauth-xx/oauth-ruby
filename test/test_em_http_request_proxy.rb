@@ -1,6 +1,13 @@
-require File.dirname(__FILE__) + '/test_helper.rb'
-require 'em-http'
-require 'oauth/request_proxy/em_http_request'
+require 'test_helper'
+
+begin
+  require 'em-http'
+  require 'oauth/request_proxy/em_http_request'
+rescue LoadError => e
+  warn "! problem loading em-http, skipping these tests: #{e}"
+  return
+end
+
 
 class EmHttpRequestProxyTest < Test::Unit::TestCase
   
