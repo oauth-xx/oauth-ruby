@@ -11,7 +11,7 @@ class Net::HTTPRequest
   # this may add a header, additional query string parameters, or additional POST body parameters.
   # The default scheme is +header+, in which the OAuth parameters as put into the +Authorization+
   # header.
-  # 
+  #
   # * http - Configured Net::HTTP instance
   # * consumer - OAuth::Consumer instance
   # * token - OAuth::Token instance
@@ -35,13 +35,13 @@ class Net::HTTPRequest
   # on the <tt>options[:scheme]</tt> being used so this must match what will be used for the request
   # itself. The default scheme is +header+, in which the OAuth parameters as put into the +Authorization+
   # header.
-  # 
+  #
   # * http - Configured Net::HTTP instance
   # * consumer - OAuth::Consumer instance
   # * token - OAuth::Token instance
   # * options - Request-specific options (e.g. +request_uri+, +consumer+, +token+, +scheme+,
   #   +signature_method+, +nonce+, +timestamp+)
-  # 
+  #
   # See Also: {OAuth core spec version 1.0, section 9.1.1}[http://oauth.net/core/1.0#rfc.section.9.1.1],
   #           {OAuth Request Body Hash 1.0 Draft 4}[http://oauth.googlecode.com/svn/spec/ext/body_hash/1.0/drafts/4/spec.html]
   def signature_base_string(http, consumer = nil, token = nil, options = {})
@@ -54,7 +54,7 @@ class Net::HTTPRequest
 private
 
   def oauth_helper_options(http, consumer, token, options)
-    { :request_uri      => oauth_full_request_uri(http),
+    { :request_uri      => oauth_full_request_uri(http,options),
       :consumer         => consumer,
       :token            => token,
       :scheme           => 'header',
@@ -63,16 +63,29 @@ private
       :timestamp        => nil }.merge(options)
   end
 
-  def oauth_full_request_uri(http)
+  def oauth_full_request_uri(http,options)
     uri = URI.parse(self.path)
     uri.host = http.address
     uri.port = http.port
+
+    if options[:request_endpoint] and options[:site]
+        hostval = options[:site]
+        if hostval.include?("http://")
+	   hostval["http://"] = ""
+        end
+        if hostval.include?("https://")
+	   hostval["https://"] = ""
+        end
+	uri.host = hostval
+        uri.port = 80
+    end
 
     if http.respond_to?(:use_ssl?) && http.use_ssl?
       uri.scheme = "https"
     else
       uri.scheme = "http"
     end
+
 
     uri.to_s
   end

@@ -162,7 +162,6 @@ module OAuth
       req = create_signed_request(http_method, path, token, request_options, *arguments)
       return nil if block_given? and yield(req) == :done
       rsp = http.request(req)
-
       # check for an error reported by the Problem Reporting extension
       # (http://wiki.oauth.net/ProblemReporting)
       # note: a 200 may actually be an error; check for an oauth_problem key to be sure
@@ -235,6 +234,11 @@ module OAuth
       @options[:site].to_s
     end
 
+    def request_endpoint
+	return nil if @options[:request_endpoint].nil?
+	@options[:request_endpoint].to_s
+    end
+
     def scheme
       @options[:scheme]
     end
@@ -284,11 +288,19 @@ module OAuth
 
     # Instantiates the http object
     def create_http(_url = nil)
+
+
+      if !request_endpoint.nil?
+       _url = request_endpoint
+      end
+
+
       if _url.nil? || _url[0] =~ /^\//
         our_uri = URI.parse(site)
       else
         our_uri = URI.parse(_url)
       end
+
 
       if proxy.nil?
         http_object = Net::HTTP.new(our_uri.host, our_uri.port)
@@ -306,7 +318,6 @@ module OAuth
       else
         http_object.verify_mode = OpenSSL::SSL::VERIFY_NONE
       end
-
       http_object
     end
 
@@ -339,7 +350,7 @@ module OAuth
 
       if data.is_a?(Hash)
         form_data = {}
-        data.each {|k,v| form_data[k.to_s] = v if !v.nil?} 
+        data.each {|k,v| form_data[k.to_s] = v if !v.nil?}
         request.set_form_data(form_data)
       elsif data
         if data.respond_to?(:read)
