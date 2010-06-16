@@ -1,3 +1,9 @@
+== 0.4.1 2010-06-16
+
+* Added support for using OAuth with proxies (Marsh Gardiner)
+* Rails 3 Compatibility fixes (Pelle Braendgaard)
+* Fixed load errors on tests for missing (non-required) libraries
+
 == 0.4.0 2010-04-22
 
 * Added computation of oauth_body_hash as per OAuth Request Body Hash 1.0
