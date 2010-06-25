@@ -1,13 +1,9 @@
 require File.expand_path('../test_helper', __FILE__)
 
 begin
-  require 'oauth/request_proxy/typhoeus_request'
-  require 'typhoeus'
-rescue LoadError => e
-  warn "! problem loading typhoeus, skipping these tests: #{e}"
-  return
-end
 
+require 'oauth/request_proxy/typhoeus_request'
+require 'typhoeus'
 
 class TyphoeusRequestProxyTest < Test::Unit::TestCase
 
@@ -78,3 +74,8 @@ class TyphoeusRequestProxyTest < Test::Unit::TestCase
     assert_equal 'POST', request_proxy.method
   end
 end
+
+rescue LoadError => e
+  warn "! problem loading typhoeus, skipping these tests: #{e}"
+end
+

@@ -1,10 +1,7 @@
 require File.expand_path('../test_helper', __FILE__)
 begin
-  require 'oauth/client/em_http'
-rescue LoadError => e
-  warn "! problem loading em-http, skipping these tests: #{e}"
-  return
-end
+
+require 'oauth/client/em_http'
 
 class EmHttpClientTest < Test::Unit::TestCase
 
@@ -76,4 +73,8 @@ class EmHttpClientTest < Test::Unit::TestCase
     assert_equal expected[6..1].split(', ').sort, actual[6..1].split(', ').sort
   end
 
+end
+
+rescue LoadError => e
+  warn "! problem loading em-http, skipping these tests: #{e}"
 end
