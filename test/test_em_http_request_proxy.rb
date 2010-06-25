@@ -1,12 +1,9 @@
 require File.expand_path('../test_helper', __FILE__)
 
 begin
-  require 'em-http'
-  require 'oauth/request_proxy/em_http_request'
-rescue LoadError => e
-  warn "! problem loading em-http, skipping these tests: #{e}"
-  return
-end
+
+require 'em-http'
+require 'oauth/request_proxy/em_http_request'
 
 
 class EmHttpRequestProxyTest < Test::Unit::TestCase
@@ -110,5 +107,9 @@ class EmHttpRequestProxyTest < Test::Unit::TestCase
     arguments = opts.delete(:proxy_options) || {}
     OAuth::RequestProxy.proxy(create_client(opts), arguments)
   end
+  
+end
 
+rescue LoadError => e
+  warn "! problem loading em-http, skipping these tests: #{e}"
 end

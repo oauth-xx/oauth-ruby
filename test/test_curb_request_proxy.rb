@@ -1,12 +1,9 @@
 require File.expand_path('../test_helper', __FILE__)
 
 begin
-  require 'oauth/request_proxy/curb_request'
-  require 'curb'
-rescue LoadError => e
-  warn "! problems loading curb, skipping these tests: #{e}"
-  return
-end
+
+require 'oauth/request_proxy/curb_request'
+require 'curb'
 
 
 class CurbRequestProxyTest < Test::Unit::TestCase
@@ -73,4 +70,8 @@ class CurbRequestProxyTest < Test::Unit::TestCase
     assert_equal expected_parameters, request_proxy.parameters_for_signature
     assert_equal 'http://example.com/test', request_proxy.normalized_uri
   end
+end
+
+rescue LoadError => e
+  warn "! problems loading curb, skipping these tests: #{e}"
 end
