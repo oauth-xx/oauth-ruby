@@ -1,4 +1,4 @@
-require File.dirname(__FILE__) + '/test_helper.rb'
+require File.expand_path('../test_helper', __FILE__)
 
 class TestSignatureHmacSha1 < Test::Unit::TestCase
   def test_that_hmac_sha1_implements_hmac_sha1

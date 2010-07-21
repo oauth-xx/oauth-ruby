@@ -1,6 +1,5 @@
 require 'active_support'
 require 'action_controller'
-require 'action_controller/request'
 require 'uri'
 
 module OAuth::RequestProxy

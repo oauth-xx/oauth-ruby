@@ -1,4 +1,4 @@
-require File.dirname(__FILE__) + '/../../oauth_case'
+require File.expand_path('../../../oauth_case', __FILE__)
 
 # See http://oauth.net/core/1.0/#anchor14
 #

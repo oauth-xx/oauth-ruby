@@ -1,6 +1,6 @@
 # -*- encoding: utf-8 -*-
 
-require File.dirname(__FILE__) + '/test_helper.rb'
+require File.expand_path('../test_helper', __FILE__)
 
 class TestOauth < Test::Unit::TestCase
 
