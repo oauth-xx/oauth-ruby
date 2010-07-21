@@ -1,4 +1,4 @@
-require File.dirname(__FILE__) + '/test_helper.rb'
+require File.expand_path('../test_helper', __FILE__)
 require 'oauth/signature/plaintext'
 
 class TestSignaturePlaintext < Test::Unit::TestCase

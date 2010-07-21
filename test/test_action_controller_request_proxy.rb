@@ -1,5 +1,5 @@
-gem 'actionpack', '>2.2.0', '<2.3.0'
-require File.dirname(__FILE__) + '/test_helper.rb'
+gem 'actionpack', '2.3.8'
+require File.expand_path('../test_helper', __FILE__)
 
 require 'oauth/request_proxy/action_controller_request'
 require 'action_controller/test_process'
