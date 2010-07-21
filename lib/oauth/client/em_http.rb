@@ -61,6 +61,20 @@ class EventMachine::HttpClient
     OAuth::Client::Helper.new(self, options).signature_base_string
   end
 
+  # This code was lifted from the em-http-request because it was removed from
+  # the gem June 19, 2010
+  # see: http://github.com/igrigorik/em-http-request/commit/d536fc17d56dbe55c487eab01e2ff9382a62598b
+  def normalize_uri
+      @normalized_uri ||= begin
+        uri = @uri.dup
+        encoded_query = encode_query(@uri.path, @options[:query], @uri.query)
+        path, query = encoded_query.split("?", 2)
+        uri.query = query unless encoded_query.empty?
+        uri.path  = path
+        uri
+      end
+  end
+
   protected
 
   # Since we expect to get the host etc details from the http instance (...),

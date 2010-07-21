@@ -150,14 +150,14 @@ Gem::Specification.new do |s|
       s.add_development_dependency(%q<rack>, [">= 1.0.0"])
       s.add_development_dependency(%q<mocha>, [">= 0.9.8"])
       s.add_development_dependency(%q<typhoeus>, [">= 0.1.13"])
-      s.add_development_dependency(%q<em-http-request>, [">= 0"])
+      s.add_development_dependency(%q<em-http-request>, [">= 0.2.10"])
       s.add_development_dependency(%q<curb>, [">= 0.6.6.0"])
     else
       s.add_dependency(%q<actionpack>, ["= 2.3.8"])
       s.add_dependency(%q<rack>, [">= 1.0.0"])
       s.add_dependency(%q<mocha>, [">= 0.9.8"])
       s.add_dependency(%q<typhoeus>, [">= 0.1.13"])
-      s.add_dependency(%q<em-http-request>, [">= 0"])
+      s.add_dependency(%q<em-http-request>, [">= 0.2.10"])
       s.add_dependency(%q<curb>, [">= 0.6.6.0"])
     end
   else
@@ -165,7 +165,7 @@ Gem::Specification.new do |s|
     s.add_dependency(%q<rack>, [">= 1.0.0"])
     s.add_dependency(%q<mocha>, [">= 0.9.8"])
     s.add_dependency(%q<typhoeus>, [">= 0.1.13"])
-    s.add_dependency(%q<em-http-request>, [">= 0"])
+    s.add_dependency(%q<em-http-request>, [">= 0.2.10"])
     s.add_dependency(%q<curb>, [">= 0.6.6.0"])
   end
 end
