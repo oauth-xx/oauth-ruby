@@ -23,20 +23,7 @@ class NetHTTPClientTest < Test::Unit::TestCase
     assert_equal auth_intro, 'OAuth'
     assert_matching_headers correct_sorted_params, request['authorization']
   end
-  
-  def test_that_using_auth_headers_on_get_requests_works_with_plaintext
-    require 'oauth/signature/plaintext'
-    c = OAuth::Consumer.new('consumer_key_86cad9', '5888bf0345e5d237',{
-      :signature_method => 'PLAINTEXT'
-    })
-    request = Net::HTTP::Get.new(@request_uri.path + "?" + request_parameters_to_s)
-    request.oauth!(@http, c, @token, {:nonce => @nonce, :timestamp => @timestamp, :signature_method => 'PLAINTEXT'})
 
-    assert_equal 'GET', request.method
-    assert_equal '/test?key=value', request.path
-    assert_matching_headers "oauth_nonce=\"225579211881198842005988698334675835446\", oauth_signature_method=\"PLAINTEXT\", oauth_token=\"token_411a7f\", oauth_timestamp=\"1199645624\", oauth_consumer_key=\"consumer_key_86cad9\", oauth_signature=\"1oO2izFav1GP4kEH2EskwXkCRFg%3D\", oauth_version=\"1.0\"", request['authorization']
-  end
-  
   def test_that_using_auth_headers_on_get_requests_works_with_plaintext
     require 'oauth/signature/plaintext'
     c = OAuth::Consumer.new('consumer_key_86cad9', '5888bf0345e5d237',{
