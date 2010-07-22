@@ -1,3 +1,4 @@
+#gem 'actionpack', '2.2.3'
 gem 'actionpack', '2.3.8'
 require File.expand_path('../test_helper', __FILE__)
 

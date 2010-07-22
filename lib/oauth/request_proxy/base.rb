@@ -142,6 +142,14 @@ module OAuth::RequestProxy
       "OAuth #{realm}#{header_params_str}"
     end
 
+    def query_string_blank?
+      if uri = request.request_uri
+        uri.split('?', 2)[1].nil?
+      else
+        request.query_string.blank?
+      end
+    end
+
   protected
 
     def header_params
