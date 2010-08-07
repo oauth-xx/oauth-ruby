@@ -68,16 +68,9 @@ private
     uri.host = http.address
     uri.port = http.port
 
-    if options[:request_endpoint] and options[:site]
-        hostval = options[:site]
-        if hostval.include?("http://")
-	   hostval["http://"] = ""
-        end
-        if hostval.include?("https://")
-	   hostval["https://"] = ""
-        end
-	uri.host = hostval
-        uri.port = 80
+    if options[:request_endpoint] && options[:site]
+      uri.host = options[:site].gsub(%r(^https?://), '')
+      uri.port = 80
     end
 
     if http.respond_to?(:use_ssl?) && http.use_ssl?
@@ -85,7 +78,6 @@ private
     else
       uri.scheme = "http"
     end
-
 
     uri.to_s
   end

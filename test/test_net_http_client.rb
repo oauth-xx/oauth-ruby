@@ -273,6 +273,14 @@ class NetHTTPClientTest < Test::Unit::TestCase
     assert_equal "POST&http%3A%2F%2Fexample.com%2Ftest&oauth_body_hash%3DDvAa1AWdFoH9K%252B%252F2AHm3f6wH27k%253D%26oauth_consumer_key%3Dconsumer_key_86cad9%26oauth_nonce%3D225579211881198842005988698334675835446%26oauth_signature_method%3DHMAC-SHA1%26oauth_timestamp%3D1199645624%26oauth_version%3D1.0", signature_base_string
   end
 
+  def test_that_site_address_is_not_modified_in_place
+    options = { :site => 'http://twitter.com', :request_endpoint => 'http://api.twitter.com' }
+    request = Net::HTTP::Get.new(@request_uri.path + "?" + request_parameters_to_s)
+    request.oauth!(@http, @consumer, @token, options)
+    assert_equal "http://twitter.com", options[:site]
+    assert_equal "http://api.twitter.com", options[:request_endpoint]
+  end
+
   protected
 
     def request_parameters_to_s
