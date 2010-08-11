@@ -61,7 +61,30 @@ class EventMachine::HttpClient
     OAuth::Client::Helper.new(self, options).signature_base_string
   end
 
+  def normalize_uri
+    @normalized_uri ||= begin
+      uri = @uri.dup
+      combined_query = combine_query(@uri.path, @options[:query], @uri.query)
+      path, query = combined_query.split("?", 2)
+      uri.query = query unless combined_query.empty?
+      uri.path  = path
+      uri
+    end
+  end
+
   protected
+
+  def combine_query(path, query, uri_query)
+    combined_query = if query.kind_of?(Hash)
+      query.map { |k, v| encode_param(k, v) }.join('&')
+    else
+      query.to_s
+    end
+    if !uri_query.to_s.empty?
+      combined_query = [combined_query, uri_query].reject {|part| part.empty?}.join("&")
+    end
+    combined_query.to_s.empty? ? path : "#{path}?#{combined_query}"
+  end
 
   # Since we expect to get the host etc details from the http instance (...),
   # we create a fake url here. Surely this is a horrible, horrible idea?
