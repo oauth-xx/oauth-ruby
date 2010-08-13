@@ -5,6 +5,7 @@ require 'oauth/request_proxy/action_controller_request'
 require 'action_controller/test_process'
 
 class ActionControllerRequestProxyTest < Test::Unit::TestCase
+
   def request_proxy(request_method = :get, uri_params = {}, body_params = {})
     request = ActionController::TestRequest.new
     request.set_REQUEST_URI('/')
@@ -22,7 +23,7 @@ class ActionControllerRequestProxyTest < Test::Unit::TestCase
     request.env['CONTENT_TYPE'] = 'application/x-www-form-urlencoded'
 
     yield request if block_given?
-    OAuth::RequestProxy.proxy(request, :parameters => uri_params)
+    OAuth::RequestProxy::ActionControllerRequest.new(request, :parameters => uri_params)
   end
 
   def test_that_proxy_simple_get_request_works_with_query_params
