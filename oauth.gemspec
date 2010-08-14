@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{oauth}
-  s.version = "0.4.1"
+  s.version = "0.4.2"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Pelle Braendgaard", "Blaine Cook", "Larry Halff", "Jesse Clark", "Jon Crosby", "Seth Fitzsimmons", "Matt Sanford", "Aaron Quint"]
-  s.date = %q{2010-07-21}
+  s.date = %q{2010-08-13}
   s.default_executable = %q{oauth}
   s.description = %q{OAuth Core Ruby implementation}
   s.email = %q{oauth-ruby@googlegroups.com}
@@ -21,6 +21,8 @@ Gem::Specification.new do |s|
   ]
   s.files = [
     ".gitignore",
+     "Gemfile",
+     "Gemfile.lock",
      "HISTORY",
      "LICENSE",
      "README.rdoc",
@@ -169,3 +171,4 @@ Gem::Specification.new do |s|
     s.add_dependency(%q<curb>, [">= 0.6.6.0"])
   end
 end
+
