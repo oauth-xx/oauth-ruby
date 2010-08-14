@@ -1,3 +1,10 @@
+== 0.4.2 2010-08-13
+
+* Fixed compatibility with Ruby 1.9.2 (ecavazos)
+* Fixed the em-http request proxy (Joshua Hull)
+* Fix for oauth proxy string manipulation (Jakub Suder)
+* Added Bundler (rc) Gemfile for easier dev/testing
+
 == 0.4.1 2010-06-16
 
 * Added support for using OAuth with proxies (Marsh Gardiner)
