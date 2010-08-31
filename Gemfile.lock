@@ -7,7 +7,7 @@ GEM
     activesupport (2.3.8)
     addressable (2.2.0)
     curb (0.7.7.1)
-    em-http-request (0.2.10)
+    em-http-request (0.2.11)
       addressable (>= 2.0.0)
       eventmachine (>= 0.12.9)
     eventmachine (0.12.10)
@@ -34,7 +34,7 @@ PLATFORMS
 DEPENDENCIES
   actionpack (= 2.3.8)
   curb (>= 0.6.6.0)
-  em-http-request
+  em-http-request (= 0.2.11)
   jeweler
   mocha (>= 0.9.8)
   typhoeus (>= 0.1.13)
