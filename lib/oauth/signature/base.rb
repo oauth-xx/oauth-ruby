@@ -11,7 +11,7 @@ module OAuth::Signature
     attr_reader :token_secret, :consumer_secret, :request
 
     def self.implements(signature_method = nil)
-      return @implements if signature_method.nil? 
+      return @implements if signature_method.nil?
       @implements = signature_method
       OAuth::Signature.available_methods[@implements] = self
     end
@@ -20,7 +20,7 @@ module OAuth::Signature
       return @digest_class if digest_class.nil?
       @digest_class = digest_class
     end
-    
+
     def self.digest_klass(digest_klass = nil)
       return @digest_klass if digest_klass.nil?
       @digest_klass = digest_klass

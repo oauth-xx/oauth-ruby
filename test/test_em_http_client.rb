@@ -18,7 +18,7 @@ class EmHttpClientTest < Test::Unit::TestCase
     # This is really unneeded I guess.
     @http = Net::HTTP.new(@request_uri.host, @request_uri.port)
   end
-  
+
   def test_that_using_auth_headers_on_get_requests_works
     request = create_client
     request.oauth!(@http, @consumer, @token, {:nonce => @nonce, :timestamp => @timestamp})
@@ -28,7 +28,7 @@ class EmHttpClientTest < Test::Unit::TestCase
     assert_equal "key=value", request.normalize_uri.query
     assert_equal_authz_headers "OAuth oauth_nonce=\"225579211881198842005988698334675835446\", oauth_signature_method=\"HMAC-SHA1\", oauth_token=\"token_411a7f\", oauth_timestamp=\"1199645624\", oauth_consumer_key=\"consumer_key_86cad9\", oauth_signature=\"1oO2izFav1GP4kEH2EskwXkCRFg%3D\", oauth_version=\"1.0\"", authz_header(request)
   end
-  
+
   def test_that_using_auth_headers_on_get_requests_works_with_plaintext
     require 'oauth/signature/plaintext'
     c = OAuth::Consumer.new('consumer_key_86cad9', '5888bf0345e5d237',{
@@ -52,9 +52,9 @@ class EmHttpClientTest < Test::Unit::TestCase
     assert_equal 'key=value', request.normalize_body
     assert_equal_authz_headers "OAuth oauth_nonce=\"225579211881198842005988698334675835446\", oauth_signature_method=\"HMAC-SHA1\", oauth_token=\"token_411a7f\", oauth_timestamp=\"1199645624\", oauth_consumer_key=\"consumer_key_86cad9\", oauth_signature=\"26g7wHTtNO6ZWJaLltcueppHYiI%3D\", oauth_version=\"1.0\"", authz_header(request)
   end
-  
+
   protected
-  
+
   def create_client(options = {})
     method         = options.delete(:method) || "GET"
     uri            = options.delete(:uri)    || @request_uri.to_s
@@ -64,7 +64,7 @@ class EmHttpClientTest < Test::Unit::TestCase
     client.options = options
     client
   end
-  
+
   def authz_header(request)
     headers = request.options[:head] || {}
     headers['Authorization'].to_s
@@ -75,5 +75,5 @@ class EmHttpClientTest < Test::Unit::TestCase
     assert_equal expected[0,6], actual[0, 6]
     assert_equal expected[6..1].split(', ').sort, actual[6..1].split(', ').sort
   end
-  
+
 end

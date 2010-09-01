@@ -39,7 +39,7 @@ module OAuth
 
       # Default http method used for OAuth Token Requests (defaults to :post)
       :http_method   => :post,
-      
+
       # Add a custom ca_file for consumer
       # :ca_file       => '/etc/certs.pem'
 
@@ -235,8 +235,8 @@ module OAuth
     end
 
     def request_endpoint
-	return nil if @options[:request_endpoint].nil?
-	@options[:request_endpoint].to_s
+  return nil if @options[:request_endpoint].nil?
+  @options[:request_endpoint].to_s
     end
 
     def scheme

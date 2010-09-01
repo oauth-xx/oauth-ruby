@@ -7,7 +7,7 @@ require 'mocha'
 require 'stringio'
 
 class Test::Unit::TestCase
-  
+
   def assert_matching_headers(expected, actual)
     # transform into sorted arrays
     auth_intro, auth_params = actual.split(' ', 2)
@@ -16,5 +16,5 @@ class Test::Unit::TestCase
     auth_params = auth_params.split(/(,|\s)/).reject {|v| v == '' || v =~ /^[\,\s]+/}.sort
     assert_equal expected, auth_params
   end
-  
+
 end

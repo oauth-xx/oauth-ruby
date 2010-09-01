@@ -2,8 +2,8 @@
 #
 # An implementation of HMAC keyed-hashing algorithm
 #
-# == Overview 
-# 
+# == Overview
+#
 # This library adds a method named hmac() to Digest classes, which
 # creates a Digest class for calculating HMAC digests.
 #
