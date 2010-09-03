@@ -1,3 +1,5 @@
+* Added support for Rails 3 in client/action_controller_request (Pelle)
+
 == 0.4.3 2010-09-01
 
 * Fix for em-http proxy (ichverstehe)
