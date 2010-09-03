@@ -13,7 +13,7 @@ class EventMachine::HttpClient
   # this may add a header, additional query string parameters, or additional POST body parameters.
   # The default scheme is +header+, in which the OAuth parameters as put into the +Authorization+
   # header.
-  # 
+  #
   # * http - Configured Net::HTTP instance, ignored in this scenario except for getting host.
   # * consumer - OAuth::Consumer instance
   # * token - OAuth::Token instance
@@ -41,13 +41,13 @@ class EventMachine::HttpClient
   # on the <tt>options[:scheme]</tt> being used so this must match what will be used for the request
   # itself. The default scheme is +header+, in which the OAuth parameters as put into the +Authorization+
   # header.
-  # 
+  #
   # * http - Configured Net::HTTP instance
   # * consumer - OAuth::Consumer instance
   # * token - OAuth::Token instance
   # * options - Request-specific options (e.g. +request_uri+, +consumer+, +token+, +scheme+,
   #   +signature_method+, +nonce+, +timestamp+)
-  # 
+  #
   # See Also: {OAuth core spec version 1.0, section 9.1.1}[http://oauth.net/core/1.0#rfc.section.9.1.1]
   def signature_base_string(http, consumer = nil, token = nil, options = {})
     options = { :request_uri      => normalized_oauth_uri(http),
@@ -65,14 +65,14 @@ class EventMachine::HttpClient
   # the gem June 19, 2010
   # see: http://github.com/igrigorik/em-http-request/commit/d536fc17d56dbe55c487eab01e2ff9382a62598b
   def normalize_uri
-      @normalized_uri ||= begin
-        uri = @uri.dup
-        encoded_query = encode_query(@uri.path, @options[:query], @uri.query)
-        path, query = encoded_query.split("?", 2)
-        uri.query = query unless encoded_query.empty?
-        uri.path  = path
-        uri
-      end
+    @normalized_uri ||= begin
+      uri = @uri.dup
+      encoded_query = encode_query(@uri, @options[:query])
+      path, query = encoded_query.split("?", 2)
+      uri.query = query unless encoded_query.empty?
+      uri.path  = path
+      uri
+    end
   end
 
   protected
@@ -116,5 +116,5 @@ class EventMachine::HttpClient
   def set_oauth_query_string
     raise NotImplementedError, 'please use the set_oauth_header method instead'
   end
-  
+
 end

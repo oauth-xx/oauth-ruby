@@ -66,7 +66,7 @@ class TyphoeusRequestProxyTest < Test::Unit::TestCase
   end
 
   def test_that_proxy_post_request_works_with_mixed_parameter_sources
-    request = Typhoeus::Request.new('/test?key=value', 
+    request = Typhoeus::Request.new('/test?key=value',
       :method => :post,
       :body => {'key2' => 'value2'},
       :headers => {'Content-Type' => 'application/x-www-form-urlencoded'})

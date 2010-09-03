@@ -19,11 +19,11 @@ require File.expand_path('../../../oauth_case', __FILE__)
 
 
 class ConstructRequestUrlTest < OAuthCase
-  
+
   def test_from_spec
     assert_request_url("http://example.com/resource","HTTP://Example.com:80/resource?id=123")
   end
-  
+
   def test_simple_url_with_ending_slash
     assert_request_url("http://example.com/","http://example.com/")
   end
@@ -31,7 +31,7 @@ class ConstructRequestUrlTest < OAuthCase
   def test_simple_url_without_ending_slash
     assert_request_url("http://example.com/","http://example.com")
   end
-  
+
   def test_of_normalized_http
     assert_request_url("http://example.com/resource","http://example.com/resource")
   end
@@ -43,20 +43,20 @@ class ConstructRequestUrlTest < OAuthCase
   def test_of_normalized_https
     assert_request_url("https://example.com/resource","https://example.com/resource")
   end
-  
+
   def test_of_http_with_non_standard_port
     assert_request_url("http://example.com:8080/resource","http://example.com:8080/resource")
   end
-  
+
   def test_of_https_with_non_standard_port
     assert_request_url("https://example.com:8080/resource","https://example.com:8080/resource")
   end
-  
+
   protected
-  
-  
+
+
   def assert_request_url(expected,given,message=nil)
     assert_equal expected, request({},'GET',given).normalized_uri, message
   end
-  
+
 end

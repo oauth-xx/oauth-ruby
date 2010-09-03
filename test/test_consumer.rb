@@ -119,7 +119,7 @@ class ConsumerTest < Test::Unit::TestCase
     assert_equal 'token', token.token
     assert_equal 'secret', token.secret
   end
-  
+
   def test_that_can_provide_a_block_to_interpret_an_access_token_response
     stub_token = mock
     @consumer.expects(:request).returns(create_stub_http_response)
@@ -129,8 +129,8 @@ class ConsumerTest < Test::Unit::TestCase
     assert_equal 'token', token.token
     assert_equal 'secret', token.secret
   end
-  
-  def test_that_not_setting_ignore_callback_will_include_oauth_callback_in_request_options 
+
+  def test_that_not_setting_ignore_callback_will_include_oauth_callback_in_request_options
     request_options = {}
     @consumer.stubs(:request).returns(create_stub_http_response)
 
@@ -147,7 +147,7 @@ class ConsumerTest < Test::Unit::TestCase
 
     assert_nil request_options[:oauth_callback]
   end
-  
+
   private
 
   def create_stub_http_response expected_body=nil

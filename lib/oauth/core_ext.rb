@@ -8,7 +8,7 @@ class Object
       self
     end
   end
-  
+
 end
 
 class String

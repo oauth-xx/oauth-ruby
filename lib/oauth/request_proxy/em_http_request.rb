@@ -5,22 +5,22 @@ require 'cgi'
 
 module OAuth::RequestProxy::EventMachine
   class HttpRequest < OAuth::RequestProxy::Base
-    
+
     # A Proxy for use when you need to sign EventMachine::HttpClient instances.
     # It needs to be called once the client is construct but before data is sent.
     # Also see oauth/client/em-http
     proxies ::EventMachine::HttpClient
-    
+
     # Request in this con
-    
+
     def method
       request.method
     end
-    
+
     def uri
       request.normalize_uri.to_s
     end
-    
+
     def parameters
       if options[:clobber_request]
         options[:parameters]
@@ -28,17 +28,17 @@ module OAuth::RequestProxy::EventMachine
         all_parameters
       end
     end
-    
+
     protected
-    
+
     def all_parameters
       merged_parameters({}, post_parameters, query_parameters, options[:parameters])
     end
-    
+
     def query_parameters
       CGI.parse(request.normalize_uri.query.to_s)
     end
-    
+
     def post_parameters
       headers = request.options[:head] || {}
       form_encoded = headers['Content-Type'].to_s.downcase == 'application/x-www-form-urlencoded'
@@ -48,7 +48,7 @@ module OAuth::RequestProxy::EventMachine
         {}
       end
     end
-    
+
     def merged_parameters(params, *extra_params)
       extra_params.compact.each do |params_pairs|
         params_pairs.each_pair do |key, value|
@@ -61,7 +61,6 @@ module OAuth::RequestProxy::EventMachine
       end
       params
     end
-    
+
   end
 end
-
