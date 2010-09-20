@@ -334,10 +334,10 @@ module OAuth
       case http_method
       when :post
         request = Net::HTTP::Post.new(path,headers)
-        request["Content-Length"] = 0 # Default to 0
+        request["Content-Length"] = '0' # Default to 0
       when :put
         request = Net::HTTP::Put.new(path,headers)
-        request["Content-Length"] = 0 # Default to 0
+        request["Content-Length"] = '0' # Default to 0
       when :get
         request = Net::HTTP::Get.new(path,headers)
       when :delete
@@ -356,15 +356,15 @@ module OAuth
         if data.respond_to?(:read)
           request.body_stream = data
           if data.respond_to?(:length)
-            request["Content-Length"] = data.length
+            request["Content-Length"] = data.length.to_s
           elsif data.respond_to?(:stat) && data.stat.respond_to?(:size)
-            request["Content-Length"] = data.stat.size
+            request["Content-Length"] = data.stat.size.to_s
           else
             raise ArgumentError, "Don't know how to send a body_stream that doesn't respond to .length or .stat.size"
           end
         else
           request.body = data.to_s
-          request["Content-Length"] = request.body.length
+          request["Content-Length"] = request.body.length.to_s
         end
       end
 
