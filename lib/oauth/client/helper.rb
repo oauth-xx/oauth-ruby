@@ -28,6 +28,7 @@ module OAuth::Client
 
     def oauth_parameters
       {
+        'scope'                  => options[:scope],
         'oauth_body_hash'        => options[:body_hash],
         'oauth_callback'         => options[:oauth_callback],
         'oauth_consumer_key'     => options[:consumer].key,
