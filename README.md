@@ -6,11 +6,11 @@ Is a RubyGem for implementing both OAuth clients and servers in Ruby application
 
 This library is intended to be used in creating Ruby Consumer and Service Provider applications. 
 
-It can be used in any Ruby application.  This includes applications written using a framework like Rails or Sinatra.
+It can be used in any Ruby application.  This includes applications written using a framework like [Rails](http://github.com/rails/rails) or [Sinatra](http://github.com/sinatra/sinatra).
 
 It originated from the [OAuth Rails Plugin](http://code.google.com/p/oauth-plugin/) which now requires this gem.
 
-The official source code repository is at http://github.com/oauth/oauth-ruby
+The official source code repository is [here](http://github.com/oauth/oauth-ruby).
 
 ## Installation
 
@@ -55,9 +55,9 @@ Now that you have an access token, you can use Typhoeus to interact with the OAu
     hydra.run
     @response = req.response
 
-Be sure to check out the examples in this repository:
+Be sure to check out the examples in
 
-   examples/yql.rb
+    examples/yql.rb
 
 ## More Information
 
@@ -76,6 +76,6 @@ This code is free to use under the terms of the [MIT license](http://www.opensou
 ## Contact
 
 OAuth Ruby has been created and maintained by a large number of talented individuals. 
-The current maintainer is Aaron Quint [(quirkey)](http://github.com/quirkey).
+The current maintainer is Aaron Quint ([quirkey](http://github.com/quirkey)).
 
 Comments are welcome. Send an email to the [OAuth Ruby Mailing List](http://groups.google.com/group/oauth-ruby).
