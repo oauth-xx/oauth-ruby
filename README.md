@@ -1,70 +1,81 @@
-# Ruby OAuth
+# Ruby OAuth 
 
-## What
+Is a RubyGem for implementing both OAuth clients and servers in Ruby applications.
 
-This is a RubyGem for implementing both OAuth clients and servers in Ruby applications.
+## Basics
 
-See the OAuth specs http://oauth.net/core/1.0/
+This library is intended to be used in creating Ruby Consumer and Service Provider applications. 
 
-## Installing
+It can be used in any Ruby application.  This includes applications written using a framework like Rails or Sinatra.
 
-    sudo gem install oauth
+It originated from the [OAuth Rails Plugin](http://code.google.com/p/oauth-plugin/) which now requires this gem.
 
-The source code is now hosted on the OAuth GitHub Project http://github.com/oauth/oauth-ruby
+The official source code repository is at http://github.com/oauth/oauth-ruby
 
-## The basics
+## Installation
 
-This is a ruby library which is intended to be used in creating Ruby Consumer and Service Provider applications. It is NOT a Rails plugin, but could easily be used for the foundation for such a Rails plugin.
+  [sudo] gem install oauth
 
-As a matter of fact it has been pulled out from an OAuth Rails Plugin http://code.google.com/p/oauth-plugin/ which now requires this GEM.
+## Usage
 
-## Demonstration of usage
+* Require the library
+* Create a consumer
+* Get a request token
+* Get an access token
+* Make API calls
 
-Create a new consumer instance by passing it a configuration hash:
+## Example
 
-    @consumer # OAuth::Consumer.new("key","secret", :site #> "https://agree2")
+In your application or script (e.g. "awesome_client.rb")
 
-Start the process by requesting a token
+    # Require the library
+    require 'rubygems'
+    require 'oauth'
+    
+    # Create a new consumer instance by passing it a configuration hash:
+    @consumer = OAuth::Consumer.new("key","secret", :site => "https://agree2")
 
-    @request_token # @consumer.get_request_token
-    session[:request_token] # @request_token
+    # Start the process by getting a request token
+    @request_token = @consumer.get_request_token
+    session[:request_token] = @request_token
     redirect_to @request_token.authorize_url
-
-When user returns create an access_token
-
-    @access_token # @request_token.get_access_token
-    @photos # @access_token.get('/photos.xml')
+    
+    # When the user returns, create an access_token
+    @access_token = @request_token.get_access_token
+    @photos = @access_token.get('/photos.xml')
 
 Now that you have an access token, you can use Typhoeus to interact with the OAuth provider if you choose.
 
-    oauth_params # {:consumer #> oauth_consumer, :token #> access_token}
-    hydra # Typhoeus::Hydra.new
-    req # Typhoeus::Request.new(uri, options) 
-    oauth_helper # OAuth::Client::Helper.new(req, oauth_params.merge(:request_uri #> uri))
-    req.headers.merge!({"Authorization" #> oauth_helper.header}) # Signs the request
+    oauth_params = {:consumer => oauth_consumer, :token => access_token}
+    hydra = Typhoeus::Hydra.new
+    req = Typhoeus::Request.new(uri, options) 
+    oauth_helper = OAuth::Client::Helper.new(req, oauth_params.merge(:request_uri => uri))
+    req.headers.merge!({"Authorization" => oauth_helper.header}) # Signs the request
     hydra.queue(req)
     hydra.run
-    @response # req.response
+    @response = req.response
 
+Be sure to check out the examples in this repository:
+
+   examples/yql.rb
 
 ## More Information
 
-* RDoc: http://rdoc.info/projects/oauth/oauth-ruby/
-* Mailing List/Google Group: http://groups.google.com/group/oauth-ruby
+* [Mailing List, Google Group](http://groups.google.com/group/oauth-ruby)
+* [API Documentation (RDoc)](http://rdoc.info/projects/oauth/oauth-ruby/)
+* [OAuth Specification](http://oauth.net/core/1.0/)
 
-## How to submit patches
+## Developers (Submitting Patches)
 
-The source code is now hosted on the OAuth GitHub Project http://github.com/oauth/oauth-ruby
-
-To submit a patch, please fork the oauth project and create a patch with tests. Once you're happy with it send a pull request and post a message to the google group.
+To submit a patch, please fork the [oauth project](http://github.com/oauth/oauth-ruby) and create a patch with tests. Once you're happy with it send a pull request and post a message to the google group.
 
 ## License
 
-This code is free to use under the terms of the MIT license. 
+This code is free to use under the terms of the [MIT license](http://www.opensource.org/licenses/mit-license.html). 
 
 ## Contact
 
 OAuth Ruby has been created and maintained by a large number of talented individuals. 
-The current maintainer is Aaron Quint (quirkey).
+The current maintainer is Aaron Quint [(quirkey)](http://github.com/quirkey).
 
-Comments are welcome. Send an email to via the OAuth Ruby mailing list http://groups.google.com/group/oauth-ruby
+Comments are welcome. Send an email to the [OAuth Ruby Mailing List](http://groups.google.com/group/oauth-ruby).
