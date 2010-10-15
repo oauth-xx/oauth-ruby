@@ -57,7 +57,7 @@ module OAuth
     #
     def parse_header(header)
       # decompose
-      params = header[6,header.length].split(/[,=]/)
+      params = header[6,header.length].split(/[,=&]/)
 
       # odd number of arguments - must be a malformed header.
       raise OAuth::Problem.new("Invalid authorization header") if params.size % 2 != 0
