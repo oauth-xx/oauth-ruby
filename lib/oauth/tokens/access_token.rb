@@ -7,11 +7,14 @@ module OAuth
       request_uri = URI.parse(path)
       site_uri = consumer.uri
       is_service_uri_different = (request_uri.absolute? && request_uri != site_uri)
-      consumer.uri(request_uri) if is_service_uri_different
-      @response = super(http_method, path, *arguments)
-      # NOTE: reset for wholesomeness? meaning that we admit only AccessToken service calls may use different URIs?
-      # so reset in case consumer is still used for other token-management tasks subsequently?
-      consumer.uri(site_uri) if is_service_uri_different
+      begin
+        consumer.uri(request_uri) if is_service_uri_different
+        @response = super(http_method, path, *arguments)
+      ensure
+        # NOTE: reset for wholesomeness? meaning that we admit only AccessToken service calls may use different URIs?
+        # so reset in case consumer is still used for other token-management tasks subsequently?
+        consumer.uri(site_uri) if is_service_uri_different
+      end
       @response
     end
 
