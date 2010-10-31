@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{oauth}
-  s.version = "0.4.3"
+  s.version = "0.4.4"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Pelle Braendgaard", "Blaine Cook", "Larry Halff", "Jesse Clark", "Jon Crosby", "Seth Fitzsimmons", "Matt Sanford", "Aaron Quint"]
-  s.date = %q{2010-09-01}
+  s.date = %q{2010-10-31}
   s.default_executable = %q{oauth}
   s.description = %q{OAuth Core Ruby implementation}
   s.email = %q{oauth-ruby@googlegroups.com}
@@ -148,14 +148,14 @@ Gem::Specification.new do |s|
     s.specification_version = 3
 
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
-      s.add_development_dependency(%q<actionpack>, ["= 2.3.8"])
+      s.add_development_dependency(%q<actionpack>, [">= 2.3.5"])
       s.add_development_dependency(%q<rack>, [">= 1.0.0"])
       s.add_development_dependency(%q<mocha>, [">= 0.9.8"])
       s.add_development_dependency(%q<typhoeus>, [">= 0.1.13"])
       s.add_development_dependency(%q<em-http-request>, [">= 0.2.10"])
       s.add_development_dependency(%q<curb>, [">= 0.6.6.0"])
     else
-      s.add_dependency(%q<actionpack>, ["= 2.3.8"])
+      s.add_dependency(%q<actionpack>, [">= 2.3.5"])
       s.add_dependency(%q<rack>, [">= 1.0.0"])
       s.add_dependency(%q<mocha>, [">= 0.9.8"])
       s.add_dependency(%q<typhoeus>, [">= 0.1.13"])
@@ -163,7 +163,7 @@ Gem::Specification.new do |s|
       s.add_dependency(%q<curb>, [">= 0.6.6.0"])
     end
   else
-    s.add_dependency(%q<actionpack>, ["= 2.3.8"])
+    s.add_dependency(%q<actionpack>, [">= 2.3.5"])
     s.add_dependency(%q<rack>, [">= 1.0.0"])
     s.add_dependency(%q<mocha>, [">= 0.9.8"])
     s.add_dependency(%q<typhoeus>, [">= 0.1.13"])
