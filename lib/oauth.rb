@@ -9,4 +9,5 @@ require 'oauth/core_ext'
 
 require 'oauth/client/helper'
 require 'oauth/signature/hmac/sha1'
+require 'oauth/signature/rsa/sha1'
 require 'oauth/request_proxy/mock_request'
