@@ -1,3 +1,11 @@
+=== 0.4.4 2010-10-31
+
+* Fix LoadError rescue in tests: return can't be used in this context (Hans de Graaff)
+* HTTP headers should be strings. (seancribbs)
+* ensure consumer uri gets set back to original config even if an error occurs (Brian Finney)
+* Yahoo uses & to split records in OAuth headers (Brian Finney)
+* Added support for Rails 3 in client/action_controller_request (Pelle)
+
 == 0.4.3 2010-09-01
 
 * Fix for em-http proxy (ichverstehe)

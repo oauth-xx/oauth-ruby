@@ -1,15 +1,26 @@
 require 'oauth/client/helper'
-require 'oauth/request_proxy/action_controller_request'
-require 'action_controller/test_process'
+if defined? ActionDispatch
+  require 'oauth/request_proxy/rack_request'
+  require 'action_dispatch/testing/test_process'
+else
+  require 'oauth/request_proxy/action_controller_request'
+  require 'action_controller/test_process'
+end
 
 module ActionController
   class Base
-    def process_with_oauth(request, response=nil)
-      request.apply_oauth! if request.respond_to?(:apply_oauth!)
-      process_without_oauth(request, response)
+    if defined? ActionDispatch
+      def process_with_new_base_test(request, response=nil)
+        request.apply_oauth! if request.respond_to?(:apply_oauth!)
+        super(request, response)        
+      end
+    else
+      def process_with_oauth(request, response=nil)
+        request.apply_oauth! if request.respond_to?(:apply_oauth!)
+        process_without_oauth(request, response)
+      end
+      alias_method_chain :process, :oauth
     end
-
-    alias_method_chain :process, :oauth
   end
 
   class TestRequest
@@ -33,7 +44,7 @@ module ActionController
     def apply_oauth!
       return unless ActionController::TestRequest.use_oauth? && @oauth_options
 
-      @oauth_helper = OAuth::Client::Helper.new(self, @oauth_options.merge(:request_uri => request_uri))
+      @oauth_helper = OAuth::Client::Helper.new(self, @oauth_options.merge(:request_uri => (respond_to?(:fullpath) ? fullpath : request_uri)))
       @oauth_helper.amend_user_agent_header(env)
 
       self.send("set_oauth_#{@oauth_options[:scheme]}")
