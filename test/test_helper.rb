@@ -5,6 +5,7 @@ $LOAD_PATH << File.dirname(__FILE__) + '/../lib/'
 require 'oauth'
 require 'mocha'
 require 'stringio'
+require 'webmock/test_unit'
 
 class Test::Unit::TestCase
 
