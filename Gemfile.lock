@@ -32,7 +32,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  actionpack (= 2.3.8)
+  actionpack (~> 2.3.8)
   curb (>= 0.6.6.0)
   em-http-request (= 0.2.11)
   jeweler
