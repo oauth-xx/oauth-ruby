@@ -116,6 +116,8 @@ module Integration
     end
 
     def test_step_by_step_token_request
+      stub_request(:get, %r{http://term\.ie/oauth/example/request_token\.php(\?.*)?})
+      
       @consumer=OAuth::Consumer.new(
           "key",
           "secret",

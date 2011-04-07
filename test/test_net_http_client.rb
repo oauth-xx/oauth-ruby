@@ -205,6 +205,9 @@ class NetHTTPClientTest < Test::Unit::TestCase
   end
 
   def test_step_by_step_token_request
+    token_response = "oauth_token=requestkey&oauth_token_secret=requestsecret"
+    stub_request(:get, %r{http://term\.ie/oauth/example/request_token\.php(\?.*)?}).to_return(:body => token_response)
+
     consumer=OAuth::Consumer.new(
         "key",
         "secret")
@@ -227,7 +230,7 @@ class NetHTTPClientTest < Test::Unit::TestCase
     response=http.request(request)
     assert_equal "200",response.code
 #    assert_equal request['authorization'],response.body
-    assert_equal "oauth_token=requestkey&oauth_token_secret=requestsecret",response.body
+    assert_equal token_response, response.body
   end
 
   def test_that_put_bodies_signed
