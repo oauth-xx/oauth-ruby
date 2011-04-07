@@ -240,6 +240,8 @@ module Integration
   #  end
   #
     def test_get_request_token_with_custom_arguments
+      stub_request(:post, "http://term.ie/oauth/example/request_token.php").with(:body => "scope=http%3a%2f%2fwww.google.com%2fcalendar%2ffeeds%20http%3a%2f%2fpicasaweb.google.com%2fdata")
+
       @consumer=OAuth::Consumer.new(
           "key",
           "secret",
@@ -250,17 +252,10 @@ module Integration
           :authorize_path=>"/oauth/example/authorize.php"
           })
 
-
-      debug = ""
-      @consumer.http.set_debug_output(debug)
-
-      # get_request_token should receive our custom request_options and *arguments parameters from get_request_token.
       @consumer.get_request_token({}, {:scope => "http://www.google.com/calendar/feeds http://picasaweb.google.com/data"})
 
       # Because this is a POST request, create_http_request should take the first element of *arguments
       # and turn it into URL-encoded data in the body of the POST.
-      assert_match( /^<- "scope=http%3a%2f%2fwww.google.com%2fcalendar%2ffeeds%20http%3a%2f%2fpicasaweb.google.com%2fdata"/,
-        debug)
     end
 
     def test_post_with_body_stream
