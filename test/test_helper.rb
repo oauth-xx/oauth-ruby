@@ -8,7 +8,6 @@ require 'stringio'
 require 'webmock/test_unit'
 
 class Test::Unit::TestCase
-
   def assert_matching_headers(expected, actual)
     # transform into sorted arrays
     auth_intro, auth_params = actual.split(' ', 2)

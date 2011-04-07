@@ -143,6 +143,9 @@ module Integration
     end
 
     def test_get_token_sequence
+      stub_request(:post, "http://term.ie/oauth/example/request_token.php").to_return(:body => "oauth_token=requestkey&oauth_token_secret=requestsecret")
+      stub_request(:post, "http://term.ie/oauth/example/access_token.php").to_return(:body => "oauth_token=requestkey&oauth_token_secret=requestsecret")
+
       @consumer=OAuth::Consumer.new(
           "key",
           "secret",
@@ -182,6 +185,9 @@ module Integration
     end
 
     def test_get_token_sequence_using_fqdn
+      stub_request(:post, "http://term.ie/oauth/example/request_token.php").to_return(:body => "oauth_token=requestkey&oauth_token_secret=requestsecret")
+      stub_request(:post, "http://term.ie/oauth/example/access_token.php").to_return(:body => "oauth_token=requestkey&oauth_token_secret=requestsecret")
+
       @consumer=OAuth::Consumer.new(
           "key",
           "secret",
@@ -264,6 +270,10 @@ module Integration
     end
 
     def test_post_with_body_stream
+      stub_request(:post, "http://term.ie/oauth/example/request_token.php").to_return(:body => "oauth_token=requestkey&oauth_token_secret=requestsecret")
+      stub_request(:post, "http://term.ie/oauth/example/access_token.php").to_return(:body => "oauth_token=requestkey&oauth_token_secret=requestsecret")
+      stub_request(:post, "http://term.ie/oauth/example/echo_api.php").to_return(:body => "Hello, hello, hello")
+
       @consumer=OAuth::Consumer.new(
           "key",
           "secret",
