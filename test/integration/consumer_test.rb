@@ -143,8 +143,7 @@ module Integration
     end
 
     def test_get_token_sequence
-      stub_request(:post, "http://term.ie/oauth/example/request_token.php").to_return(:body => "oauth_token=requestkey&oauth_token_secret=requestsecret")
-      stub_request(:post, "http://term.ie/oauth/example/access_token.php").to_return(:body => "oauth_token=requestkey&oauth_token_secret=requestsecret")
+      stub_test_ie
 
       @consumer=OAuth::Consumer.new(
           "key",
@@ -185,8 +184,7 @@ module Integration
     end
 
     def test_get_token_sequence_using_fqdn
-      stub_request(:post, "http://term.ie/oauth/example/request_token.php").to_return(:body => "oauth_token=requestkey&oauth_token_secret=requestsecret")
-      stub_request(:post, "http://term.ie/oauth/example/access_token.php").to_return(:body => "oauth_token=requestkey&oauth_token_secret=requestsecret")
+      stub_test_ie
 
       @consumer=OAuth::Consumer.new(
           "key",
@@ -246,7 +244,7 @@ module Integration
   #  end
   #
     def test_get_request_token_with_custom_arguments
-      stub_request(:post, "http://term.ie/oauth/example/request_token.php").with(:body => "scope=http%3a%2f%2fwww.google.com%2fcalendar%2ffeeds%20http%3a%2f%2fpicasaweb.google.com%2fdata")
+      stub_test_ie
 
       @consumer=OAuth::Consumer.new(
           "key",
@@ -265,9 +263,7 @@ module Integration
     end
 
     def test_post_with_body_stream
-      stub_request(:post, "http://term.ie/oauth/example/request_token.php").to_return(:body => "oauth_token=requestkey&oauth_token_secret=requestsecret")
-      stub_request(:post, "http://term.ie/oauth/example/access_token.php").to_return(:body => "oauth_token=requestkey&oauth_token_secret=requestsecret")
-      stub_request(:post, "http://term.ie/oauth/example/echo_api.php").to_return(:body => "Hello, hello, hello")
+      stub_test_ie
 
       @consumer=OAuth::Consumer.new(
           "key",
