@@ -101,6 +101,18 @@ class ConsumerTest < Test::Unit::TestCase
     assert_equal 'secret', hash[:oauth_token_secret]
   end
 
+  def test_token_request_follows_redirect
+    redirect_url = @request_uri.clone
+    redirect_url.path = "/oauth/example/request_token_redirect.php"
+    stub_request(:get, /.*#{@request_uri.path}/).to_return(:status => 301, :headers => {'Location' => redirect_url.to_s})
+    stub_request(:get, /.*#{redirect_url.path}/).to_return(:body => "oauth_token=token&oauth_token_secret=secret")
+
+    hash = @consumer.token_request(:get, @request_uri.path) {{ :oauth_token => 'token', :oauth_token_secret => 'secret' }}
+
+    assert_equal 'token', hash[:oauth_token]
+    assert_equal 'secret', hash[:oauth_token_secret]
+  end
+
   def test_that_can_provide_a_block_to_interpret_a_request_token_response
     @consumer.expects(:request).returns(create_stub_http_response)
 

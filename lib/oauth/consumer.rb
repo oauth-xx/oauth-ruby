@@ -212,7 +212,9 @@ module OAuth
         end
       when (300..399)
         # this is a redirect
-        response.error!
+        uri = URI.parse(response.header['location'])
+        response.error! if uri.path == path # careful of those infinite redirects
+        self.token_request(http_method, uri.path, token, request_options, arguments)
       when (400..499)
         raise OAuth::Unauthorized, response
       else
