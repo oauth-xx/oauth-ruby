@@ -18,7 +18,7 @@ class Test::Unit::TestCase
   end
 
   def stub_test_ie
-    stub_request(:post, "http://term.ie/oauth/example/request_token.php").to_return(:body => "oauth_token=requestkey&oauth_token_secret=requestsecret")
+    stub_request(:any, "http://term.ie/oauth/example/request_token.php").to_return(:body => "oauth_token=requestkey&oauth_token_secret=requestsecret")
     stub_request(:post, "http://term.ie/oauth/example/access_token.php").to_return(:body => "oauth_token=accesskey&oauth_token_secret=accesssecret")
     stub_request(:get, %r{http://term\.ie/oauth/example/echo_api\.php\?.+}).to_return(lambda {|request| {:body => request.uri.query}})
     stub_request(:post, "http://term.ie/oauth/example/echo_api.php").to_return(lambda {|request| {:body => request.body}})
