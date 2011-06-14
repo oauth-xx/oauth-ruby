@@ -2,7 +2,7 @@ require 'oauth/helper'
 require 'oauth/client/helper'
 require 'oauth/request_proxy/net_http'
 
-class Net::HTTPRequest
+class Net::HTTPGenericRequest
   include OAuth::Helper
 
   attr_reader :oauth_helper
