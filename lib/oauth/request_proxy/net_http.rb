@@ -6,7 +6,7 @@ require 'cgi'
 module OAuth::RequestProxy::Net
   module HTTP
     class HTTPRequest < OAuth::RequestProxy::Base
-      proxies ::Net::HTTPRequest
+      proxies ::Net::HTTPGenericRequest
 
       def method
         request.method
