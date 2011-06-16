@@ -43,7 +43,7 @@ module OAuth::RequestProxy::Typhoeus
 
     def post_parameters
       # Post params are only used if posting form data
-      if(method == 'POST' && request.headers['Content-Type'] && request.headers['Content-Type'].downcase == 'application/x-www-form-urlencoded')
+      if(method == 'POST' && request.headers['Content-Type'] && request.headers['Content-Type'].to_s.downcase.start_with?("application/x-www-form-urlencoded"))
         request.body || {}
       else
         {}

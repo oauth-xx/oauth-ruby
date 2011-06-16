@@ -52,7 +52,7 @@ module OAuth::RequestProxy::Net
       end
 
       def form_url_encoded?
-        request['Content-Type'] != nil && request['Content-Type'].downcase == 'application/x-www-form-urlencoded'
+        request['Content-Type'] != nil && request['Content-Type'].to_s.downcase.start_with?('application/x-www-form-urlencoded')
       end
 
       def query_params

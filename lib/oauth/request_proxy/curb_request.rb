@@ -42,7 +42,7 @@ module OAuth::RequestProxy::Curl
       post_body = {}
 
       # Post params are only used if posting form data
-      if (request.headers['Content-Type'] && request.headers['Content-Type'].downcase == 'application/x-www-form-urlencoded')
+      if (request.headers['Content-Type'] && request.headers['Content-Type'].to_s.downcase.start_with?("application/x-www-form-urlencoded"))
 
         request.post_body.split("&").each do |str|
           param = str.split("=")
