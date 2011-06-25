@@ -1,3 +1,13 @@
+=== 0.4.5 2011-06-25
+
+* Add explicit require for rsa/sha1 (Juris Galang)
+* Use webmock to mock all http-requests in tests (Adrian Feldman)
+* Add gemtest support (Adrian Feldman)
+* Fix POST Requests with Typhoeus proxy (niedhui)
+* Mention Typhoeus require in the README (Kim Ahlström)
+* Fix incorrect hardcoded port (Ian Taylor)
+* Use Net::HTTPGenericRequest (Jakub Kuźma)
+
 === 0.4.4 2010-10-31
 
 * Fix LoadError rescue in tests: return can't be used in this context (Hans de Graaff)
