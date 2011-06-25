@@ -34,9 +34,9 @@ module OAuth::RequestProxy
     end
 
     def request_params
-      if request.content_type and request.content_type.downcase == 'application/x-www-form-urlencoded'
+      if request.content_type and request.content_type.to_s.downcase.start_with?("application/x-www-form-urlencoded")
         request.POST
-      else 
+      else
         {}
       end
     end
