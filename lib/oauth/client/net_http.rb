@@ -69,8 +69,9 @@ private
     uri.port = http.port
 
     if options[:request_endpoint] && options[:site]
+      is_https = options[:site].match(%r(^https://))
       uri.host = options[:site].gsub(%r(^https?://), '')
-      uri.port = 80
+      uri.port ||= is_https ? 443 : 80
     end
 
     if http.respond_to?(:use_ssl?) && http.use_ssl?
