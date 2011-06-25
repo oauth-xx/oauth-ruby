@@ -41,5 +41,6 @@ DEPENDENCIES
   em-http-request (= 0.2.11)
   jeweler
   mocha (>= 0.9.8)
+  rake
   typhoeus (>= 0.1.13)
   webmock
