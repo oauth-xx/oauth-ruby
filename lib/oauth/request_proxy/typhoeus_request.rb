@@ -38,13 +38,13 @@ module OAuth::RequestProxy::Typhoeus
 
     def query_parameters
       query = URI.parse(request.url).query
-      return(query ? CGI.parse(query) : {})
+      query ? CGI.parse(query) : {}
     end
 
     def post_parameters
       # Post params are only used if posting form data
-      if(method == 'POST' && request.headers['Content-Type'] && request.headers['Content-Type'].to_s.downcase.start_with?("application/x-www-form-urlencoded"))
-        request.body || {}
+      if method == 'POST'
+        OAuth::Helper.stringify_keys(request.params || {})
       else
         {}
       end
