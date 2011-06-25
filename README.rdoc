@@ -41,6 +41,7 @@ When user returns create an access_token
 
 Now that you have an access token, you can use Typhoeus to interact with the OAuth provider if you choose.
 
+  require 'oauth/request_proxy/typhoeus_request'
   oauth_params = {:consumer => oauth_consumer, :token => access_token}
   hydra = Typhoeus::Hydra.new
   req = Typhoeus::Request.new(uri, options) 
