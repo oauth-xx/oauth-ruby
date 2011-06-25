@@ -117,7 +117,7 @@ module Integration
 
     def test_step_by_step_token_request
       stub_test_ie
-      
+
       @consumer=OAuth::Consumer.new(
           "key",
           "secret",

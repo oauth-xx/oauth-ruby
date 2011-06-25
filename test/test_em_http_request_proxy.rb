@@ -107,7 +107,7 @@ class EmHttpRequestProxyTest < Test::Unit::TestCase
     arguments = opts.delete(:proxy_options) || {}
     OAuth::RequestProxy.proxy(create_client(opts), arguments)
   end
-  
+
 end
 
 rescue LoadError => e

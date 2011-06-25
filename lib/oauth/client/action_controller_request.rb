@@ -12,7 +12,7 @@ module ActionController
     if defined? ActionDispatch
       def process_with_new_base_test(request, response=nil)
         request.apply_oauth! if request.respond_to?(:apply_oauth!)
-        super(request, response)        
+        super(request, response)
       end
     else
       def process_with_oauth(request, response=nil)
