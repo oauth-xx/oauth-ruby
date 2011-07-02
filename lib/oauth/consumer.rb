@@ -43,9 +43,6 @@ module OAuth
       # Add a custom ca_file for consumer
       # :ca_file       => '/etc/certs.pem'
 
-      # Add a custom ca_file for consumer
-      # :ca_file       => '/etc/certs.pem'
-
       :oauth_version => "1.0"
     }
 
