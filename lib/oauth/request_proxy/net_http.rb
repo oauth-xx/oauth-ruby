@@ -47,7 +47,7 @@ module OAuth::RequestProxy::Net
 
       def query_string
         params = [ query_params, auth_header_params ]
-        params << post_params if method.to_s.upcase == 'POST' && form_url_encoded?
+        params << post_params if (method.to_s.upcase == 'POST' || method.to_s.upcase == 'PUT') && form_url_encoded?
         params.compact.join('&')
       end
 
