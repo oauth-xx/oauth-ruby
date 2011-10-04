@@ -62,7 +62,7 @@ module OAuth
           normalize_nested_query(v, prefix ? "#{prefix}[#{k}]" : k)
         end.flatten
       else
-        "#{escape(prefix)}=#{escape(value)}"
+        [escape(prefix), escape(value)] * "="
       end
     end
 
