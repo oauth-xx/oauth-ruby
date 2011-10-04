@@ -68,4 +68,26 @@ class TestOAuthHelper < Test::Unit::TestCase
     assert_equal "nonce", params['oauth_nonce']
     assert_equal "1.0", params['oauth_version']
   end
+  
+  def test_normalize
+    params = {
+      'oauth_nonce' => 'nonce',
+      'weight' => { :value => "65" },
+      'oauth_signature_method' => 'HMAC-SHA1',
+      'oauth_timestamp' => "1240004133",
+      'oauth_consumer_key' => 'vince_clortho',
+      'oauth_token' => 'token_value',
+      'oauth_version' => "1.0"
+    }
+    assert_equal("oauth_consumer_key=vince_clortho&oauth_nonce=nonce&oauth_signature_method=HMAC-SHA1&oauth_timestamp=1240004133&oauth_token=token_value&oauth_version=1.0&weight%5Bvalue%5D=65", OAuth::Helper.normalize(params))
+  end
+  
+  def test_normalize_nested_query
+    assert_equal([], OAuth::Helper.normalize_nested_query({}))
+    assert_equal(["foo=bar"], OAuth::Helper.normalize_nested_query({:foo => 'bar'}))
+    assert_equal(["prefix%5Bfoo%5D=bar"], OAuth::Helper.normalize_nested_query({:foo => 'bar'}, 'prefix'))
+    assert_equal(["prefix%5Blevel_1%5D%5Blevel_2%5D%5B%5D=value_1",
+     "prefix%5Blevel_1%5D%5Blevel_2%5D%5B%5D=value_2"], OAuth::Helper.normalize_nested_query({:level_1 => {:level_2 => ['value_1','value_2']}}, 'prefix'))
+  end
+
 end
