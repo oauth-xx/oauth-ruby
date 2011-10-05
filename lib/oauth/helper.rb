@@ -56,11 +56,11 @@ module OAuth
       when Array
         value.map do |v|
           normalize_nested_query(v, "#{prefix}[]")
-        end.flatten
+        end.flatten.sort
       when Hash
         value.map do |k, v|
           normalize_nested_query(v, prefix ? "#{prefix}[#{k}]" : k)
-        end.flatten
+        end.flatten.sort
       else
         [escape(prefix), escape(value)] * "="
       end
