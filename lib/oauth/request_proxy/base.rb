@@ -136,9 +136,9 @@ module OAuth::RequestProxy
 
     # Authorization header for OAuth
     def oauth_header(options = {})
-      header_params_str = oauth_parameters.map { |k,v| "#{k}=\"#{escape(v)}\"" }.join(', ')
+      header_params_str = oauth_parameters.map { |k,v| "#{k}=\"#{escape(v)}\"" }.join(',')
 
-      realm = "realm=\"#{options[:realm]}\", " if options[:realm]
+      realm = "realm=\"#{options[:realm]}\"," if options[:realm]
       "OAuth #{realm}#{header_params_str}"
     end
 
