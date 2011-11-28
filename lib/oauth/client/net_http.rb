@@ -1,9 +1,11 @@
 require 'oauth/helper'
+require 'oauth/multipart'
 require 'oauth/client/helper'
 require 'oauth/request_proxy/net_http'
 
 class Net::HTTPGenericRequest
   include OAuth::Helper
+  include OAuth::Multipart
 
   attr_reader :oauth_helper
 
@@ -99,9 +101,20 @@ private
   # base string.
 
   def set_oauth_body
-    self.set_form_data(@oauth_helper.stringify_keys(@oauth_helper.parameters_with_oauth))
-    params_with_sig = @oauth_helper.parameters.merge(:oauth_signature => @oauth_helper.signature)
-    self.set_form_data(@oauth_helper.stringify_keys(params_with_sig))
+    if @oauth_helper.multipart_body?
+      # If POST body is set to multipart, we still calculate oauth_signature as usual, but will overwrite body later with add_multipart_data()
+
+      self.set_form_data(@oauth_helper.stringify_keys(@oauth_helper.parameters_with_oauth))
+      params_with_sig = @oauth_helper.parameters.merge(:oauth_signature => @oauth_helper.signature)
+
+      # restore original request parameters -- so something like File object is restored for future processing in add_multipart_data()
+      params_with_sig.merge!(@oauth_helper.options[:parameters])
+      add_multipart_data(self, @oauth_helper.stringify_keys(params_with_sig))
+    else
+      self.set_form_data(@oauth_helper.stringify_keys(@oauth_helper.parameters_with_oauth))
+      params_with_sig = @oauth_helper.parameters.merge(:oauth_signature => @oauth_helper.signature)
+      self.set_form_data(@oauth_helper.stringify_keys(params_with_sig))
+    end
   end
 
   def set_oauth_query_string

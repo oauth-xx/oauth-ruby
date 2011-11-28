@@ -60,6 +60,10 @@ module OAuth::Client
       @options[:body_hash] = OAuth::Signature.body_hash(@request, :parameters => oauth_parameters)
     end
 
+    def multipart_body?
+      @options[:multipart]
+    end
+
     def amend_user_agent_header(headers)
       @oauth_ua_string ||= "OAuth gem v#{OAuth::VERSION}"
       # Net::HTTP in 1.9 appends Ruby
