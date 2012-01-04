@@ -33,16 +33,21 @@ module OAuth
     # name-value pair is separated by an "&" character.
     #
     # See Also: {OAuth core spec version 1.0, section 9.1.1}[http://oauth.net/core/1.0#rfc.section.9.1.1]
-    def normalize(params)
+    def normalize(params, prefix = nil)
       params.sort.map do |k, values|
+        key = escape(k)
+        key = "#{prefix}%5B#{key}%5D" if prefix
 
         if values.is_a?(Array)
           # multiple values were provided for a single key
           values.sort.collect do |v|
-            [escape(k),escape(v)] * "="
+            [key,escape(v)] * "="
           end
+        elsif values.is_a?(Hash)
+		  # nested values were provided for a single key
+          normalize(values,key)
         else
-          [escape(k),escape(values)] * "="
+          [key,escape(values)] * "="
         end
       end * "&"
     end
