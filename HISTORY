@@ -1,3 +1,7 @@
+=== 0.4.6 2012-03-21
+
+* Add support for action_dispatch_request proxy (jbasdf)
+
 === 0.4.5 2011-06-25
 
 * Add explicit require for rsa/sha1 (Juris Galang)

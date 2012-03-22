@@ -4,15 +4,14 @@
 # -*- encoding: utf-8 -*-
 
 Gem::Specification.new do |s|
-  s.name = %q{oauth}
-  s.version = "0.4.5"
+  s.name = "oauth"
+  s.version = "0.4.6"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Pelle Braendgaard", "Blaine Cook", "Larry Halff", "Jesse Clark", "Jon Crosby", "Seth Fitzsimmons", "Matt Sanford", "Aaron Quint"]
-  s.date = %q{2011-06-25}
-  s.default_executable = %q{oauth}
-  s.description = %q{OAuth Core Ruby implementation}
-  s.email = %q{oauth-ruby@googlegroups.com}
+  s.date = "2012-03-22"
+  s.description = "OAuth Core Ruby implementation"
+  s.email = "oauth-ruby@googlegroups.com"
   s.executables = ["oauth"]
   s.extra_rdoc_files = [
     "LICENSE",
@@ -49,6 +48,7 @@ Gem::Specification.new do |s|
     "lib/oauth/oauth_test_helper.rb",
     "lib/oauth/request_proxy.rb",
     "lib/oauth/request_proxy/action_controller_request.rb",
+    "lib/oauth/request_proxy/action_dispatch_request.rb",
     "lib/oauth/request_proxy/base.rb",
     "lib/oauth/request_proxy/curb_request.rb",
     "lib/oauth/request_proxy/em_http_request.rb",
@@ -109,12 +109,11 @@ Gem::Specification.new do |s|
     "test/test_typhoeus_request_proxy.rb"
   ]
   s.require_paths = ["lib"]
-  s.rubyforge_project = %q{oauth}
-  s.rubygems_version = %q{1.3.7}
-  s.summary = %q{OAuth Core Ruby implementation}
+  s.rubyforge_project = "oauth"
+  s.rubygems_version = "1.8.12"
+  s.summary = "OAuth Core Ruby implementation"
 
   if s.respond_to? :specification_version then
-    current_version = Gem::Specification::CURRENT_SPECIFICATION_VERSION
     s.specification_version = 3
 
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
