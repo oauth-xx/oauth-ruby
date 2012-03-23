@@ -36,7 +36,7 @@ module OAuth
     def normalize(params)
       params.sort.map do |k, values|
 
-        if values.is_a?(Array)
+        if values.is_a?(Array) && !values.empty?
           # multiple values were provided for a single key
           values.sort.collect do |v|
             [escape(k),escape(v)] * "="
