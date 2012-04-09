@@ -32,6 +32,7 @@ module OAuth::RequestProxy::Net
 
       def all_parameters
         request_params = CGI.parse(query_string)
+        # request_params.each{|k,v| request_params[k] = [nil] if v == []}
 
         if options[:parameters]
           options[:parameters].each do |k,v|
