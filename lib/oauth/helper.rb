@@ -42,10 +42,30 @@ module OAuth
           values.sort.collect do |v|
             [escape(k),escape(v)] * "="
           end
+        elsif values.is_a?(Hash)
+          normalize_nested_query(values, k)
         else
           [escape(k),escape(values)] * "="
         end
       end * "&"
+    end
+    
+    #Returns a string representation of the Hash like in URL query string
+    # build_nested_query({:level_1 => {:level_2 => ['value_1','value_2']}}, 'prefix'))
+    #   #=> ["prefix%5Blevel_1%5D%5Blevel_2%5D%5B%5D=value_1", "prefix%5Blevel_1%5D%5Blevel_2%5D%5B%5D=value_2"]
+    def normalize_nested_query(value, prefix = nil)
+      case value
+      when Array
+        value.map do |v|
+          normalize_nested_query(v, "#{prefix}[]")
+        end.flatten.sort
+      when Hash
+        value.map do |k, v|
+          normalize_nested_query(v, prefix ? "#{prefix}[#{k}]" : k)
+        end.flatten.sort
+      else
+        [escape(prefix), escape(value)] * "="
+      end
     end
 
     # Parse an Authorization / WWW-Authenticate header into a hash. Takes care of unescaping and
