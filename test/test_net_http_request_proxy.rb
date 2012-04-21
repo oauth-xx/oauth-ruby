@@ -52,7 +52,7 @@ class NetHTTPRequestProxyTest < Test::Unit::TestCase
     request.set_form_data(params)
     request_proxy = OAuth::RequestProxy.proxy(request, {:uri => 'http://example.com/test'})
 
-    expected_parameters = {}
+    expected_parameters = {'key' => ['value']}
     assert_equal expected_parameters, request_proxy.parameters_for_signature
     assert_equal 'http://example.com/test', request_proxy.normalized_uri
     assert_equal 'PUT', request_proxy.method
