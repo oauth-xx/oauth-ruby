@@ -61,6 +61,34 @@ class ConsumerTest < Test::Unit::TestCase
     assert_equal :post,@consumer.http_method
   end
 
+  def test_site_without_path
+    @consumer=OAuth::Consumer.new(
+      "key",
+      "secret",
+      {
+          :site=>"http://twitter.com"
+      })
+    request = stub(:oauth! => nil)
+    http = stub(:request => stub(:to_hash => {}))
+    Net::HTTP::Get.expects(:new).with('/people', {}).returns(request)
+    @consumer.expects(:create_http).returns(http)
+    @consumer.request(:get, '/people', nil, {})
+  end
+
+  def test_site_with_path
+    @consumer=OAuth::Consumer.new(
+      "key",
+      "secret",
+      {
+          :site=>"http://identi.ca/api"
+      })
+    request = stub(:oauth! => nil)
+    http = stub(:request => stub(:to_hash => {}))
+    Net::HTTP::Get.expects(:new).with('/api/people', {}).returns(request)
+    @consumer.expects(:create_http).returns(http)
+    @consumer.request(:get, '/people', nil, {})
+  end
+
   def test_override_paths
     @consumer=OAuth::Consumer.new(
       "key",
