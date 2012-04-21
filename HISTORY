@@ -1,3 +1,10 @@
+=== 0.4.6 2012-04-21
+
+* Fixed nested attributes in #normalize (Shaliko Usubov)
+* Make use the path component of the :site parameter (Jonathon M. Abbott)
+* Fixed post body's being dropped in 1.9 (Steven Hammond)
+* Fixed PUT request handling (Anton Panasenko)
+
 === 0.4.5 2011-06-25
 
 * Add explicit require for rsa/sha1 (Juris Galang)
