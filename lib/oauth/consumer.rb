@@ -328,6 +328,10 @@ module OAuth
         data = arguments.shift
       end
 
+      # if the base site contains a path, add it now
+      uri = URI.parse(site)
+      path = uri.path + path if uri.path
+
       headers = arguments.first.is_a?(Hash) ? arguments.shift : {}
 
       case http_method
