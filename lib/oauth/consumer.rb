@@ -159,6 +159,7 @@ module OAuth
       req = create_signed_request(http_method, path, token, request_options, *arguments)
       return nil if block_given? and yield(req) == :done
       rsp = http.request(req)
+
       # check for an error reported by the Problem Reporting extension
       # (http://wiki.oauth.net/ProblemReporting)
       # note: a 200 may actually be an error; check for an oauth_problem key to be sure
@@ -213,6 +214,12 @@ module OAuth
         response.error! if uri.path == path # careful of those infinite redirects
         self.token_request(http_method, uri.path, token, request_options, arguments)
       when (400..499)
+        def response.message
+          s = response.body
+          s << "Response Headers: "
+          response.each_header{|k,v| s << "\n#{k}: #{v}"}
+          s
+        end
         raise OAuth::Unauthorized, response
       else
         response.error!
