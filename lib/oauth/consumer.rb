@@ -330,7 +330,7 @@ module OAuth
 
       # if the base site contains a path, add it now
       uri = URI.parse(site)
-      path = uri.path + path if uri.path
+      path = uri.path + path if uri.path && uri.path != '/'
 
       headers = arguments.first.is_a?(Hash) ? arguments.shift : {}
 
