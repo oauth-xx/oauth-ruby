@@ -76,7 +76,7 @@ module OAuth::RequestProxy
     end
 
     def parameters_for_signature
-      parameters.reject { |k,v| k == "oauth_signature" || unsigned_parameters.include?(k)}
+      parameters.reject { |k,v| k == "oauth_signature" || k == "unsigned_parameters" || unsigned_parameters.include?(k)}
     end
 
     def oauth_parameters

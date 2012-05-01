@@ -184,7 +184,7 @@ module OAuth
     # Creates and signs an http request.
     # It's recommended to use the Token classes to set this up correctly
     def create_signed_request(http_method, path, token = nil, request_options = {}, *arguments)
-      request = create_http_request(http_method, path, *arguments)
+      request = create_http_request(http_method, path, request_options, *arguments)
       sign!(request, token, request_options)
       request
     end
@@ -234,8 +234,8 @@ module OAuth
     end
 
     def request_endpoint
-  return nil if @options[:request_endpoint].nil?
-  @options[:request_endpoint].to_s
+      return nil if @options[:request_endpoint].nil?
+      @options[:request_endpoint].to_s
     end
 
     def scheme
@@ -321,7 +321,8 @@ module OAuth
     end
 
     # create the http request object for a given http_method and path
-    def create_http_request(http_method, path, *arguments)
+    # *argument: data, headers
+    def create_http_request(http_method, path, request_options, *arguments)
       http_method = http_method.to_sym
 
       if [:post, :put].include?(http_method)
@@ -355,6 +356,8 @@ module OAuth
         form_data = {}
         data.each {|k,v| form_data[k.to_s] = v if !v.nil?}
         request.set_form_data(form_data)
+        # keep a copy of original parameters
+        request_options.merge!(:parameters => form_data) if request_options[:multipart]
       elsif data
         if data.respond_to?(:read)
           request.body_stream = data
