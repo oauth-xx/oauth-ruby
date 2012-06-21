@@ -317,6 +317,10 @@ module OAuth
       else
         http_object.verify_mode = OpenSSL::SSL::VERIFY_NONE
       end
+
+      http_object.read_timeout = http_object.open_timeout = @options[:timeout] || 30
+      http_object.open_timeout = @options[:open_timeout] if @options[:open_timeout]
+
       http_object
     end
 
