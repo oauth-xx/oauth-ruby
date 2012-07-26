@@ -89,6 +89,27 @@ class ConsumerTest < Test::Unit::TestCase
     @consumer.request(:get, '/people', nil, {})
   end
 
+  def test_post_of_nested_params_maintains_nesting
+    @consumer=OAuth::Consumer.new(
+      "key",
+      "secret",
+      {
+          :site=>"http://twitter.com"
+      })
+    request = @consumer.create_signed_request(
+      :post,
+      '/people',
+      nil,
+      {},
+      {
+        :key => {
+          :subkey => 'value'
+        }
+      })
+    assert_equal 'key%5Bsubkey%5D=value', request.body
+    assert_equal request.content_type, 'application/x-www-form-urlencoded'
+  end
+
   def test_override_paths
     @consumer=OAuth::Consumer.new(
       "key",
