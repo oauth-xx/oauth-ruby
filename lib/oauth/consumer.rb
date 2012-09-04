@@ -356,9 +356,8 @@ module OAuth
       end
 
       if data.is_a?(Hash)
-        form_data = {}
-        data.each {|k,v| form_data[k.to_s] = v if !v.nil?}
-        request.set_form_data(form_data)
+        request.body = OAuth::Helper.normalize(data)
+        request.content_type = 'application/x-www-form-urlencoded'
       elsif data
         if data.respond_to?(:read)
           request.body_stream = data
