@@ -1,3 +1,9 @@
+=== 0.4.7 2012-09-03
+
+* Fix merging paths if the path is not empty
+* Set a configurable timeout for all requests (Rick Olson)
+* Fix nested hash params in Consumer#request (Ernie Miller)
+
 === 0.4.6 2012-04-21
 
 * Fixed nested attributes in #normalize (Shaliko Usubov)

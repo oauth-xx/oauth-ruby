@@ -1,7 +1,7 @@
 $LOAD_PATH << File.dirname(__FILE__) unless $LOAD_PATH.include?(File.dirname(__FILE__))
 
 module OAuth
-  VERSION = "0.4.6"
+  VERSION = "0.4.7"
 end
 
 require 'oauth/oauth'
