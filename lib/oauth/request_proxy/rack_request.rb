@@ -14,6 +14,13 @@ module OAuth::RequestProxy
       request.url
     end
 
+    def body
+      body_string = request.body.read
+      #rewind the StringIO so other mehtods can use it as well
+      request.body.rewind
+      body_string
+    end
+
     def parameters
       if options[:clobber_request]
         options[:parameters] || {}
