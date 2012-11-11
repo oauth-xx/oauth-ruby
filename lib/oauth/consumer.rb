@@ -234,8 +234,8 @@ module OAuth
     end
 
     def request_endpoint
-  return nil if @options[:request_endpoint].nil?
-  @options[:request_endpoint].to_s
+      return nil if @options[:request_endpoint].nil?
+      @options[:request_endpoint].to_s
     end
 
     def scheme
