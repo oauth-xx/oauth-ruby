@@ -59,6 +59,18 @@ module OAuth
       request(:put, path, body, headers)
     end
 
+    # Make a regular PATCH request using AccessToken
+    #
+    #   @response = @token.patch('/people/123')
+    #   @response = @token.patch('/people/123', { :name => 'Bob', :email => 'bob@mailinator.com' })
+    #   @response = @token.patch('/people/123', { :name => 'Bob', :email => 'bob@mailinator.com' }, { 'Accept' => 'application/xml' })
+    #   @response = @token.patch('/people/123', nil, { 'Accept' => 'application/xml' })
+    #   @response = @token.patch('/people/123', @person.to_xml, { 'Accept' => 'application/xml', 'Content-Type' => 'application/xml' })
+    #
+    def patch(path, body = '', headers = {})
+      request(:patch, path, body, headers)
+    end
+
     # Make a regular DELETE request using AccessToken
     #
     #   @response = @token.delete('/people/123')

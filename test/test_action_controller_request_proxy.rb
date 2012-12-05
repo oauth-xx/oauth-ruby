@@ -15,6 +15,8 @@ class ActionControllerRequestProxyTest < Test::Unit::TestCase
       request.env['REQUEST_METHOD'] = 'POST'
     when :put
       request.env['REQUEST_METHOD'] = 'PUT'
+    when :patch
+      request.env['REQUEST_METHOD'] = 'PATCH'
     end
 
     request.env['REQUEST_URI'] = '/'
@@ -50,6 +52,14 @@ class ActionControllerRequestProxyTest < Test::Unit::TestCase
     assert_equal 'PUT', request_proxy.method
   end
 
+  def test_that_proxy_simple_patch_request_works_with_query_params
+    request_proxy = request_proxy(:patch, {'key'=>'value'})
+
+    expected_parameters = [["key", "value"]]
+    assert_equal expected_parameters, request_proxy.parameters_for_signature
+    assert_equal 'PATCH', request_proxy.method
+  end
+
   def test_that_proxy_simple_get_request_works_with_post_params
     request_proxy = request_proxy(:get, {}, {'key'=>'value'})
 
@@ -74,6 +84,14 @@ class ActionControllerRequestProxyTest < Test::Unit::TestCase
     assert_equal 'PUT', request_proxy.method
   end
 
+  def test_that_proxy_simple_patch_request_works_with_post_params
+    request_proxy = request_proxy(:patch, {}, {'key'=>'value'})
+
+    expected_parameters = []
+    assert_equal expected_parameters, request_proxy.parameters_for_signature
+    assert_equal 'PATCH', request_proxy.method
+  end
+
   def test_that_proxy_simple_get_request_works_with_mixed_params
     request_proxy = request_proxy(:get, {'key'=>'value'}, {'key2'=>'value2'})
 
@@ -96,6 +114,14 @@ class ActionControllerRequestProxyTest < Test::Unit::TestCase
     expected_parameters = [["key", "value"]]
     assert_equal expected_parameters, request_proxy.parameters_for_signature
     assert_equal 'PUT', request_proxy.method
+  end
+
+  def test_that_proxy_simple_patch_request_works_with_mixed_params
+    request_proxy = request_proxy(:patch, {'key'=>'value'}, {'key2'=>'value2'})
+
+    expected_parameters = [["key", "value"]]
+    assert_equal expected_parameters, request_proxy.parameters_for_signature
+    assert_equal 'PATCH', request_proxy.method
   end
 
   def test_parameter_keys_should_preserve_brackets_from_hash

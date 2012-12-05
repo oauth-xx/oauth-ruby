@@ -3,6 +3,10 @@ require 'action_controller'
 require 'action_controller/request'
 require 'uri'
 
+ActionController::Request::HTTP_METHODS << "patch"
+ActionController::Request::HTTP_METHOD_LOOKUP["PATCH"] = :patch
+ActionController::Request::HTTP_METHOD_LOOKUP["patch"] = :patch
+
 module OAuth::RequestProxy
   class ActionControllerRequest < OAuth::RequestProxy::Base
     proxies(defined?(ActionController::AbstractRequest) ? ActionController::AbstractRequest : ActionController::Request)

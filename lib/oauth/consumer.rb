@@ -328,7 +328,7 @@ module OAuth
     def create_http_request(http_method, path, *arguments)
       http_method = http_method.to_sym
 
-      if [:post, :put].include?(http_method)
+      if [:post, :put, :patch].include?(http_method)
         data = arguments.shift
       end
 
@@ -344,6 +344,9 @@ module OAuth
         request["Content-Length"] = '0' # Default to 0
       when :put
         request = Net::HTTP::Put.new(path,headers)
+        request["Content-Length"] = '0' # Default to 0
+      when :patch
+        request = Net::HTTP::Patch.new(path,headers)
         request["Content-Length"] = '0' # Default to 0
       when :get
         request = Net::HTTP::Get.new(path,headers)
