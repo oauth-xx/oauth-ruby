@@ -35,6 +35,8 @@ module OAuth::Signature::RSA
       private_key = OpenSSL::PKey::RSA.new(
         if options[:private_key_file]
           IO.read(options[:private_key_file])
+        elsif options[:private_key]
+          options[:private_key]
         else
           consumer_secret
         end
