@@ -1,4 +1,4 @@
-  require 'oauth/request_proxy/base'
+require 'oauth/request_proxy/base'
 require 'curb'
 require 'uri'
 require 'cgi'
@@ -16,7 +16,11 @@ module OAuth::RequestProxy::Curl
     proxies ::Curl::Easy
 
     def method
-      nil
+      request.post_body ? 'POST' : 'GET'
+    end
+    
+    def body
+      request.post_body
     end
 
     def uri
@@ -46,7 +50,7 @@ module OAuth::RequestProxy::Curl
 
         request.post_body.split("&").each do |str|
           param = str.split("=")
-          post_body[param[0]] = param[1]
+          post_body[param[0]] = CGI.unescape(param[1])
         end
       end
       post_body
