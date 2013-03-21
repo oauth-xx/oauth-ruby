@@ -11,7 +11,7 @@ module OAuth
     end
 
     def to_query
-      "oauth_token=#{escape(token)}&oauth_secret=#{escape(secret)}"
+      "oauth_token=#{escape(token)}&oauth_token_secret=#{escape(secret)}"
     end
   end
 end
