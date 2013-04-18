@@ -43,6 +43,9 @@ module OAuth
       # Add a custom ca_file for consumer
       # :ca_file       => '/etc/certs.pem'
 
+      # turn on logging for all HTTP requests (defaults to false)
+      :verbose       => false,
+
       :oauth_version => "1.0"
     }
 
@@ -283,6 +286,10 @@ module OAuth
       @options[:proxy]
     end
 
+    def verbose?
+      @options[:verbose]
+    end
+
     protected
 
     # Instantiates the http object
@@ -320,6 +327,8 @@ module OAuth
 
       http_object.read_timeout = http_object.open_timeout = @options[:timeout] || 30
       http_object.open_timeout = @options[:open_timeout] if @options[:open_timeout]
+
+      http_object.set_debug_output($stdout) if @options[:verbose]
 
       http_object
     end

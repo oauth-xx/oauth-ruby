@@ -39,6 +39,7 @@ class ConsumerTest < Test::Unit::TestCase
     assert_equal "http://blabla.bla/oauth/example/authorize.php",@consumer.authorize_url
     assert_equal :header,@consumer.scheme
     assert_equal :get,@consumer.http_method
+    assert_equal false,@consumer.verbose?
   end
 
    def test_defaults
@@ -59,6 +60,7 @@ class ConsumerTest < Test::Unit::TestCase
     assert_equal "http://twitter.com/oauth/authorize",@consumer.authorize_url
     assert_equal :header,@consumer.scheme
     assert_equal :post,@consumer.http_method
+    assert_equal false,@consumer.verbose?
   end
 
   def test_site_without_path
@@ -209,6 +211,16 @@ class ConsumerTest < Test::Unit::TestCase
     assert_nil request_options[:oauth_callback]
   end
 
+  def test_verbose
+     @consumer=OAuth::Consumer.new(
+       "key",
+       "secret",
+       {
+           :verbose=>true
+       })
+     assert_equal true,@consumer.verbose?
+   end
+
   private
 
   def create_stub_http_response expected_body=nil
@@ -217,4 +229,5 @@ class ConsumerTest < Test::Unit::TestCase
     stub_http_response.stubs(:body).tap {|expectation| expectation.returns(expected_body) unless expected_body.nil? }
     return stub_http_response
   end
+
 end
