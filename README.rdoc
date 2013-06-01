@@ -44,7 +44,7 @@ Now that you have an access token, you can use Typhoeus to interact with the OAu
   require 'oauth/request_proxy/typhoeus_request'
   oauth_params = {:consumer => oauth_consumer, :token => access_token}
   hydra = Typhoeus::Hydra.new
-  req = Typhoeus::Request.new(uri, options) 
+  req = Typhoeus::Request.new(uri, options) # :method needs to be specified in options
   oauth_helper = OAuth::Client::Helper.new(req, oauth_params.merge(:request_uri => uri))
   req.headers.merge!({"Authorization" => oauth_helper.header}) # Signs the request
   hydra.queue(req)

@@ -19,7 +19,7 @@ module OAuth::RequestProxy::Typhoeus
     proxies Typhoeus::Request
 
     def method
-      request.method.to_s.upcase
+      request.options[:method].to_s.upcase
     end
 
     def uri

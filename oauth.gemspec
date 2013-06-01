@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = "oauth"
-  s.version = "0.4.7"
+  s.version = "0.4.8.pre"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Pelle Braendgaard", "Blaine Cook", "Larry Halff", "Jesse Clark", "Jon Crosby", "Seth Fitzsimmons", "Matt Sanford", "Aaron Quint"]
-  s.date = "2012-09-04"
+  s.date = "2013-06-01"
   s.description = "OAuth Core Ruby implementation"
   s.email = "oauth-ruby@googlegroups.com"
   s.executables = ["oauth"]
