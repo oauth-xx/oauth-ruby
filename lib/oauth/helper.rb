@@ -11,7 +11,7 @@ module OAuth
     def escape(value)
       URI::escape(value.to_s.to_str, OAuth::RESERVED_CHARACTERS)
     rescue ArgumentError
-      URI::escape(value.to_s.to_str, force_encoding(Encoding::UTF_8), OAuth::RESERVED_CHARACTERS)
+      URI::escape(value.to_s.to_str.force_encoding(Encoding::UTF_8), OAuth::RESERVED_CHARACTERS)
     end
 
     # Generate a random key of up to +size+ bytes. The value returned is Base64 encoded with non-word
