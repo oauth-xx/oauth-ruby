@@ -10,7 +10,7 @@ See the OAuth specs http://oauth.net/core/1.0/
 
   sudo gem install oauth
 
-The source code is now hosted on the OAuth GitHub Project http://github.com/oauth/oauth-ruby
+The source code is now hosted on the OAuth GitHub Project http://github.com/oauth-xx/oauth-ruby
 
 == The basics
 
@@ -59,7 +59,7 @@ Now that you have an access token, you can use Typhoeus to interact with the OAu
 
 == How to submit patches
 
-The source code is now hosted on the OAuth GitHub Project http://github.com/oauth/oauth-ruby
+The source code is now hosted on the OAuth GitHub Project http://github.com/oauth-xx/oauth-ruby
 
 To submit a patch, please fork the oauth project and create a patch with tests. Once you're happy with it send a pull request and post a message to the google group.
 
