@@ -5,6 +5,8 @@ module OAuth
 
     # Generate an authorization URL for user authorization
     def authorize_url(params = nil)
+      return nil if self.token.nil?
+
       params = (params || {}).merge(:oauth_token => self.token)
       build_authorize_url(consumer.authorize_url, params)
     end
