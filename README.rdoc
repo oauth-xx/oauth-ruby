@@ -10,7 +10,7 @@ See the OAuth specs http://oauth.net/core/1.0/
 
   sudo gem install oauth
 
-The source code is now hosted on the OAuth GitHub Project http://github.com/oauth/oauth-ruby
+The source code is now hosted on the OAuth GitHub Project http://github.com/oauth-xx/oauth-ruby
 
 == The basics
 
@@ -44,7 +44,7 @@ Now that you have an access token, you can use Typhoeus to interact with the OAu
   require 'oauth/request_proxy/typhoeus_request'
   oauth_params = {:consumer => oauth_consumer, :token => access_token}
   hydra = Typhoeus::Hydra.new
-  req = Typhoeus::Request.new(uri, options) 
+  req = Typhoeus::Request.new(uri, options)
   oauth_helper = OAuth::Client::Helper.new(req, oauth_params.merge(:request_uri => uri))
   req.headers.merge!({"Authorization" => oauth_helper.header}) # Signs the request
   hydra.queue(req)
@@ -65,11 +65,11 @@ To submit a patch, please fork the oauth project and create a patch with tests. 
 
 == License
 
-This code is free to use under the terms of the MIT license. 
+This code is free to use under the terms of the MIT license.
 
 == Contact
 
-OAuth Ruby has been created and maintained by a large number of talented individuals. 
+OAuth Ruby has been created and maintained by a large number of talented individuals.
 The current maintainer is Aaron Quint (quirkey).
 
 Comments are welcome. Send an email to via the OAuth Ruby mailing list http://groups.google.com/group/oauth-ruby
