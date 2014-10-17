@@ -36,7 +36,7 @@ module OAuth::Signature::RSA
         if options[:private_key_file]
           IO.read(options[:private_key_file])
         else
-          consumer_secret
+          options[:private_key] || consumer_secret
         end
       )
 
