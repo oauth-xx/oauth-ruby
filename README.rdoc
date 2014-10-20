@@ -54,12 +54,12 @@ Now that you have an access token, you can use Typhoeus to interact with the OAu
 
 == More Information
 
-* RDoc: http://rdoc.info/projects/oauth/oauth-ruby/
+* RDoc: http://rdoc.info/github/oauth-xx/oauth-ruby/master/frames
 * Mailing List/Google Group: http://groups.google.com/group/oauth-ruby
 
 == How to submit patches
 
-The source code is now hosted on the OAuth GitHub Project http://github.com/oauth/oauth-ruby
+The source code is now hosted on the OAuth GitHub Project http://github.com/oauth-xx/oauth-ruby
 
 To submit a patch, please fork the oauth project and create a patch with tests. Once you're happy with it send a pull request and post a message to the google group.
 
