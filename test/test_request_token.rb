@@ -35,6 +35,11 @@ class TestRequestToken < Test::Unit::TestCase
     assert_match(/\?oauth_token=/, auth_url)
   end
 
+  def test_request_token_returns_nil_authorize_url_when_token_is_nil
+    @request_token.token = nil
+    assert_nil @request_token.authorize_url
+  end
+
   #TODO: mock out the Consumer to test the Consumer/AccessToken interaction.
   def test_get_access_token
   end
