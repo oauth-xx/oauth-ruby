@@ -11,7 +11,7 @@ module OAuth::RequestProxy::Typhoeus
     # oauth_params = {:consumer => oauth_consumer, :token => access_token}
     # req = Typhoeus::Request.new(uri, options)
     # oauth_helper = OAuth::Client::Helper.new(req, oauth_params.merge(:request_uri => uri))
-    # req.headers.merge!({"Authorization" => oauth_helper.header})
+    # req.options[:headers].merge!({"Authorization" => oauth_helper.header})
     # hydra = Typhoeus::Hydra.new()
     # hydra.queue(req)
     # hydra.run
@@ -19,7 +19,8 @@ module OAuth::RequestProxy::Typhoeus
     proxies Typhoeus::Request
 
     def method
-      request.options[:method].to_s.upcase
+      request_method = request.options[:method].to_s.upcase
+      request_method.empty? ? 'GET' : request_method
     end
 
     def uri
@@ -44,7 +45,7 @@ module OAuth::RequestProxy::Typhoeus
     def post_parameters
       # Post params are only used if posting form data
       if method == 'POST'
-        OAuth::Helper.stringify_keys(request.params || {})
+        OAuth::Helper.stringify_keys(request.options[:params] || {})
       else
         {}
       end
