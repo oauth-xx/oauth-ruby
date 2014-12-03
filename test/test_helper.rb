@@ -1,9 +1,9 @@
-require 'test/unit'
 require 'rubygems'
+require 'test/unit'
+require 'mocha/mini_test'
 
 $LOAD_PATH << File.dirname(__FILE__) + '/../lib/'
 require 'oauth'
-require 'mocha'
 require 'stringio'
 require 'webmock'
 
