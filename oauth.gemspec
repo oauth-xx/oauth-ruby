@@ -24,11 +24,12 @@ Gem::Specification.new do |spec|
 
   spec.add_development_dependency(%q<rake>)
   spec.add_development_dependency(%q<jeweler>)
-  spec.add_development_dependency(%q<actionpack>, [">= 2.3.5"])
-  spec.add_development_dependency(%q<rack>, [">= 1.0.0"])
-  spec.add_development_dependency(%q<mocha>, [">= 0.9.8"])
+  spec.add_development_dependency(%q<actionpack>, [">= 2.3.8"])
+  spec.add_development_dependency(%q<iconv>, ["~> 1.0.3"])
+  spec.add_development_dependency(%q<rack>, ["~> 1.1.0"])
+  spec.add_development_dependency(%q<mocha>, [">= 0.9.12"])
   spec.add_development_dependency(%q<typhoeus>, [">= 0.1.13"])
-  spec.add_development_dependency(%q<em-http-request>, [">= 0.2.10"])
-  spec.add_development_dependency(%q<curb>, [">= 0.6.6.0"])
+  spec.add_development_dependency(%q<em-http-request>, ["0.2.11"])
+  spec.add_development_dependency(%q<curb>, ["0.7.16"])
 end
 
