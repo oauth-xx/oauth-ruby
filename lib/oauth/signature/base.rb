@@ -16,16 +16,6 @@ module OAuth::Signature
       OAuth::Signature.available_methods[@implements] = self
     end
 
-    def self.digest_class(digest_class = nil)
-      return @digest_class if digest_class.nil?
-      @digest_class = digest_class
-    end
-
-    def self.hash_class(hash_class = nil)
-      return @hash_class if hash_class.nil?
-      @hash_class = hash_class
-    end
-
     def initialize(request, options = {}, &block)
       raise TypeError unless request.kind_of?(OAuth::RequestProxy::Base)
       @request = request
@@ -73,14 +63,10 @@ module OAuth::Signature
     end
 
     def body_hash
-      if self.class.hash_class
-        Base64.encode64(self.class.hash_class.digest(request.body || '')).chomp.gsub(/\n/,'')
-      else
-        nil # no body hash algorithm defined, so don't generate one
-      end
+      raise_instantiation_error
     end
 
-  private
+    private
 
     def token
       request.token
@@ -99,11 +85,11 @@ module OAuth::Signature
     end
 
     def digest
-      if self.class.hash_class.present?
-        self.class.digest_class.digest(self.class.hash_class.new, secret, signature_base_string)
-      else
-        self.class.digest_class.digest(signature_base_string)
-      end
+      raise_instantiation_error
+    end
+
+    def raise_instantiation_error
+      raise NotImplementedError, "Cannot instantiate #{self.class.name} class directly."
     end
 
   end

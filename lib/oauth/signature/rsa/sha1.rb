@@ -3,7 +3,6 @@ require 'oauth/signature/base'
 module OAuth::Signature::RSA
   class SHA1 < OAuth::Signature::Base
     implements 'rsa-sha1'
-    hash_class OpenSSL::Digest::SHA1
 
     def ==(cmp_signature)
       public_key.verify(OpenSSL::Digest::SHA1.new, Base64.decode64(cmp_signature.is_a?(Array) ? cmp_signature.first : cmp_signature), signature_base_string)
@@ -19,7 +18,11 @@ module OAuth::Signature::RSA
       end
     end
 
-  private
+    def body_hash
+      Base64.encode64(OpenSSL::Digest::SHA1.digest(request.body || '')).chomp.gsub(/\n/,'')
+    end
+
+    private
 
     def decode_public_key
       case consumer_secret
