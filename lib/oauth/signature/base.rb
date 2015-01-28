@@ -21,11 +21,6 @@ module OAuth::Signature
       @digest_class = digest_class
     end
 
-    def self.digest_klass(digest_klass = nil)
-      return @digest_klass if digest_klass.nil?
-      @digest_klass = digest_klass
-    end
-
     def self.hash_class(hash_class = nil)
       return @hash_class if hash_class.nil?
       @hash_class = hash_class
@@ -104,7 +99,12 @@ module OAuth::Signature
     end
 
     def digest
-      self.class.digest_class.digest(signature_base_string)
+      if self.class.hash_class.present?
+        self.class.digest_class.digest(self.class.hash_class.new, secret, signature_base_string)
+      else
+        self.class.digest_class.digest(signature_base_string)
+      end
     end
+
   end
 end

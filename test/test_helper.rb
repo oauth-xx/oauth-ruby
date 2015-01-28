@@ -2,6 +2,8 @@ require 'rubygems'
 require 'test/unit'
 require 'mocha/mini_test'
 
+require 'byebug'
+
 $LOAD_PATH << File.dirname(__FILE__) + '/../lib/'
 require 'oauth'
 require 'stringio'

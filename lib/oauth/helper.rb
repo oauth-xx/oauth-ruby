@@ -49,7 +49,7 @@ module OAuth
         end
       end * "&"
     end
-    
+
     #Returns a string representation of the Hash like in URL query string
     # build_nested_query({:level_1 => {:level_2 => ['value_1','value_2']}}, 'prefix'))
     #   #=> ["prefix%5Blevel_1%5D%5Blevel_2%5D%5B%5D=value_1", "prefix%5Blevel_1%5D%5Blevel_2%5D%5B%5D=value_2"]
