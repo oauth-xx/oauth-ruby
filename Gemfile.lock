@@ -12,9 +12,15 @@ GEM
     activesupport (2.3.18)
     addressable (2.3.6)
     builder (3.2.2)
+    byebug (3.5.1)
+      columnize (~> 0.8)
+      debugger-linecache (~> 1.2)
+      slop (~> 3.6)
+    columnize (0.9.0)
     crack (0.4.2)
       safe_yaml (~> 1.0.0)
     curb (0.7.16)
+    debugger-linecache (1.2.0)
     descendants_tracker (0.0.4)
       thread_safe (~> 0.3, >= 0.3.1)
     em-http-request (0.2.11)
@@ -66,6 +72,7 @@ GEM
     rdoc (4.1.2)
       json (~> 1.4)
     safe_yaml (1.0.4)
+    slop (3.6.0)
     thread_safe (0.3.4)
     typhoeus (0.6.9)
       ethon (>= 0.7.1)
@@ -78,6 +85,7 @@ PLATFORMS
 
 DEPENDENCIES
   actionpack (>= 2.3.8)
+  byebug
   curb (= 0.7.16)
   em-http-request (= 0.2.11)
   iconv (~> 1.0.3)

@@ -23,6 +23,7 @@ Gem::Specification.new do |spec|
 
 
   spec.add_development_dependency(%q<rake>)
+  spec.add_development_dependency(%q<byebug>)
   spec.add_development_dependency(%q<jeweler>)
   spec.add_development_dependency(%q<actionpack>, [">= 2.3.8"])
   spec.add_development_dependency(%q<iconv>, ["~> 1.0.3"])
