@@ -1,0 +1,11 @@
+language: ruby
+script: "bundle exec rake test"
+sudo: false
+
+rvm:
+- "2.2"
+- "2.1"
+- "2.0"
+
+gemfile:
+- Gemfile
