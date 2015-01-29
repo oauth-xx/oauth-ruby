@@ -16,6 +16,12 @@ module OAuth::Signature
       secret
     end
 
+    def body_hash
+      nil
+    end
+
+    private
+
     def secret
       super
     end
