@@ -46,9 +46,9 @@ class Net::HTTPGenericRequest
   #           {OAuth Request Body Hash 1.0 Draft 4}[http://oauth.googlecode.com/svn/spec/ext/body_hash/1.0/drafts/4/spec.html]
   def signature_base_string(http, consumer = nil, token = nil, options = {})
     helper_options = oauth_helper_options(http, consumer, token, options)
-    oauth_helper = OAuth::Client::Helper.new(self, helper_options)
-    oauth_helper.hash_body if oauth_body_hash_required?
-    oauth_helper.signature_base_string
+    @oauth_helper = OAuth::Client::Helper.new(self, helper_options)
+    @oauth_helper.hash_body if oauth_body_hash_required?
+    @oauth_helper.signature_base_string
   end
 
 private
@@ -84,7 +84,7 @@ private
   end
 
   def oauth_body_hash_required?
-    request_body_permitted? && !content_type.to_s.downcase.start_with?("application/x-www-form-urlencoded")
+    !@oauth_helper.token_request? && request_body_permitted? && !content_type.to_s.downcase.start_with?("application/x-www-form-urlencoded")
   end
 
   def set_oauth_header
