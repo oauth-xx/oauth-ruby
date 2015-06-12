@@ -131,7 +131,14 @@ class ConsumerTest < Test::Unit::TestCase
     assert_equal :post,@consumer.http_method
   end
 
- def test_that_token_response_should_be_uri_parameter_format_as_default
+  def test_token_request_identifies_itself_as_a_token_request
+    request_options = {}
+    @consumer.stubs(:request).returns(create_stub_http_response)
+    @consumer.token_request(:post, '/', 'token', request_options) {}
+    assert_equal true, request_options[:token_request]
+  end
+
+  def test_that_token_response_should_be_uri_parameter_format_as_default
     @consumer.expects(:request).returns(create_stub_http_response("oauth_token=token&oauth_token_secret=secret"))
 
     hash = @consumer.token_request(:get, "")

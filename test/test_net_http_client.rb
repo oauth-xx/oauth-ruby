@@ -62,6 +62,12 @@ class NetHTTPClientTest < Test::Unit::TestCase
     assert_matching_headers "oauth_nonce=\"225579211881198842005988698334675835446\", oauth_body_hash=\"oXyaqmHoChv3HQ2FCvTluqmAC70%3D\", oauth_signature_method=\"HMAC-SHA1\", oauth_token=\"token_411a7f\", oauth_timestamp=\"1199645624\", oauth_consumer_key=\"consumer_key_86cad9\", oauth_signature=\"0DA6pGTapdHSqC15RZelY5rNLDw%3D\", oauth_version=\"1.0\"", request['authorization']
   end
 
+  def test_that_body_hash_is_obmitted_when_token_request
+    request = Net::HTTP::Post.new(@request_uri.path)
+    request.oauth!(@http, @consumer, @token, {:nonce => @nonce, :timestamp => @timestamp, :token_request => true})
+    assert_no_match(/oauth_body_hash/, request['authorization'])
+  end
+
   def test_that_body_hash_is_obmitted_when_no_algorithm_is_defined
     request = Net::HTTP::Post.new(@request_uri.path)
     request.body = "data"
