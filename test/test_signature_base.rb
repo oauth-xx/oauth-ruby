@@ -1,7 +1,8 @@
 require File.expand_path('../test_helper', __FILE__)
 require 'oauth/signature/base'
 require 'net/http'
-class SignatureBaseTest < Test::Unit::TestCase
+
+class SignatureBaseTest < Minitest::Test
 
   def test_that_initialize_requires_one_request_argument
     assert_raises ArgumentError do
@@ -22,11 +23,10 @@ class SignatureBaseTest < Test::Unit::TestCase
     # this isn't quite valid, but it will do.
     raw_request = Net::HTTP::Get.new('/test')
     request = OAuth::RequestProxy.proxy(raw_request)
-    assert_nothing_raised do
-      OAuth::Signature::Base.new(request) { |token|
-        # just a stub
-      }
-    end
+
+    OAuth::Signature::Base.new(request) { |token|
+      # just a stub
+    }
   end
 
 end

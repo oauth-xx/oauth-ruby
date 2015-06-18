@@ -3,7 +3,7 @@ begin
 
 require 'oauth/client/em_http'
 
-class EmHttpClientTest < Test::Unit::TestCase
+class EmHttpClientTest < Minitest::Test
 
   def setup
     @consumer = OAuth::Consumer.new('consumer_key_86cad9', '5888bf0345e5d237')

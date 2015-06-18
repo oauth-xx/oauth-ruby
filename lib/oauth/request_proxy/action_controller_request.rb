@@ -1,11 +1,11 @@
 require 'active_support'
 require 'action_controller'
-require 'action_controller/request'
+require 'action_dispatch/http/request'
 require 'uri'
 
 module OAuth::RequestProxy
   class ActionControllerRequest < OAuth::RequestProxy::Base
-    proxies(defined?(ActionController::AbstractRequest) ? ActionController::AbstractRequest : ActionController::Request)
+    proxies(defined?(ActionDispatch::AbstractRequest) ? ActionDispatch::AbstractRequest : ActionDispatch::Request)
 
     def method
       request.method.to_s.upcase

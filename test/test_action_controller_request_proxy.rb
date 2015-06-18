@@ -1,13 +1,12 @@
 require File.expand_path('../test_helper', __FILE__)
 
 require 'oauth/request_proxy/action_controller_request'
-require 'action_controller/test_process'
 
-class ActionControllerRequestProxyTest < Test::Unit::TestCase
+class ActionControllerRequestProxyTest < Minitest::Test
 
   def request_proxy(request_method = :get, uri_params = {}, body_params = {})
-    request = ActionController::TestRequest.new
-    request.set_REQUEST_URI('/')
+    request = ActionDispatch::TestRequest.new
+    request.request_uri = '/'
 
     case request_method
     when :post

@@ -1,6 +1,6 @@
 require File.expand_path('../test_helper', __FILE__)
 
-class TestOAuthHelper < Test::Unit::TestCase
+class TestOAuthHelper < Minitest::Test
 
   def test_parse_valid_header
     header = 'OAuth ' \
@@ -27,7 +27,7 @@ class TestOAuthHelper < Test::Unit::TestCase
   def test_parse_header_ill_formed
     header = "OAuth garbage"
 
-    assert_raise OAuth::Problem do
+    assert_raises OAuth::Problem do
       OAuth::Helper.parse_header(header)
     end
   end
@@ -42,7 +42,7 @@ class TestOAuthHelper < Test::Unit::TestCase
              'oauth_timestamp="1240004133", oauth_nonce="nonce", ' \
              'oauth_version="1.0" '
 
-    assert_raise OAuth::Problem do
+    assert_raises OAuth::Problem do
       OAuth::Helper.parse_header(header)
     end
   end
@@ -68,7 +68,7 @@ class TestOAuthHelper < Test::Unit::TestCase
     assert_equal "nonce", params['oauth_nonce']
     assert_equal "1.0", params['oauth_version']
   end
-  
+
   def test_normalize
     params = {
       'oauth_nonce' => 'nonce',
@@ -81,7 +81,7 @@ class TestOAuthHelper < Test::Unit::TestCase
     }
     assert_equal("oauth_consumer_key=vince_clortho&oauth_nonce=nonce&oauth_signature_method=HMAC-SHA1&oauth_timestamp=1240004133&oauth_token=token_value&oauth_version=1.0&weight%5Bvalue%5D=65", OAuth::Helper.normalize(params))
   end
-  
+
   def test_normalize_nested_query
     assert_equal([], OAuth::Helper.normalize_nested_query({}))
     assert_equal(["foo=bar"], OAuth::Helper.normalize_nested_query({:foo => 'bar'}))
