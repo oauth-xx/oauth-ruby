@@ -143,7 +143,7 @@ module OAuth::RequestProxy
     end
 
     def query_string_blank?
-      if uri = request.request_uri
+      if uri = request.env['REQUEST_URI']
         uri.split('?', 2)[1].nil?
       else
         request.query_string.blank?

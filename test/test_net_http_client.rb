@@ -1,6 +1,6 @@
 require File.expand_path('../test_helper', __FILE__)
 
-class NetHTTPClientTest < Test::Unit::TestCase
+class NetHTTPClientTest < Minitest::Test
 
   def setup
     @consumer = OAuth::Consumer.new('consumer_key_86cad9', '5888bf0345e5d237')

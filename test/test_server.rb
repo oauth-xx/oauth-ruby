@@ -1,6 +1,7 @@
 require File.expand_path('../test_helper', __FILE__)
 require 'oauth/server'
-class ServerTest < Test::Unit::TestCase
+
+class ServerTest < Minitest::Test
   def setup
     @server=OAuth::Server.new "http://test.com"
   end
@@ -19,15 +20,15 @@ class ServerTest < Test::Unit::TestCase
 
   def test_generate_consumer_credentials
     consumer=@server.generate_consumer_credentials
-    assert_not_nil consumer.key
-    assert_not_nil consumer.secret
+    assert consumer.key
+    assert consumer.secret
   end
 
   def test_create_consumer
     @consumer=@server.create_consumer
-    assert_not_nil @consumer
-    assert_not_nil @consumer.key
-    assert_not_nil @consumer.secret
+    assert @consumer
+    assert @consumer.key
+    assert @consumer.secret
     assert_equal "http://test.com",@consumer.site
     assert_equal "/oauth/request_token",@consumer.request_token_path
     assert_equal "/oauth/authorize",@consumer.authorize_path

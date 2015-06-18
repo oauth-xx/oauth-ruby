@@ -6,7 +6,7 @@ require 'em-http'
 require 'oauth/request_proxy/em_http_request'
 
 
-class EmHttpRequestProxyTest < Test::Unit::TestCase
+class EmHttpRequestProxyTest < Minitest::Test
 
   def test_request_proxy_works_with_simple_request
     proxy = create_request_proxy

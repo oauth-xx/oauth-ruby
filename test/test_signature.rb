@@ -2,7 +2,7 @@
 
 require File.expand_path('../test_helper', __FILE__)
 
-class TestOauth < Test::Unit::TestCase
+class TestOauth < Minitest::Test
 
   def test_parameter_escaping_kcode_invariant
     %w(n N e E s S u U).each do |kcode|

@@ -1,7 +1,7 @@
 require File.expand_path('../test_helper', __FILE__)
 require 'oauth/token'
 
-class TestToken < Test::Unit::TestCase
+class TestToken < Minitest::Test
 
   def setup
   end

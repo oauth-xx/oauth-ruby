@@ -2,7 +2,7 @@ require File.expand_path('../test_helper', __FILE__)
 require 'oauth/consumer'
 require 'oauth/signature/rsa/sha1'
 
-class TestSignatureRsaSha1 < Test::Unit::TestCase
+class TestSignatureRsaSha1 < Minitest::Test
 
   def setup
     @request = Net::HTTP::Get.new('/photos?file=vacaction.jpg&size=original&oauth_version=1.0&oauth_consumer_key=dpf43f3p2l4k3l03&oauth_timestamp=1196666512&oauth_nonce=13917289812797014437&oauth_signature_method=RSA-SHA1')

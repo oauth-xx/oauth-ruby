@@ -5,7 +5,7 @@ require 'stringio'
 # This performs testing against Andy Smith's test server http://term.ie/oauth/example/
 # Thanks Andy.
 # This also means you have to be online to be able to run these.
-class ConsumerTest < Test::Unit::TestCase
+class ConsumerTest < Minitest::Test
   def setup
     @consumer=OAuth::Consumer.new(
         'consumer_key_86cad9', '5888bf0345e5d237',
