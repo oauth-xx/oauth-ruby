@@ -6,10 +6,25 @@ PATH
 GEM
   remote: https://rubygems.org/
   specs:
-    actionpack (2.3.18)
-      activesupport (= 2.3.18)
-      rack (~> 1.1.0)
-    activesupport (2.3.18)
+    actionpack (4.2.2)
+      actionview (= 4.2.2)
+      activesupport (= 4.2.2)
+      rack (~> 1.6)
+      rack-test (~> 0.6.2)
+      rails-dom-testing (~> 1.0, >= 1.0.5)
+      rails-html-sanitizer (~> 1.0, >= 1.0.1)
+    actionview (4.2.2)
+      activesupport (= 4.2.2)
+      builder (~> 3.1)
+      erubis (~> 2.7.0)
+      rails-dom-testing (~> 1.0, >= 1.0.5)
+      rails-html-sanitizer (~> 1.0, >= 1.0.1)
+    activesupport (4.2.2)
+      i18n (~> 0.7)
+      json (~> 1.7, >= 1.7.7)
+      minitest (~> 5.1)
+      thread_safe (~> 0.3, >= 0.3.4)
+      tzinfo (~> 1.1)
     addressable (2.3.6)
     builder (3.2.2)
     byebug (3.5.1)
@@ -26,6 +41,7 @@ GEM
     em-http-request (0.2.11)
       addressable (>= 2.0.0)
       eventmachine (>= 0.12.9)
+    erubis (2.7.0)
     ethon (0.7.2)
       ffi (>= 1.3.0)
     eventmachine (1.0.4)
@@ -44,6 +60,7 @@ GEM
     hashie (3.3.2)
     highline (1.6.21)
     httpauth (0.2.1)
+    i18n (0.7.0)
     iconv (1.0.4)
     jeweler (2.0.1)
       builder
@@ -55,8 +72,11 @@ GEM
       rake
       rdoc
     json (1.8.2)
+    loofah (2.0.2)
+      nokogiri (>= 1.5.9)
     metaclass (0.0.4)
     mini_portile (0.6.2)
+    minitest (5.7.0)
     mocha (1.1.0)
       metaclass (~> 0.0.1)
     multi_json (1.10.1)
@@ -67,7 +87,17 @@ GEM
       faraday (~> 0.7)
       httpauth (~> 0.1)
       multi_json (~> 1.3)
-    rack (1.1.6)
+    rack (1.6.2)
+    rack-test (0.6.3)
+      rack (>= 1.0)
+    rails-deprecated_sanitizer (1.0.3)
+      activesupport (>= 4.2.0.alpha)
+    rails-dom-testing (1.0.6)
+      activesupport (>= 4.2.0.beta, < 5.0)
+      nokogiri (~> 1.6.0)
+      rails-deprecated_sanitizer (>= 1.0.1)
+    rails-html-sanitizer (1.0.2)
+      loofah (~> 2.0)
     rake (10.4.2)
     rdoc (4.2.0)
       json (~> 1.4)
@@ -76,6 +106,8 @@ GEM
     thread_safe (0.3.4)
     typhoeus (0.7.0)
       ethon (>= 0.7.1)
+    tzinfo (1.2.2)
+      thread_safe (~> 0.1)
     webmock (1.20.4)
       addressable (>= 2.3.6)
       crack (>= 0.3.2)
@@ -84,7 +116,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  actionpack (>= 2.3.8)
+  actionpack (>= 4.0.2)
   byebug
   curb (= 0.7.16)
   em-http-request (= 0.2.11)
@@ -92,7 +124,7 @@ DEPENDENCIES
   jeweler
   mocha (>= 0.9.12)
   oauth!
-  rack (~> 1.1.0)
+  rack
   rake
   typhoeus (>= 0.1.13)
   webmock
