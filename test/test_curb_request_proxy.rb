@@ -6,7 +6,7 @@ require 'oauth/request_proxy/curb_request'
 require 'curb'
 
 
-class CurbRequestProxyTest < Test::Unit::TestCase
+class CurbRequestProxyTest < Minitest::Test
 
   def test_that_proxy_simple_get_request_works
     request = Curl::Easy.new('/test?key=value')

@@ -1,9 +1,9 @@
-require 'test/unit'
+require 'minitest/autorun'
 require 'oauth/signature'
 require 'oauth/request_proxy/mock_request'
 
 
-class OAuthCase < Test::Unit::TestCase
+class OAuthCase < Minitest::Test
   # avoid whining about a lack of tests
   def run(*args)
     return if @method_name.to_s == "default_test"

@@ -1,7 +1,7 @@
 require File.expand_path('../test_helper', __FILE__)
 require 'oauth/signature/plaintext'
 
-class TestSignaturePlaintext < Test::Unit::TestCase
+class TestSignaturePlaintext < Minitest::Test
   def test_that_plaintext_implements_plaintext
     assert OAuth::Signature.available_methods.include?('plaintext')
   end

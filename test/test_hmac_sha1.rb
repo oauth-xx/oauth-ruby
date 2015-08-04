@@ -1,6 +1,6 @@
 require File.expand_path('../test_helper', __FILE__)
 
-class TestSignatureHmacSha1 < Test::Unit::TestCase
+class TestSignatureHmacSha1 < Minitest::Test
   def test_that_hmac_sha1_implements_hmac_sha1
     assert OAuth::Signature.available_methods.include?('hmac-sha1')
   end

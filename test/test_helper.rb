@@ -1,13 +1,18 @@
 require 'rubygems'
-require 'test/unit'
+require 'minitest/autorun'
 require 'mocha/mini_test'
+require 'rack/test'
+
+ENV['RACK_ENV'] = 'test'
+
+require 'byebug'
 
 $LOAD_PATH << File.dirname(__FILE__) + '/../lib/'
 require 'oauth'
 require 'stringio'
 require 'webmock'
 
-class Test::Unit::TestCase
+class Minitest::Test
   include WebMock::API
 
   def assert_matching_headers(expected, actual)

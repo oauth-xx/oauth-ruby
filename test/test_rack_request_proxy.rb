@@ -3,7 +3,7 @@ require 'oauth/request_proxy/rack_request'
 require 'rack/request'
 require 'rack/mock'
 
-class RackRequestProxyTest < Test::Unit::TestCase
+class RackRequestProxyTest < Minitest::Test
 
   def test_that_proxy_simple_get_request_works
     request = Rack::Request.new(Rack::MockRequest.env_for('http://example.com/test?key=value'))
