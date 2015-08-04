@@ -107,7 +107,7 @@ module OAuth
           uri.query = [uri.query, *params].reject { |x| x.nil? } * "&"
           p uri.to_s
 
-          response = access_token.request(options[:method].downcase.to_sym, uri.to_s)
+          response = access_token.request(options[:method].to_s.downcase.to_sym, uri.to_s)
           puts "#{response.code} #{response.message}"
           puts response.body
         when "sign"
