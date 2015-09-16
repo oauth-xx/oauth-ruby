@@ -57,7 +57,7 @@ module OAuth
             oauth_verifier = nil
 
             # get a request token
-            request_token = consumer.get_request_token({ :oauth_callback => options[:oauth_callback] }, { "scope" => options[:scope] })
+            request_token = consumer.get_request_token({ :oauth_callback => options[:oauth_callback] }, options[:scope] ? { "scope" => options[:scope] } : {})
 
             if request_token.callback_confirmed?
               stdout.puts "Server appears to support OAuth 1.0a; enabling support."
@@ -107,7 +107,7 @@ module OAuth
           uri.query = [uri.query, *params].reject { |x| x.nil? } * "&"
           p uri.to_s
 
-          response = access_token.request(options[:method].downcase.to_sym, uri.to_s)
+          response = access_token.request(options[:method].to_s.downcase.to_sym, uri.to_s)
           puts "#{response.code} #{response.message}"
           puts response.body
         when "sign"
@@ -268,7 +268,7 @@ module OAuth
           options[:uri] = v
         end
 
-        opts.on(:OPTIONAL, "--version VERSION", "Specifies the OAuth version to use.") do |v|
+        opts.on("--version [VERSION]", "Specifies the OAuth version to use.") do |v|
           if v
             options[:oauth_version] = v
           else

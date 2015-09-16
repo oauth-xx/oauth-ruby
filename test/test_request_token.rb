@@ -6,7 +6,7 @@ class StubbedToken < OAuth::RequestToken
   end
 end
 
-class TestRequestToken < Test::Unit::TestCase
+class TestRequestToken < Minitest::Test
   def setup
     # setup a fake req. token. mocking Consumer would be more appropriate...
     @request_token = OAuth::RequestToken.new(
@@ -18,7 +18,7 @@ class TestRequestToken < Test::Unit::TestCase
 
   def test_request_token_builds_authorize_url_connectly_with_additional_params
     auth_url = @request_token.authorize_url({:oauth_callback => "github.com"})
-    assert_not_nil auth_url
+    assert auth_url
     assert_match(/oauth_token/, auth_url)
     assert_match(/oauth_callback/, auth_url)
   end
@@ -27,11 +27,11 @@ class TestRequestToken < Test::Unit::TestCase
     # we should only have 1 key in the url returned if we didn't pass anything.
     # this is the only required param to authenticate the client.
     auth_url = @request_token.authorize_url(nil)
-    assert_not_nil auth_url
+    assert auth_url
     assert_match(/\?oauth_token=/, auth_url)
 
     auth_url = @request_token.authorize_url
-    assert_not_nil auth_url
+    assert auth_url
     assert_match(/\?oauth_token=/, auth_url)
   end
 

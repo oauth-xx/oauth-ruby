@@ -5,7 +5,7 @@ begin
 require 'oauth/request_proxy/typhoeus_request'
 require 'typhoeus'
 
-class TyphoeusRequestProxyTest < Test::Unit::TestCase
+class TyphoeusRequestProxyTest < Minitest::Test
 
   def test_that_proxy_simple_get_request_works
     request = ::Typhoeus::Request.new('/test?key=value')

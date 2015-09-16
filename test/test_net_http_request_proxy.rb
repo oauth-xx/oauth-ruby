@@ -1,6 +1,6 @@
 require File.expand_path('../test_helper', __FILE__)
 
-class NetHTTPRequestProxyTest < Test::Unit::TestCase
+class NetHTTPRequestProxyTest < Minitest::Test
 
   def test_that_proxy_simple_get_request_works
     request = Net::HTTP::Get.new('/test?key=value')
