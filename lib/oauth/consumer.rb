@@ -234,8 +234,8 @@ module OAuth
     end
 
     def request_endpoint
-  return nil if @options[:request_endpoint].nil?
-  @options[:request_endpoint].to_s
+      return nil if @options[:request_endpoint].nil?
+      @options[:request_endpoint].to_s
     end
 
     def scheme
@@ -333,8 +333,10 @@ module OAuth
       end
 
       # if the base site contains a path, add it now
+      # only add if the site host matches the current http object's host
+      # (in case we've specified a full url for token requests)
       uri = URI.parse(site)
-      path = uri.path + path if uri.path && uri.path != '/'
+      path = uri.path + path if uri.path && uri.path != '/' && uri.host == http.address
 
       headers = arguments.first.is_a?(Hash) ? arguments.shift : {}
 
