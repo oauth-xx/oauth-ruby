@@ -66,7 +66,7 @@ module OAuth::RequestProxy::Net
 
       def auth_header_params
         return nil unless request['Authorization'] && request['Authorization'][0,5] == 'OAuth'
-        auth_params = request['Authorization']
+        request['Authorization']
       end
     end
   end
