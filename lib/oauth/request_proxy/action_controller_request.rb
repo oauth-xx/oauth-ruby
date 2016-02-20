@@ -1,11 +1,31 @@
 require 'active_support'
+require "active_support/version"
 require 'action_controller'
-require 'action_dispatch/http/request'
 require 'uri'
 
-ActionController::Request::HTTP_METHODS << "patch"
-ActionController::Request::HTTP_METHOD_LOOKUP["PATCH"] = :patch
-ActionController::Request::HTTP_METHOD_LOOKUP["patch"] = :patch
+if
+  Gem::Version.new(ActiveSupport::VERSION::STRING) < Gem::Version.new("3")
+then # rails 2.x
+  require 'action_controller/request'
+  unless ActionController::Request::HTTP_METHODS.include?("patch")
+    ActionController::Request::HTTP_METHODS << "patch"
+    ActionController::Request::HTTP_METHOD_LOOKUP["PATCH"] = :patch
+    ActionController::Request::HTTP_METHOD_LOOKUP["patch"] = :patch
+  end
+
+elsif
+  Gem::Version.new(ActiveSupport::VERSION::STRING) < Gem::Version.new("4")
+then # rails 3.x
+  require 'action_dispatch/http/request'
+  unless ActionDispatch::Request::HTTP_METHODS.include?("patch")
+    ActionDispatch::Request::HTTP_METHODS << "patch"
+    ActionDispatch::Request::HTTP_METHOD_LOOKUP["PATCH"] = :patch
+    ActionDispatch::Request::HTTP_METHOD_LOOKUP["patch"] = :patch
+  end
+
+else # rails 4.x - already has patch
+  require 'action_dispatch/http/request'
+end
 
 module OAuth::RequestProxy
   class ActionControllerRequest < OAuth::RequestProxy::Base
