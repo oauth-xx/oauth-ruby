@@ -21,7 +21,8 @@ class Net::HTTPGenericRequest
   # This method also modifies the <tt>User-Agent</tt> header to add the OAuth gem version.
   #
   # See Also: {OAuth core spec version 1.0, section 5.4.1}[http://oauth.net/core/1.0#rfc.section.5.4.1],
-  #           {OAuth Request Body Hash 1.0 Draft 4}[http://oauth.googlecode.com/svn/spec/ext/body_hash/1.0/drafts/4/spec.html]
+  #           {OAuth Request Body Hash 1.0 Draft 4}[http://oauth.googlecode.com/svn/spec/ext/body_hash/1.0/drafts/4/spec.html,
+  #                                                 http://oauth.googlecode.com/svn/spec/ext/body_hash/1.0/oauth-bodyhash.html#when_to_include]
   def oauth!(http, consumer = nil, token = nil, options = {})
     helper_options = oauth_helper_options(http, consumer, token, options)
     @oauth_helper = OAuth::Client::Helper.new(self, helper_options)
@@ -42,13 +43,14 @@ class Net::HTTPGenericRequest
   # * options - Request-specific options (e.g. +request_uri+, +consumer+, +token+, +scheme+,
   #   +signature_method+, +nonce+, +timestamp+)
   #
-  # See Also: {OAuth core spec version 1.0, section 9.1.1}[http://oauth.net/core/1.0#rfc.section.9.1.1],
-  #           {OAuth Request Body Hash 1.0 Draft 4}[http://oauth.googlecode.com/svn/spec/ext/body_hash/1.0/drafts/4/spec.html]
+  # See Also: {OAuth core spec version 1.0, section 5.4.1}[http://oauth.net/core/1.0#rfc.section.5.4.1],
+  #           {OAuth Request Body Hash 1.0 Draft 4}[http://oauth.googlecode.com/svn/spec/ext/body_hash/1.0/drafts/4/spec.html,
+  #                                                 http://oauth.googlecode.com/svn/spec/ext/body_hash/1.0/oauth-bodyhash.html#when_to_include]
   def signature_base_string(http, consumer = nil, token = nil, options = {})
     helper_options = oauth_helper_options(http, consumer, token, options)
-    oauth_helper = OAuth::Client::Helper.new(self, helper_options)
-    oauth_helper.hash_body if oauth_body_hash_required?
-    oauth_helper.signature_base_string
+    @oauth_helper = OAuth::Client::Helper.new(self, helper_options)
+    @oauth_helper.hash_body if oauth_body_hash_required?
+    @oauth_helper.signature_base_string
   end
 
 private
@@ -84,7 +86,7 @@ private
   end
 
   def oauth_body_hash_required?
-    request_body_permitted? && !content_type.to_s.downcase.start_with?("application/x-www-form-urlencoded")
+    !@oauth_helper.token_request? && request_body_permitted? && !content_type.to_s.downcase.start_with?("application/x-www-form-urlencoded")
   end
 
   def set_oauth_header
