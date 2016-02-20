@@ -61,6 +61,27 @@ class TyphoeusRequestProxyTest < Minitest::Test
     assert_equal 'PUT', request_proxy.method
   end
 
+  def test_that_proxy_simple_put_request_works_with_arguments
+    request = Typhoeus::Request.new('/test', :method => :patch)
+    params = {'key' => 'value'}
+    request_proxy = OAuth::RequestProxy.proxy(request, {:uri => 'http://example.com/test', :parameters => params})
+
+    expected_parameters = {'key' => 'value'}
+    assert_equal expected_parameters, request_proxy.parameters_for_signature
+    assert_equal 'http://example.com/test', request_proxy.normalized_uri
+    assert_equal 'PATCH', request_proxy.method
+  end
+
+  def test_that_proxy_simple_put_request_works_with_form_data
+    request = Typhoeus::Request.new('/test', :method => :patch, :params => {'key' => 'value'})
+    request_proxy = OAuth::RequestProxy.proxy(request, {:uri => 'http://example.com/test'})
+
+    expected_parameters = {'key' => ['value']}
+    assert_equal expected_parameters, request_proxy.parameters_for_signature
+    assert_equal 'http://example.com/test', request_proxy.normalized_uri
+    assert_equal 'PATCH', request_proxy.method
+  end
+
   def test_that_proxy_post_request_works_with_mixed_parameter_sources
     request = Typhoeus::Request.new('/test?key=value',
       :method => :post,
