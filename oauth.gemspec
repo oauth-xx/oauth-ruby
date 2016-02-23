@@ -11,6 +11,7 @@ require "oauth/version"
 Gem::Specification.new do |spec|
   spec.name    = "oauth"
   spec.version = OAuth::VERSION
+  spec.license = "MIT"
 
   spec.authors     = ["Pelle Braendgaard", "Blaine Cook", "Larry Halff", "Jesse Clark", "Jon Crosby", "Seth Fitzsimmons", "Matt Sanford", "Aaron Quint"]
   spec.email       = "oauth-ruby@googlegroupspec.com"
