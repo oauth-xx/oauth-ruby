@@ -26,11 +26,11 @@ module OAuth
     # construct an authorization url
     def build_authorize_url(base_url, params)
       uri = URI.parse(base_url.to_s)
-      if(uri.query && !uri.query.blank? && !params.empty?)
-	uri.query += "&"
-      end
+      queries = {}
+      queries = Hash[URI.decode_www_form(uri.query)] if uri.query
       # TODO doesn't handle array values correctly
-      uri.query = params.map { |k,v| [k, CGI.escape(v)] * "=" } * "&"
+      queries.merge!(params) if params
+      uri.query = URI.encode_www_form(queries) if !queries.empty?
       uri.to_s
     end
   end
