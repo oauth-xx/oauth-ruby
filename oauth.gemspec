@@ -22,17 +22,16 @@ Gem::Specification.new do |spec|
   spec.extra_rdoc_files = [ "LICENSE", "README.rdoc", "TODO" ]
 
 
-  spec.add_development_dependency(%q<rake>)
-  spec.add_development_dependency(%q<minitest>)
-  spec.add_development_dependency(%q<byebug>)
-  spec.add_development_dependency(%q<jeweler>)
-  spec.add_development_dependency(%q<actionpack>, [">= 4.0.2"])
-  spec.add_development_dependency(%q<iconv>, ["~> 1.0.3"])
-  spec.add_development_dependency(%q<rack>, ["~> 1.6.1"])
-  spec.add_development_dependency(%q<rack-test>)
-  spec.add_development_dependency(%q<mocha>, [">= 0.9.12"])
-  spec.add_development_dependency(%q<typhoeus>, [">= 0.1.13"])
-  spec.add_development_dependency(%q<em-http-request>, ["0.2.11"])
-  spec.add_development_dependency(%q<curb>, ["0.7.16"])
+  spec.add_development_dependency("rake")
+  spec.add_development_dependency("minitest")
+  spec.add_development_dependency("byebug")
+  spec.add_development_dependency("jeweler")
+  spec.add_development_dependency("actionpack", [">= 4.0.2"])
+  spec.add_development_dependency("iconv")
+  spec.add_development_dependency("rack")
+  spec.add_development_dependency("rack-test")
+  spec.add_development_dependency("mocha", [">= 0.9.12"])
+  spec.add_development_dependency("typhoeus", [">= 0.1.13"])
+  spec.add_development_dependency("em-http-request")
+  spec.add_development_dependency("curb")
 end
-
