@@ -1,7 +1,7 @@
 require File.expand_path('../test_helper', __FILE__)
 require 'oauth/signature/hmac/sha1'
 
-class SignatureHMACSHA1Test < Minitest::Unit::TestCase
+class SignatureHMACSHA1Test < Minitest::Test
   def test_that_verify_returns_true_when_the_request_signature_is_right
     request = OAuth::RequestProxy::MockRequest.new(
       'method' => 'POST',

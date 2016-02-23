@@ -4,7 +4,7 @@ begin
   require 'oauth/request_proxy/rest_client_request'
   require 'rest-client'
 
-  class RestlClientRequestProxyTest < Minitest::Unit::TestCase
+  class RestlClientRequestProxyTest < Minitest::Test
 
     def test_that_proxy_simple_get_request_works
       request = ::RestClient::Request.new(method: :get, url: "http://example.com/test?key=value")

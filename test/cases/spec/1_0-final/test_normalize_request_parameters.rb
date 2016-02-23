@@ -27,13 +27,13 @@ require File.expand_path('../../../oauth_case', __FILE__)
 class NormalizeRequestParametersTest < OAuthCase
 
   def test_parameters_for_signature
-    params={'a'=>1, 'c'=>'hi there', 'f'=>'25', 'f'=>'50', 'f'=>'a', 'z'=>'p', 'z'=>'t'}
+    params={"a"=>1, "c"=>"hi there", "f"=>"a", "z"=>"t"}
     assert_equal params,request(params).parameters_for_signature
   end
 
 
   def test_parameters_for_signature_removes_oauth_signature
-    params={'a'=>1, 'c'=>'hi there', 'f'=>'25', 'f'=>'50', 'f'=>'a', 'z'=>'p', 'z'=>'t'}
+    params={"a"=>1, "c"=>"hi there", "f"=>"a", "z"=>"t"}
     assert_equal params,request(params.merge({'oauth_signature'=>'blalbla'})).parameters_for_signature
   end
 

@@ -291,6 +291,10 @@ class NetHTTPClientTest < Minitest::Test
 
   protected
 
+  def assert_no_match exp, act, msg = "Expected #{act.inspect} to not match #{exp.inspect}"
+    assert act !~ exp, msg
+  end
+
     def request_parameters_to_s
       @request_parameters.map { |k,v| "#{k}=#{v}" }.join("&")
     end
