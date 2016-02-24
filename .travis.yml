@@ -3,6 +3,7 @@ addons:
     packages:
     - libcurl-dev
 
+before_install: gem install bundler
 language: ruby
 script: "bundle exec rake test"
 
