@@ -22,7 +22,6 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency("rake")
   spec.add_development_dependency("minitest")
   spec.add_development_dependency("byebug")
-  spec.add_development_dependency("jeweler")
   spec.add_development_dependency("actionpack", ">= 4.0.2")
   spec.add_development_dependency("iconv")
   spec.add_development_dependency("rack")
