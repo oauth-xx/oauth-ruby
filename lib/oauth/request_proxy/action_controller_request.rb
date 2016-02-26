@@ -67,7 +67,7 @@ module OAuth::RequestProxy
 
       params.
         join('&').split('&').
-        reject(&:blank?).
+        reject { |s| s.match(/\A\s*\z/) }.
         map { |p| p.split('=').map{|esc| CGI.unescape(esc)} }.
         reject { |kv| kv[0] == 'oauth_signature'}
     end

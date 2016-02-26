@@ -146,7 +146,7 @@ module OAuth::RequestProxy
       if uri = request.env['REQUEST_URI']
         uri.split('?', 2)[1].nil?
       else
-        request.query_string.blank?
+        request.query_string.match(/\A\s*\z/)
       end
     end
 
