@@ -131,6 +131,19 @@ class ConsumerTest < Minitest::Test
     assert_equal :post,@consumer.http_method
   end
 
+  def test_getting_tokens_doesnt_add_paths_if_full_url_is_specified
+   @consumer = OAuth::Consumer.new(
+     "key",
+     "secret",
+     {
+         :site              => "https://api.mysite.co.nz/v1",
+         :request_token_url => "https://authentication.mysite.co.nz/Oauth/RequestToken"
+     })
+
+   stub_request(:post, "https://authentication.mysite.co.nz/Oauth/RequestToken").to_return(:status => 200)
+   @consumer.get_request_token
+  end
+
   def test_token_request_identifies_itself_as_a_token_request
     request_options = {}
     @consumer.stubs(:request).returns(create_stub_http_response)
