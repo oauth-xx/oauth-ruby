@@ -78,9 +78,9 @@ module OAuth::Client
       parameters = oauth_parameters
       parameters.merge!('oauth_signature' => signature(options.merge(:parameters => parameters)))
 
-      header_params_str = parameters.sort.map { |k,v| "#{k}=\"#{escape(v)}\"" }.join(', ')
+      header_params_str = parameters.sort.map { |k,v| "#{k}=\"#{escape(v)}\"" }.join(',')
 
-      realm = "realm=\"#{options[:realm]}\", " if options[:realm]
+      realm = "realm=\"#{options[:realm]}\"," if options[:realm]
       "OAuth #{realm}#{header_params_str}"
     end
 

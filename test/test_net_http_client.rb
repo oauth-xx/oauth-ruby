@@ -219,7 +219,7 @@ class NetHTTPClientTest < Minitest::Test
     assert_equal 'GET', request.method
     correct_sorted_params = 'oauth_nonce="kllo9940pd9333jh", oauth_signature_method="HMAC-SHA1", oauth_token="nnch734d00sl2jdk", oauth_timestamp="1191242096", oauth_consumer_key="dpf43f3p2l4k3l03", oauth_signature="tR3%2BTy81lMeYAr%2FFid0kMTYa%2FWM%3D", oauth_version="1.0"'.split(', ').sort
     correct_sorted_params.unshift 'OAuth realm="http://photos.example.net/"'
-    assert_equal correct_sorted_params, request['authorization'].split(', ').sort
+    assert_equal correct_sorted_params, request['authorization'].split(',').sort
   end
 
   def test_step_by_step_token_request
