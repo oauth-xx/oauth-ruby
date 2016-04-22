@@ -31,11 +31,15 @@ Create a new consumer instance by passing it a configuration hash:
 Start the process by requesting a token
 
   @request_token = @consumer.get_request_token(:oauth_callback => @callback_url)
-  session[:request_token] = @request_token
+
+  session[:token] = request_token.token
+  session[:token_secret] = request_token.secret
   redirect_to @request_token.authorize_url(:oauth_callback => @callback_url)
 
 When user returns create an access_token
 
+  hash = { oauth_token: session[:token], oauth_token_secret: session[:token_secret]}
+  request_token  = OAuth::RequestToken.from_hash(@consumer, hash)
   @access_token = @request_token.get_access_token
   @photos = @access_token.get('/photos.xml')
 
