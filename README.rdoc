@@ -22,7 +22,7 @@ The source code is now hosted on the OAuth GitHub Project http://github.com/oaut
 
 This is a ruby library which is intended to be used in creating Ruby Consumer and Service Provider applications. It is NOT a Rails plugin, but could easily be used for the foundation for such a Rails plugin.
 
-As a matter of fact it has been pulled out from an OAuth Rails Plugin http://code.google.com/p/oauth-plugin/ which now requires this GEM.
+As a matter of fact it has been pulled out from an OAuth Rails GEM (https://rubygems.org/gems/oauth-plugin https://github.com/pelle/oauth-plugin) which now uses this gem as a dependency.
 
 == Demonstration of usage
 
