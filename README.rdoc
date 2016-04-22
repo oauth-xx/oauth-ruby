@@ -1,5 +1,11 @@
 = Ruby OAuth
 
+== Status
+
+{<img src="https://travis-ci.org/oauth-xx/oauth-ruby.svg?branch=master" alt="Build Status" />}[https://travis-ci.org/oauth-xx/oauth-ruby]
+
+
+
 == What
 
 This is a RubyGem for implementing both OAuth clients and servers in Ruby applications.
