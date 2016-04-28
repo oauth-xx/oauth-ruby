@@ -9,9 +9,17 @@ module OAuth
     #
     # See Also: {OAuth core spec version 1.0, section 5.1}[http://oauth.net/core/1.0#rfc.section.5.1]
     def escape(value)
-      URI::escape(value.to_s.to_str, OAuth::RESERVED_CHARACTERS)
+      _escape(value.to_s.to_str)
     rescue ArgumentError
-      URI::escape(value.to_s.to_str.force_encoding(Encoding::UTF_8), OAuth::RESERVED_CHARACTERS)
+      _escape(value.to_s.to_str.force_encoding(Encoding::UTF_8))
+    end
+
+    def _escape(string)
+      URI.escape(string, OAuth::RESERVED_CHARACTERS)
+    end
+
+    def unescape(value)
+      URI.unescape(value.gsub('+', '%2B'))
     end
 
     # Generate a random key of up to +size+ bytes. The value returned is Base64 encoded with non-word
@@ -92,10 +100,6 @@ module OAuth
 
       # convert into a Hash
       Hash[*params.flatten]
-    end
-
-    def unescape(value)
-      URI.unescape(value.gsub('+', '%2B'))
     end
 
     def stringify_keys(hash)
