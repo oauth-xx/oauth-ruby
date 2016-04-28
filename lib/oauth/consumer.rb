@@ -43,6 +43,13 @@ module OAuth
       # Add a custom ca_file for consumer
       # :ca_file       => '/etc/certs.pem'
 
+      # Possible values:
+      #
+      # nil, false - no debug output
+      # true - uses $stdout
+      # some_value - uses some_value
+      :debug_output => nil,
+
       :oauth_version => "1.0"
     }
 
@@ -85,6 +92,18 @@ module OAuth
     # The default http method
     def http_method
       @http_method ||= @options[:http_method] || :post
+    end
+
+    def debug_output
+      @debug_output ||= begin
+        case @options[:debug_output]
+        when nil, false
+        when true
+          $stdout
+        else
+          @options[:debug_output]
+        end
+      end
     end
 
     # The HTTP object for the site. The HTTP Object is what you get when you do Net::HTTP.new
@@ -322,6 +341,8 @@ module OAuth
       http_object.read_timeout = http_object.open_timeout = @options[:timeout] || 30
       http_object.open_timeout = @options[:open_timeout] if @options[:open_timeout]
       http_object.ssl_version = @options[:ssl_version] if @options[:ssl_version]
+      http_object.set_debug_output(debug_output) if debug_output
+
       http_object
     end
 
