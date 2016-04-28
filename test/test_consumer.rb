@@ -38,6 +38,7 @@ class ConsumerTest < Minitest::Test
     assert_equal "http://blabla.bla/oauth/example/authorize.php",@consumer.authorize_url
     assert_equal :header,@consumer.scheme
     assert_equal :get,@consumer.http_method
+    assert_nil   @consumer.debug_output
   end
 
    def test_defaults
@@ -58,6 +59,28 @@ class ConsumerTest < Minitest::Test
     assert_equal "http://twitter.com/oauth/authorize",@consumer.authorize_url
     assert_equal :header,@consumer.scheme
     assert_equal :post,@consumer.http_method
+    assert_nil   @consumer.debug_output
+  end
+
+  def test_debug_output_true
+    @consumer=OAuth::Consumer.new(
+      "key",
+      "secret",
+      {
+          :debug_output=>true
+      })
+    assert_equal $stdout,@consumer.debug_output
+  end
+
+  def test_debug_output
+    stringio = StringIO.new
+    @consumer=OAuth::Consumer.new(
+      "key",
+      "secret",
+      {
+          :debug_output=>stringio
+      })
+    assert_equal stringio,@consumer.debug_output
   end
 
   def test_site_without_path
