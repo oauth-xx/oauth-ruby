@@ -10,10 +10,9 @@ require 'byebug'
 $LOAD_PATH << File.dirname(__FILE__) + '/../lib/'
 require 'oauth'
 require 'stringio'
-require 'webmock'
+require 'webmock/minitest'
 
-class Minitest::Test
-  include WebMock::API
+Minitest::Test.class_eval do
 
   def assert_matching_headers(expected, actual)
     # transform into sorted arrays
