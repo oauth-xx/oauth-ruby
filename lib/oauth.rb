@@ -1,4 +1,5 @@
-$LOAD_PATH << File.dirname(__FILE__) unless $LOAD_PATH.include?(File.dirname(__FILE__))
+root = File.dirname(__FILE__)
+$LOAD_PATH << root unless $LOAD_PATH.include?(root)
 
 require 'oauth/version'
 

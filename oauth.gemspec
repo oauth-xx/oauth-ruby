@@ -19,7 +19,6 @@ Gem::Specification.new do |spec|
   spec.test_files  = Dir.glob("test/**/*.rb")
   spec.extra_rdoc_files = [ "LICENSE", "README.rdoc", "TODO" ]
 
-
   spec.add_development_dependency("rake")
   spec.add_development_dependency("minitest")
   spec.add_development_dependency("byebug")
