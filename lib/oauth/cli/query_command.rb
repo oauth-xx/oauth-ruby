@@ -1,5 +1,6 @@
 class OAuth::CLI
   class QueryCommand < BaseCommand
+    extend OAuth::Helper
 
     def required_options
       [:oauth_consumer_key, :oauth_consumer_secret, :oauth_token, :oauth_token_secret]
@@ -12,7 +13,7 @@ class OAuth::CLI
 
       # append params to the URL
       uri = URI.parse(options[:uri])
-      params = parameters.map { |k,v| Array(v).map { |v2| "#{URI.encode(k)}=#{URI.encode(v2)}" } * "&" }
+      params = parameters.map { |k,v| Array(v).map { |v2| "#{OAuth::Helper.escape(k)}=#{OAuth::Helper.escape(v2)}" } * "&" }
       uri.query = [uri.query, *params].reject { |x| x.nil? } * "&"
       puts uri.to_s
 
