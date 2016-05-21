@@ -1,5 +1,4 @@
 require 'oauth/helper'
-require 'oauth/client/helper'
 require 'oauth/request_proxy/net_http'
 
 class Net::HTTPGenericRequest

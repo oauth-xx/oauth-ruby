@@ -1,6 +1,5 @@
 require 'em-http'
 require 'oauth/helper'
-require 'oauth/client/helper'
 require 'oauth/request_proxy/em_http_request'
 
 # Extensions for em-http so that we can use consumer.sign! with an EventMachine::HttpClient
