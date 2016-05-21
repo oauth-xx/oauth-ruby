@@ -41,7 +41,7 @@ class ConsumerTest < Minitest::Test
     assert_nil   @consumer.debug_output
   end
 
-   def test_defaults
+  def test_defaults
     @consumer=OAuth::Consumer.new(
       "key",
       "secret",

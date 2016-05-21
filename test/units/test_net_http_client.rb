@@ -19,7 +19,7 @@ class NetHTTPClientTest < Minitest::Test
     assert_equal 'GET', request.method
     assert_equal '/test?key=value', request.path
     correct_sorted_params = "oauth_nonce=\"225579211881198842005988698334675835446\", oauth_signature_method=\"HMAC-SHA1\", oauth_token=\"token_411a7f\", oauth_timestamp=\"1199645624\", oauth_consumer_key=\"consumer_key_86cad9\", oauth_signature=\"1oO2izFav1GP4kEH2EskwXkCRFg%3D\", oauth_version=\"1.0\""
-    auth_intro, auth_params = request['authorization'].split(' ', 2)
+    auth_intro = request['authorization'].split(' ', 2).first
     assert_equal auth_intro, 'OAuth'
     assert_matching_headers correct_sorted_params, request['authorization']
   end
@@ -129,7 +129,7 @@ class NetHTTPClientTest < Minitest::Test
 
     assert_equal 'POST', request.method
     assert_equal '/test', request.path
-    assert_match /key=value&oauth_consumer_key=consumer_key_86cad9&oauth_nonce=225579211881198842005988698334675835446&oauth_signature=26g7wHTtNO6ZWJaLltcueppHYiI%3[Dd]&oauth_signature_method=HMAC-SHA1&oauth_timestamp=1199645624&oauth_token=token_411a7f&oauth_version=1.0/, request.body.split("&").sort.join("&")
+    assert_match(/key=value&oauth_consumer_key=consumer_key_86cad9&oauth_nonce=225579211881198842005988698334675835446&oauth_signature=26g7wHTtNO6ZWJaLltcueppHYiI%3[Dd]&oauth_signature_method=HMAC-SHA1&oauth_timestamp=1199645624&oauth_token=token_411a7f&oauth_version=1.0/, request.body.split("&").sort.join("&"))
     assert_equal nil, request['authorization']
   end
 
@@ -152,7 +152,7 @@ class NetHTTPClientTest < Minitest::Test
 
     assert_equal 'POST', request.method
     assert_equal '/test', request.path
-    assert_match /OAuth oauth_consumer_key="consumer_key_86cad9", oauth_nonce="225579211881198842005988698334675835446", oauth_signature="%2[fF]DMMBOJzQ6JmEaXlAXDLGtD1z2I%3D", oauth_signature_method="HMAC-SHA1", oauth_timestamp="1199645624", oauth_token="token_411a7f", oauth_version="1.0"/, request['authorization'].split("&").sort.join("&")
+    assert_match(/OAuth oauth_consumer_key="consumer_key_86cad9", oauth_nonce="225579211881198842005988698334675835446", oauth_signature="%2[fF]DMMBOJzQ6JmEaXlAXDLGtD1z2I%3D", oauth_signature_method="HMAC-SHA1", oauth_timestamp="1199645624", oauth_token="token_411a7f", oauth_version="1.0"/, request['authorization'].split("&").sort.join("&"))
     # assert_equal nil, request['authorization']
   end
 

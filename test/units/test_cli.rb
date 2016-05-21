@@ -46,13 +46,13 @@ class TestCLI < Minitest::Test
   def test_help_empty
     out = run_command
 
-    assert_match /Usage: /, out
+    assert_match(/Usage: /, out)
   end
 
   def test_help
     out = run_command(%w[help])
 
-    assert_match /Usage: /, out
+    assert_match(/Usage: /, out)
   end
 
   def test_version
