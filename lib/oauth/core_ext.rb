@@ -13,11 +13,6 @@ end
 
 class String
 
-  def camelize
-    a,b = self[0], self[1..-1]
-    [a.upcase, b].join
-  end
-
   unless method_defined?(:bytesize)
     def bytesize
       self.size
