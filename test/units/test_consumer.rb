@@ -91,7 +91,7 @@ class ConsumerTest < Minitest::Test
           :site=>"http://twitter.com"
       })
     request = stub(:oauth! => nil)
-    http = stub(:request => stub(:to_hash => {}))
+    http = stub(:request => stub(:to_hash => {}), :address => "identi.ca")
     Net::HTTP::Get.expects(:new).with('/people', {}).returns(request)
     @consumer.expects(:create_http).returns(http)
     @consumer.request(:get, '/people', nil, {})
@@ -105,7 +105,7 @@ class ConsumerTest < Minitest::Test
           :site=>"http://identi.ca/api"
       })
     request = stub(:oauth! => nil)
-    http = stub(:request => stub(:to_hash => {}))
+    http = stub(:request => stub(:to_hash => {}), :address => "identi.ca")
     Net::HTTP::Get.expects(:new).with('/api/people', {}).returns(request)
     @consumer.expects(:create_http).returns(http)
     @consumer.request(:get, '/people', nil, {})
@@ -163,7 +163,7 @@ class ConsumerTest < Minitest::Test
          :request_token_url => "https://authentication.mysite.co.nz/Oauth/RequestToken"
      })
 
-   stub_request(:post, "https://authentication.mysite.co.nz/Oauth/RequestToken").to_return(:status => 200)
+   stub_request(:post, "https://authentication.mysite.co.nz/Oauth/RequestToken").to_return(:body => "success", :status => 200)
    @consumer.get_request_token
   end
 
