@@ -1,4 +1,4 @@
-require File.expand_path('../test_helper', __FILE__)
+require File.expand_path('../../test_helper_units', __FILE__)
 
 begin
 
@@ -61,7 +61,7 @@ class TyphoeusRequestProxyTest < Minitest::Test
     assert_equal 'PUT', request_proxy.method
   end
 
-  def test_that_proxy_simple_put_request_works_with_arguments
+  def test_that_proxy_simple_patch_request_works_with_arguments
     request = Typhoeus::Request.new('/test', :method => :patch)
     params = {'key' => 'value'}
     request_proxy = OAuth::RequestProxy.proxy(request, {:uri => 'http://example.com/test', :parameters => params})
@@ -72,7 +72,7 @@ class TyphoeusRequestProxyTest < Minitest::Test
     assert_equal 'PATCH', request_proxy.method
   end
 
-  def test_that_proxy_simple_put_request_works_with_form_data
+  def test_that_proxy_simple_patch_request_works_with_form_data
     request = Typhoeus::Request.new('/test', :method => :patch, :params => {'key' => 'value'})
     request_proxy = OAuth::RequestProxy.proxy(request, {:uri => 'http://example.com/test'})
 
