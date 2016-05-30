@@ -91,7 +91,7 @@ class ConsumerTest < Minitest::Test
           :site=>"http://twitter.com"
       })
     request = stub(:oauth! => nil)
-    http = stub(:request => stub(:to_hash => {}))
+    http = stub(:request => stub(:to_hash => {}), :address => "identi.ca")
     Net::HTTP::Get.expects(:new).with('/people', {}).returns(request)
     @consumer.expects(:create_http).returns(http)
     @consumer.request(:get, '/people', nil, {})
@@ -105,7 +105,7 @@ class ConsumerTest < Minitest::Test
           :site=>"http://identi.ca/api"
       })
     request = stub(:oauth! => nil)
-    http = stub(:request => stub(:to_hash => {}))
+    http = stub(:request => stub(:to_hash => {}), :address => "identi.ca")
     Net::HTTP::Get.expects(:new).with('/api/people', {}).returns(request)
     @consumer.expects(:create_http).returns(http)
     @consumer.request(:get, '/people', nil, {})
@@ -152,6 +152,19 @@ class ConsumerTest < Minitest::Test
     assert_equal "http://site.twitter.com/authorize",@consumer.authorize_url
     assert_equal :header,@consumer.scheme
     assert_equal :post,@consumer.http_method
+  end
+
+  def test_getting_tokens_doesnt_add_paths_if_full_url_is_specified
+   @consumer = OAuth::Consumer.new(
+     "key",
+     "secret",
+     {
+         :site              => "https://api.mysite.co.nz/v1",
+         :request_token_url => "https://authentication.mysite.co.nz/Oauth/RequestToken"
+     })
+
+   stub_request(:post, "https://authentication.mysite.co.nz/Oauth/RequestToken").to_return(:body => "success", :status => 200)
+   @consumer.get_request_token
   end
 
   def test_token_request_identifies_itself_as_a_token_request
