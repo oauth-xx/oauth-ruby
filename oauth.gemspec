@@ -20,15 +20,16 @@ Gem::Specification.new do |spec|
   spec.extra_rdoc_files = [ "LICENSE", "README.rdoc", "TODO" ]
 
   spec.add_development_dependency("rake")
-  spec.add_development_dependency("minitest")
+  spec.add_development_dependency("minitest", '>= 5.0')
   spec.add_development_dependency("byebug")
-  spec.add_development_dependency("actionpack", ">= 5.0.0") # TODO: try to allow both Rails versions on next release
+  spec.add_development_dependency("actionpack")
   spec.add_development_dependency("iconv")
-  spec.add_development_dependency("rack", "~> 1.0") # TODO: try to allow both Rack versions on next release
+  spec.add_development_dependency("rack")
   spec.add_development_dependency("rack-test")
   spec.add_development_dependency("mocha", ">= 0.9.12")
   spec.add_development_dependency("typhoeus", ">= 0.1.13")
   spec.add_development_dependency("em-http-request", "0.2.11")
   spec.add_development_dependency("curb")
   spec.add_development_dependency("webmock", "< 2.0")
+  spec.add_development_dependency 'codeclimate-test-reporter'
 end

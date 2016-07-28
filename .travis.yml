@@ -5,15 +5,22 @@ addons:
 
 language: ruby
 
-before_install: rvm rubygems master --force
-install: gem install --file
-script: "RUBYGEMS_GEMDEPS=- rake test"
-
 rvm:
-- "2.3.0"
-- "2.2"
-- "2.1"
-- "2.0"
+- 2.3.1
+- 2.2.5
+- 2.1
+- 2.0
+
+gemfile:
+- gemfiles/Gemfile.rails-4
+- Gemfile
+
+matrix:
+  exclude:
+  - rvm: 2.0
+    gemfile: Gemfile
+  - rvm: 2.1
+    gemfile: Gemfile
 
 addons:
   code_climate:
