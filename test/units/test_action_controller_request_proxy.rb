@@ -1,11 +1,12 @@
 require File.expand_path('../../test_helper_units', __FILE__)
 
 require 'oauth/request_proxy/action_controller_request'
+require 'rack/mock'
 
 class ActionControllerRequestProxyTest < Minitest::Test
 
   def request_proxy(request_method = :get, uri_params = {}, body_params = {})
-    request = ActionDispatch::TestRequest.new
+    request = ActionDispatch::TestRequest.new(Rack::MockRequest.env_for('/', method: request_method, params: uri_params))
     request.request_uri = '/'
 
     case request_method
