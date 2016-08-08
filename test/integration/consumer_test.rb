@@ -32,7 +32,6 @@ module Integration
     end
 
     def test_that_setting_signature_method_on_consumer_effects_signing
-      require 'oauth/signature/plaintext'
       request = Net::HTTP::Get.new(@request_uri.path)
       consumer = @consumer.dup
       consumer.options[:signature_method] = 'PLAINTEXT'
@@ -44,7 +43,6 @@ module Integration
     end
 
     def test_that_setting_signature_method_on_consumer_effects_signature_base_string
-      require 'oauth/signature/plaintext'
       request = Net::HTTP::Get.new(@request_uri.path)
       consumer = @consumer.dup
       consumer.options[:signature_method] = 'PLAINTEXT'
@@ -58,7 +56,7 @@ module Integration
 
     def test_that_plaintext_signature_works
       # Invalid test because server expects double-escaped signature
-      require 'oauth/signature/plaintext'
+
       # consumer = OAuth::Consumer.new("key", "secret",
       #   :site => "http://term.ie", :signature_method => 'PLAINTEXT')
       # access_token = OAuth::AccessToken.new(consumer, 'accesskey', 'accesssecret')

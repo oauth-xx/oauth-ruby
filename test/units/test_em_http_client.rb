@@ -27,7 +27,6 @@ class EmHttpClientTest < Minitest::Test
   end
 
   def test_that_using_auth_headers_on_get_requests_works_with_plaintext
-    require 'oauth/signature/plaintext'
     c = OAuth::Consumer.new('consumer_key_86cad9', '5888bf0345e5d237',{
       :signature_method => 'PLAINTEXT'
     })
