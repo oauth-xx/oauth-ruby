@@ -5,7 +5,7 @@ addons:
 
 language: ruby
 
-before_install: rvm rubygems master --force
+before_install: rvm rubygems v2.6.6 --force
 install: gem install --file
 script: "RUBYGEMS_GEMDEPS=- rake test"
 
