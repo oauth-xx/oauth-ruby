@@ -5,9 +5,6 @@ addons:
 
 language: ruby
 
-install: gem install --file
-script: "RUBYGEMS_GEMDEPS=- rake test"
-
 rvm:
 - "2.3.0"
 - "2.2"
