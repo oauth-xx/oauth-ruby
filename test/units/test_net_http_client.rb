@@ -105,9 +105,9 @@ class NetHTTPClientTest < Minitest::Test
     assert_equal 'GET', request.method
     uri = URI.parse(request.path)
     assert_equal '/test', uri.path
-    assert_equal nil, uri.fragment
+    assert_nil uri.fragment
     assert_equal "key=value&oauth_consumer_key=consumer_key_86cad9&oauth_nonce=225579211881198842005988698334675835446&oauth_signature=1oO2izFav1GP4kEH2EskwXkCRFg%3D&oauth_signature_method=HMAC-SHA1&oauth_timestamp=1199645624&oauth_token=token_411a7f&oauth_version=1.0", uri.query.split("&").sort.join("&")
-    assert_equal nil, request['authorization']
+    assert_nil request['authorization']
   end
 
   def test_that_using_get_params_works_with_plaintext
@@ -117,9 +117,9 @@ class NetHTTPClientTest < Minitest::Test
     assert_equal 'GET', request.method
     uri = URI.parse(request.path)
     assert_equal '/test', uri.path
-    assert_equal nil, uri.fragment
+    assert_nil uri.fragment
     assert_equal "key=value&oauth_consumer_key=consumer_key_86cad9&oauth_nonce=225579211881198842005988698334675835446&oauth_signature=5888bf0345e5d237%263196ffd991c8ebdb&oauth_signature_method=PLAINTEXT&oauth_timestamp=1199645624&oauth_token=token_411a7f&oauth_version=1.0", uri.query.split("&").sort.join("&")
-    assert_equal nil, request['authorization']
+    assert_nil request['authorization']
   end
 
   def test_that_using_post_params_works
@@ -130,7 +130,7 @@ class NetHTTPClientTest < Minitest::Test
     assert_equal 'POST', request.method
     assert_equal '/test', request.path
     assert_match(/key=value&oauth_consumer_key=consumer_key_86cad9&oauth_nonce=225579211881198842005988698334675835446&oauth_signature=26g7wHTtNO6ZWJaLltcueppHYiI%3[Dd]&oauth_signature_method=HMAC-SHA1&oauth_timestamp=1199645624&oauth_token=token_411a7f&oauth_version=1.0/, request.body.split("&").sort.join("&"))
-    assert_equal nil, request['authorization']
+    assert_nil request['authorization']
   end
 
   def test_that_using_post_params_works_with_plaintext
@@ -141,7 +141,7 @@ class NetHTTPClientTest < Minitest::Test
     assert_equal 'POST', request.method
     assert_equal '/test', request.path
     assert_equal "key=value&oauth_consumer_key=consumer_key_86cad9&oauth_nonce=225579211881198842005988698334675835446&oauth_signature=5888bf0345e5d237%263196ffd991c8ebdb&oauth_signature_method=PLAINTEXT&oauth_timestamp=1199645624&oauth_token=token_411a7f&oauth_version=1.0", request.body.split("&").sort.join("&")
-    assert_equal nil, request['authorization']
+    assert_nil request['authorization']
   end
 
   def test_that_using_post_body_works
@@ -153,7 +153,7 @@ class NetHTTPClientTest < Minitest::Test
     assert_equal 'POST', request.method
     assert_equal '/test', request.path
     assert_match(/OAuth oauth_consumer_key="consumer_key_86cad9", oauth_nonce="225579211881198842005988698334675835446", oauth_signature="%2[fF]DMMBOJzQ6JmEaXlAXDLGtD1z2I%3D", oauth_signature_method="HMAC-SHA1", oauth_timestamp="1199645624", oauth_token="token_411a7f", oauth_version="1.0"/, request['authorization'].split("&").sort.join("&"))
-    # assert_equal nil, request['authorization']
+    # assert_nil request['authorization']
   end
 
   def test_that_using_post_with_uri_params_works
@@ -164,10 +164,10 @@ class NetHTTPClientTest < Minitest::Test
     assert_equal 'POST', request.method
     uri = URI.parse(request.path)
     assert_equal '/test', uri.path
-    assert_equal nil, uri.fragment
+    assert_nil uri.fragment
     assert_equal "key=value&oauth_consumer_key=consumer_key_86cad9&oauth_nonce=225579211881198842005988698334675835446&oauth_signature=26g7wHTtNO6ZWJaLltcueppHYiI%3D&oauth_signature_method=HMAC-SHA1&oauth_timestamp=1199645624&oauth_token=token_411a7f&oauth_version=1.0", uri.query.split("&").sort.join('&')
     assert_equal "", request.body
-    assert_equal nil, request['authorization']
+    assert_nil request['authorization']
   end
 
   def test_that_using_post_with_uri_and_form_params_works
@@ -178,10 +178,10 @@ class NetHTTPClientTest < Minitest::Test
     assert_equal 'POST', request.method
     uri = URI.parse(request.path)
     assert_equal '/test', uri.path
-    assert_equal nil, uri.fragment
+    assert_nil uri.fragment
     assert_equal "key=value&oauth_consumer_key=consumer_key_86cad9&oauth_nonce=225579211881198842005988698334675835446&oauth_signature=4kSU8Zd1blWo3W6qJH7eaRTMkg0%3D&oauth_signature_method=HMAC-SHA1&oauth_timestamp=1199645624&oauth_token=token_411a7f&oauth_version=1.0", uri.query.split("&").sort.join('&')
     assert_equal "key2=value2", request.body
-    assert_equal nil, request['authorization']
+    assert_nil request['authorization']
   end
 
   def test_that_using_post_with_uri_and_data_works
@@ -193,11 +193,11 @@ class NetHTTPClientTest < Minitest::Test
     assert_equal 'POST', request.method
     uri = URI.parse(request.path)
     assert_equal '/test', uri.path
-    assert_equal nil, uri.fragment
+    assert_nil uri.fragment
     assert_equal "data", request.body
     assert_equal 'text/ascii', request.content_type
     assert_equal "key=value&oauth_body_hash=oXyaqmHoChv3HQ2FCvTluqmAC70%3D&oauth_consumer_key=consumer_key_86cad9&oauth_nonce=225579211881198842005988698334675835446&oauth_signature=MHRKU42iVHU4Ke9kBUDa9Zw6IAM%3D&oauth_signature_method=HMAC-SHA1&oauth_timestamp=1199645624&oauth_token=token_411a7f&oauth_version=1.0", uri.query.split("&").sort.join('&')
-    assert_equal nil, request['authorization']
+    assert_nil request['authorization']
   end
 
 
