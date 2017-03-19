@@ -87,7 +87,7 @@ module Integration
       assert_equal 'POST', request.method
       assert_equal '/test', request.path
       assert_match(/key=value&oauth_consumer_key=consumer_key_86cad9&oauth_nonce=225579211881198842005988698334675835446&oauth_signature=26g7wHTtNO6ZWJaLltcueppHYiI%3[Dd]&oauth_signature_method=HMAC-SHA1&oauth_timestamp=1199645624&oauth_token=token_411a7f&oauth_version=1.0/, request.body.split("&").sort.join("&"))
-      assert_equal nil, request['authorization']
+      assert_nil request['authorization']
     end
 
     def test_that_using_auth_headers_on_get_on_create_signed_requests_works
@@ -112,7 +112,7 @@ module Integration
       assert_equal 'POST', request.method
       assert_equal '/test', request.path
       assert_match(/key=value&oauth_consumer_key=consumer_key_86cad9&oauth_nonce=225579211881198842005988698334675835446&oauth_signature=26g7wHTtNO6ZWJaLltcueppHYiI%3[Dd]&oauth_signature_method=HMAC-SHA1&oauth_timestamp=1199645624&oauth_token=token_411a7f&oauth_version=1.0/, request.body.split("&").sort.join("&"))
-      assert_equal nil, request['authorization']
+      assert_nil request['authorization']
     end
 
     def test_step_by_step_token_request
@@ -136,7 +136,7 @@ module Integration
       @consumer.sign!(request, nil,options)
 
       assert_equal 'GET', request.method
-      assert_equal nil, request.body
+      assert_nil request.body
       response=@consumer.http.request(request)
       assert_equal "200",response.code
       assert_equal "oauth_token=requestkey&oauth_token_secret=requestsecret",response.body
