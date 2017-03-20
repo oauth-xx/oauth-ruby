@@ -1,4 +1,4 @@
-require File.expand_path('../../test_helper_units', __FILE__)
+require File.expand_path('../../test_helper', __FILE__)
 
 class StubbedToken < OAuth::RequestToken
   define_method :build_authorize_url_promoted do |root_domain, params|

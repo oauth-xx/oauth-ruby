@@ -1,7 +1,6 @@
-require File.expand_path('../../test_helper_units', __FILE__)
+require File.expand_path('../../test_helper', __FILE__)
+
 require 'oauth/request_proxy/rack_request'
-require 'rack/request'
-require 'rack/mock'
 
 class RackRequestProxyTest < Minitest::Test
 

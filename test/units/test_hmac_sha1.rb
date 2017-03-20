@@ -1,4 +1,4 @@
-require File.expand_path('../../test_helper_units', __FILE__)
+require File.expand_path('../../test_helper', __FILE__)
 
 class TestSignatureHmacSha1 < Minitest::Test
   def test_that_hmac_sha1_implements_hmac_sha1
