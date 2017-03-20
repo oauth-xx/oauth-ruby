@@ -1,6 +1,7 @@
 === CURRENT
 
 * Adding support to Ruby 2.4 and head (James Pinto)
+* Upgrading to CodeClimate 1.0 (James Pinto)
 
 === 0.5.1 2016-02-29
 
