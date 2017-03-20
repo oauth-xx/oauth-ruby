@@ -1,4 +1,4 @@
-require File.expand_path('../../test_helper_units', __FILE__)
+require File.expand_path('../../test_helper', __FILE__)
 
 begin
   require 'oauth/request_proxy/rest_client_request'

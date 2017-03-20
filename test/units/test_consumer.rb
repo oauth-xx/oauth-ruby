@@ -1,6 +1,4 @@
-require File.expand_path('../../test_helper_units', __FILE__)
-
-require 'stringio'
+require File.expand_path('../../test_helper', __FILE__)
 
 # This performs testing against Andy Smith's test server http://term.ie/oauth/example/
 # Thanks Andy.
