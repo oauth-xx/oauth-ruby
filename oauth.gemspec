@@ -19,6 +19,12 @@ Gem::Specification.new do |spec|
   spec.test_files  = Dir.glob("test/**/*.rb")
   spec.extra_rdoc_files = [ "LICENSE", "README.rdoc", "TODO" ]
 
+  # This gem will work with 2.0 or greater...
+  spec.required_ruby_version = '>= 2.0'
+
+  # Nokogiri 1.7 does not accept Ruby 2.0
+  spec.add_development_dependency("nokogiri", "~> 1.6.8") if RUBY_VERSION < "2.1"
+
   spec.add_development_dependency("rake")
   spec.add_development_dependency("minitest")
   spec.add_development_dependency("byebug")
