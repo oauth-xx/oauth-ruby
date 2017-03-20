@@ -1,19 +1,26 @@
+# ensure test env
+
 ENV['RACK_ENV'] = 'test'
 
-require "codeclimate-test-reporter"
-CodeClimate::TestReporter.start
+# simplecov, Travis will call codeclimate
 
-require 'rubygems'
+require 'simplecov'
+SimpleCov.start
+
+# require third-party code
+
+require 'byebug'
+require 'stringio'
 require 'minitest/autorun'
 require 'mocha/mini_test'
 require 'rack/test'
+require 'webmock/minitest'
 
-require 'byebug'
+# require our lib
 
 $LOAD_PATH << File.dirname(__FILE__) + '/../lib/'
 require 'oauth'
-require 'stringio'
-require 'webmock/minitest'
-WebMock.disable_net_connect!(allow: "codeclimate.com")
+
+# require our support code
 
 require 'support/minitest_helpers'

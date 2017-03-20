@@ -1,4 +1,5 @@
-require File.expand_path('../../test_helper_units', __FILE__)
+require File.expand_path('../../test_helper', __FILE__)
+
 require 'oauth/signature/plaintext'
 
 class TestSignaturePlaintext < Minitest::Test

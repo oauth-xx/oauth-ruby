@@ -1,3 +1,9 @@
+=== CURRENT
+
+* Adding support to Ruby 2.4 and head (James Pinto)
+* Upgrading to CodeClimate 1.0 (James Pinto)
+* Nokogiri 1.7 does not accept Ruby 2.0 (James Pinto)
+
 === 0.5.1 2016-02-29
 
 * Proper handling for empty query string in RequestToken#build_authorize_url (midchildan,

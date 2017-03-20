@@ -1,16 +1,9 @@
-addons:
-  apt:
-    packages:
-    - libcurl-dev
-
 language: ruby
 
-before_install: rvm rubygems master --force
-install: gem install --file
-script: "RUBYGEMS_GEMDEPS=- rake test"
-
 rvm:
-- "2.3.0"
+- "ruby-head"
+- "2.4.0"
+- "2.3"
 - "2.2"
 - "2.1"
 - "2.0"
@@ -18,3 +11,6 @@ rvm:
 addons:
   code_climate:
     repo_token: 8f697ca756250f0c2c54170ae27e8a9c459d18a0236903b11291c88291b3aac9
+
+after_success:
+  - bundle exec codeclimate-test-reporter
