@@ -16,7 +16,7 @@ Gem::Specification.new do |spec|
 
   spec.executables = ["oauth"]
   spec.files       = Dir.glob("lib/**/*.rb")
-  spec.test_files  = Dir.glob("test/**/*.rb")
+  spec.test_files  = Dir.glob("test/**/*.rb") + Dir.glob('test/keys/*')
   spec.extra_rdoc_files = [ "LICENSE", "README.rdoc", "TODO" ]
 
   # This gem will work with 2.0 or greater...
