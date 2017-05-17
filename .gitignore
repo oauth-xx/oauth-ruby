@@ -1,5 +1,4 @@
-pkg/*
-_site
 .bundle
 Gemfile.lock
 coverage
+*.gem
