@@ -1,5 +1,9 @@
 === CURRENT
 
+
+
+=== 0.5.2 2017-05-17
+
 * Adding a development dependency that had not been mentioned (James Pinto)
 * Use assert_nil so as to silence a Minitest 6 deprecation warning (James Pinto)
 * Stop bundling tests files in the gem (Michal Papis)
