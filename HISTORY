@@ -1,6 +1,11 @@
 === CURRENT
 
-* Removing legacy scripts
+
+
+=== 0.5.3 2017-05-24
+
+* Removing legacy scripts (James Pinto)
+* Fix #145 - broken CLI required loading active_support (James Pinto)
 
 === 0.5.2 2017-05-17
 
