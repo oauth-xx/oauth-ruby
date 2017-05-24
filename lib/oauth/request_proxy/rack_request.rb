@@ -14,6 +14,13 @@ module OAuth::RequestProxy
       request.url
     end
 
+    def body
+      body_string = request.body.read
+      #rewind the StringIO so other mehtods can use it as well
+      request.body.rewind
+      body_string
+    end
+
     def parameters
       if options[:clobber_request]
         options[:parameters] || {}
@@ -23,6 +30,16 @@ module OAuth::RequestProxy
       end
     end
 
+    def parameters_for_signature
+      param_hash = parameters.reject { |k,v| k == "oauth_signature" || unsigned_parameters.include?(k)}
+      array_values = param_hash.select {|k,v| v.kind_of?(Array)}
+      array_values.each do |k,v|
+        param_hash.delete(k)
+        param_hash["#{k}[]"] = v
+      end
+      param_hash
+    end
+    
     def signature
       parameters['oauth_signature']
     end
