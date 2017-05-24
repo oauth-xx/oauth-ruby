@@ -40,7 +40,7 @@ module OAuth::Signature::RSA
         elsif options[:private_key]
           options[:private_key]
         else
-          consumer_secret
+          options[:private_key] || consumer_secret
         end
       )
 
