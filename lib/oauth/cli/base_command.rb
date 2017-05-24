@@ -12,7 +12,7 @@ class OAuth::CLI
       if missing.empty?
         _run
       else
-        # puts "Options missing to OAuth CLI: #{options}"
+        show_missing(missing)
         puts option_parser.help
       end
     end
@@ -24,6 +24,11 @@ class OAuth::CLI
     protected
 
     attr_reader :options
+
+    def show_missing(array)
+      array = array.map { |s| "--#{s}" }.join(' ')
+      OAuth::CLI.puts_red "Options missing to OAuth CLI: #{array}"
+    end
 
     def xmpp?
       options[:xmpp]
