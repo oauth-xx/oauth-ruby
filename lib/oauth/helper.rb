@@ -15,11 +15,11 @@ module OAuth
     end
 
     def _escape(string)
-      URI.escape(string, OAuth::RESERVED_CHARACTERS)
+      URI::DEFAULT_PARSER.escape(string, OAuth::RESERVED_CHARACTERS)
     end
 
     def unescape(value)
-      URI.unescape(value.gsub('+', '%2B'))
+      URI::DEFAULT_PARSER.unescape(value.gsub('+', '%2B'))
     end
 
     # Generate a random key of up to +size+ bytes. The value returned is Base64 encoded with non-word
