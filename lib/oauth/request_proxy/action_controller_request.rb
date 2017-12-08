@@ -23,7 +23,7 @@ then # rails 3.x
     ActionDispatch::Request::HTTP_METHOD_LOOKUP["patch"] = :patch
   end
 
-else # rails 4.x - already has patch
+else # rails 4.x and later - already has patch
   require 'action_dispatch/http/request'
 end
 

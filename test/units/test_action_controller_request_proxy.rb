@@ -5,7 +5,7 @@ require 'oauth/request_proxy/action_controller_request'
 class ActionControllerRequestProxyTest < Minitest::Test
 
   def request_proxy(request_method = :get, uri_params = {}, body_params = {})
-    request = ActionDispatch::TestRequest.new
+    request = ActionDispatch::TestRequest.create
     request.request_uri = '/'
 
     case request_method

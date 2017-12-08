@@ -1,5 +1,6 @@
 if defined? ActionDispatch
   require 'oauth/request_proxy/rack_request'
+  require 'oauth/request_proxy/action_dispatch_request'
   require 'action_dispatch/testing/test_process'
 else
   require 'oauth/request_proxy/action_controller_request'
