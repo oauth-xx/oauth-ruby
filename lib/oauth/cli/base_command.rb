@@ -131,7 +131,7 @@ class OAuth::CLI
         options[:method] = v
       end
 
-      opts.on("--nonce NONCE", "Specifies the none to use.") do |v|
+      opts.on("--nonce NONCE", "Specifies the nonce to use.") do |v|
         options[:oauth_nonce] = v
       end
 

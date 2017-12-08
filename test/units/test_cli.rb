@@ -280,7 +280,7 @@ Usage: oauth <command> [ARGS]
 
   options for signing and querying
         --method METHOD              Specifies the method (e.g. GET) to use when signing.
-        --nonce NONCE                Specifies the none to use.
+        --nonce NONCE                Specifies the nonce to use.
         --parameters PARAMS          Specifies the parameters to use when signing.
         --signature-method METHOD    Specifies the signature method to use; defaults to HMAC-SHA1.
         --token TOKEN                Specifies the token to use.
