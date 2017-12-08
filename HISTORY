@@ -1,6 +1,9 @@
 === CURRENT
 
+=== 0.5.4 2017-12-08
 
+* Fixes UnknownRequestType on Rails 5.1 for ActionDispatch::Request (xprazak2)
+* Various cleanups (charliesome)
 
 === 0.5.3 2017-05-24
 
