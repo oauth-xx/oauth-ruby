@@ -44,7 +44,7 @@ module OAuth::Client
         allowed_empty_params = options[:allow_empty_params]
         allowed_empty_params = [allowed_empty_params] if allowed_empty_params.kind_of?(String)
         allowed_empty_params = true if !allowed_empty_params.kind_of?(Array)
-        out.reject! { |k,v| && v.to_s == '' && (allowed_empty_params != true || !allowed_empty_params.include?(k)) }
+        out.reject! { |k,v| v.to_s == '' && (allowed_empty_params != true || !allowed_empty_params.include?(k)) }
       end
       out
     end
