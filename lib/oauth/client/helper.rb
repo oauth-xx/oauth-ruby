@@ -33,7 +33,7 @@ module OAuth::Client
         'oauth_signature_method' => options[:signature_method],
         'oauth_timestamp'        => timestamp,
         'oauth_nonce'            => nonce,
-        'oauth_version'          => (options[:oauth_version] || '1.0')
+        'oauth_version'          => (options[:oauth_version] || '1.0'),
         'oauth_body_hash'        => options[:body_hash],
         # 'oauth_callback'         => options[:oauth_callback],
         # 'oauth_verifier'         => options[:oauth_verifier],
