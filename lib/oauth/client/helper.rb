@@ -28,16 +28,16 @@ module OAuth::Client
 
     def oauth_parameters
       out = {
-        'oauth_body_hash'        => options[:body_hash],
-        'oauth_callback'         => options[:oauth_callback],
         'oauth_consumer_key'     => options[:consumer].key,
         'oauth_token'            => options[:token] ? options[:token].token : '',
         'oauth_signature_method' => options[:signature_method],
         'oauth_timestamp'        => timestamp,
         'oauth_nonce'            => nonce,
-        'oauth_verifier'         => options[:oauth_verifier],
-        'oauth_version'          => (options[:oauth_version] || '1.0'),
-        'oauth_session_handle'   => options[:oauth_session_handle]
+        'oauth_version'          => (options[:oauth_version] || '1.0')
+        # 'oauth_body_hash'        => options[:body_hash],
+        # 'oauth_callback'         => options[:oauth_callback],
+        # 'oauth_verifier'         => options[:oauth_verifier],
+        # 'oauth_session_handle'   => options[:oauth_session_handle]
       }
       if !options[:allow_empty_params]
         out.reject! { |k,v| v.to_s == '' }
