@@ -39,9 +39,11 @@ module OAuth::Client
         'oauth_version'          => (options[:oauth_version] || '1.0'),
         'oauth_session_handle'   => options[:oauth_session_handle]
       }
-      if !options[:allow_empty_params]
-        out.reject! { |k,v| v.to_s == '' }
+      allowed_empty_params = options[:allow_empty_params]
+      if allowed_empty_params != true && !allowed_empty_params.kind_of?(Array)
+        allowed_empty_params = allowed_empty_params == false ? [] : [allowed_empty_params]
       end
+      out.select! { |k,v| v.to_s != '' || allowed_empty_params == true || allowed_empty_params.include?(k) }
       out
     end
 
