@@ -44,6 +44,7 @@ module OAuth::Client
         allowed_empty_params = allowed_empty_params == false ? [] : [allowed_empty_params]
       end
       out.select! { |k,v| v.to_s != '' || allowed_empty_params == true || allowed_empty_params.include?(k) }
+      out
     end
 
     def signature(extra_options = {})
