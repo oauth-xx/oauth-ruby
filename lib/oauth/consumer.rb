@@ -371,7 +371,7 @@ module OAuth
         http_object.verify_depth = 5
       end
 
-      http_object.read_timeout = http_object.open_timeout = @options[:timeout] || 30
+      http_object.read_timeout = http_object.open_timeout = @options[:timeout] || 60
       http_object.open_timeout = @options[:open_timeout] if @options[:open_timeout]
       http_object.ssl_version = @options[:ssl_version] if @options[:ssl_version]
       http_object.set_debug_output(debug_output) if debug_output
