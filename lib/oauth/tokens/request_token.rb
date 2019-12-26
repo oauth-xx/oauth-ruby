@@ -8,7 +8,14 @@ module OAuth
       return nil if self.token.nil?
 
       params = (params || {}).merge(:oauth_token => self.token)
-      build_authorize_url(consumer.authorize_url, params)
+      build_url(consumer.authorize_url, params)
+    end
+
+    def authenticate_url(params = nil)
+      return nil if self.token.nil?
+
+      params = (params || {}).merge(:oauth_token => self.token)
+      build_url(consumer.authenticate_url, params)
     end
 
     def callback_confirmed?
@@ -23,8 +30,8 @@ module OAuth
 
   protected
 
-    # construct an authorization url
-    def build_authorize_url(base_url, params)
+    # construct an authorization or authentication url
+    def build_url(base_url, params)
       uri = URI.parse(base_url.to_s)
       queries = {}
       queries = Hash[URI.decode_www_form(uri.query)] if uri.query
