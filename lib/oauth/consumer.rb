@@ -8,11 +8,21 @@ require 'cgi'
 module OAuth
   class Consumer
     # determine the certificate authority path to verify SSL certs
-    CA_FILES = %W(#{ENV['SSL_CERT_FILE']} /etc/ssl/certs/ca-certificates.crt /etc/pki/tls/certs/ca-bundle.crt /usr/share/curl/curl-ca-bundle.crt)
-    CA_FILES.each do |ca_file|
-      if File.exist?(ca_file)
-        CA_FILE = ca_file
-        break
+    if ENV['SSL_CERT_FILE']
+      if File.exist?(ENV['SSL_CERT_FILE'])
+        CA_FILE = ENV['SSL_CERT_FILE']
+      else
+        raise "The SSL CERT provided does not exist."
+      end
+    end
+
+    if !defined?(CA_FILE)
+      CA_FILES = %W(/etc/ssl/certs/ca-certificates.crt /etc/pki/tls/certs/ca-bundle.crt /usr/share/curl/curl-ca-bundle.crt)
+      CA_FILES.each do |ca_file|
+        if File.exist?(ca_file)
+          CA_FILE = ca_file
+          break
+        end
       end
     end
     CA_FILE = nil unless defined?(CA_FILE)
@@ -343,12 +353,15 @@ module OAuth
 
       http_object.use_ssl = (our_uri.scheme == 'https')
 
-      if @options[:ca_file] || CA_FILE
-        http_object.ca_file = @options[:ca_file] || CA_FILE
+      if @options[:no_verify]
+        http_object.verify_mode = OpenSSL::SSL::VERIFY_NONE
+      else
+        ca_file =  @options[:ca_file] || CA_FILE
+        if ca_file
+          http_object.ca_file = ca_file
+        end
         http_object.verify_mode = OpenSSL::SSL::VERIFY_PEER
         http_object.verify_depth = 5
-      else
-        http_object.verify_mode = OpenSSL::SSL::VERIFY_NONE
       end
 
       http_object.read_timeout = http_object.open_timeout = @options[:timeout] || 30
