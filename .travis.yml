@@ -2,10 +2,13 @@ language: ruby
 
 rvm:
 - "ruby-head"
+- "2.7"
 - "2.4.0"
 - "2.3"
 - "2.2"
-
+matrix:
+  allow_failures:
+    - rvm: "ruby-head"
 addons:
   code_climate:
     repo_token: 8f697ca756250f0c2c54170ae27e8a9c459d18a0236903b11291c88291b3aac9
