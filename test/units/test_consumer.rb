@@ -165,6 +165,54 @@ class ConsumerTest < Minitest::Test
    @consumer.get_request_token
   end
 
+  def test_noverify_true
+    @consumer = OAuth::Consumer.new(
+     "key",
+     "secret",
+     {
+         :site              => "https://api.mysite.co.nz/v1",
+         :request_token_url => "https://authentication.mysite.co.nz/Oauth/RequestToken",
+         :no_verify         => true
+     })
+
+    stub_request(:post, "https://authentication.mysite.co.nz/Oauth/RequestToken").to_return(:body => "success", :status => 200)
+
+    Net::HTTP.any_instance.expects(:'verify_mode=').with(OpenSSL::SSL::VERIFY_NONE)
+
+    @consumer.get_request_token
+  end
+
+  def test_noverify_false
+    @consumer = OAuth::Consumer.new(
+     "key",
+     "secret",
+     {
+         :site              => "https://api.mysite.co.nz/v1",
+         :request_token_url => "https://authentication.mysite.co.nz/Oauth/RequestToken",
+         :no_verify         => false
+     })
+
+    stub_request(:post, "https://authentication.mysite.co.nz/Oauth/RequestToken").to_return(:body => "success", :status => 200)
+
+    Net::HTTP.any_instance.expects(:'verify_mode=').with(OpenSSL::SSL::VERIFY_PEER)
+    @consumer.get_request_token
+  end
+
+  def test_noverify_empty
+    @consumer = OAuth::Consumer.new(
+     "key",
+     "secret",
+     {
+         :site              => "https://api.mysite.co.nz/v1",
+         :request_token_url => "https://authentication.mysite.co.nz/Oauth/RequestToken"
+     })
+
+    stub_request(:post, "https://authentication.mysite.co.nz/Oauth/RequestToken").to_return(:body => "success", :status => 200)
+
+    Net::HTTP.any_instance.expects(:'verify_mode=').with(OpenSSL::SSL::VERIFY_PEER)
+    @consumer.get_request_token
+  end
+
   def test_token_request_identifies_itself_as_a_token_request
     request_options = {}
     @consumer.stubs(:request).returns(create_stub_http_response)
