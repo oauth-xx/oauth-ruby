@@ -27,7 +27,7 @@ module OAuth::Client
     end
 
     def oauth_parameters
-      {
+      out = {
         'oauth_body_hash'        => options[:body_hash],
         'oauth_callback'         => options[:oauth_callback],
         'oauth_consumer_key'     => options[:consumer].key,
@@ -38,7 +38,13 @@ module OAuth::Client
         'oauth_verifier'         => options[:oauth_verifier],
         'oauth_version'          => (options[:oauth_version] || '1.0'),
         'oauth_session_handle'   => options[:oauth_session_handle]
-      }.reject { |k,v| v.to_s == "" }
+      }
+      allowed_empty_params = options[:allow_empty_params]
+      if allowed_empty_params != true && !allowed_empty_params.kind_of?(Array)
+        allowed_empty_params = allowed_empty_params == false ? [] : [allowed_empty_params]
+      end
+      out.select! { |k,v| v.to_s != '' || allowed_empty_params == true || allowed_empty_params.include?(k) }
+      out
     end
 
     def signature(extra_options = {})
