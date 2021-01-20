@@ -1,5 +1,10 @@
 === CURRENT
 
+=== 0.5.5 2020-01-19
+
+* Fixes ssl-noverify
+* Various cleanups
+
 === 0.5.4 2017-12-08
 
 * Fixes UnknownRequestType on Rails 5.1 for ActionDispatch::Request (xprazak2)
