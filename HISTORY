@@ -2,6 +2,7 @@
 
 === 0.5.5 2020-01-19
 
+* Add :allow_empty_params option (#155)
 * Fixes ssl-noverify
 * Various cleanups
 
