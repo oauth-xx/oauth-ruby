@@ -1,8 +1,6 @@
 #!/usr/bin/env ruby -r rubygems
-
-# Sample queries:
-#  ./yql.rb --consumer-key <key> --consumer-secret <secret> "show tables"
-#  ./yql.rb --consumer-key <key> --consumer-secret <secret> "select * from flickr.photos.search where text='Cat' limit 10"
+#
+#  ./twitter.rb --consumer-key <key> --consumer-secret <secret> <tweet_id>
 
 require 'oauth'
 require 'optparse'
@@ -35,10 +33,10 @@ end
 consumer = OAuth::Consumer.new \
   options[:consumer_key],
   options[:consumer_secret],
-  :site => "http://query.yahooapis.com"
+  :site => "https://api.twitter.com"
 
 access_token = OAuth::AccessToken.new(consumer)
 
-response = access_token.request(:get, "/v1/yql?q=#{OAuth::Helper.escape(query)}&format=json")
+response = access_token.request(:get, "/1.1/statuses/show/#{OAuth::Helper.escape(query)}.json")
 rsp = JSON.parse(response.body)
 pp rsp
