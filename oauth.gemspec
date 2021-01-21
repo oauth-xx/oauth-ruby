@@ -15,6 +15,14 @@ Gem::Specification.new do |spec|
   spec.summary     = "OAuth Core Ruby implementation"
 
   spec.executables = ["oauth"]
+  spec.homepage = "https://github.com/oauth-xx/oauth-ruby"
+  spec.metadata = {
+    'bug_tracker_uri' => "#{spec.homepage}/issues",
+    'changelog_uri' => "#{spec.homepage}/blob/master/HISTORY",
+    'documentation_uri' => "https://rdoc.info/github/oauth-xx/oauth-ruby/master/frames",
+    'homepage_uri' => spec.homepage,
+    'source_code_uri' => spec.homepage
+  }
   spec.files       = Dir.glob("lib/**/*.rb")
   #spec.test_files  = Dir.glob("test/**/*.rb") + Dir.glob('test/keys/*')
   spec.extra_rdoc_files = [ "LICENSE", "README.rdoc", "TODO" ]
