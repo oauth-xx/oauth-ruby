@@ -1,5 +1,7 @@
 === CURRENT
 
+* Add metadata to Gemspec file
+
 === 0.5.5 2020-01-19
 
 * Allow redirect to different host but same path
