@@ -2,7 +2,7 @@
 
 == Status
 
-{<img src="https://travis-ci.org/oauth-xx/oauth-ruby.svg?branch=master" alt="Build Status" />}[https://travis-ci.org/oauth-xx/oauth-ruby]
+{<img src="https://travis-ci.org/oauth-xx/oauth-ruby.svg?branch=master" alt="Build Status" />}[https://travis-ci.com/github/oauth-xx/oauth-ruby]
 
 
 
@@ -48,7 +48,7 @@ When user returns create an access_token
   request_token  = OAuth::RequestToken.from_hash(oauth_consumer, hash)
   access_token = request_token.get_access_token
   # For 3-legged authorization, flow oauth_verifier is passed as param in callback
-  # access_token = request_token.get_access_token(oauth_verifier: params[:oauth_verifier]) 
+  # access_token = request_token.get_access_token(oauth_verifier: params[:oauth_verifier])
   @photos = access_token.get('/photos.xml')
 
 Now that you have an access token, you can use Typhoeus to interact with the OAuth provider if you choose.
