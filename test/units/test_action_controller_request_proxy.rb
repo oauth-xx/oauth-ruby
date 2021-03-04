@@ -77,7 +77,7 @@ class ActionControllerRequestProxyTest < Minitest::Test
   def test_that_proxy_simple_put_request_works_with_post_params
     request_proxy = request_proxy(:put, {}, {'key'=>'value'})
 
-    expected_parameters = []
+    expected_parameters = [["key", "value"]]
     assert_equal expected_parameters, request_proxy.parameters_for_signature
     assert_equal 'PUT', request_proxy.method
   end
@@ -109,7 +109,7 @@ class ActionControllerRequestProxyTest < Minitest::Test
   def test_that_proxy_simple_put_request_works_with_mixed_params
     request_proxy = request_proxy(:put, {'key'=>'value'}, {'key2'=>'value2'})
 
-    expected_parameters = [["key", "value"]]
+    expected_parameters = [["key", "value"],["key2", "value2"]]
     assert_equal expected_parameters, request_proxy.parameters_for_signature
     assert_equal 'PUT', request_proxy.method
   end
