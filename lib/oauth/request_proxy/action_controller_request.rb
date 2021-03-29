@@ -60,7 +60,7 @@ module OAuth::RequestProxy
         params << header_params.to_query
         params << request.query_string unless query_string_blank?
 
-        if request.post? && request.content_type.to_s.downcase.start_with?("application/x-www-form-urlencoded")
+        if raw_post_signature?
           params << request.raw_post
         end
       end
@@ -70,6 +70,10 @@ module OAuth::RequestProxy
         reject { |s| s.match(/\A\s*\z/) }.
         map { |p| p.split('=').map{|esc| CGI.unescape(esc)} }.
         reject { |kv| kv[0] == 'oauth_signature'}
+    end
+
+    def raw_post_signature?
+      (request.post? || request.put?) && request.content_type.to_s.downcase.start_with?("application/x-www-form-urlencoded")
     end
 
   protected
