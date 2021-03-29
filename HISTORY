@@ -2,6 +2,7 @@
 
 * Add metadata to Gemspec file
 * Change default timeout to be the same as Net::HTTP default, 60 seconds instead of 30 seconds.
+* Add support for PUT requests with Action Controller (#181)
 
 === 0.5.5 2020-01-19
 
