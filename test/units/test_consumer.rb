@@ -263,6 +263,22 @@ class ConsumerTest < Minitest::Test
     assert_equal 'secret', hash[:oauth_token_secret]
   end
 
+  def test_not_following_redirect_with_same_uri
+    request_uri = URI.parse("http://example.com/request_token")
+    redirect_uri = request_uri.clone
+
+    stub_request(:get, request_uri.to_s).to_return(
+      :status => 301,
+      :headers => {'Location' => redirect_uri.to_s}
+    )
+
+    assert_raises Net::HTTPRetriableError do
+      @consumer.token_request(:get, request_uri.path) {
+        { :oauth_token => 'token', :oauth_token_secret => 'secret' }
+      }
+    end
+  end
+
   def test_that_can_provide_a_block_to_interpret_a_request_token_response
     @consumer.expects(:request).returns(create_stub_http_response)
 
