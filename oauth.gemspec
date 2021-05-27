@@ -31,7 +31,7 @@ Gem::Specification.new do |spec|
   spec.required_ruby_version = '>= 2.0'
 
   # Nokogiri 1.7 does not accept Ruby 2.0
-  spec.add_development_dependency("nokogiri", "~> 1.6.8") if RUBY_VERSION < "2.1"
+  spec.add_development_dependency("nokogiri", "~> 1.11.6") if RUBY_VERSION < "2.1"
 
   spec.add_development_dependency("rake")
   spec.add_development_dependency("minitest")
