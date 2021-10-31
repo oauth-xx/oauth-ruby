@@ -17,7 +17,8 @@ end
 require "byebug" if debug
 require "stringio"
 require "minitest/autorun"
-require "mocha/mini_test"
+require "minitest/unit"
+require "mocha/minitest"
 require "rack/test"
 require "webmock/minitest"
 
