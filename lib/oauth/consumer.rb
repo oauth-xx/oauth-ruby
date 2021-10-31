@@ -343,18 +343,22 @@ module OAuth
     # Instantiates the http object
     def create_http(_url = nil)
 
-
       if !request_endpoint.nil?
        _url = request_endpoint
       end
 
-
-      if _url.nil? || _url[0] =~ /^\//
-        our_uri = URI.parse(site)
-      else
-        our_uri = URI.parse(_url)
-      end
-
+      our_uri = if _url.nil? || _url[0] =~ /^\//
+                  URI.parse(site)
+                else
+                  your_uri = URI.parse(_url)
+                  if your_uri.host.nil?
+                    # If the _url is a path, missing the leading slash, then it won't have a host,
+                    # and our_uri *must* have a host, so we parse site instead.
+                    URI.parse(site)
+                  else
+                    your_uri
+                  end
+                end
 
       if proxy.nil?
         http_object = Net::HTTP.new(our_uri.host, our_uri.port)
