@@ -1,5 +1,5 @@
-require 'openssl'
-require 'base64'
+require "openssl"
+require "base64"
 
 module OAuth
   module Helper
@@ -19,13 +19,13 @@ module OAuth
     end
 
     def unescape(value)
-      URI::DEFAULT_PARSER.unescape(value.gsub('+', '%2B'))
+      URI::DEFAULT_PARSER.unescape(value.gsub("+", "%2B"))
     end
 
     # Generate a random key of up to +size+ bytes. The value returned is Base64 encoded with non-word
     # characters removed.
     def generate_key(size=32)
-      Base64.encode64(OpenSSL::Random.random_bytes(size)).gsub(/\W/, '')
+      Base64.encode64(OpenSSL::Random.random_bytes(size)).gsub(/\W/, "")
     end
 
     alias_method :generate_nonce, :generate_key

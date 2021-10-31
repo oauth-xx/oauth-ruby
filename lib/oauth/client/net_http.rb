@@ -1,5 +1,5 @@
-require 'oauth/helper'
-require 'oauth/request_proxy/net_http'
+require "oauth/helper"
+require "oauth/request_proxy/net_http"
 
 class Net::HTTPGenericRequest
   include OAuth::Helper
@@ -58,7 +58,7 @@ private
     { :request_uri      => oauth_full_request_uri(http,options),
       :consumer         => consumer,
       :token            => token,
-      :scheme           => 'header',
+      :scheme           => "header",
       :signature_method => nil,
       :nonce            => nil,
       :timestamp        => nil }.merge(options)
@@ -71,7 +71,7 @@ private
 
     if options[:request_endpoint] && options[:site]
       is_https = options[:site].match(%r(^https://))
-      uri.host = options[:site].gsub(%r(^https?://), '')
+      uri.host = options[:site].gsub(%r(^https?://), "")
       uri.port ||= is_https ? 443 : 80
     end
 
@@ -89,7 +89,7 @@ private
   end
 
   def set_oauth_header
-    self['Authorization'] = @oauth_helper.header
+    self["Authorization"] = @oauth_helper.header
   end
 
   # FIXME: if you're using a POST body and query string parameters, this method

@@ -1,4 +1,4 @@
-require File.expand_path('../../../oauth_case', __FILE__)
+require File.expand_path("../../../oauth_case", __FILE__)
 
 # See http://oauth.net/core/1.0/#anchor14
 #
@@ -56,7 +56,7 @@ class ConstructRequestUrlTest < OAuthCase
 
 
   def assert_request_url(expected,given,message=nil)
-    assert_equal expected, request({},'GET',given).normalized_uri, message
+    assert_equal expected, request({},"GET",given).normalized_uri, message
   end
 
 end

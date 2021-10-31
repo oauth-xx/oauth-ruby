@@ -1,8 +1,8 @@
-require 'oauth/signature/base'
+require "oauth/signature/base"
 
 module OAuth::Signature
   class PLAINTEXT < Base
-    implements 'plaintext'
+    implements "plaintext"
 
     def signature
       signature_base_string

@@ -1,5 +1,5 @@
-require 'oauth/helper'
-require 'oauth/consumer'
+require "oauth/helper"
+require "oauth/consumer"
 
 module OAuth
   # This is mainly used to create consumer credentials and can pretty much be ignored if you want to create your own

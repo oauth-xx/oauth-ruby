@@ -1,4 +1,4 @@
-require File.expand_path('../../../oauth_case', __FILE__)
+require File.expand_path("../../../oauth_case", __FILE__)
 
 # See http://oauth.net/core/1.0/#anchor14
 #
@@ -34,16 +34,16 @@ class NormalizeRequestParametersTest < OAuthCase
 
   def test_parameters_for_signature_removes_oauth_signature
     params={"a"=>1, "c"=>"hi there", "f"=>"a", "z"=>"t"}
-    assert_equal params,request(params.merge({'oauth_signature'=>'blalbla'})).parameters_for_signature
+    assert_equal params,request(params.merge({"oauth_signature"=>"blalbla"})).parameters_for_signature
   end
 
   def test_spec_example
-    assert_normalized 'a=1&c=hi%20there&f=25&f=50&f=a&z=p&z=t', { 'a' => 1, 'c' => 'hi there', 'f' => ['25', '50', 'a'], 'z' => ['p', 't'] }
+    assert_normalized "a=1&c=hi%20there&f=25&f=50&f=a&z=p&z=t", { "a" => 1, "c" => "hi there", "f" => ["25", "50", "a"], "z" => ["p", "t"] }
   end
 
   def test_sorts_parameters_correctly
     # values for 'f' are scrambled
-    assert_normalized 'a=1&c=hi%20there&f=5&f=70&f=a&z=p&z=t', { 'a' => 1, 'c' => 'hi there', 'f' => ['a', '70', '5'], 'z' => ['p', 't'] }
+    assert_normalized "a=1&c=hi%20there&f=5&f=70&f=a&z=p&z=t", { "a" => 1, "c" => "hi there", "f" => ["a", "70", "5"], "z" => ["p", "t"] }
   end
 
   def test_empty
@@ -59,20 +59,20 @@ class NormalizeRequestParametersTest < OAuthCase
   end
 
   def test_wiki2
-    assert_normalized "a=b",{'a'=>'b'}
+    assert_normalized "a=b",{"a"=>"b"}
   end
 
   def test_wiki3
-    assert_normalized "a=b&c=d",{'a'=>'b','c'=>'d'}
+    assert_normalized "a=b&c=d",{"a"=>"b","c"=>"d"}
   end
 
   def test_wiki4
-    assert_normalized "a=x%20y&a=x%21y",{'a'=>["x!y","x y"]}
+    assert_normalized "a=x%20y&a=x%21y",{"a"=>["x!y","x y"]}
 
   end
 
   def test_wiki5
-    assert_normalized "x=a&x%21y=a",{"x!y"=>'a','x'=>'a'}
+    assert_normalized "x=a&x%21y=a",{"x!y"=>"a","x"=>"a"}
   end
 
   protected

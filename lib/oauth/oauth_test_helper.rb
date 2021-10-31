@@ -1,5 +1,5 @@
-require 'action_controller'
-require 'action_controller/test_process'
+require "action_controller"
+require "action_controller/test_process"
 
 module OAuth
   module OAuthTestHelper
@@ -8,7 +8,7 @@ module OAuth
       incoming.request_uri = request.path
       incoming.host = request.uri.host
       incoming.env["SERVER_PORT"] = request.uri.port
-      incoming.env['REQUEST_METHOD'] = request.http_method
+      incoming.env["REQUEST_METHOD"] = request.http_method
       incoming
     end
 
@@ -18,7 +18,7 @@ module OAuth
       incoming.host = request.uri.host
       incoming.env["HTTP_AUTHORIZATION"] = request.to_auth_string
       incoming.env["SERVER_PORT"] = request.uri.port
-      incoming.env['REQUEST_METHOD'] = request.http_method
+      incoming.env["REQUEST_METHOD"] = request.http_method
       incoming
     end
   end

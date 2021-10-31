@@ -1,26 +1,30 @@
 # ensure test env
 
-ENV['RACK_ENV'] = 'test'
+ENV["RACK_ENV"] = "test"
 
-# simplecov, Travis will call codeclimate
+ruby_version = Gem::Version.new(RUBY_VERSION)
+minimum_version = ->(version) { ruby_version >= Gem::Version.new(version) && RUBY_ENGINE == "ruby" }
+coverage = minimum_version.call("2.6")
+debug = minimum_version.call("2.4")
 
-require 'simplecov'
-SimpleCov.start
+if coverage
+  require "simplecov"
+  require "simplecov-cobertura"
+  SimpleCov.formatter = SimpleCov::Formatter::CoberturaFormatter unless ENV["HTML_COVERAGE"] == "true"
+end
 
 # require third-party code
-
-require 'byebug'
-require 'stringio'
-require 'minitest/autorun'
-require 'mocha/mini_test'
-require 'rack/test'
-require 'webmock/minitest'
+require "byebug" if debug
+require "stringio"
+require "minitest/autorun"
+require "minitest/unit"
+require "mocha/minitest"
+require "rack/test"
+require "webmock/minitest"
 
 # require our lib
-
-$LOAD_PATH << File.dirname(__FILE__) + '/../lib/'
-require 'oauth'
+require "oauth"
 
 # require our support code
 
-require 'support/minitest_helpers'
+require "support/minitest_helpers"

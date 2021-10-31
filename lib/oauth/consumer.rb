@@ -1,16 +1,16 @@
-require 'net/http'
-require 'net/https'
-require 'oauth/oauth'
-require 'oauth/client/net_http'
-require 'oauth/errors'
-require 'cgi'
+require "net/http"
+require "net/https"
+require "oauth/oauth"
+require "oauth/client/net_http"
+require "oauth/errors"
+require "cgi"
 
 module OAuth
   class Consumer
     # determine the certificate authority path to verify SSL certs
-    if ENV['SSL_CERT_FILE']
-      if File.exist?(ENV['SSL_CERT_FILE'])
-        CA_FILE = ENV['SSL_CERT_FILE']
+    if ENV["SSL_CERT_FILE"]
+      if File.exist?(ENV["SSL_CERT_FILE"])
+        CA_FILE = ENV["SSL_CERT_FILE"]
       else
         raise "The SSL CERT provided does not exist."
       end
@@ -29,17 +29,17 @@ module OAuth
 
     @@default_options = {
       # Signature method used by server. Defaults to HMAC-SHA1
-      :signature_method   => 'HMAC-SHA1',
+      :signature_method   => "HMAC-SHA1",
 
       # default paths on site. These are the same as the defaults set up by the generators
-      :request_token_path => '/oauth/request_token',
-      :authenticate_path  => '/oauth/authenticate',
-      :authorize_path     => '/oauth/authorize',
-      :access_token_path  => '/oauth/access_token',
+      :request_token_path => "/oauth/request_token",
+      :authenticate_path  => "/oauth/authenticate",
+      :authorize_path     => "/oauth/authorize",
+      :access_token_path  => "/oauth/access_token",
 
       :proxy              => nil,
       # How do we send the oauth values to the server see
-      # http://oauth.net/core/1.0/#consumer_req_param for more info
+      # https://oauth.net/core/1.0/#consumer_req_param for more info
       #
       # Possible values:
       #
@@ -157,11 +157,14 @@ module OAuth
       request_options[:oauth_callback] ||= OAuth::OUT_OF_BAND unless request_options[:exclude_callback]
 
       if block_given?
-        response = token_request(http_method,
-        (request_token_url? ? request_token_url : request_token_path),
-        nil,
-        request_options,
-        *arguments, &block)
+        response = token_request(
+          http_method,
+          (request_token_url? ? request_token_url : request_token_path),
+          nil,
+          request_options,
+          *arguments,
+          &block
+        )
       else
         response = token_request(http_method, (request_token_url? ? request_token_url : request_token_path), nil, request_options, *arguments)
       end
@@ -190,7 +193,7 @@ module OAuth
       return nil if block_given? and yield(req) == :done
       rsp = http.request(req)
       # check for an error reported by the Problem Reporting extension
-      # (http://wiki.oauth.net/ProblemReporting)
+      # (https://wiki.oauth.net/ProblemReporting)
       # note: a 200 may actually be an error; check for an oauth_problem key to be sure
       if !(headers = rsp.to_hash["www-authenticate"]).nil? &&
         (h = headers.select { |hdr| hdr =~ /^OAuth / }).any? &&
@@ -360,7 +363,7 @@ module OAuth
         http_object = Net::HTTP.new(our_uri.host, our_uri.port, proxy_uri.host, proxy_uri.port, proxy_uri.user, proxy_uri.password)
       end
 
-      http_object.use_ssl = (our_uri.scheme == 'https')
+      http_object.use_ssl = (our_uri.scheme == "https")
 
       if @options[:no_verify]
         http_object.verify_mode = OpenSSL::SSL::VERIFY_NONE
@@ -393,20 +396,20 @@ module OAuth
       # only add if the site host matches the current http object's host
       # (in case we've specified a full url for token requests)
       uri  = URI.parse(site)
-      path = uri.path + path if uri.path && uri.path != '/' && uri.host == http.address
+      path = uri.path + path if uri.path && uri.path != "/" && uri.host == http.address
 
       headers = arguments.first.is_a?(Hash) ? arguments.shift : {}
 
       case http_method
       when :post
         request = Net::HTTP::Post.new(path,headers)
-        request["Content-Length"] = '0' # Default to 0
+        request["Content-Length"] = "0" # Default to 0
       when :put
         request = Net::HTTP::Put.new(path,headers)
-        request["Content-Length"] = '0' # Default to 0
+        request["Content-Length"] = "0" # Default to 0
       when :patch
         request = Net::HTTP::Patch.new(path,headers)
-        request["Content-Length"] = '0' # Default to 0
+        request["Content-Length"] = "0" # Default to 0
       when :get
         request = Net::HTTP::Get.new(path,headers)
       when :delete
@@ -419,7 +422,7 @@ module OAuth
 
       if data.is_a?(Hash)
         request.body = OAuth::Helper.normalize(data)
-        request.content_type = 'application/x-www-form-urlencoded'
+        request.content_type = "application/x-www-form-urlencoded"
       elsif data
         if data.respond_to?(:read)
           request.body_stream = data

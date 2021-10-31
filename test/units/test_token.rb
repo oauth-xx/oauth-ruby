@@ -1,6 +1,6 @@
-require File.expand_path('../../test_helper', __FILE__)
+require File.expand_path("../../test_helper", __FILE__)
 
-require 'oauth/token'
+require "oauth/token"
 
 class TestToken < Minitest::Test
 
@@ -8,8 +8,8 @@ class TestToken < Minitest::Test
   end
 
   def test_token_constructor_produces_valid_token
-    token = OAuth::Token.new('xyz', '123')
-    assert_equal 'xyz', token.token
-    assert_equal '123', token.secret
+    token = OAuth::Token.new("xyz", "123")
+    assert_equal "xyz", token.token
+    assert_equal "123", token.secret
   end
 end

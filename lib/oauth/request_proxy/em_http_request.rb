@@ -1,7 +1,7 @@
-require 'oauth/request_proxy/base'
+require "oauth/request_proxy/base"
 # em-http also uses adddressable so there is no need to require uri.
-require 'em-http'
-require 'cgi'
+require "em-http"
+require "cgi"
 
 module OAuth::RequestProxy::EventMachine
   class HttpRequest < OAuth::RequestProxy::Base
@@ -14,11 +14,11 @@ module OAuth::RequestProxy::EventMachine
     # Request in this con
 
     def method
-      request.method
+      request.req[:method]
     end
 
     def uri
-      request.normalize_uri.to_s
+      request.conn.normalize.to_s
     end
 
     def parameters
@@ -36,14 +36,20 @@ module OAuth::RequestProxy::EventMachine
     end
 
     def query_parameters
-      CGI.parse(request.normalize_uri.query.to_s)
+      quer = request.req[:query]
+      hash_quer = if quer.respond_to?(:merge)
+                    quer
+                  else
+                    CGI.parse(quer.to_s)
+                  end
+      CGI.parse(request.conn.query.to_s).merge(hash_quer)
     end
 
     def post_parameters
-      headers = request.options[:head] || {}
-      form_encoded = headers['Content-Type'].to_s.downcase.start_with?("application/x-www-form-urlencoded")
-      if ['POST', 'PUT'].include?(method) && form_encoded
-        CGI.parse(request.normalize_body.to_s)
+      headers = request.req[:head] || {}
+      form_encoded = headers["Content-Type"].to_s.downcase.start_with?("application/x-www-form-urlencoded")
+      if ["POST", "PUT"].include?(method) && form_encoded
+        CGI.parse(request.normalize_body(request.req[:body]).to_s)
       else
         {}
       end
@@ -53,9 +59,9 @@ module OAuth::RequestProxy::EventMachine
       extra_params.compact.each do |params_pairs|
         params_pairs.each_pair do |key, value|
           if params.has_key?(key)
-            params[key] += value
+            params[key.to_s] += value
           else
-            params[key] = [value].flatten
+            params[key.to_s] = [value].flatten
           end
         end
       end

@@ -1,12 +1,12 @@
-require 'active_support'
+require "active_support"
 require "active_support/version"
-require 'action_controller'
-require 'uri'
+require "action_controller"
+require "uri"
 
 if
   Gem::Version.new(ActiveSupport::VERSION::STRING) < Gem::Version.new("3")
 then # rails 2.x
-  require 'action_controller/request'
+  require "action_controller/request"
   unless ActionController::Request::HTTP_METHODS.include?("patch")
     ActionController::Request::HTTP_METHODS << "patch"
     ActionController::Request::HTTP_METHOD_LOOKUP["PATCH"] = :patch
@@ -16,7 +16,7 @@ then # rails 2.x
 elsif
   Gem::Version.new(ActiveSupport::VERSION::STRING) < Gem::Version.new("4")
 then # rails 3.x
-  require 'action_dispatch/http/request'
+  require "action_dispatch/http/request"
   unless ActionDispatch::Request::HTTP_METHODS.include?("patch")
     ActionDispatch::Request::HTTP_METHODS << "patch"
     ActionDispatch::Request::HTTP_METHOD_LOOKUP["PATCH"] = :patch
@@ -24,7 +24,7 @@ then # rails 3.x
   end
 
 else # rails 4.x and later - already has patch
-  require 'action_dispatch/http/request'
+  require "action_dispatch/http/request"
 end
 
 module OAuth::RequestProxy
@@ -66,10 +66,10 @@ module OAuth::RequestProxy
       end
 
       params.
-        join('&').split('&').
+        join("&").split("&").
         reject { |s| s.match(/\A\s*\z/) }.
-        map { |p| p.split('=').map{|esc| CGI.unescape(esc)} }.
-        reject { |kv| kv[0] == 'oauth_signature'}
+        map { |p| p.split("=").map{|esc| CGI.unescape(esc)} }.
+        reject { |kv| kv[0] == "oauth_signature"}
     end
 
     def raw_post_signature?
