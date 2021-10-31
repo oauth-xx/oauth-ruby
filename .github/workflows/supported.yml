@@ -35,6 +35,10 @@ jobs:
           cc_test_reporter_id: ${{ secrets.CC_TEST_REPORTER_ID }}
       - name: Checkout
         uses: actions/checkout@v2
+      - name: Install cURL Headers
+        run: curl https://curl.haxx.se/download/curl-$V.tar.gz | sudo tar xz -C /usr --strip-components=1 curl-$V/include
+        env:
+          V: 7.58.0
       - name: Setup Ruby & Bundle
         uses: ruby/setup-ruby@v1
         with:
