@@ -51,7 +51,9 @@ module OAuth::Signature
     end
 
     def ==(cmp_signature)
-      signature == cmp_signature
+      check = signature.bytesize ^ cmp_signature.bytesize
+      signature.bytes.zip(cmp_signature.bytes) { |x, y| check |= x ^ y.to_i }
+      check.zero?
     end
 
     def verify
