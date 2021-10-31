@@ -49,6 +49,7 @@ jobs:
       - name: Run tests
         run: bundle exec rake test
       - uses: codecov/codecov-action@v2
+        if: matrix.ruby == '2.6' && github.event_name != 'pull_request'
         with:
           flags: unittests
           name: codecov-upload
