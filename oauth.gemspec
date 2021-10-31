@@ -31,11 +31,11 @@ Gem::Specification.new do |spec|
   spec.required_ruby_version = ">= 2.0"
 
   ruby_version = Gem::Version.new(RUBY_VERSION)
-  linting = ruby_version >= Gem::Version.new('2.6') && RUBY_ENGINE == 'ruby'
+  linting = ruby_version >= Gem::Version.new("2.6") && RUBY_ENGINE == "ruby"
   coverage = linting
 
   # Nokogiri 1.7 does not accept Ruby 2.0
-  spec.add_development_dependency("nokogiri", "~> 1.6.8") if ruby_version < Gem::Version.new('2.0')
+  spec.add_development_dependency("nokogiri", "~> 1.6.8") if ruby_version < Gem::Version.new("2.0")
 
   spec.add_development_dependency("actionpack", ">= 5.0")
   spec.add_development_dependency("byebug", "~> 11.1")
