@@ -36,9 +36,6 @@ Gem::Specification.new do |spec|
   coverage = minimum_version.call("2.6")
   debug = minimum_version.call("2.4")
 
-  # Nokogiri 1.7 does not accept Ruby 2.0
-  spec.add_development_dependency("nokogiri", "~> 1.6.8") if ruby_version < Gem::Version.new("2.0")
-
   spec.add_development_dependency("actionpack", ">= 5.0")
   spec.add_development_dependency("byebug", "~> 11.1") if debug
   spec.add_development_dependency("curb")
