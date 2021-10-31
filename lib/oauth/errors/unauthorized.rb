@@ -6,7 +6,9 @@ module OAuth
     end
 
     def to_s
-      [request.code, request.message] * " "
+      return "401 Unauthorized" if request.nil?
+
+      "#{request.code} #{request.message}"
     end
   end
 end
