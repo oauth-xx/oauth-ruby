@@ -2,10 +2,14 @@
 
 ENV["RACK_ENV"] = "test"
 
+ruby_version = Gem::Version.new(RUBY_VERSION)
 # Code coverage
-require "simplecov"
-require "simplecov-cobertura"
-SimpleCov.formatter = SimpleCov::Formatter::CoberturaFormatter unless ENV["HTML_COVERAGE"] == "true"
+coverage = ruby_version >= Gem::Version.new("2.6") && RUBY_ENGINE == "ruby"
+if coverage
+  require "simplecov"
+  require "simplecov-cobertura"
+  SimpleCov.formatter = SimpleCov::Formatter::CoberturaFormatter unless ENV["HTML_COVERAGE"] == "true"
+end
 
 # require third-party code
 
