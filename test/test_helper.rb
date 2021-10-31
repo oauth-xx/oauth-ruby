@@ -22,8 +22,6 @@ require "rack/test"
 require "webmock/minitest"
 
 # require our lib
-
-$LOAD_PATH << File.dirname(__FILE__) + "/../lib/"
 require "oauth"
 
 # require our support code
