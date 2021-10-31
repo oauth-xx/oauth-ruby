@@ -1,4 +1,4 @@
-require File.expand_path("../../test_helper_units", __FILE__)
+require File.expand_path("../../test_helper", __FILE__)
 
 class TestSignaturePlaintext < Minitest::Test
   def test_that_plaintext_implements_plaintext

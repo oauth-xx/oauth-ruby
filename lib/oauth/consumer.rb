@@ -157,11 +157,14 @@ module OAuth
       request_options[:oauth_callback] ||= OAuth::OUT_OF_BAND unless request_options[:exclude_callback]
 
       if block_given?
-        response = token_request(http_method,
-        (request_token_url? ? request_token_url : request_token_path),
-        nil,
-        request_options,
-        *arguments, &block)
+        response = token_request(
+          http_method,
+          (request_token_url? ? request_token_url : request_token_path),
+          nil,
+          request_options,
+          *arguments,
+          &block
+        )
       else
         response = token_request(http_method, (request_token_url? ? request_token_url : request_token_path), nil, request_options, *arguments)
       end

@@ -136,7 +136,7 @@ module Integration
       assert_equal "GET", request.method
       assert_nil request.body
       response=@consumer.http.request(request)
-      assert_equal "200",response.code
+      assert_equal "200", response.code
       assert_equal "oauth_token=requestkey&oauth_token_secret=requestsecret",response.body
     end
 
@@ -161,24 +161,24 @@ module Integration
 
       @request_token=@consumer.get_request_token
       assert @request_token
-      assert_equal "requestkey",@request_token.token
-      assert_equal "requestsecret",@request_token.secret
+      assert_equal "requestkey", @request_token.token
+      assert_equal "requestsecret", @request_token.secret
       assert_equal "http://term.ie/oauth/example/authorize.php?oauth_token=requestkey",@request_token.authorize_url
 
       @access_token=@request_token.get_access_token
       assert @access_token
-      assert_equal "accesskey",@access_token.token
-      assert_equal "accesssecret",@access_token.secret
+      assert_equal "accesskey", @access_token.token
+      assert_equal "accesssecret", @access_token.secret
 
       @response=@access_token.get("/oauth/example/echo_api.php?ok=hello&test=this")
       assert @response
-      assert_equal "200",@response.code
-      assert_equal( "ok=hello&test=this",@response.body)
+      assert_equal "200", @response.code
+      assert_equal( "ok=hello&test=this", @response.body)
 
       @response=@access_token.post("/oauth/example/echo_api.php",{"ok"=>"hello","test"=>"this"})
       assert @response
-      assert_equal "200",@response.code
-      assert_equal( "ok=hello&test=this",@response.body)
+      assert_equal "200", @response.code
+      assert_equal( "ok=hello&test=this", @response.body)
     end
 
     def test_get_token_sequence_using_fqdn
@@ -193,8 +193,8 @@ module Integration
           :access_token_url=>"http://term.ie/oauth/example/access_token.php",
           :authorize_url=>"http://term.ie/oauth/example/authorize.php"
           })
-      assert_equal "http://term.ie/oauth/example/request_token.php",@consumer.request_token_url
-      assert_equal "http://term.ie/oauth/example/access_token.php",@consumer.access_token_url
+      assert_equal "http://term.ie/oauth/example/request_token.php", @consumer.request_token_url
+      assert_equal "http://term.ie/oauth/example/access_token.php", @consumer.access_token_url
 
       assert @consumer.request_token_url?, "Should use fully qualified request token url"
       assert @consumer.access_token_url?, "Should use fully qualified access token url"
@@ -202,24 +202,24 @@ module Integration
 
       @request_token=@consumer.get_request_token
       assert @request_token
-      assert_equal "requestkey",@request_token.token
-      assert_equal "requestsecret",@request_token.secret
-      assert_equal "http://term.ie/oauth/example/authorize.php?oauth_token=requestkey",@request_token.authorize_url
+      assert_equal "requestkey", @request_token.token
+      assert_equal "requestsecret", @request_token.secret
+      assert_equal "http://term.ie/oauth/example/authorize.php?oauth_token=requestkey", @request_token.authorize_url
 
       @access_token=@request_token.get_access_token
       assert @access_token
-      assert_equal "accesskey",@access_token.token
-      assert_equal "accesssecret",@access_token.secret
+      assert_equal "accesskey", @access_token.token
+      assert_equal "accesssecret", @access_token.secret
 
       @response=@access_token.get("/oauth/example/echo_api.php?ok=hello&test=this")
       assert @response
-      assert_equal "200",@response.code
-      assert_equal( "ok=hello&test=this",@response.body)
+      assert_equal "200", @response.code
+      assert_equal( "ok=hello&test=this", @response.body)
 
       @response=@access_token.post("/oauth/example/echo_api.php",{"ok"=>"hello","test"=>"this"})
       assert @response
       assert_equal "200",@response.code
-      assert_equal( "ok=hello&test=this",@response.body)
+      assert_equal( "ok=hello&test=this", @response.body)
     end
 
 
