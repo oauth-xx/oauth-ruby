@@ -1,7 +1,7 @@
-require 'oauth/request_proxy/base'
-require 'rest-client'
-require 'uri'
-require 'cgi'
+require "oauth/request_proxy/base"
+require "rest-client"
+require "uri"
+require "cgi"
 
 module OAuth::RequestProxy::RestClient
   class Request < OAuth::RequestProxy::Base
@@ -35,7 +35,7 @@ module OAuth::RequestProxy::RestClient
       
       def post_parameters
         # Post params are only used if posting form data
-        if method == 'POST' || method == 'PUT'
+        if method == "POST" || method == "PUT"
           OAuth::Helper.stringify_keys(query_string_to_hash(request.payload.to_s) || {})
         else
           {}
@@ -45,8 +45,8 @@ module OAuth::RequestProxy::RestClient
    private
       
       def query_string_to_hash(query)
-        keyvals = query.split('&').inject({}) do |result, q| 
-          k,v = q.split('=')
+        keyvals = query.split("&").inject({}) do |result, q| 
+          k,v = q.split("=")
           if !v.nil?
              result.merge({k => v})
           elsif !result.key?(k)

@@ -1,6 +1,6 @@
-require 'oauth/request_proxy/base'
-require 'uri'
-require 'rack'
+require "oauth/request_proxy/base"
+require "uri"
+require "rack"
 
 module OAuth::RequestProxy
   class RackRequest < OAuth::RequestProxy::Base
@@ -24,7 +24,7 @@ module OAuth::RequestProxy
     end
 
     def signature
-      parameters['oauth_signature']
+      parameters["oauth_signature"]
     end
 
   protected

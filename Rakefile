@@ -1,13 +1,18 @@
-%w[rubygems rake rake/clean rake/testtask fileutils bundler].each { |f| require f }
+# frozen_string_literal: true
+
+require "bundler/gem_tasks"
+%w[rake/testtask fileutils].each { |f| require f }
 
 Bundler::GemHelper.install_tasks
 
 Rake::TestTask.new do |t|
   t.libs << "test"
-  t.test_files = FileList['test/**/*test*.rb']
+  t.test_files = FileList["test/**/*test*.rb"]
   t.verbose = true
 end
 
-Dir['tasks/**/*.rake'].each { |t| load t }
+require "rubocop/rake_task"
 
-task :default => :test
+RuboCop::RakeTask.new
+
+task default: %i[test rubocop]

@@ -1,12 +1,12 @@
-require File.expand_path('../../test_helper', __FILE__)
+require File.expand_path("../../test_helper", __FILE__)
 
-require 'oauth/client'
+require "oauth/client"
 
 class ClientHelperTest < Minitest::Test
 
   def setup
     @consumer=OAuth::Consumer.new(
-        'consumer_key_86cad9', '5888bf0345e5d237',
+        "consumer_key_86cad9", "5888bf0345e5d237",
         {
         :site=>"http://blabla.bla",
         :proxy=>"http://user:password@proxy.bla:8080",
@@ -22,8 +22,8 @@ class ClientHelperTest < Minitest::Test
     helper = OAuth::Client::Helper.new(nil, {
       :consumer => @consumer
     })
-    helper.stub :timestamp, '0' do
-      helper.stub :nonce, 'nonce' do
+    helper.stub :timestamp, "0" do
+      helper.stub :nonce, "nonce" do
         expected = {
           "oauth_consumer_key"=>"consumer_key_86cad9",
           "oauth_signature_method"=>"HMAC-SHA1",
@@ -42,8 +42,8 @@ class ClientHelperTest < Minitest::Test
       :consumer => @consumer,
       :allow_empty_params => input
     })
-    helper.stub :timestamp, '0' do
-      helper.stub :nonce, 'nonce' do
+    helper.stub :timestamp, "0" do
+      helper.stub :nonce, "nonce" do
         expected = {
           "oauth_body_hash"=>nil,
           "oauth_callback"=>nil,
@@ -67,8 +67,8 @@ class ClientHelperTest < Minitest::Test
       :consumer => @consumer,
       :allow_empty_params => input
     })
-    helper.stub :timestamp, '0' do
-      helper.stub :nonce, 'nonce' do
+    helper.stub :timestamp, "0" do
+      helper.stub :nonce, "nonce" do
         expected = {
           "oauth_consumer_key"=>"consumer_key_86cad9",
           "oauth_signature_method"=>"HMAC-SHA1",
@@ -82,13 +82,13 @@ class ClientHelperTest < Minitest::Test
   end
 
   def test_oauth_parameters_allow_empty_params_only_oauth_token_as_string
-    input = 'oauth_token'
+    input = "oauth_token"
     helper = OAuth::Client::Helper.new(nil, {
       :consumer => @consumer,
       :allow_empty_params => input
     })
-    helper.stub :timestamp, '0' do
-      helper.stub :nonce, 'nonce' do
+    helper.stub :timestamp, "0" do
+      helper.stub :nonce, "nonce" do
         expected = {
           "oauth_consumer_key"=>"consumer_key_86cad9",
           "oauth_token"=>"",
@@ -103,13 +103,13 @@ class ClientHelperTest < Minitest::Test
   end
 
   def test_oauth_parameters_allow_empty_params_only_oauth_token_as_array
-    input = ['oauth_token']
+    input = ["oauth_token"]
     helper = OAuth::Client::Helper.new(nil, {
       :consumer => @consumer,
       :allow_empty_params => input
     })
-    helper.stub :timestamp, '0' do
-      helper.stub :nonce, 'nonce' do
+    helper.stub :timestamp, "0" do
+      helper.stub :nonce, "nonce" do
         expected = {
           "oauth_consumer_key"=>"consumer_key_86cad9",
           "oauth_token"=>"",
@@ -124,13 +124,13 @@ class ClientHelperTest < Minitest::Test
   end
 
   def test_oauth_parameters_allow_empty_params_oauth_token_and_oauth_session_handle
-    input = ['oauth_token', 'oauth_session_handle']
+    input = ["oauth_token", "oauth_session_handle"]
     helper = OAuth::Client::Helper.new(nil, {
       :consumer => @consumer,
       :allow_empty_params => input
     })
-    helper.stub :timestamp, '0' do
-      helper.stub :nonce, 'nonce' do
+    helper.stub :timestamp, "0" do
+      helper.stub :nonce, "nonce" do
         expected = {
           "oauth_consumer_key"=>"consumer_key_86cad9",
           "oauth_token"=>"",

@@ -1,4 +1,4 @@
-require 'oauth/request_proxy/rack_request'
+require "oauth/request_proxy/rack_request"
 
 module OAuth::RequestProxy
   class ActionDispatchRequest < OAuth::RequestProxy::RackRequest

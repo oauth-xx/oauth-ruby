@@ -26,7 +26,7 @@ class OAuth::CLI
     attr_reader :options
 
     def show_missing(array)
-      array = array.map { |s| "--#{s}" }.join(' ')
+      array = array.map { |s| "--#{s}" }.join(" ")
       OAuth::CLI.puts_red "Options missing to OAuth CLI: #{array}"
     end
 

@@ -1,4 +1,4 @@
-require File.expand_path('../../test_helper', __FILE__)
+require File.expand_path("../../test_helper", __FILE__)
 
 # This performs testing against Andy Smith's test server http://term.ie/oauth/example/
 # Thanks Andy.
@@ -6,7 +6,7 @@ require File.expand_path('../../test_helper', __FILE__)
 class ConsumerTest < Minitest::Test
   def setup
     @consumer=OAuth::Consumer.new(
-        'consumer_key_86cad9', '5888bf0345e5d237',
+        "consumer_key_86cad9", "5888bf0345e5d237",
         {
         :site=>"http://blabla.bla",
         :proxy=>"http://user:password@proxy.bla:8080",
@@ -16,9 +16,9 @@ class ConsumerTest < Minitest::Test
         :scheme=>:header,
         :http_method=>:get
         })
-    @token = OAuth::ConsumerToken.new(@consumer,'token_411a7f', '3196ffd991c8ebdb')
-    @request_uri = URI.parse('http://example.com/test?key=value')
-    @request_parameters = { 'key' => 'value' }
+    @token = OAuth::ConsumerToken.new(@consumer,"token_411a7f", "3196ffd991c8ebdb")
+    @request_uri = URI.parse("http://example.com/test?key=value")
+    @request_parameters = { "key" => "value" }
     @nonce = 225579211881198842005988698334675835446
     @timestamp = "1199645624"
     @consumer.http=Net::HTTP.new(@request_uri.host, @request_uri.port)
@@ -90,9 +90,9 @@ class ConsumerTest < Minitest::Test
       })
     request = stub(:oauth! => nil)
     http = stub(:request => stub(:to_hash => {}), :address => "identi.ca")
-    Net::HTTP::Get.expects(:new).with('/people', {}).returns(request)
+    Net::HTTP::Get.expects(:new).with("/people", {}).returns(request)
     @consumer.expects(:create_http).returns(http)
-    @consumer.request(:get, '/people', nil, {})
+    @consumer.request(:get, "/people", nil, {})
   end
 
   def test_site_with_path
@@ -104,9 +104,9 @@ class ConsumerTest < Minitest::Test
       })
     request = stub(:oauth! => nil)
     http = stub(:request => stub(:to_hash => {}), :address => "identi.ca")
-    Net::HTTP::Get.expects(:new).with('/api/people', {}).returns(request)
+    Net::HTTP::Get.expects(:new).with("/api/people", {}).returns(request)
     @consumer.expects(:create_http).returns(http)
-    @consumer.request(:get, '/people', nil, {})
+    @consumer.request(:get, "/people", nil, {})
   end
 
   def test_post_of_nested_params_maintains_nesting
@@ -118,16 +118,16 @@ class ConsumerTest < Minitest::Test
       })
     request = @consumer.create_signed_request(
       :post,
-      '/people',
+      "/people",
       nil,
       {},
       {
         :key => {
-          :subkey => 'value'
+          :subkey => "value"
         }
       })
-    assert_equal 'key%5Bsubkey%5D=value', request.body
-    assert_equal request.content_type, 'application/x-www-form-urlencoded'
+    assert_equal "key%5Bsubkey%5D=value", request.body
+    assert_equal request.content_type, "application/x-www-form-urlencoded"
   end
 
   def test_override_paths
@@ -216,7 +216,7 @@ class ConsumerTest < Minitest::Test
   def test_token_request_identifies_itself_as_a_token_request
     request_options = {}
     @consumer.stubs(:request).returns(create_stub_http_response)
-    @consumer.token_request(:post, '/', 'token', request_options) {}
+    @consumer.token_request(:post, "/", "token", request_options) {}
     assert_equal true, request_options[:token_request]
   end
 
@@ -232,35 +232,35 @@ class ConsumerTest < Minitest::Test
   def test_can_provided_a_block_to_interpret_token_response
     @consumer.expects(:request).returns(create_stub_http_response)
 
-    hash = @consumer.token_request(:get, '') {{ :oauth_token => 'token', :oauth_token_secret => 'secret' }}
+    hash = @consumer.token_request(:get, "") {{ :oauth_token => "token", :oauth_token_secret => "secret" }}
 
-    assert_equal 'token', hash[:oauth_token]
-    assert_equal 'secret', hash[:oauth_token_secret]
+    assert_equal "token", hash[:oauth_token]
+    assert_equal "secret", hash[:oauth_token_secret]
   end
 
   def test_token_request_follows_redirect
     redirect_url = @request_uri.clone
     redirect_url.path = "/oauth/example/request_token_redirect.php"
-    stub_request(:get, /.*#{@request_uri.path}/).to_return(:status => 301, :headers => {'Location' => redirect_url.to_s})
+    stub_request(:get, /.*#{@request_uri.path}/).to_return(:status => 301, :headers => {"Location" => redirect_url.to_s})
     stub_request(:get, /.*#{redirect_url.path}/).to_return(:body => "oauth_token=token&oauth_token_secret=secret")
 
-    hash = @consumer.token_request(:get, @request_uri.path) {{ :oauth_token => 'token', :oauth_token_secret => 'secret' }}
+    hash = @consumer.token_request(:get, @request_uri.path) {{ :oauth_token => "token", :oauth_token_secret => "secret" }}
 
-    assert_equal 'token', hash[:oauth_token]
-    assert_equal 'secret', hash[:oauth_token_secret]
+    assert_equal "token", hash[:oauth_token]
+    assert_equal "secret", hash[:oauth_token_secret]
   end
 
   def test_follow_redirect_different_host_same_path
     request_uri = URI.parse("https://example.com/request_token")
     redirect_uri = URI.parse("https://foobar.com/request_token")
 
-    stub_request(:get, "http://example.com/request_token").to_return(:status => 301, :headers => {'Location' => redirect_uri.to_s})
+    stub_request(:get, "http://example.com/request_token").to_return(:status => 301, :headers => {"Location" => redirect_uri.to_s})
     stub_request(:get, "https://foobar.com/request_token").to_return(:body => "oauth_token=token&oauth_token_secret=secret")
 
-    hash = @consumer.token_request(:get, request_uri.path) {{ :oauth_token => 'token', :oauth_token_secret => 'secret' }}
+    hash = @consumer.token_request(:get, request_uri.path) {{ :oauth_token => "token", :oauth_token_secret => "secret" }}
 
-    assert_equal 'token', hash[:oauth_token]
-    assert_equal 'secret', hash[:oauth_token_secret]
+    assert_equal "token", hash[:oauth_token]
+    assert_equal "secret", hash[:oauth_token_secret]
   end
 
   def test_not_following_redirect_with_same_uri
@@ -269,23 +269,23 @@ class ConsumerTest < Minitest::Test
 
     stub_request(:get, request_uri.to_s).to_return(
       :status => 301,
-      :headers => {'Location' => redirect_uri.to_s}
+      :headers => {"Location" => redirect_uri.to_s}
     )
 
     assert_raises Net::HTTPRetriableError do
-      @consumer.token_request(:get, request_uri.path) {
-        { :oauth_token => 'token', :oauth_token_secret => 'secret' }
-      }
+      @consumer.token_request(:get, request_uri.path) do
+        { :oauth_token => "token", :oauth_token_secret => "secret" }
+      end
     end
   end
 
   def test_that_can_provide_a_block_to_interpret_a_request_token_response
     @consumer.expects(:request).returns(create_stub_http_response)
 
-    token = @consumer.get_request_token {{ :oauth_token => 'token', :oauth_token_secret => 'secret' }}
+    token = @consumer.get_request_token {{ :oauth_token => "token", :oauth_token_secret => "secret" }}
 
-    assert_equal 'token', token.token
-    assert_equal 'secret', token.secret
+    assert_equal "token", token.token
+    assert_equal "secret", token.secret
   end
 
   def test_that_block_is_not_mandatory_for_getting_an_access_token
@@ -294,34 +294,34 @@ class ConsumerTest < Minitest::Test
 
     token = @consumer.get_access_token(stub_token)
 
-    assert_equal 'token', token.token
-    assert_equal 'secret', token.secret
+    assert_equal "token", token.token
+    assert_equal "secret", token.secret
   end
 
   def test_that_can_provide_a_block_to_interpret_an_access_token_response
     stub_token = mock
     @consumer.expects(:request).returns(create_stub_http_response)
 
-    token = @consumer.get_access_token(stub_token) {{ :oauth_token => 'token', :oauth_token_secret => 'secret' }}
+    token = @consumer.get_access_token(stub_token) {{ :oauth_token => "token", :oauth_token_secret => "secret" }}
 
-    assert_equal 'token', token.token
-    assert_equal 'secret', token.secret
+    assert_equal "token", token.token
+    assert_equal "secret", token.secret
   end
 
   def test_that_not_setting_ignore_callback_will_include_oauth_callback_in_request_options
     request_options = {}
     @consumer.stubs(:request).returns(create_stub_http_response)
 
-    @consumer.get_request_token(request_options) {{ :oauth_token => 'token', :oauth_token_secret => 'secret' }}
+    @consumer.get_request_token(request_options) {{ :oauth_token => "token", :oauth_token_secret => "secret" }}
 
-    assert_equal 'oob', request_options[:oauth_callback]
+    assert_equal "oob", request_options[:oauth_callback]
   end
 
   def test_that_setting_ignore_callback_will_exclude_oauth_callback_in_request_options
     request_options = { :exclude_callback=> true }
     @consumer.stubs(:request).returns(create_stub_http_response)
 
-    @consumer.get_request_token(request_options) {{ :oauth_token => 'token', :oauth_token_secret => 'secret' }}
+    @consumer.get_request_token(request_options) {{ :oauth_token => "token", :oauth_token_secret => "secret" }}
 
     assert_nil request_options[:oauth_callback]
   end

@@ -1,10 +1,10 @@
-require File.expand_path('../../test_helper', __FILE__)
+require File.expand_path("../../test_helper", __FILE__)
 
 module Integration
   class ConsumerTest < Minitest::Test
     def setup
       @consumer=OAuth::Consumer.new(
-          'consumer_key_86cad9', '5888bf0345e5d237',
+          "consumer_key_86cad9", "5888bf0345e5d237",
           {
           :site=>"http://blabla.bla",
           :proxy=>"http://user:password@proxy.bla:8080",
@@ -14,9 +14,9 @@ module Integration
           :scheme=>:header,
           :http_method=>:get
           })
-      @token = OAuth::ConsumerToken.new(@consumer,'token_411a7f', '3196ffd991c8ebdb')
-      @request_uri = URI.parse('http://example.com/test?key=value')
-      @request_parameters = { 'key' => 'value' }
+      @token = OAuth::ConsumerToken.new(@consumer,"token_411a7f", "3196ffd991c8ebdb")
+      @request_uri = URI.parse("http://example.com/test?key=value")
+      @request_parameters = { "key" => "value" }
       @nonce = 225579211881198842005988698334675835446
       @timestamp = "1199645624"
       @consumer.http=Net::HTTP.new(@request_uri.host, @request_uri.port)
@@ -26,28 +26,28 @@ module Integration
       request = Net::HTTP::Get.new(@request_uri.path + "?" + request_parameters_to_s)
       @token.sign!(request, {:nonce => @nonce, :timestamp => @timestamp})
 
-      assert_equal 'GET', request.method
-      assert_equal '/test?key=value', request.path
-      assert_equal "OAuth oauth_nonce=\"225579211881198842005988698334675835446\", oauth_signature_method=\"HMAC-SHA1\", oauth_token=\"token_411a7f\", oauth_timestamp=\"1199645624\", oauth_consumer_key=\"consumer_key_86cad9\", oauth_signature=\"1oO2izFav1GP4kEH2EskwXkCRFg%3D\", oauth_version=\"1.0\"".delete(',').split.sort, request['authorization'].delete(',').split.sort
+      assert_equal "GET", request.method
+      assert_equal "/test?key=value", request.path
+      assert_equal "OAuth oauth_nonce=\"225579211881198842005988698334675835446\", oauth_signature_method=\"HMAC-SHA1\", oauth_token=\"token_411a7f\", oauth_timestamp=\"1199645624\", oauth_consumer_key=\"consumer_key_86cad9\", oauth_signature=\"1oO2izFav1GP4kEH2EskwXkCRFg%3D\", oauth_version=\"1.0\"".delete(",").split.sort, request["authorization"].delete(",").split.sort
     end
 
     def test_that_setting_signature_method_on_consumer_effects_signing
       request = Net::HTTP::Get.new(@request_uri.path)
       consumer = @consumer.dup
-      consumer.options[:signature_method] = 'PLAINTEXT'
-      token = OAuth::ConsumerToken.new(consumer, 'token_411a7f', '3196ffd991c8ebdb')
+      consumer.options[:signature_method] = "PLAINTEXT"
+      token = OAuth::ConsumerToken.new(consumer, "token_411a7f", "3196ffd991c8ebdb")
       token.sign!(request, {:nonce => @nonce, :timestamp => @timestamp})
 
-      refute_match( /oauth_signature_method="HMAC-SHA1"/, request['authorization'])
-      assert_match(    /oauth_signature_method="PLAINTEXT"/, request['authorization'])
+      refute_match( /oauth_signature_method="HMAC-SHA1"/, request["authorization"])
+      assert_match(    /oauth_signature_method="PLAINTEXT"/, request["authorization"])
     end
 
     def test_that_setting_signature_method_on_consumer_effects_signature_base_string
       request = Net::HTTP::Get.new(@request_uri.path)
       consumer = @consumer.dup
-      consumer.options[:signature_method] = 'PLAINTEXT'
+      consumer.options[:signature_method] = "PLAINTEXT"
 
-      request = Net::HTTP::Get.new('/')
+      request = Net::HTTP::Get.new("/")
       signature_base_string = consumer.signature_base_string(request)
 
       refute_match( /HMAC-SHA1/, signature_base_string)
@@ -71,46 +71,46 @@ module Integration
       @token.sign!(request, {:nonce => @nonce, :timestamp => @timestamp})
   #    assert_equal "",request.oauth_helper.signature_base_string
 
-      assert_equal 'POST', request.method
-      assert_equal '/test', request.path
-      assert_equal 'key=value', request.body
-      assert_equal "OAuth oauth_nonce=\"225579211881198842005988698334675835446\", oauth_signature_method=\"HMAC-SHA1\", oauth_token=\"token_411a7f\", oauth_timestamp=\"1199645624\", oauth_consumer_key=\"consumer_key_86cad9\", oauth_signature=\"26g7wHTtNO6ZWJaLltcueppHYiI%3D\", oauth_version=\"1.0\"".delete(',').split.sort, request['authorization'].delete(',').split.sort
+      assert_equal "POST", request.method
+      assert_equal "/test", request.path
+      assert_equal "key=value", request.body
+      assert_equal "OAuth oauth_nonce=\"225579211881198842005988698334675835446\", oauth_signature_method=\"HMAC-SHA1\", oauth_token=\"token_411a7f\", oauth_timestamp=\"1199645624\", oauth_consumer_key=\"consumer_key_86cad9\", oauth_signature=\"26g7wHTtNO6ZWJaLltcueppHYiI%3D\", oauth_version=\"1.0\"".delete(",").split.sort, request["authorization"].delete(",").split.sort
     end
 
     def test_that_signing_post_params_works
       request = Net::HTTP::Post.new(@request_uri.path)
       request.set_form_data( @request_parameters )
-      @token.sign!(request, {:scheme => 'body', :nonce => @nonce, :timestamp => @timestamp})
+      @token.sign!(request, {:scheme => "body", :nonce => @nonce, :timestamp => @timestamp})
 
-      assert_equal 'POST', request.method
-      assert_equal '/test', request.path
+      assert_equal "POST", request.method
+      assert_equal "/test", request.path
       assert_match(/key=value&oauth_consumer_key=consumer_key_86cad9&oauth_nonce=225579211881198842005988698334675835446&oauth_signature=26g7wHTtNO6ZWJaLltcueppHYiI%3[Dd]&oauth_signature_method=HMAC-SHA1&oauth_timestamp=1199645624&oauth_token=token_411a7f&oauth_version=1.0/, request.body.split("&").sort.join("&"))
-      assert_nil request['authorization']
+      assert_nil request["authorization"]
     end
 
     def test_that_using_auth_headers_on_get_on_create_signed_requests_works
       request=@consumer.create_signed_request(:get,@request_uri.path+ "?" + request_parameters_to_s,@token,{:nonce => @nonce, :timestamp => @timestamp},@request_parameters)
 
-      assert_equal 'GET', request.method
-      assert_equal '/test?key=value', request.path
-      assert_equal "OAuth oauth_nonce=\"225579211881198842005988698334675835446\", oauth_signature_method=\"HMAC-SHA1\", oauth_token=\"token_411a7f\", oauth_timestamp=\"1199645624\", oauth_consumer_key=\"consumer_key_86cad9\", oauth_signature=\"1oO2izFav1GP4kEH2EskwXkCRFg%3D\", oauth_version=\"1.0\"".delete(',').split.sort, request['authorization'].delete(',').split.sort
+      assert_equal "GET", request.method
+      assert_equal "/test?key=value", request.path
+      assert_equal "OAuth oauth_nonce=\"225579211881198842005988698334675835446\", oauth_signature_method=\"HMAC-SHA1\", oauth_token=\"token_411a7f\", oauth_timestamp=\"1199645624\", oauth_consumer_key=\"consumer_key_86cad9\", oauth_signature=\"1oO2izFav1GP4kEH2EskwXkCRFg%3D\", oauth_version=\"1.0\"".delete(",").split.sort, request["authorization"].delete(",").split.sort
     end
 
     def test_that_using_auth_headers_on_post_on_create_signed_requests_works
       request=@consumer.create_signed_request(:post,@request_uri.path,@token,{:nonce => @nonce, :timestamp => @timestamp},@request_parameters,{})
-      assert_equal 'POST', request.method
-      assert_equal '/test', request.path
-      assert_equal 'key=value', request.body
-      assert_equal "OAuth oauth_nonce=\"225579211881198842005988698334675835446\", oauth_signature_method=\"HMAC-SHA1\", oauth_token=\"token_411a7f\", oauth_timestamp=\"1199645624\", oauth_consumer_key=\"consumer_key_86cad9\", oauth_signature=\"26g7wHTtNO6ZWJaLltcueppHYiI%3D\", oauth_version=\"1.0\"".delete(',').split.sort, request['authorization'].delete(',').split.sort
+      assert_equal "POST", request.method
+      assert_equal "/test", request.path
+      assert_equal "key=value", request.body
+      assert_equal "OAuth oauth_nonce=\"225579211881198842005988698334675835446\", oauth_signature_method=\"HMAC-SHA1\", oauth_token=\"token_411a7f\", oauth_timestamp=\"1199645624\", oauth_consumer_key=\"consumer_key_86cad9\", oauth_signature=\"26g7wHTtNO6ZWJaLltcueppHYiI%3D\", oauth_version=\"1.0\"".delete(",").split.sort, request["authorization"].delete(",").split.sort
     end
 
     def test_that_signing_post_params_works_2
-      request=@consumer.create_signed_request(:post,@request_uri.path,@token,{:scheme => 'body', :nonce => @nonce, :timestamp => @timestamp},@request_parameters,{})
+      request=@consumer.create_signed_request(:post,@request_uri.path,@token,{:scheme => "body", :nonce => @nonce, :timestamp => @timestamp},@request_parameters,{})
 
-      assert_equal 'POST', request.method
-      assert_equal '/test', request.path
+      assert_equal "POST", request.method
+      assert_equal "/test", request.path
       assert_match(/key=value&oauth_consumer_key=consumer_key_86cad9&oauth_nonce=225579211881198842005988698334675835446&oauth_signature=26g7wHTtNO6ZWJaLltcueppHYiI%3[Dd]&oauth_signature_method=HMAC-SHA1&oauth_timestamp=1199645624&oauth_token=token_411a7f&oauth_version=1.0/, request.body.split("&").sort.join("&"))
-      assert_nil request['authorization']
+      assert_nil request["authorization"]
     end
 
     def test_step_by_step_token_request
@@ -126,14 +126,14 @@ module Integration
           :authorize_path=>"/oauth/example/authorize.php",
           :scheme=>:header
           })
-      options={:nonce=>'nonce',:timestamp=>Time.now.to_i.to_s}
+      options={:nonce=>"nonce",:timestamp=>Time.now.to_i.to_s}
 
       request = Net::HTTP::Get.new("/oauth/example/request_token.php")
       signature_base_string=@consumer.signature_base_string(request,nil,options)
       assert_equal "GET&http%3A%2F%2Fterm.ie%2Foauth%2Fexample%2Frequest_token.php&oauth_consumer_key%3Dkey%26oauth_nonce%3D#{options[:nonce]}%26oauth_signature_method%3DHMAC-SHA1%26oauth_timestamp%3D#{options[:timestamp]}%26oauth_version%3D1.0",signature_base_string
       @consumer.sign!(request, nil,options)
 
-      assert_equal 'GET', request.method
+      assert_equal "GET", request.method
       assert_nil request.body
       response=@consumer.http.request(request)
       assert_equal "200",response.code
@@ -175,7 +175,7 @@ module Integration
       assert_equal "200",@response.code
       assert_equal( "ok=hello&test=this",@response.body)
 
-      @response=@access_token.post("/oauth/example/echo_api.php",{'ok'=>'hello','test'=>'this'})
+      @response=@access_token.post("/oauth/example/echo_api.php",{"ok"=>"hello","test"=>"this"})
       assert @response
       assert_equal "200",@response.code
       assert_equal( "ok=hello&test=this",@response.body)
@@ -216,7 +216,7 @@ module Integration
       assert_equal "200",@response.code
       assert_equal( "ok=hello&test=this",@response.body)
 
-      @response=@access_token.post("/oauth/example/echo_api.php",{'ok'=>'hello','test'=>'this'})
+      @response=@access_token.post("/oauth/example/echo_api.php",{"ok"=>"hello","test"=>"this"})
       assert @response
       assert_equal "200",@response.code
       assert_equal( "ok=hello&test=this",@response.body)

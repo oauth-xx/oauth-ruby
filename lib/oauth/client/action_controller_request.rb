@@ -1,10 +1,10 @@
 if defined? ActionDispatch
-  require 'oauth/request_proxy/rack_request'
-  require 'oauth/request_proxy/action_dispatch_request'
-  require 'action_dispatch/testing/test_process'
+  require "oauth/request_proxy/rack_request"
+  require "oauth/request_proxy/action_dispatch_request"
+  require "action_dispatch/testing/test_process"
 else
-  require 'oauth/request_proxy/action_controller_request'
-  require 'action_controller/test_process'
+  require "oauth/request_proxy/action_controller_request"
+  require "action_controller/test_process"
 end
 
 module ActionController
@@ -35,7 +35,7 @@ module ActionController
     def configure_oauth(consumer = nil, token = nil, options = {})
       @oauth_options = { :consumer  => consumer,
                          :token     => token,
-                         :scheme    => 'header',
+                         :scheme    => "header",
                          :signature_method => nil,
                          :nonce     => nil,
                          :timestamp => nil }.merge(options)
@@ -51,7 +51,7 @@ module ActionController
     end
 
     def set_oauth_header
-      env['Authorization'] = @oauth_helper.header
+      env["Authorization"] = @oauth_helper.header
     end
 
     def set_oauth_parameters
