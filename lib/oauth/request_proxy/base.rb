@@ -1,5 +1,5 @@
-require 'oauth/request_proxy'
-require 'oauth/helper'
+require "oauth/request_proxy"
+require "oauth/helper"
 
 module OAuth::RequestProxy
   class Base
@@ -20,41 +20,41 @@ module OAuth::RequestProxy
     ## OAuth parameters
 
     def oauth_callback
-      parameters['oauth_callback']
+      parameters["oauth_callback"]
     end
 
     def oauth_consumer_key
-      parameters['oauth_consumer_key']
+      parameters["oauth_consumer_key"]
     end
 
     def oauth_nonce
-      parameters['oauth_nonce']
+      parameters["oauth_nonce"]
     end
 
     def oauth_signature
       # TODO can this be nil?
-      [parameters['oauth_signature']].flatten.first || ""
+      [parameters["oauth_signature"]].flatten.first || ""
     end
 
     def oauth_signature_method
-      case parameters['oauth_signature_method']
+      case parameters["oauth_signature_method"]
       when Array
-        parameters['oauth_signature_method'].first
+        parameters["oauth_signature_method"].first
       else
-        parameters['oauth_signature_method']
+        parameters["oauth_signature_method"]
       end
     end
 
     def oauth_timestamp
-      parameters['oauth_timestamp']
+      parameters["oauth_timestamp"]
     end
 
     def oauth_token
-      parameters['oauth_token']
+      parameters["oauth_token"]
     end
 
     def oauth_verifier
-      parameters['oauth_verifier']
+      parameters["oauth_verifier"]
     end
 
     def oauth_version
@@ -140,15 +140,15 @@ module OAuth::RequestProxy
 
     # Authorization header for OAuth
     def oauth_header(options = {})
-      header_params_str = oauth_parameters.map { |k,v| "#{k}=\"#{escape(v)}\"" }.join(', ')
+      header_params_str = oauth_parameters.map { |k,v| "#{k}=\"#{escape(v)}\"" }.join(", ")
 
       realm = "realm=\"#{options[:realm]}\", " if options[:realm]
       "OAuth #{realm}#{header_params_str}"
     end
 
     def query_string_blank?
-      if uri = request.env['REQUEST_URI']
-        uri.split('?', 2)[1].nil?
+      if uri = request.env["REQUEST_URI"]
+        uri.split("?", 2)[1].nil?
       else
         request.query_string.match(/\A\s*\z/)
       end
@@ -161,7 +161,7 @@ module OAuth::RequestProxy
         next unless request.env.include?(header)
 
         header = request.env[header]
-        next unless header[0,6] == 'OAuth '
+        next unless header[0,6] == "OAuth "
 
         # parse the header into a Hash
         oauth_params = OAuth::Helper.parse_header(header)

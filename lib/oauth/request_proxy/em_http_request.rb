@@ -1,7 +1,7 @@
-require 'oauth/request_proxy/base'
+require "oauth/request_proxy/base"
 # em-http also uses adddressable so there is no need to require uri.
-require 'em-http'
-require 'cgi'
+require "em-http"
+require "cgi"
 
 module OAuth::RequestProxy::EventMachine
   class HttpRequest < OAuth::RequestProxy::Base
@@ -47,8 +47,8 @@ module OAuth::RequestProxy::EventMachine
 
     def post_parameters
       headers = request.req[:head] || {}
-      form_encoded = headers['Content-Type'].to_s.downcase.start_with?("application/x-www-form-urlencoded")
-      if ['POST', 'PUT'].include?(method) && form_encoded
+      form_encoded = headers["Content-Type"].to_s.downcase.start_with?("application/x-www-form-urlencoded")
+      if ["POST", "PUT"].include?(method) && form_encoded
         CGI.parse(request.normalize_body(request.req[:body]).to_s)
       else
         {}

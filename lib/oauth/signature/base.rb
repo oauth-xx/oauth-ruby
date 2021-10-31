@@ -1,7 +1,7 @@
-require 'oauth/signature'
-require 'oauth/helper'
-require 'oauth/request_proxy/base'
-require 'base64'
+require "oauth/signature"
+require "oauth/helper"
+require "oauth/request_proxy/base"
+require "base64"
 
 module OAuth::Signature
   class Base
@@ -47,7 +47,7 @@ module OAuth::Signature
     end
 
     def signature
-      Base64.encode64(digest).chomp.gsub(/\n/,'')
+      Base64.encode64(digest).chomp.gsub(/\n/,"")
     end
 
     def ==(cmp_signature)

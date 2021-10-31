@@ -1,6 +1,6 @@
-require 'em-http'
-require 'oauth/helper'
-require 'oauth/request_proxy/em_http_request'
+require "em-http"
+require "oauth/helper"
+require "oauth/request_proxy/em_http_request"
 
 # Extensions for em-http so that we can use consumer.sign! with an EventMachine::HttpClient
 # instance. This is purely syntactic sugar.
@@ -26,7 +26,7 @@ module EventMachine
       options = { :request_uri      => normalized_oauth_uri(http),
                   :consumer         => consumer,
                   :token            => token,
-                  :scheme           => 'header',
+                  :scheme           => "header",
                   :signature_method => nil,
                   :nonce            => nil,
                   :timestamp        => nil }.merge(options)
@@ -52,7 +52,7 @@ module EventMachine
       options = { :request_uri      => normalized_oauth_uri(http),
                   :consumer         => consumer,
                   :token            => token,
-                  :scheme           => 'header',
+                  :scheme           => "header",
                   :signature_method => nil,
                   :nonce            => nil,
                   :timestamp        => nil }.merge(options)
@@ -78,7 +78,7 @@ module EventMachine
 
     def combine_query(path, query, uri_query)
       combined_query = if query.kind_of?(Hash)
-        query.map { |k, v| encode_param(k, v) }.join('&')
+        query.map { |k, v| encode_param(k, v) }.join("&")
       else
         query.to_s
       end
@@ -105,15 +105,15 @@ module EventMachine
 
     def set_oauth_header
       self.req[:head] ||= {}
-      self.req[:head].merge!('Authorization' => @oauth_helper.header)
+      self.req[:head].merge!("Authorization" => @oauth_helper.header)
     end
 
     def set_oauth_body
-      raise NotImplementedError, 'please use the set_oauth_header method instead'
+      raise NotImplementedError, "please use the set_oauth_header method instead"
     end
 
     def set_oauth_query_string
-      raise NotImplementedError, 'please use the set_oauth_header method instead'
+      raise NotImplementedError, "please use the set_oauth_header method instead"
     end
   end
 end

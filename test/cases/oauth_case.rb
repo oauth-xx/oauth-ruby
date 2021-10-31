@@ -1,6 +1,6 @@
-require 'minitest/autorun'
-require 'oauth/signature'
-require 'oauth/request_proxy/mock_request'
+require "minitest/autorun"
+require "oauth/signature"
+require "oauth/request_proxy/mock_request"
 
 
 class OAuthCase < Minitest::Test
@@ -14,7 +14,7 @@ class OAuthCase < Minitest::Test
   protected
 
   # Creates a fake request
-  def request(params={},method='GET',uri="http://photos.example.net/photos")
-    OAuth::RequestProxy.proxy({'parameters'=>params,'method'=>method,'uri'=>uri})
+  def request(params={},method="GET",uri="http://photos.example.net/photos")
+    OAuth::RequestProxy.proxy({"parameters"=>params,"method"=>method,"uri"=>uri})
   end
 end

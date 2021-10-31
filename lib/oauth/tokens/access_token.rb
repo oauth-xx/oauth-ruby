@@ -43,7 +43,7 @@ module OAuth
     #   @response = @token.post('/people', nil, {'Accept' => 'application/xml' })
     #   @response = @token.post('/people', @person.to_xml, { 'Accept'=>'application/xml', 'Content-Type' => 'application/xml' })
     #
-    def post(path, body = '', headers = {})
+    def post(path, body = "", headers = {})
       request(:post, path, body, headers)
     end
 
@@ -55,7 +55,7 @@ module OAuth
     #   @response = @token.put('/people/123', nil, { 'Accept' => 'application/xml' })
     #   @response = @token.put('/people/123', @person.to_xml, { 'Accept' => 'application/xml', 'Content-Type' => 'application/xml' })
     #
-    def put(path, body = '', headers = {})
+    def put(path, body = "", headers = {})
       request(:put, path, body, headers)
     end
 
@@ -67,7 +67,7 @@ module OAuth
     #   @response = @token.patch('/people/123', nil, { 'Accept' => 'application/xml' })
     #   @response = @token.patch('/people/123', @person.to_xml, { 'Accept' => 'application/xml', 'Content-Type' => 'application/xml' })
     #
-    def patch(path, body = '', headers = {})
+    def patch(path, body = "", headers = {})
       request(:patch, path, body, headers)
     end
 

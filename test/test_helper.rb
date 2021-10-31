@@ -1,6 +1,6 @@
 # ensure test env
 
-ENV['RACK_ENV'] = 'test'
+ENV["RACK_ENV"] = "test"
 
 # Code coverage
 require "simplecov"
@@ -9,18 +9,18 @@ SimpleCov.formatter = SimpleCov::Formatter::CoberturaFormatter unless ENV["HTML_
 
 # require third-party code
 
-require 'byebug'
-require 'stringio'
-require 'minitest/autorun'
-require 'mocha/mini_test'
-require 'rack/test'
-require 'webmock/minitest'
+require "byebug"
+require "stringio"
+require "minitest/autorun"
+require "mocha/mini_test"
+require "rack/test"
+require "webmock/minitest"
 
 # require our lib
 
-$LOAD_PATH << File.dirname(__FILE__) + '/../lib/'
-require 'oauth'
+$LOAD_PATH << File.dirname(__FILE__) + "/../lib/"
+require "oauth"
 
 # require our support code
 
-require 'support/minitest_helpers'
+require "support/minitest_helpers"

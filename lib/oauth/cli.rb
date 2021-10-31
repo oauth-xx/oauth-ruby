@@ -1,11 +1,11 @@
-require 'optparse'
-require 'oauth/cli/base_command'
-require 'oauth/cli/help_command'
-require 'oauth/cli/query_command'
-require 'oauth/cli/authorize_command'
-require 'oauth/cli/sign_command'
-require 'oauth/cli/version_command'
-require 'active_support/core_ext/string/inflections'
+require "optparse"
+require "oauth/cli/base_command"
+require "oauth/cli/help_command"
+require "oauth/cli/query_command"
+require "oauth/cli/authorize_command"
+require "oauth/cli/sign_command"
+require "oauth/cli/version_command"
+require "active_support/core_ext/string/inflections"
 
 module OAuth
   class CLI
@@ -14,11 +14,11 @@ module OAuth
     end
 
     ALIASES = {
-      'h' => 'help',
-      'v' => 'version',
-      'q' => 'query',
-      'a' => 'authorize',
-      's' => 'sign',
+      "h" => "help",
+      "v" => "version",
+      "q" => "query",
+      "a" => "authorize",
+      "s" => "sign",
     }
 
     def initialize(stdout, stdin, stderr, command, arguments)
@@ -39,17 +39,17 @@ module OAuth
 
     def parse_command(command)
       case command = command.to_s.downcase
-      when '--version', '-v'
-        'version'
-      when '--help', '-h', nil, ''
-        'help'
+      when "--version", "-v"
+        "version"
+      when "--help", "-h", nil, ""
+        "help"
       when *ALIASES.keys
         ALIASES[command]
       when *ALIASES.values
         command
       else
         OAuth::CLI.puts_red "Command '#{command}' not found"
-        'help'
+        "help"
       end
     end
   end

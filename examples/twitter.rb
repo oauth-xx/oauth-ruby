@@ -2,10 +2,10 @@
 #
 #  ./twitter.rb --consumer-key <key> --consumer-secret <secret> <tweet_id>
 
-require 'oauth'
-require 'optparse'
-require 'json'
-require 'pp'
+require "oauth"
+require "optparse"
+require "json"
+require "pp"
 
 options = {}
 
