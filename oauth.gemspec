@@ -30,8 +30,12 @@ Gem::Specification.new do |spec|
   # This gem will work with 2.0 or greater...
   spec.required_ruby_version = ">= 2.0"
 
+  ruby_version = Gem::Version.new(RUBY_VERSION)
+  linting = ruby_version >= Gem::Version.new('2.6') && RUBY_ENGINE == 'ruby'
+  coverage = linting
+
   # Nokogiri 1.7 does not accept Ruby 2.0
-  spec.add_development_dependency("nokogiri", "~> 1.6.8") if RUBY_VERSION < "2.1"
+  spec.add_development_dependency("nokogiri", "~> 1.6.8") if ruby_version < Gem::Version.new('2.0')
 
   spec.add_development_dependency("actionpack", ">= 5.0")
   spec.add_development_dependency("byebug", "~> 11.1")
@@ -44,16 +48,20 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency("rack-test")
   spec.add_development_dependency("rake", "~> 13.0")
   spec.add_development_dependency("rest-client")
-  spec.add_development_dependency("rubocop", "~> 1.22")
-  spec.add_development_dependency("rubocop-faker", "~> 1.1")
-  spec.add_development_dependency("rubocop-md", "~> 1.0")
-  spec.add_development_dependency("rubocop-minitest", "~> 0.15")
-  spec.add_development_dependency("rubocop-packaging", "~> 0.5")
-  spec.add_development_dependency("rubocop-performance", "~> 1.11")
-  spec.add_development_dependency("rubocop-rake", "~> 0.6")
-  spec.add_development_dependency("rubocop-thread_safety", "~> 0.4")
-  spec.add_development_dependency("simplecov", "~> 0.21")
-  spec.add_development_dependency("simplecov-cobertura", "~> 1.4")
+  if linting
+    spec.add_development_dependency("rubocop", "~> 1.22")
+    spec.add_development_dependency("rubocop-faker", "~> 1.1")
+    spec.add_development_dependency("rubocop-md", "~> 1.0")
+    spec.add_development_dependency("rubocop-minitest", "~> 0.15")
+    spec.add_development_dependency("rubocop-packaging", "~> 0.5")
+    spec.add_development_dependency("rubocop-performance", "~> 1.11")
+    spec.add_development_dependency("rubocop-rake", "~> 0.6")
+    spec.add_development_dependency("rubocop-thread_safety", "~> 0.4")
+  end
+  if coverage
+    spec.add_development_dependency("simplecov", "~> 0.21")
+    spec.add_development_dependency("simplecov-cobertura", "~> 1.4")
+  end
   spec.add_development_dependency("typhoeus", ">= 0.1.13")
   spec.add_development_dependency("webmock", "< 2.0")
 end
