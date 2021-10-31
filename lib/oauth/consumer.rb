@@ -242,16 +242,18 @@ module OAuth
           end
         end
       when (300..399)
-        # this is a redirect
+        # Parse redirect to follow
         uri = URI.parse(response["location"])
         our_uri = URI.parse(site)
+
+        # Guard against infinite redirects
+        response.error! if uri.path == path && our_uri.host == uri.host
 
         if uri.path == path && our_uri.host != uri.host
             options[:site] = "#{uri.scheme}://#{uri.host}"
             @http = create_http
         end
 
-        response.error! if uri.path == path && our_uri.host == uri.host # careful of those infinite redirects
         self.token_request(http_method, uri.path, token, request_options, arguments)
       when (400..499)
         raise OAuth::Unauthorized, response
