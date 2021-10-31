@@ -45,7 +45,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency("em-http-request", "~> 1.1.7")
   spec.add_development_dependency("curb")
   spec.add_development_dependency("webmock", "< 2.0")
-  spec.add_development_dependency("codeclimate-test-reporter")
-  spec.add_development_dependency("simplecov")
   spec.add_development_dependency("rest-client")
+  spec.add_development_dependency("simplecov")
+  spec.add_development_dependency("simplecov-cobertura", "~> 1.4")
 end
