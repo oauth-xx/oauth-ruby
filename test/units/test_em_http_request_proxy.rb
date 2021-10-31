@@ -5,7 +5,6 @@ begin
 require 'em-http'
 require 'oauth/request_proxy/em_http_request'
 
-
 class EmHttpRequestProxyTest < Minitest::Test
 
   def test_request_proxy_works_with_simple_request
@@ -70,7 +69,7 @@ class EmHttpRequestProxyTest < Minitest::Test
   end
 
   def test_request_proxy_works_with_mixed_params
-    proxy = create_request_proxy(:proxy_options => {:parameters => {"a" => "1"}},:query => {"c" => "1"}, :uri => "http://example.com/test?b=1")
+    proxy = create_request_proxy(:proxy_options => {:parameters => {"a" => "1"}}, :query => {"c" => "1"}, :uri => "http://example.com/test?b=1")
     assert_equal({"a" => ["1"], "b" => ["1"], "c" => ["1"]}, proxy.parameters)
     proxy = create_request_proxy(:proxy_options => {:parameters => {"a" => "1"}}, :body => {"b" => "1"}, :query => {"c" => "1"},
       :uri => "http://example.com/test?d=1", :method => "POST", :head => {"Content-Type" => "application/x-www-form-urlencoded"})
@@ -79,28 +78,23 @@ class EmHttpRequestProxyTest < Minitest::Test
 
   def test_request_has_the_correct_uri
     assert_equal "http://example.com/", create_request_proxy.uri
-    assert_equal "http://example.com/?a=1", create_request_proxy(:query => "a=1").uri
-    assert_equal "http://example.com/?a=1", create_request_proxy(:query => {"a" => "1"}).uri
-
+    assert_equal "http://example.com/?a=1", create_request_proxy(:query => "a=1").request.normalize_uri.to_s
+    assert_equal "http://example.com/?a=1", create_request_proxy(:query => {"a" => "1"}).request.normalize_uri.to_s
   end
 
   def test_request_proxy_has_correct_method
-    assert_equal "GET", create_request_proxy(:method => "GET").method
-    assert_equal "PUT", create_request_proxy(:method => "PUT").method
-    assert_equal "POST", create_request_proxy(:method => "POST").method
-    assert_equal "DELETE", create_request_proxy(:method => "DELETE").method
+    assert_equal "GET", create_request_proxy(:method => "GET").request.req[:method]
+    assert_equal "PUT", create_request_proxy(:method => "PUT").request.req[:method]
+    assert_equal "POST", create_request_proxy(:method => "POST").request.req[:method]
+    assert_equal "DELETE", create_request_proxy(:method => "DELETE").request.req[:method]
   end
 
   protected
 
   def create_client(options = {})
-    method         = options.delete(:method) || "GET"
-    uri            = options.delete(:uri)    || "http://example.com/"
-    client         = EventMachine::HttpClient.new("")
-    client.uri     = URI.parse(uri)
-    client.method  = method.to_s.upcase
-    client.options = options
-    client
+    options[:method] = options.key?(:method) ? options[:method].upcase : "GET"
+    uri = options.delete(:uri) || "http://example.com/"
+    EventMachine::HttpClient.new(URI.parse(uri), options)
   end
 
   def create_request_proxy(opts = {})
