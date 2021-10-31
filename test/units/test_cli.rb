@@ -1,46 +1,46 @@
-require File.expand_path('../../test_helper', __FILE__)
+require File.expand_path("../../test_helper", __FILE__)
 
-require 'oauth/cli'
+require "oauth/cli"
 
 class TestCLI < Minitest::Test
 
   def test_parse
-    assert_equal 'version', parse('-v')
-    assert_equal 'version', parse('--version')
+    assert_equal "version", parse("-v")
+    assert_equal "version", parse("--version")
 
-    assert_equal 'help', parse('-h')
-    assert_equal 'help', parse('--help')
-    assert_equal 'help', parse('-H')
-    assert_equal 'help', parse('--HELP')
+    assert_equal "help", parse("-h")
+    assert_equal "help", parse("--help")
+    assert_equal "help", parse("-H")
+    assert_equal "help", parse("--HELP")
 
-    assert_equal 'help', parse('')
-    assert_equal 'help', parse(nil)
+    assert_equal "help", parse("")
+    assert_equal "help", parse(nil)
 
-    assert_equal 'help', parse('NotACommand')
+    assert_equal "help", parse("NotACommand")
 
-    assert_equal 'help'      , parse('h')
-    assert_equal 'version'   , parse('v')
-    assert_equal 'query'     , parse('q')
-    assert_equal 'authorize' , parse('a')
-    assert_equal 'sign'      , parse('s')
+    assert_equal "help"      , parse("h")
+    assert_equal "version"   , parse("v")
+    assert_equal "query"     , parse("q")
+    assert_equal "authorize" , parse("a")
+    assert_equal "sign"      , parse("s")
 
-    assert_equal 'help'      , parse('help')
-    assert_equal 'version'   , parse('version')
-    assert_equal 'query'     , parse('query')
-    assert_equal 'authorize' , parse('authorize')
-    assert_equal 'sign'      , parse('sign')
+    assert_equal "help"      , parse("help")
+    assert_equal "version"   , parse("version")
+    assert_equal "query"     , parse("query")
+    assert_equal "authorize" , parse("authorize")
+    assert_equal "sign"      , parse("sign")
 
-    assert_equal 'help'      , parse('H')
-    assert_equal 'version'   , parse('V')
-    assert_equal 'query'     , parse('Q')
-    assert_equal 'authorize' , parse('A')
-    assert_equal 'sign'      , parse('S')
+    assert_equal "help"      , parse("H")
+    assert_equal "version"   , parse("V")
+    assert_equal "query"     , parse("Q")
+    assert_equal "authorize" , parse("A")
+    assert_equal "sign"      , parse("S")
 
-    assert_equal 'help'      , parse('HELP')
-    assert_equal 'version'   , parse('VERSION')
-    assert_equal 'query'     , parse('QUERY')
-    assert_equal 'authorize' , parse('AUTHORIZE')
-    assert_equal 'sign'      , parse('SIGN')
+    assert_equal "help"      , parse("HELP")
+    assert_equal "version"   , parse("VERSION")
+    assert_equal "query"     , parse("QUERY")
+    assert_equal "authorize" , parse("AUTHORIZE")
+    assert_equal "sign"      , parse("SIGN")
   end
 
   def test_help_empty
@@ -86,28 +86,28 @@ class TestCLI < Minitest::Test
 
     consumer_new = lambda { |oauth_consumer_key, oauth_consumer_secret, options|
       expected_options = {:scheme=>:header}
-      assert_equal 'oauth_consumer_key', oauth_consumer_key
-      assert_equal 'oauth_consumer_secret', oauth_consumer_secret
+      assert_equal "oauth_consumer_key", oauth_consumer_key
+      assert_equal "oauth_consumer_secret", oauth_consumer_secret
       assert_equal expected_options, options
       consumer
     }
     access_token_new = lambda { |consumer1, token, secret|
       assert_equal consumer1.object_id, consumer.object_id
-      assert_equal 'TOKEN', token
-      assert_equal 'SECRET', secret
+      assert_equal "TOKEN", token
+      assert_equal "SECRET", secret
       access_token
     }
 
     # mock expects:
     #                    method      return    arguments
     #-------------------------------------------------------------
-    response.expect(    :code    , '!code!')
-    response.expect(    :message , '!message!')
-    response.expect(    :body    , '!body!')
+    response.expect(    :code    , "!code!")
+    response.expect(    :message , "!message!")
+    response.expect(    :body    , "!body!")
     access_token.expect(:request , response     , [:post, "http://example.com/oauth/url?oauth_consumer_key=oauth_consumer_key&oauth_nonce=GENERATE_KEY&oauth_timestamp=GENERATE_TIMESTAMP&oauth_token=TOKEN&oauth_signature_method=HMAC-SHA1&oauth_version=1.0"])
 
-    OAuth::Helper.stub(:generate_key, 'GENERATE_KEY') do
-      OAuth::Helper.stub(:generate_timestamp, 'GENERATE_TIMESTAMP') do
+    OAuth::Helper.stub(:generate_key, "GENERATE_KEY") do
+      OAuth::Helper.stub(:generate_timestamp, "GENERATE_TIMESTAMP") do
         OAuth::AccessToken.stub(:new, access_token_new) do
           OAuth::Consumer.stub(:new, consumer_new) do
             out = run_command %w[query
@@ -136,8 +136,8 @@ EXPECTED
 
     consumer_new = lambda { |oauth_consumer_key, oauth_consumer_secret, options|
       expected_options = {:access_token_url=>nil, :authorize_url=>nil, :request_token_url=>nil, :scheme=>:header, :http_method=>:get}
-      assert_equal 'oauth_consumer_key', oauth_consumer_key
-      assert_equal 'oauth_consumer_secret', oauth_consumer_secret
+      assert_equal "oauth_consumer_key", oauth_consumer_key
+      assert_equal "oauth_consumer_secret", oauth_consumer_secret
       assert_equal expected_options, options
       consumer
     }
@@ -151,8 +151,8 @@ EXPECTED
     request_token.expect( :authorize_url       , "!url1!")
     request_token.expect( :get_access_token    , access_token,   [{:oauth_verifier=>nil}])
 
-    OAuth::Helper.stub(:generate_key, 'GENERATE_KEY') do
-      OAuth::Helper.stub(:generate_timestamp, 'GENERATE_TIMESTAMP') do
+    OAuth::Helper.stub(:generate_key, "GENERATE_KEY") do
+      OAuth::Helper.stub(:generate_timestamp, "GENERATE_TIMESTAMP") do
         OAuth::Consumer.stub(:new, consumer_new) do
 
           out = run_command %w[authorize
@@ -180,8 +180,8 @@ EXPECTED
 
     consumer_new = lambda { |oauth_consumer_key, oauth_consumer_secret, options|
       expected_options = {:access_token_url=>nil, :authorize_url=>nil, :request_token_url=>nil, :scheme=>:header, :http_method=>:get}
-      assert_equal 'oauth_consumer_key', oauth_consumer_key
-      assert_equal 'oauth_consumer_secret', oauth_consumer_secret
+      assert_equal "oauth_consumer_key", oauth_consumer_key
+      assert_equal "oauth_consumer_secret", oauth_consumer_secret
       assert_equal expected_options, options
       consumer
     }
@@ -197,8 +197,8 @@ EXPECTED
 
     out = []
 
-    OAuth::Helper.stub(:generate_key, 'GENERATE_KEY') do
-      OAuth::Helper.stub(:generate_timestamp, 'GENERATE_TIMESTAMP') do
+    OAuth::Helper.stub(:generate_key, "GENERATE_KEY") do
+      OAuth::Helper.stub(:generate_timestamp, "GENERATE_TIMESTAMP") do
         OAuth::Consumer.stub(:new, consumer_new) do
 
           out.push run_command %w[sign

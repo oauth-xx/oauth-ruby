@@ -1,9 +1,9 @@
-require File.expand_path('../../test_helper', __FILE__)
+require File.expand_path("../../test_helper", __FILE__)
 
 begin
 
-require 'em-http'
-require 'oauth/request_proxy/em_http_request'
+require "em-http"
+require "oauth/request_proxy/em_http_request"
 
 class EmHttpRequestProxyTest < Minitest::Test
 
@@ -20,47 +20,47 @@ class EmHttpRequestProxyTest < Minitest::Test
   end
 
   def test_request_proxy_works_with_post_body_params_with_correct_content_type
-    proxy = create_request_proxy :head => {'Content-Type' => 'application/x-www-form-urlencoded'}, :method => "POST"
+    proxy = create_request_proxy :head => {"Content-Type" => "application/x-www-form-urlencoded"}, :method => "POST"
     assert_equal({}, proxy.parameters)
-    proxy = create_request_proxy :head => {'Content-Type' => 'application/x-www-form-urlencoded'}, :method => "POST", :body => "a=1"
+    proxy = create_request_proxy :head => {"Content-Type" => "application/x-www-form-urlencoded"}, :method => "POST", :body => "a=1"
     assert_equal({"a" => ["1"]}, proxy.parameters)
-    proxy = create_request_proxy :head => {'Content-Type' => 'application/x-www-form-urlencoded'}, :method => "POST", :body => {"a" => 1}
+    proxy = create_request_proxy :head => {"Content-Type" => "application/x-www-form-urlencoded"}, :method => "POST", :body => {"a" => 1}
     assert_equal({"a" => ["1"]}, proxy.parameters)
-    proxy = create_request_proxy :head => {'Content-Type' => 'application/x-www-form-urlencoded'}, :method => "PUT"
+    proxy = create_request_proxy :head => {"Content-Type" => "application/x-www-form-urlencoded"}, :method => "PUT"
     assert_equal({}, proxy.parameters)
-    proxy = create_request_proxy :head => {'Content-Type' => 'application/x-www-form-urlencoded'}, :method => "PUT", :body => "a=1"
+    proxy = create_request_proxy :head => {"Content-Type" => "application/x-www-form-urlencoded"}, :method => "PUT", :body => "a=1"
     assert_equal({"a" => ["1"]}, proxy.parameters)
-    proxy = create_request_proxy :head => {'Content-Type' => 'application/x-www-form-urlencoded'}, :method => "PUT", :body => {"a" => 1}
+    proxy = create_request_proxy :head => {"Content-Type" => "application/x-www-form-urlencoded"}, :method => "PUT", :body => {"a" => 1}
     assert_equal({"a" => ["1"]}, proxy.parameters)
   end
 
   def test_request_proxy_ignore_post_body_with_invalid_content_type
-    proxy = create_request_proxy :head => {'Content-Type' => 'text/plain'}, :method => "POST"
+    proxy = create_request_proxy :head => {"Content-Type" => "text/plain"}, :method => "POST"
     assert_equal({}, proxy.parameters)
-    proxy = create_request_proxy :head => {'Content-Type' => 'text/plain'}, :method => "POST", :body => "a=1"
+    proxy = create_request_proxy :head => {"Content-Type" => "text/plain"}, :method => "POST", :body => "a=1"
     assert_equal({}, proxy.parameters)
-    proxy = create_request_proxy :head => {'Content-Type' => 'text/plain'}, :method => "POST", :body => {"a" => 1}
+    proxy = create_request_proxy :head => {"Content-Type" => "text/plain"}, :method => "POST", :body => {"a" => 1}
     assert_equal({}, proxy.parameters)
-    proxy = create_request_proxy :head => {'Content-Type' => 'text/plain'}, :method => "PUT"
+    proxy = create_request_proxy :head => {"Content-Type" => "text/plain"}, :method => "PUT"
     assert_equal({}, proxy.parameters)
-    proxy = create_request_proxy :head => {'Content-Type' => 'text/plain'}, :method => "PUT", :body => "a=1"
+    proxy = create_request_proxy :head => {"Content-Type" => "text/plain"}, :method => "PUT", :body => "a=1"
     assert_equal({}, proxy.parameters)
-    proxy = create_request_proxy :head => {'Content-Type' => 'text/plain'}, :method => "PUT", :body => {"a" => 1}
+    proxy = create_request_proxy :head => {"Content-Type" => "text/plain"}, :method => "PUT", :body => {"a" => 1}
     assert_equal({}, proxy.parameters)
   end
 
   def test_request_proxy_ignores_post_body_with_invalid_method
-    proxy = create_request_proxy :head => {'Content-Type' => 'application/x-www-form-urlencoded'}, :method => "DELETE"
+    proxy = create_request_proxy :head => {"Content-Type" => "application/x-www-form-urlencoded"}, :method => "DELETE"
     assert_equal({}, proxy.parameters)
-    proxy = create_request_proxy :head => {'Content-Type' => 'application/x-www-form-urlencoded'}, :method => "DELETE", :body => "a=1"
+    proxy = create_request_proxy :head => {"Content-Type" => "application/x-www-form-urlencoded"}, :method => "DELETE", :body => "a=1"
     assert_equal({}, proxy.parameters)
-    proxy = create_request_proxy :head => {'Content-Type' => 'application/x-www-form-urlencoded'}, :method => "DELETE", :body => {"a" => 1}
+    proxy = create_request_proxy :head => {"Content-Type" => "application/x-www-form-urlencoded"}, :method => "DELETE", :body => {"a" => 1}
     assert_equal({}, proxy.parameters)
-    proxy = create_request_proxy :head => {'Content-Type' => 'application/x-www-form-urlencoded'}, :method => "GET"
+    proxy = create_request_proxy :head => {"Content-Type" => "application/x-www-form-urlencoded"}, :method => "GET"
     assert_equal({}, proxy.parameters)
-    proxy = create_request_proxy :head => {'Content-Type' => 'application/x-www-form-urlencoded'}, :method => "GET", :body => "a=1"
+    proxy = create_request_proxy :head => {"Content-Type" => "application/x-www-form-urlencoded"}, :method => "GET", :body => "a=1"
     assert_equal({}, proxy.parameters)
-    proxy = create_request_proxy :head => {'Content-Type' => 'application/x-www-form-urlencoded'}, :method => "GET", :body => {"a" => 1}
+    proxy = create_request_proxy :head => {"Content-Type" => "application/x-www-form-urlencoded"}, :method => "GET", :body => {"a" => 1}
     assert_equal({}, proxy.parameters)
   end
 

@@ -1,4 +1,4 @@
-require 'oauth/request_proxy/base'
+require "oauth/request_proxy/base"
 
 module OAuth
   module RequestProxy

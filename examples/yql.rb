@@ -4,10 +4,10 @@
 #  ./yql.rb --consumer-key <key> --consumer-secret <secret> "show tables"
 #  ./yql.rb --consumer-key <key> --consumer-secret <secret> "select * from flickr.photos.search where text='Cat' limit 10"
 
-require 'oauth'
-require 'optparse'
-require 'json'
-require 'pp'
+require "oauth"
+require "optparse"
+require "json"
+require "pp"
 
 options = {}
 

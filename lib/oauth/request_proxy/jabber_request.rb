@@ -1,5 +1,5 @@
-require 'xmpp4r'
-require 'oauth/request_proxy/base'
+require "xmpp4r"
+require "oauth/request_proxy/base"
 
 module OAuth
   module RequestProxy
@@ -13,7 +13,7 @@ module OAuth
 
         @params = {}
 
-        oauth = @request.get_elements('//oauth').first
+        oauth = @request.get_elements("//oauth").first
         return @params unless oauth
 
         %w( oauth_token oauth_consumer_key oauth_signature_method oauth_signature

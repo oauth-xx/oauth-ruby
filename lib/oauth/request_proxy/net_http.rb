@@ -1,7 +1,7 @@
-require 'oauth/request_proxy/base'
-require 'net/http'
-require 'uri'
-require 'cgi'
+require "oauth/request_proxy/base"
+require "net/http"
+require "uri"
+require "cgi"
 
 module OAuth::RequestProxy::Net
   module HTTP
@@ -48,12 +48,12 @@ module OAuth::RequestProxy::Net
 
       def query_string
         params = [ query_params, auth_header_params ]
-        params << post_params if (method.to_s.upcase == 'POST' || method.to_s.upcase == 'PUT') && form_url_encoded?
-        params.compact.join('&')
+        params << post_params if (method.to_s.upcase == "POST" || method.to_s.upcase == "PUT") && form_url_encoded?
+        params.compact.join("&")
       end
 
       def form_url_encoded?
-        request['Content-Type'] != nil && request['Content-Type'].to_s.downcase.start_with?('application/x-www-form-urlencoded')
+        request["Content-Type"] != nil && request["Content-Type"].to_s.downcase.start_with?("application/x-www-form-urlencoded")
       end
 
       def query_params
@@ -65,8 +65,8 @@ module OAuth::RequestProxy::Net
       end
 
       def auth_header_params
-        return nil unless request['Authorization'] && request['Authorization'][0,5] == 'OAuth'
-        request['Authorization']
+        return nil unless request["Authorization"] && request["Authorization"][0,5] == "OAuth"
+        request["Authorization"]
       end
     end
   end

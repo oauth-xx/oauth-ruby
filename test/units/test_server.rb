@@ -1,6 +1,6 @@
-require File.expand_path('../../test_helper', __FILE__)
+require File.expand_path("../../test_helper", __FILE__)
 
-require 'oauth/server'
+require "oauth/server"
 
 class ServerTest < Minitest::Test
   def setup
