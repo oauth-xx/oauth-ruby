@@ -243,7 +243,7 @@ module OAuth
         end
       when (300..399)
         # Parse redirect to follow
-        uri = URI.parse(response['location'])
+        uri = URI.parse(response["location"])
         our_uri = URI.parse(site)
 
         # Guard against infinite redirects

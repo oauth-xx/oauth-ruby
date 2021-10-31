@@ -269,13 +269,13 @@ class ConsumerTest < Minitest::Test
 
     stub_request(:get, request_uri.to_s).to_return(
       :status => 301,
-      :headers => {'Location' => redirect_uri.to_s}
+      :headers => {"Location" => redirect_uri.to_s}
     )
 
     assert_raises Net::HTTPRetriableError do
-      @consumer.token_request(:get, request_uri.path) {
-        { :oauth_token => 'token', :oauth_token_secret => 'secret' }
-      }
+      @consumer.token_request(:get, request_uri.path) do
+        { :oauth_token => "token", :oauth_token_secret => "secret" }
+      end
     end
   end
 
