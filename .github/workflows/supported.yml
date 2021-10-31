@@ -1,0 +1,57 @@
+name: Supported Rubies
+
+on:
+  push:
+    branches:
+      - master
+      - '*-maintenance'
+      - '*-dev'
+    tags:
+      - '!*' # Do not execute on tags
+  pull_request:
+    branches:
+      - '*'
+
+jobs:
+  test:
+    name: Specs - Ruby ${{ matrix.ruby }} ${{ matrix.name_extra || '' }}
+    if: "!contains(github.event.commits[0].message, '[ci skip]') && !contains(github.event.commits[0].message, '[skip ci]')"
+    strategy:
+      fail-fast: false
+      matrix:
+        ruby:
+          - truffleruby-head
+          - ruby-head
+          - 3.0
+          - 2.7
+          - 2.6
+    runs-on: ubuntu-latest
+    continue-on-error: ${{ matrix.allow_failure || endsWith(matrix.ruby, 'head') }}
+    steps:
+      - uses: amancevice/setup-code-climate@v0
+        name: CodeClimate Install
+        if: matrix.ruby == '2.6' && github.event_name != 'pull_request'
+        with:
+          cc_test_reporter_id: ${{ secrets.CC_TEST_REPORTER_ID }}
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Setup Ruby & Bundle
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ${{ matrix.ruby }}
+          bundler-cache: true
+      - name: CodeClimate Pre-build Notification
+        run: cc-test-reporter before-build
+        if: matrix.ruby == '2.6' && github.event_name != 'pull_request'
+        continue-on-error: ${{ matrix.allow_failures != 'false' }}
+      - name: Run tests
+        run: bundle exec rake test
+      - uses: codecov/codecov-action@v2
+        with:
+          flags: unittests
+          name: codecov-upload
+          fail_ci_if_error: true
+      - name: CodeClimate Post-build Notification
+        run: cc-test-reporter after-build
+        if: matrix.ruby == '2.6' && github.event_name != 'pull_request' && always()
+        continue-on-error: ${{ matrix.allow_failures != 'false' }}
