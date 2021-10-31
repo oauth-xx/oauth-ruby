@@ -3,8 +3,10 @@
 ENV["RACK_ENV"] = "test"
 
 ruby_version = Gem::Version.new(RUBY_VERSION)
-# Code coverage
-coverage = ruby_version >= Gem::Version.new("2.6") && RUBY_ENGINE == "ruby"
+minimum_version = ->(version) { ruby_version >= Gem::Version.new(version) && RUBY_ENGINE == "ruby" }
+coverage = minimum_version.call("2.6")
+debug = minimum_version.call("2.4")
+
 if coverage
   require "simplecov"
   require "simplecov-cobertura"
@@ -12,8 +14,7 @@ if coverage
 end
 
 # require third-party code
-
-require "byebug"
+require "byebug" if debug
 require "stringio"
 require "minitest/autorun"
 require "mocha/mini_test"
