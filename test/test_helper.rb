@@ -2,10 +2,10 @@
 
 ENV['RACK_ENV'] = 'test'
 
-# simplecov, Travis will call codeclimate
-
-require 'simplecov'
-SimpleCov.start
+# Code coverage
+require "simplecov"
+require "simplecov-cobertura"
+SimpleCov.formatter = SimpleCov::Formatter::CoberturaFormatter unless ENV["HTML_COVERAGE"] == "true"
 
 # require third-party code
 
