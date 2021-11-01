@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "oauth/request_proxy/base"
 
 module OAuth
@@ -18,7 +20,7 @@ module OAuth
     #     :consumer_secret => oauth_consumer_secret,
     #     :token_secret    => oauth_token_secret,
     class MockRequest < OAuth::RequestProxy::Base
-      proxies Hash
+      proxies ::Hash
 
       def parameters
         @request["parameters"]
