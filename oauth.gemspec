@@ -18,12 +18,12 @@ Gem::Specification.new do |spec|
   spec.homepage = "https://github.com/oauth-xx/oauth-ruby"
   spec.metadata = {
     "bug_tracker_uri" => "#{spec.homepage}/issues",
-    "changelog_uri" => "#{spec.homepage}/blob/master/HISTORY",
+    "changelog_uri" => "#{spec.homepage}/blob/master/CHANGELOG.md",
     "documentation_uri" => "https://rubydoc.info/github/oauth-xx/oauth-ruby/master",
     "homepage_uri" => spec.homepage,
     "source_code_uri" => spec.homepage
   }
-  spec.files       = Dir.glob("lib/**/*.rb") + ["LICENSE", "README.rdoc", "HISTORY"]
+  spec.files       = Dir.glob("lib/**/*.rb") + ["LICENSE", "README.rdoc", "CHANGELOG.md"]
   #spec.test_files  = Dir.glob("test/**/*.rb") + Dir.glob('test/keys/*')
   spec.extra_rdoc_files = [ "LICENSE", "README.rdoc", "TODO" ]
 
