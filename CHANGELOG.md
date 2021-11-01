@@ -22,6 +22,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * HISTORY renamed to CHANGELOG.md, and follows Keep a Changelog (#214, #215 by @pboling)
 * CHANGELOG, LICENSE, and README now ship with packaged gem (#214, #215 by @pboling)
 * README.rdoc renamed to README.md (#217, #218 by @pboling)
+* Require plaintext signature method by default (#135 by @confiks & @pboling)
 
 ### Fixed
 
