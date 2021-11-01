@@ -51,6 +51,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 * Fixes ssl-noverify
+* Fixed README example (#158, #159, by @pboling)
 
 ## [0.5.4] 2017-12-08
 ### Changed
