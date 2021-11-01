@@ -1,9 +1,11 @@
+# frozen_string_literal: true
+
 require "openssl"
 require "base64"
 
 module OAuth
   module Helper
-    extend self
+    module_function
 
     # Escape +value+ by URL encoding all non-reserved character.
     #
@@ -43,7 +45,8 @@ module OAuth
     # See Also: {OAuth core spec version 1.0, section 9.1.1}[http://oauth.net/core/1.0#rfc.section.9.1.1]
     def normalize(params)
       params.sort.map do |k, values|
-        if values.is_a?(Array)
+        case values
+        when Array
           # make sure the array has an element so we don't lose the key
           values << nil if values.empty?
           # multiple values were provided for a single key
@@ -54,7 +57,7 @@ module OAuth
               [escape(k), escape(v)].join("=")
             end
           end
-        elsif values.is_a?(Hash)
+        when Hash
           normalize_nested_query(values, k)
         else
           [escape(k), escape(values)].join("=")

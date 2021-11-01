@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require File.expand_path("../../oauth_case", __dir__)
 
 # See http://oauth.net/core/1.0/#anchor14

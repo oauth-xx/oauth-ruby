@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module OAuth
   # Superclass for the various tokens used by OAuth
   class Token

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module OAuth
   module Signature
     # Returns a list of available signature methods

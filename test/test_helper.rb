@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # ensure test env
 
 ENV["RACK_ENV"] = "test"

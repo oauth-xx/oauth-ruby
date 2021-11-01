@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require File.expand_path("../test_helper", __dir__)
 
 require "oauth/consumer"
@@ -62,18 +64,18 @@ class TestSignatureRsaSha1 < Minitest::Test
   end
 
   def x509_certificate
-    OpenSSL::X509::Certificate.new(IO.read(cert_path))
+    OpenSSL::X509::Certificate.new(File.read(cert_path))
   end
 
   def pkey_rsa
-    OpenSSL::PKey::RSA.new(IO.read(pem_path))
+    OpenSSL::PKey::RSA.new(File.read(pem_path))
   end
 
   def cert_path
-    File.dirname(__FILE__) + "/../keys/rsa.cert"
+    "#{File.dirname(__FILE__)}/../keys/rsa.cert"
   end
 
   def pem_path
-    File.dirname(__FILE__) + "/../keys/rsa.pem"
+    "#{File.dirname(__FILE__)}/../keys/rsa.pem"
   end
 end

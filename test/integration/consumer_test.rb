@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require File.expand_path("../test_helper", __dir__)
 
 module Integration
@@ -24,7 +26,7 @@ module Integration
     end
 
     def test_that_signing_auth_headers_on_get_requests_works
-      request = Net::HTTP::Get.new(@request_uri.path + "?" + request_parameters_to_s)
+      request = Net::HTTP::Get.new("#{@request_uri.path}?#{request_parameters_to_s}")
       @token.sign!(request, { nonce: @nonce, timestamp: @timestamp })
 
       assert_equal "GET", request.method
@@ -94,7 +96,7 @@ module Integration
     end
 
     def test_that_using_auth_headers_on_get_on_create_signed_requests_works
-      request = @consumer.create_signed_request(:get, @request_uri.path + "?" + request_parameters_to_s, @token,
+      request = @consumer.create_signed_request(:get, "#{@request_uri.path}?#{request_parameters_to_s}", @token,
                                                 { nonce: @nonce, timestamp: @timestamp }, @request_parameters)
 
       assert_equal "GET", request.method

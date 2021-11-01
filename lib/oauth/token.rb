@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # this exists for backwards-compatibility
 
 require "oauth/tokens/token"

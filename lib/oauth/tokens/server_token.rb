@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module OAuth
   # Used on the server for generating tokens
   class ServerToken < Token

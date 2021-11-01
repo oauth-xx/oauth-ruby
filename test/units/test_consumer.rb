@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require File.expand_path("../test_helper", __dir__)
 
 # This performs testing against Andy Smith's test server http://term.ie/oauth/example/

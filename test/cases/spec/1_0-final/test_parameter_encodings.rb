@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require File.expand_path("../../oauth_case", __dir__)
 
 # See http://oauth.net/core/1.0/#encoding_parameters
@@ -70,7 +72,7 @@ class ParameterEncodingTest < OAuthCase
 
     unicode.scan(/(U\+(?:[[:digit:][:xdigit:]]{4,5}|10[[:digit:][:xdigit:]]{4})|.)/mu) do
       c = Regexp.last_match(1)
-      str << if /^U\+/.match?(c)
+      str += if /^U\+/.match?(c)
                [c[2..-1].hex].pack("U*")
              else
                c

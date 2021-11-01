@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module OAuth
   module MinitestHelpers
     def assert_matching_headers(expected, actual)

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "em-http"
 require "oauth/helper"
 require "oauth/request_proxy/em_http_request"
@@ -82,7 +84,7 @@ module EventMachine
                        else
                          query.to_s
                        end
-      combined_query = [combined_query, uri_query].reject { |part| part.empty? }.join("&") unless uri_query.to_s.empty?
+      combined_query = [combined_query, uri_query].reject(&:empty?).join("&") unless uri_query.to_s.empty?
       combined_query.to_s.empty? ? path : "#{path}?#{combined_query}"
     end
 
