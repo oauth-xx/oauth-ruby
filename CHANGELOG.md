@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Setup Rubocop (#205, #208 by @pboling)
 * Added CODE_OF_CONDUCT.md (#217, #218 by @pboling)
 * Added FUNDING.yml (#217, #218 by @pboling)
+* Added Client Certificate Options: :ssl_client_cert and :ssl_client_key (#136, #220 by @pboling)
 
 ### Changed
 
