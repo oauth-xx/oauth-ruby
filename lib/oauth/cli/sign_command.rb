@@ -1,23 +1,20 @@
 class OAuth::CLI
   class SignCommand < BaseCommand
-
     def required_options
-      [:oauth_consumer_key, :oauth_consumer_secret, :oauth_token, :oauth_token_secret]
+      %i[oauth_consumer_key oauth_consumer_secret oauth_token oauth_token_secret]
     end
 
     def _run
       request = OAuth::RequestProxy.proxy \
-         "method"     => options[:method],
-         "uri"        => options[:uri],
-         "parameters" => parameters
+        "method" => options[:method],
+        "uri" => options[:uri],
+        "parameters" => parameters
 
-      if verbose?
-        puts_verbose_parameters(request)
-      end
+      puts_verbose_parameters(request) if verbose?
 
       request.sign! \
-        :consumer_secret => options[:oauth_consumer_secret],
-        :token_secret    => options[:oauth_token_secret]
+        consumer_secret: options[:oauth_consumer_secret],
+        token_secret: options[:oauth_token_secret]
 
       if verbose?
         puts_verbose_request(request)
@@ -28,15 +25,15 @@ class OAuth::CLI
 
     def puts_verbose_parameters(request)
       puts "OAuth parameters:"
-      request.oauth_parameters.each do |k,v|
-        puts "  " + [k, v] * ": "
+      request.oauth_parameters.each do |k, v|
+        puts "  " + [k, v].join(": ")
       end
       puts
 
       if request.non_oauth_parameters.any?
         puts "Parameters:"
-        request.non_oauth_parameters.each do |k,v|
-          puts "  " + [k, v] * ": "
+        request.non_oauth_parameters.each do |k, v|
+          puts "  " + [k, v].join(": ")
         end
         puts
       end
@@ -58,7 +55,7 @@ class OAuth::CLI
       else
         puts "OAuth Request URI: #{request.signed_uri}"
         puts "Request URI: #{request.signed_uri(false)}"
-        puts "Authorization header: #{request.oauth_header(:realm => options[:realm])}"
+        puts "Authorization header: #{request.oauth_header(realm: options[:realm])}"
       end
       puts "Signature:         #{request.oauth_signature}"
       puts "Escaped signature: #{OAuth::Helper.escape(request.oauth_signature)}"

@@ -1,6 +1,7 @@
 module OAuth
   class Unauthorized < OAuth::Error
     attr_reader :request
+
     def initialize(request = nil)
       @request = request
     end

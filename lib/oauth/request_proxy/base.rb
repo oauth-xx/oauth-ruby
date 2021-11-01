@@ -13,7 +13,7 @@ module OAuth::RequestProxy
 
     def initialize(request, options = {})
       @request = request
-      @unsigned_parameters = (options[:unsigned_parameters] || []).map {|param| param.to_s}
+      @unsigned_parameters = (options[:unsigned_parameters] || []).map { |param| param.to_s }
       @options = options
     end
 
@@ -32,7 +32,7 @@ module OAuth::RequestProxy
     end
 
     def oauth_signature
-      # TODO can this be nil?
+      # TODO: can this be nil?
       [parameters["oauth_signature"]].flatten.first || ""
     end
 
@@ -61,13 +61,13 @@ module OAuth::RequestProxy
       parameters["oauth_version"]
     end
 
-    # TODO deprecate these
-    alias_method :consumer_key,     :oauth_consumer_key
-    alias_method :token,            :oauth_token
-    alias_method :nonce,            :oauth_nonce
-    alias_method :timestamp,        :oauth_timestamp
-    alias_method :signature,        :oauth_signature
-    alias_method :signature_method, :oauth_signature_method
+    # TODO: deprecate these
+    alias consumer_key oauth_consumer_key
+    alias token oauth_token
+    alias nonce oauth_nonce
+    alias timestamp oauth_timestamp
+    alias signature oauth_signature
+    alias signature_method oauth_signature_method
 
     ## Parameter accessors
 
@@ -76,25 +76,25 @@ module OAuth::RequestProxy
     end
 
     def parameters_for_signature
-      parameters.select { |k,v| not signature_and_unsigned_parameters.include?(k) }
+      parameters.select { |k, _v| !signature_and_unsigned_parameters.include?(k) }
     end
 
     def oauth_parameters
-      parameters.select { |k,v| OAuth::PARAMETERS.include?(k) }.reject { |k,v| v == "" }
+      parameters.select { |k, _v| OAuth::PARAMETERS.include?(k) }.reject { |_k, v| v == "" }
     end
 
     def non_oauth_parameters
-      parameters.reject { |k,v| OAuth::PARAMETERS.include?(k) }
+      parameters.reject { |k, _v| OAuth::PARAMETERS.include?(k) }
     end
 
     def signature_and_unsigned_parameters
-      unsigned_parameters+["oauth_signature"]
+      unsigned_parameters + ["oauth_signature"]
     end
 
     # See 9.1.2 in specs
     def normalized_uri
       u = URI.parse(uri)
-      "#{u.scheme.downcase}://#{u.host.downcase}#{(u.scheme.downcase == 'http' && u.port != 80) || (u.scheme.downcase == 'https' && u.port != 443) ? ":#{u.port}" : ""}#{(u.path && u.path != '') ? u.path : '/'}"
+      "#{u.scheme.downcase}://#{u.host.downcase}#{(u.scheme.downcase == "http" && u.port != 80) || (u.scheme.downcase == "https" && u.port != 443) ? ":#{u.port}" : ""}#{u.path && u.path != "" ? u.path : "/"}"
     end
 
     # See 9.1.1. in specs Normalize Request Parameters
@@ -126,21 +126,21 @@ module OAuth::RequestProxy
     # URI, including OAuth parameters
     def signed_uri(with_oauth = true)
       if signed?
-        if with_oauth
-          params = parameters
-        else
-          params = non_oauth_parameters
-        end
+        params = if with_oauth
+                   parameters
+                 else
+                   non_oauth_parameters
+                 end
 
-        [uri, normalize(params)] * "?"
+        [uri, normalize(params)].join("?")
       else
-        STDERR.puts "This request has not yet been signed!"
+        warn "This request has not yet been signed!"
       end
     end
 
     # Authorization header for OAuth
     def oauth_header(options = {})
-      header_params_str = oauth_parameters.map { |k,v| "#{k}=\"#{escape(v)}\"" }.join(", ")
+      header_params_str = oauth_parameters.map { |k, v| "#{k}=\"#{escape(v)}\"" }.join(", ")
 
       realm = "realm=\"#{options[:realm]}\", " if options[:realm]
       "OAuth #{realm}#{header_params_str}"
@@ -154,25 +154,25 @@ module OAuth::RequestProxy
       end
     end
 
-  protected
+    protected
 
     def header_params
-      %w( X-HTTP_AUTHORIZATION Authorization HTTP_AUTHORIZATION ).each do |header|
+      %w[X-HTTP_AUTHORIZATION Authorization HTTP_AUTHORIZATION].each do |header|
         next unless request.env.include?(header)
 
         header = request.env[header]
-        next unless header[0,6] == "OAuth "
+        next unless header[0, 6] == "OAuth "
 
         # parse the header into a Hash
         oauth_params = OAuth::Helper.parse_header(header)
 
         # remove non-OAuth parameters
-        oauth_params.reject! { |k,v| k !~ /^oauth_/ }
+        oauth_params.reject! { |k, _v| k !~ /^oauth_/ }
 
         return oauth_params
       end
 
-      return {}
+      {}
     end
   end
 end

@@ -12,12 +12,14 @@ module OAuth::Signature
 
     def self.implements(signature_method = nil)
       return @implements if signature_method.nil?
+
       @implements = signature_method
       OAuth::Signature.available_methods[@implements] = self
     end
 
     def initialize(request, options = {}, &block)
-      raise TypeError unless request.kind_of?(OAuth::RequestProxy::Base)
+      raise TypeError unless request.is_a?(OAuth::RequestProxy::Base)
+
       @request = request
       @options = options
 
@@ -36,7 +38,7 @@ module OAuth::Signature
       @token_secret = options[:token_secret] if options[:token_secret]
 
       # override secrets based on the values returned from the block (if any)
-      if block_given?
+      if block
         # consumer secret and token secret need to be looked up based on pieces of the request
         secrets = yield block.arity == 1 ? request : [token, consumer_key, nonce, request.timestamp]
         if secrets.is_a?(Array) && secrets.size == 2
@@ -47,17 +49,17 @@ module OAuth::Signature
     end
 
     def signature
-      Base64.encode64(digest).chomp.gsub(/\n/,"")
+      Base64.encode64(digest).chomp.delete("\n")
     end
 
-    def ==(cmp_signature)
-      check = signature.bytesize ^ cmp_signature.bytesize
-      signature.bytes.zip(cmp_signature.bytes) { |x, y| check |= x ^ y.to_i }
+    def ==(other)
+      check = signature.bytesize ^ other.bytesize
+      signature.bytes.zip(other.bytes) { |x, y| check |= x ^ y.to_i }
       check.zero?
     end
 
     def verify
-      self == self.request.signature
+      self == request.signature
     end
 
     def signature_base_string
@@ -93,6 +95,5 @@ module OAuth::Signature
     def raise_instantiation_error
       raise NotImplementedError, "Cannot instantiate #{self.class.name} class directly."
     end
-
   end
 end

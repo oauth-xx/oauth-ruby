@@ -23,8 +23,7 @@ jobs:
           - 2.5
           - 2.4
           - 2.3
-          - 2.2
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-20.04
     continue-on-error: ${{ matrix.allow_failure || endsWith(matrix.ruby, 'head') }}
     steps:
       - name: Checkout

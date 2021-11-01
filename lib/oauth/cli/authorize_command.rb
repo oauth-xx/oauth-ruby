@@ -1,6 +1,5 @@
 class OAuth::CLI
   class AuthorizeCommand < BaseCommand
-
     def required_options
       [:uri]
     end
@@ -25,7 +24,7 @@ class OAuth::CLI
     def get_request_token
       consumer = get_consumer
       scope_options = options[:scope] ? { "scope" => options[:scope] } : {}
-      consumer.get_request_token({ :oauth_callback => options[:oauth_callback] }, scope_options)
+      consumer.get_request_token({ oauth_callback: options[:oauth_callback] }, scope_options)
     rescue OAuth::Unauthorized => e
       alert "A problem occurred while attempting to authorize:"
       alert e
@@ -36,13 +35,12 @@ class OAuth::CLI
       OAuth::Consumer.new \
         options[:oauth_consumer_key],
         options[:oauth_consumer_secret],
-        :access_token_url  => options[:access_token_url],
-        :authorize_url     => options[:authorize_url],
-        :request_token_url => options[:request_token_url],
-        :scheme            => options[:scheme],
-        :http_method       => options[:method].to_s.downcase.to_sym
+        access_token_url: options[:access_token_url],
+        authorize_url: options[:authorize_url],
+        request_token_url: options[:request_token_url],
+        scheme: options[:scheme],
+        http_method: options[:method].to_s.downcase.to_sym
     end
-
 
     def ask_user_for_verifier
       if options[:version] == "1.0a"
@@ -56,10 +54,10 @@ class OAuth::CLI
     end
 
     def verbosely_get_access_token(request_token, oauth_verifier)
-      access_token = request_token.get_access_token(:oauth_verifier => oauth_verifier)
+      access_token = request_token.get_access_token(oauth_verifier: oauth_verifier)
 
       puts "Response:"
-      access_token.params.each do |k,v|
+      access_token.params.each do |k, v|
         puts "  #{k}: #{v}" unless k.is_a?(Symbol)
       end
     rescue OAuth::Unauthorized => e

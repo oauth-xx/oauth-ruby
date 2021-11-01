@@ -1,4 +1,4 @@
-  require "oauth/request_proxy/base"
+require "oauth/request_proxy/base"
 require "curb"
 require "uri"
 require "cgi"
@@ -35,14 +35,14 @@ module OAuth::RequestProxy::Curl
 
     def query_parameters
       query = URI.parse(request.url).query
-      return(query ? CGI.parse(query) : {})
+      (query ? CGI.parse(query) : {})
     end
 
     def post_parameters
       post_body = {}
 
       # Post params are only used if posting form data
-      if (request.headers["Content-Type"] && request.headers["Content-Type"].to_s.downcase.start_with?("application/x-www-form-urlencoded"))
+      if request.headers["Content-Type"] && request.headers["Content-Type"].to_s.downcase.start_with?("application/x-www-form-urlencoded")
 
         request.post_body.split("&").each do |str|
           param = str.split("=")

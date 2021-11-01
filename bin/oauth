@@ -1,10 +1,13 @@
 #!/usr/bin/env ruby
 
-require_relative "../lib/oauth"
+require "oauth"
 require "oauth/cli"
 
-Signal.trap("INT") { puts; exit(1) } # don't dump a backtrace on a ^C
-
+# don't dump a backtrace on a ^C
+Signal.trap("INT") do
+  puts
+  exit(1)
+end
 ARGV << "help" if ARGV.empty?
 command = ARGV.shift
 

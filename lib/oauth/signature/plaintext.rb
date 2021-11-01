@@ -8,8 +8,8 @@ module OAuth::Signature
       signature_base_string
     end
 
-    def ==(cmp_signature)
-      signature.to_s == cmp_signature.to_s
+    def ==(other)
+      signature.to_s == other.to_s
     end
 
     def signature_base_string

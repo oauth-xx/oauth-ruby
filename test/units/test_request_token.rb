@@ -1,4 +1,4 @@
-require File.expand_path("../../test_helper", __FILE__)
+require File.expand_path("../test_helper", __dir__)
 
 class StubbedToken < OAuth::RequestToken
   define_method :build_url_promoted do |root_domain, params|
@@ -17,7 +17,7 @@ class TestRequestToken < Minitest::Test
   end
 
   def test_request_token_builds_authorize_url_connectly_with_additional_params
-    auth_url = @request_token.authorize_url({:oauth_callback => "github.com"})
+    auth_url = @request_token.authorize_url({ oauth_callback: "github.com" })
     assert auth_url
     assert_match(/oauth_token/, auth_url)
     assert_match(/oauth_callback/, auth_url)
@@ -41,7 +41,7 @@ class TestRequestToken < Minitest::Test
   end
 
   def test_request_token_builds_authenticate_url_connectly_with_additional_params
-    authenticate_url = @request_token.authenticate_url({:oauth_callback => "github.com"})
+    authenticate_url = @request_token.authenticate_url({ oauth_callback: "github.com" })
     assert authenticate_url
     assert_match(/oauth_token/, authenticate_url)
     assert_match(/oauth_callback/, authenticate_url)
@@ -64,16 +64,16 @@ class TestRequestToken < Minitest::Test
     assert_nil @request_token.authenticate_url
   end
 
-  #TODO: mock out the Consumer to test the Consumer/AccessToken interaction.
-  def test_get_access_token
-  end
+  # TODO: mock out the Consumer to test the Consumer/AccessToken interaction.
+  def test_get_access_token; end
 
   def test_build_url
-   @stubbed_token = StubbedToken.new(nil, nil, nil)
+    @stubbed_token = StubbedToken.new(nil, nil, nil)
     assert_respond_to @stubbed_token, :build_url_promoted
     url = @stubbed_token.build_url_promoted(
       "http://github.com/oauth/authorize",
-      {:foo => "bar bar"})
+      { foo: "bar bar" }
+    )
     assert url
     assert_equal "http://github.com/oauth/authorize?foo=bar+bar", url
   end

@@ -58,42 +58,52 @@ which now uses this gem as a dependency.
 We need to specify the oauth_callback url explicitly, otherwise it defaults to
 "oob" (Out of Band)
 
-    callback_url = "http://127.0.0.1:3000/oauth/callback"
+```ruby
+callback_url = "http://127.0.0.1:3000/oauth/callback"
+```
 
 Create a new `OAuth::Consumer` instance by passing it a configuration hash:
 
-    oauth_consumer = OAuth::Consumer.new("key", "secret", :site => "https://agree2")
+```ruby
+oauth_consumer = OAuth::Consumer.new("key", "secret", site: "https://agree2")
+```
 
 Start the process by requesting a token
 
-    request_token = oauth_consumer.get_request_token(:oauth_callback => callback_url)
+```ruby
+request_token = oauth_consumer.get_request_token(oauth_callback: callback_url)
 
-    session[:token] = request_token.token
-    session[:token_secret] = request_token.secret
-    redirect_to request_token.authorize_url(:oauth_callback => callback_url)
+session[:token] = request_token.token
+session[:token_secret] = request_token.secret
+redirect_to request_token.authorize_url(oauth_callback: callback_url)
+```
 
 When user returns create an access_token
 
-    hash = { oauth_token: session[:token], oauth_token_secret: session[:token_secret]}
-    request_token  = OAuth::RequestToken.from_hash(oauth_consumer, hash)
-    access_token = request_token.get_access_token
-    # For 3-legged authorization, flow oauth_verifier is passed as param in callback
-    # access_token = request_token.get_access_token(oauth_verifier: params[:oauth_verifier])
-    @photos = access_token.get('/photos.xml')
+```ruby
+hash = { oauth_token: session[:token], oauth_token_secret: session[:token_secret] }
+request_token = OAuth::RequestToken.from_hash(oauth_consumer, hash)
+access_token = request_token.get_access_token
+# For 3-legged authorization, flow oauth_verifier is passed as param in callback
+# access_token = request_token.get_access_token(oauth_verifier: params[:oauth_verifier])
+@photos = access_token.get("/photos.xml")
+```
 
 Now that you have an access token, you can use Typhoeus to interact with the
 OAuth provider if you choose.
 
-    require 'typhoeus'
-    require 'oauth/request_proxy/typhoeus_request'
-    oauth_params = {:consumer => oauth_consumer, :token => access_token}
-    hydra = Typhoeus::Hydra.new
-    req = Typhoeus::Request.new(uri, options) # :method needs to be specified in options
-    oauth_helper = OAuth::Client::Helper.new(req, oauth_params.merge(:request_uri => uri))
-    req.options[:headers].merge!({"Authorization" => oauth_helper.header}) # Signs the request
-    hydra.queue(req)
-    hydra.run
-    @response = req.response
+```ruby
+require "typhoeus"
+require "oauth/request_proxy/typhoeus_request"
+oauth_params = { consumer: oauth_consumer, token: access_token }
+hydra = Typhoeus::Hydra.new
+req = Typhoeus::Request.new(uri, options) # :method needs to be specified in options
+oauth_helper = OAuth::Client::Helper.new(req, oauth_params.merge(request_uri: uri))
+req.options[:headers].merge!({ "Authorization" => oauth_helper.header }) # Signs the request
+hydra.queue(req)
+hydra.run
+@response = req.response
+```
 
 ## More Information
 

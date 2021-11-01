@@ -18,7 +18,7 @@ module OAuth
       "v" => "version",
       "q" => "query",
       "a" => "authorize",
-      "s" => "sign",
+      "s" => "sign"
     }
 
     def initialize(stdout, stdin, stderr, command, arguments)
