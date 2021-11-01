@@ -82,6 +82,20 @@ class TestOAuthHelper < Minitest::Test
     assert_equal("oauth_consumer_key=vince_clortho&oauth_nonce=nonce&oauth_signature_method=HMAC-SHA1&oauth_timestamp=1240004133&oauth_token=token_value&oauth_version=1.0&weight%5Bvalue%5D=65", OAuth::Helper.normalize(params))
   end
 
+  def test_normalize_with_nested_array_of_hashes
+    params = {
+      "oauth_nonce" => "nonce",
+      "weight" => { :value => "65" },
+      "items" => [{"a" => 1}, {"b" => 2}],
+      "oauth_signature_method" => "HMAC-SHA1",
+      "oauth_timestamp" => "1240004133",
+      "oauth_consumer_key" => "vince_clortho",
+      "oauth_token" => "token_value",
+      "oauth_version" => "1.0"
+    }
+    assert_equal("items%5B%5D%5Ba%5D=1&items%5B%5D%5Bb%5D=2&oauth_consumer_key=vince_clortho&oauth_nonce=nonce&oauth_signature_method=HMAC-SHA1&oauth_timestamp=1240004133&oauth_token=token_value&oauth_version=1.0&weight%5Bvalue%5D=65", OAuth::Helper.normalize(params))
+  end
+
   def test_normalize_nested_query
     assert_equal([], OAuth::Helper.normalize_nested_query({}))
     assert_equal(["foo=bar"], OAuth::Helper.normalize_nested_query({:foo => "bar"}))

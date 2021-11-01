@@ -47,8 +47,12 @@ module OAuth
           # make sure the array has an element so we don't lose the key
           values << nil if values.empty?
           # multiple values were provided for a single key
-          values.sort.collect do |v|
-            [escape(k),escape(v)] * "="
+          if values[0].is_a?(Hash)
+            normalize_nested_query(values, k)
+          else
+            values.sort.collect do |v|
+              [escape(k),escape(v)] * "="
+            end
           end
         elsif values.is_a?(Hash)
           normalize_nested_query(values, k)
@@ -58,7 +62,7 @@ module OAuth
       end * "&"
     end
 
-    #Returns a string representation of the Hash like in URL query string
+    # Returns a string representation of the Hash like in URL query string
     # build_nested_query({:level_1 => {:level_2 => ['value_1','value_2']}}, 'prefix'))
     #   #=> ["prefix%5Blevel_1%5D%5Blevel_2%5D%5B%5D=value_1", "prefix%5Blevel_1%5D%5Blevel_2%5D%5B%5D=value_2"]
     def normalize_nested_query(value, prefix = nil)
