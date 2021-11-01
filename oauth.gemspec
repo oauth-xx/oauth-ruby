@@ -1,6 +1,4 @@
-# -*- encoding: utf-8 -*-
-
-lib = File.expand_path("../lib/", __FILE__)
+lib = File.expand_path("lib", __dir__)
 $:.unshift lib unless $:.include?(lib)
 
 require "oauth/version"
@@ -10,7 +8,8 @@ Gem::Specification.new do |spec|
   spec.version = OAuth::VERSION
   spec.license = "MIT"
 
-  spec.authors     = ["Pelle Braendgaard", "Blaine Cook", "Larry Halff", "Jesse Clark", "Jon Crosby", "Seth Fitzsimmons", "Matt Sanford", "Aaron Quint", "Peter Boling"]
+  spec.authors     = ["Pelle Braendgaard", "Blaine Cook", "Larry Halff", "Jesse Clark", "Jon Crosby",
+                      "Seth Fitzsimmons", "Matt Sanford", "Aaron Quint", "Peter Boling"]
   spec.email       = "oauth-ruby@googlegroups.com"
   spec.summary     = "OAuth Core Ruby implementation"
 
@@ -23,8 +22,8 @@ Gem::Specification.new do |spec|
     "homepage_uri" => spec.homepage,
     "source_code_uri" => spec.homepage
   }
-  spec.files       = Dir.glob("lib/**/*.rb") + ["LICENSE", "README.md", "CHANGELOG.md", "CODE_OF_CONDUCT.md"]
-  spec.extra_rdoc_files = [ "TODO" ]
+  spec.files = Dir.glob("lib/**/*.rb") + ["LICENSE", "README.md", "CHANGELOG.md", "CODE_OF_CONDUCT.md"]
+  spec.extra_rdoc_files = ["TODO"]
 
   # This gem will work with Ruby 2.0 or greater...
   spec.required_ruby_version = ">= 2.0"

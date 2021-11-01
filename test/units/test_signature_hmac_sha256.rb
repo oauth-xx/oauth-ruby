@@ -1,4 +1,4 @@
-require File.expand_path("../../test_helper", __FILE__)
+require File.expand_path("../test_helper", __dir__)
 
 require "oauth/signature/hmac/sha256"
 
@@ -17,7 +17,7 @@ class SignatureHMACSHA256Test < Minitest::Test
         "oauth_signature" => "tkpCGNHi3laWBHQ9+Ka5IOeixEuhxg12LTMlLJxQxKc="
       }
     )
-    assert OAuth::Signature::HMAC::SHA256.new(request, :consumer_secret => "kd94hf93k423kf44").verify
+    assert OAuth::Signature::HMAC::SHA256.new(request, consumer_secret: "kd94hf93k423kf44").verify
   end
 
   def test_that_verify_returns_false_when_the_request_signature_is_wrong
@@ -36,6 +36,6 @@ class SignatureHMACSHA256Test < Minitest::Test
         "oauth_signature" => "tkpCGNHi3laWBHQ9+Ka5IOeixEuhxg12LTMlLJxQxKZ="
       }
     )
-    assert !OAuth::Signature::HMAC::SHA256.new(request, :consumer_secret => "kd94hf93k423kf44").verify
+    refute OAuth::Signature::HMAC::SHA256.new(request, consumer_secret: "kd94hf93k423kf44").verify
   end
 end

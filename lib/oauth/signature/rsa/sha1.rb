@@ -4,8 +4,9 @@ module OAuth::Signature::RSA
   class SHA1 < OAuth::Signature::Base
     implements "rsa-sha1"
 
-    def ==(cmp_signature)
-      public_key.verify(OpenSSL::Digest::SHA1.new, Base64.decode64(cmp_signature.is_a?(Array) ? cmp_signature.first : cmp_signature), signature_base_string)
+    def ==(other)
+      public_key.verify(OpenSSL::Digest.new("SHA1"),
+                        Base64.decode64(other.is_a?(Array) ? other.first : other), signature_base_string)
     end
 
     def public_key
@@ -19,7 +20,7 @@ module OAuth::Signature::RSA
     end
 
     def body_hash
-      Base64.encode64(OpenSSL::Digest::SHA1.digest(request.body || "")).chomp.gsub(/\n/,"")
+      Base64.encode64(OpenSSL::Digest.digest("SHA1", request.body || "")).chomp.delete("\n")
     end
 
     private
@@ -27,9 +28,9 @@ module OAuth::Signature::RSA
     def decode_public_key
       case consumer_secret
       when /-----BEGIN CERTIFICATE-----/
-        OpenSSL::X509::Certificate.new( consumer_secret).public_key
+        OpenSSL::X509::Certificate.new(consumer_secret).public_key
       else
-        OpenSSL::PKey::RSA.new( consumer_secret)
+        OpenSSL::PKey::RSA.new(consumer_secret)
       end
     end
 
@@ -44,7 +45,7 @@ module OAuth::Signature::RSA
         end
       )
 
-      private_key.sign(OpenSSL::Digest::SHA1.new, signature_base_string)
+      private_key.sign(OpenSSL::Digest.new("SHA1"), signature_base_string)
     end
   end
 end

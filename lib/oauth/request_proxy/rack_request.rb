@@ -27,7 +27,7 @@ module OAuth::RequestProxy
       parameters["oauth_signature"]
     end
 
-  protected
+    protected
 
     def query_params
       request.GET

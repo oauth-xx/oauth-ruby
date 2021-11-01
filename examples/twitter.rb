@@ -33,7 +33,7 @@ end
 consumer = OAuth::Consumer.new \
   options[:consumer_key],
   options[:consumer_secret],
-  :site => "https://api.twitter.com"
+  site: "https://api.twitter.com"
 
 access_token = OAuth::AccessToken.new(consumer)
 

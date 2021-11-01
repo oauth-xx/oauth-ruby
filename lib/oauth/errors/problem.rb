@@ -1,6 +1,7 @@
 module OAuth
   class Problem < OAuth::Unauthorized
     attr_reader :problem, :params
+
     def initialize(problem, request = nil, params = {})
       super(request)
       @problem = problem

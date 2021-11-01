@@ -8,9 +8,9 @@ module OAuth
     attr_accessor :base_url
 
     @@server_paths = {
-      :request_token_path => "/oauth/request_token",
-      :authorize_path     => "/oauth/authorize",
-      :access_token_path  => "/oauth/access_token"
+      request_token_path: "/oauth/request_token",
+      authorize_path: "/oauth/authorize",
+      access_token_path: "/oauth/access_token"
     }
 
     # Create a new server instance
@@ -23,7 +23,7 @@ module OAuth
       [generate_key(16), generate_key]
     end
 
-    def generate_consumer_credentials(params = {})
+    def generate_consumer_credentials(_params = {})
       Consumer.new(*generate_credentials)
     end
 
@@ -31,12 +31,12 @@ module OAuth
     def create_consumer
       creds = generate_credentials
       Consumer.new(creds[0], creds[1],
-        {
-          :site               => base_url,
-          :request_token_path => request_token_path,
-          :authorize_path     => authorize_path,
-          :access_token_path  => access_token_path
-        })
+                   {
+                     site: base_url,
+                     request_token_path: request_token_path,
+                     authorize_path: authorize_path,
+                     access_token_path: access_token_path
+                   })
     end
 
     def request_token_path
