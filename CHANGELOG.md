@@ -7,26 +7,26 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 ### Added
 
-* Setup Rubocop (#205, #208)
+* Setup Rubocop (#205, #208 by @pboling)
 
 ### Changed
 
-* Switch from TravisCI to Github Actions (#202, #207, #176)
-* Upgrade webmock to v3.14.0 (#196)
-* Upgrade em-http-request to v1.1.7 (#173)
-* Upgrade mocha to v1.13.0 (#193)
+* Switch from TravisCI to Github Actions (#202, #207, #176 by @pboling)
+* Upgrade webmock to v3.14.0 (#196 by @pboling)
+* Upgrade em-http-request to v1.1.7 (#173 by @pboling)
+* Upgrade mocha to v1.13.0 (#193 by @pboling)
 
 ### Fixed
 
-* Fixed Infinite Redirect in v0.5.5, v0.5.6 (#186, #210)
-* Fixed NoMethodError on missing leading slash in path (#194, #211)
-* Fixed NoMethodError on nil request object (#165, #212)
-* Fixed Unsafe String Comparison (#156, #209)
-* Fixed typos in Gemspec (#204, #203, #208)
+* Fixed Infinite Redirect in v0.5.5, v0.5.6 (#186, #210 by @pboling)
+* Fixed NoMethodError on missing leading slash in path (#194, #211 by @pboling)
+* Fixed NoMethodError on nil request object (#165, #212 by @pboling)
+* Fixed Unsafe String Comparison (#156, #209 by @pboling and @drosseau)
+* Fixed typos in Gemspec (#204, #203, #208 by @pboling)
 
 ### Removed
 
-* Remove direct development dependency on nokogiri (#299)
+* Remove direct development dependency on nokogiri (#299 by @pboling)
 
 ## [0.5.6] 2021-04-02
 ### Added
