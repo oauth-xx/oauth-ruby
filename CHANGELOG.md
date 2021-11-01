@@ -15,6 +15,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Upgrade webmock to v3.14.0 (#196 by @pboling)
 * Upgrade em-http-request to v1.1.7 (#173 by @pboling)
 * Upgrade mocha to v1.13.0 (#193 by @pboling)
+* HISTORY renamed to CHANGELOG.md, and follows Keep a Changelog (#214, #215 by @pboling)
+* CHANGELOG, LICENSE, and README now ship with packaged gem (#214, #215 by @pboling)
 
 ### Fixed
 
