@@ -25,8 +25,8 @@ Gem::Specification.new do |spec|
   spec.files = Dir.glob("lib/**/*.rb") + ["LICENSE", "README.md", "CHANGELOG.md", "CODE_OF_CONDUCT.md"]
   spec.extra_rdoc_files = ["TODO"]
 
-  # This gem will work with Ruby 2.0 or greater...
-  spec.required_ruby_version = ">= 2.0"
+  # This gem will work with Ruby 2.3 or greater...
+  spec.required_ruby_version = ">= 2.3"
 
   ruby_version = Gem::Version.new(RUBY_VERSION)
   minimum_version = ->(version) { ruby_version >= Gem::Version.new(version) && RUBY_ENGINE == "ruby" }
