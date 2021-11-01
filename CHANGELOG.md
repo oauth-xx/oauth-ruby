@@ -8,7 +8,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 * Setup Rubocop (#205, #208 by @pboling)
-* Added CODE_OF_CONDUCT (#217 by @pboling)
+* Added CODE_OF_CONDUCT.md (#217, #218 by @pboling)
+* Added FUNDING.yml (#217, #218 by @pboling)
 
 ### Changed
 
@@ -18,6 +19,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Upgrade mocha to v1.13.0 (#193 by @pboling)
 * HISTORY renamed to CHANGELOG.md, and follows Keep a Changelog (#214, #215 by @pboling)
 * CHANGELOG, LICENSE, and README now ship with packaged gem (#214, #215 by @pboling)
+* README.rdoc renamed to README.md (#217, #218 by @pboling)
 
 ### Fixed
 
@@ -26,7 +28,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Fixed NoMethodError on nil request object (#165, #212 by @pboling)
 * Fixed Unsafe String Comparison (#156, #209 by @pboling and @drosseau)
 * Fixed typos in Gemspec (#204, #203, #208 by @pboling)
-* Copyright Notice in LICENSE - added correct years (#217 by @pboling)
+* Copyright Notice in LICENSE - added correct years (#217, #218 by @pboling)
 
 ### Removed
 
