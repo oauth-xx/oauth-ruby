@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.version = OAuth::VERSION
   spec.license = "MIT"
 
-  spec.authors     = ["Pelle Braendgaard", "Blaine Cook", "Larry Halff", "Jesse Clark", "Jon Crosby", "Seth Fitzsimmons", "Matt Sanford", "Aaron Quint"]
+  spec.authors     = ["Pelle Braendgaard", "Blaine Cook", "Larry Halff", "Jesse Clark", "Jon Crosby", "Seth Fitzsimmons", "Matt Sanford", "Aaron Quint", "Peter Boling"]
   spec.email       = "oauth-ruby@googlegroups.com"
   spec.summary     = "OAuth Core Ruby implementation"
 
@@ -23,11 +23,10 @@ Gem::Specification.new do |spec|
     "homepage_uri" => spec.homepage,
     "source_code_uri" => spec.homepage
   }
-  spec.files       = Dir.glob("lib/**/*.rb") + ["LICENSE", "README.rdoc", "CHANGELOG.md"]
-  #spec.test_files  = Dir.glob("test/**/*.rb") + Dir.glob('test/keys/*')
-  spec.extra_rdoc_files = [ "LICENSE", "README.rdoc", "TODO" ]
+  spec.files       = Dir.glob("lib/**/*.rb") + ["LICENSE", "README.md", "CHANGELOG.md", "CODE_OF_CONDUCT.md"]
+  spec.extra_rdoc_files = [ "TODO" ]
 
-  # This gem will work with 2.0 or greater...
+  # This gem will work with Ruby 2.0 or greater...
   spec.required_ruby_version = ">= 2.0"
 
   ruby_version = Gem::Version.new(RUBY_VERSION)
