@@ -41,7 +41,15 @@ Or install it yourself as:
 
 Targeted ruby compatibility is non-EOL versions of Ruby, currently 2.6, 2.7, and
 3.0. Ruby is limited to 2.0+ in the gemspec, and this may change while the gem is
-still at version 0.x.
+still at version 0.x.  The `master` branch currently targets 0.6.x releases.
+
+| Ruby OAuth Version   | Officially Supported Rubies                 | Unofficially Supported Rubies |
+|--------------------- | ------------------------------------------- | ----------------------------- |
+| 0.7.x (hypothetical) | 2.7, 3.0, 3.1                               | 2.6                           |
+| 0.6.x                | 2.6, 2.7, 3.0                               | 2.3, 2.4, 2.5                 |
+| 0.5.x                | 2.0, 2.1, 2.2, 2.3, 2.4, 2.5, 2.6, 2.7, 3.0 |                               |
+
+NOTE: 0.5.7 is anticipated as last release of the 0.5.x series.
 
 ## Basics
 
