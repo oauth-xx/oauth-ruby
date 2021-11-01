@@ -1,7 +1,10 @@
-class OAuth::CLI
-  class HelpCommand < BaseCommand
-    def run
-      puts <<-EOT
+# frozen_string_literal: true
+
+module OAuth
+  class CLI
+    class HelpCommand < BaseCommand
+      def run
+        puts <<-EOT
   Usage: oauth COMMAND [ARGS]
 
   Available oauth commands are:
@@ -16,7 +19,8 @@ class OAuth::CLI
   Tip: All commands can be run without args for specific help.
 
 
-      EOT
+        EOT
+      end
     end
   end
 end

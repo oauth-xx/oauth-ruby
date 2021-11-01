@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "optparse"
 require "oauth/cli/base_command"
 require "oauth/cli/help_command"
@@ -19,7 +21,7 @@ module OAuth
       "q" => "query",
       "a" => "authorize",
       "s" => "sign"
-    }
+    }.freeze
 
     def initialize(stdout, stdin, stderr, command, arguments)
       klass = get_command_class(parse_command(command))

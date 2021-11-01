@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module OAuth
   module RequestProxy
     def self.available_proxies # :nodoc:

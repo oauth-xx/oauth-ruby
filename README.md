@@ -99,7 +99,7 @@ oauth_params = { consumer: oauth_consumer, token: access_token }
 hydra = Typhoeus::Hydra.new
 req = Typhoeus::Request.new(uri, options) # :method needs to be specified in options
 oauth_helper = OAuth::Client::Helper.new(req, oauth_params.merge(request_uri: uri))
-req.options[:headers].merge!({ "Authorization" => oauth_helper.header }) # Signs the request
+req.options[:headers]["Authorization"] = oauth_helper.header # Signs the request
 hydra.queue(req)
 hydra.run
 @response = req.response

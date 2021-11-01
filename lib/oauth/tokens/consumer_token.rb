@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module OAuth
   # Superclass for tokens used by OAuth Clients
   class ConsumerToken < Token

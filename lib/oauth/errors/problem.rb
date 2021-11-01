@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module OAuth
   class Problem < OAuth::Unauthorized
     attr_reader :problem, :params

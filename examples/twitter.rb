@@ -1,4 +1,6 @@
 #!/usr/bin/env ruby -r rubygems
+# frozen_string_literal: true
+
 #
 #  ./twitter.rb --consumer-key <key> --consumer-secret <secret> <tweet_id>
 
@@ -10,7 +12,7 @@ require "pp"
 options = {}
 
 option_parser = OptionParser.new do |opts|
-  opts.banner = "Usage: #{$0} [options] <query>"
+  opts.banner = "Usage: #{$PROGRAM_NAME} [options] <query>"
 
   opts.on("--consumer-key KEY", "Specifies the consumer key to use.") do |v|
     options[:consumer_key] = v
@@ -23,7 +25,7 @@ end
 
 option_parser.parse!
 query = ARGV.pop
-query = STDIN.read if query == "-"
+query = $stdin.read if query == "-"
 
 if options[:consumer_key].nil? || options[:consumer_secret].nil? || query.nil?
   puts option_parser.help

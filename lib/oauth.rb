@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 root = File.dirname(__FILE__)
 $LOAD_PATH << root unless $LOAD_PATH.include?(root)
 

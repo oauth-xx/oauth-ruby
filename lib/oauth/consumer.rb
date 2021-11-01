@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "net/http"
 require "net/https"
 require "oauth/oauth"
@@ -18,7 +20,7 @@ module OAuth
 
     unless defined?(CA_FILE)
       CA_FILES = %w[/etc/ssl/certs/ca-certificates.crt /etc/pki/tls/certs/ca-bundle.crt
-                    /usr/share/curl/curl-ca-bundle.crt]
+                    /usr/share/curl/curl-ca-bundle.crt].freeze
       CA_FILES.each do |ca_file|
         if File.exist?(ca_file)
           CA_FILE = ca_file
@@ -95,9 +97,7 @@ module OAuth
       @secret = consumer_secret
 
       # ensure that keys are symbols
-      @options = @@default_options.merge(options.each_with_object({}) do |(key, value), opts|
-        opts[key.to_sym] = value
-      end)
+      @options = @@default_options.merge(options.transform_keys(&:to_sym))
     end
 
     # The default http method
@@ -190,15 +190,15 @@ module OAuth
 
       # override the request with your own, this is useful for file uploads which Net::HTTP does not do
       req = create_signed_request(http_method, path, token, request_options, *arguments)
-      return nil if block_given? and yield(req) == :done
+      return nil if block_given? && (yield(req) == :done)
 
       rsp = http.request(req)
       # check for an error reported by the Problem Reporting extension
       # (https://wiki.oauth.net/ProblemReporting)
       # note: a 200 may actually be an error; check for an oauth_problem key to be sure
       if !(headers = rsp.to_hash["www-authenticate"]).nil? &&
-         (h = headers.select { |hdr| hdr =~ /^OAuth / }).any? &&
-         h.first =~ /oauth_problem/
+         (h = headers.grep(/^OAuth /)).any? &&
+         h.first.include?("oauth_problem")
 
         # puts "Header: #{h.first}"
 
@@ -308,7 +308,7 @@ module OAuth
     end
 
     def request_token_url?
-      @options.has_key?(:request_token_url)
+      @options.key?(:request_token_url)
     end
 
     def authenticate_url
@@ -316,7 +316,7 @@ module OAuth
     end
 
     def authenticate_url?
-      @options.has_key?(:authenticate_url)
+      @options.key?(:authenticate_url)
     end
 
     def authorize_url
@@ -324,7 +324,7 @@ module OAuth
     end
 
     def authorize_url?
-      @options.has_key?(:authorize_url)
+      @options.key?(:authorize_url)
     end
 
     def access_token_url
@@ -332,7 +332,7 @@ module OAuth
     end
 
     def access_token_url?
-      @options.has_key?(:access_token_url)
+      @options.key?(:access_token_url)
     end
 
     def proxy

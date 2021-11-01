@@ -1,4 +1,5 @@
 #!/usr/bin/env ruby
+# frozen_string_literal: true
 
 require "oauth"
 require "oauth/cli"
@@ -11,4 +12,4 @@ end
 ARGV << "help" if ARGV.empty?
 command = ARGV.shift
 
-OAuth::CLI.new(STDOUT, STDIN, STDERR, command, ARGV).run
+OAuth::CLI.new($stdout, $stdin, $stderr, command, ARGV).run

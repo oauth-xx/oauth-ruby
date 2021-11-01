@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module OAuth
   # The RequestToken is used for the initial Request.
   # This is normally created by the Consumer object.

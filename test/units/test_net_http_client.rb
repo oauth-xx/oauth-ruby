@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require File.expand_path("../test_helper", __dir__)
 
 class NetHTTPClientTest < Minitest::Test
@@ -12,7 +14,7 @@ class NetHTTPClientTest < Minitest::Test
   end
 
   def test_that_using_auth_headers_on_get_requests_works
-    request = Net::HTTP::Get.new(@request_uri.path + "?" + request_parameters_to_s)
+    request = Net::HTTP::Get.new("#{@request_uri.path}?#{request_parameters_to_s}")
     request.oauth!(@http, @consumer, @token, { nonce: @nonce, timestamp: @timestamp })
 
     assert_equal "GET", request.method
@@ -27,7 +29,7 @@ class NetHTTPClientTest < Minitest::Test
     c = OAuth::Consumer.new("consumer_key_86cad9", "5888bf0345e5d237", {
                               signature_method: "PLAINTEXT"
                             })
-    request = Net::HTTP::Get.new(@request_uri.path + "?" + request_parameters_to_s)
+    request = Net::HTTP::Get.new("#{@request_uri.path}?#{request_parameters_to_s}")
     request.oauth!(@http, c, @token, { nonce: @nonce, timestamp: @timestamp, signature_method: "PLAINTEXT" })
 
     assert_equal "GET", request.method
@@ -101,7 +103,7 @@ class NetHTTPClientTest < Minitest::Test
   end
 
   def test_that_using_get_params_works
-    request = Net::HTTP::Get.new(@request_uri.path + "?" + request_parameters_to_s)
+    request = Net::HTTP::Get.new("#{@request_uri.path}?#{request_parameters_to_s}")
     request.oauth!(@http, @consumer, @token, { scheme: "query_string", nonce: @nonce, timestamp: @timestamp })
 
     assert_equal "GET", request.method
@@ -114,7 +116,7 @@ class NetHTTPClientTest < Minitest::Test
   end
 
   def test_that_using_get_params_works_with_plaintext
-    request = Net::HTTP::Get.new(@request_uri.path + "?" + request_parameters_to_s)
+    request = Net::HTTP::Get.new("#{@request_uri.path}?#{request_parameters_to_s}")
     request.oauth!(@http, @consumer, @token,
                    { scheme: "query_string", nonce: @nonce, timestamp: @timestamp, signature_method: "PLAINTEXT" })
 
@@ -168,7 +170,7 @@ class NetHTTPClientTest < Minitest::Test
   end
 
   def test_that_using_post_with_uri_params_works
-    request = Net::HTTP::Post.new(@request_uri.path + "?" + request_parameters_to_s)
+    request = Net::HTTP::Post.new("#{@request_uri.path}?#{request_parameters_to_s}")
     request.set_form_data({}) # just to make sure we have a correct mime type and thus no body hash
     request.oauth!(@http, @consumer, @token, { scheme: "query_string", nonce: @nonce, timestamp: @timestamp })
 
@@ -183,7 +185,7 @@ class NetHTTPClientTest < Minitest::Test
   end
 
   def test_that_using_post_with_uri_and_form_params_works
-    request = Net::HTTP::Post.new(@request_uri.path + "?" + request_parameters_to_s)
+    request = Net::HTTP::Post.new("#{@request_uri.path}?#{request_parameters_to_s}")
     request.set_form_data({ "key2" => "value2" })
     request.oauth!(@http, @consumer, @token, { scheme: :query_string, nonce: @nonce, timestamp: @timestamp })
 
@@ -198,7 +200,7 @@ class NetHTTPClientTest < Minitest::Test
   end
 
   def test_that_using_post_with_uri_and_data_works
-    request = Net::HTTP::Post.new(@request_uri.path + "?" + request_parameters_to_s)
+    request = Net::HTTP::Post.new("#{@request_uri.path}?#{request_parameters_to_s}")
     request.body = "data"
     request.content_type = "text/ascii"
     request.oauth!(@http, @consumer, @token, { scheme: :query_string, nonce: @nonce, timestamp: @timestamp })
@@ -222,7 +224,7 @@ class NetHTTPClientTest < Minitest::Test
     timestamp = "1191242096"
     http = Net::HTTP.new(request_uri.host, request_uri.port)
 
-    request = Net::HTTP::Get.new(request_uri.path + "?" + request_uri.query)
+    request = Net::HTTP::Get.new("#{request_uri.path}?#{request_uri.query}")
     signature_base_string = request.signature_base_string(http, consumer, token,
                                                           { nonce: nonce, timestamp: timestamp })
     assert_equal "GET&http%3A%2F%2Fphotos.example.net%2Fphotos&file%3Dvacation.jpg%26oauth_consumer_key%3Ddpf43f3p2l4k3l03%26oauth_nonce%3Dkllo9940pd9333jh%26oauth_signature_method%3DHMAC-SHA1%26oauth_timestamp%3D1191242096%26oauth_token%3Dnnch734d00sl2jdk%26oauth_version%3D1.0%26size%3Doriginal",
@@ -310,7 +312,7 @@ class NetHTTPClientTest < Minitest::Test
 
   def test_that_site_address_is_not_modified_in_place
     options = { site: "http://twitter.com", request_endpoint: "http://api.twitter.com" }
-    request = Net::HTTP::Get.new(@request_uri.path + "?" + request_parameters_to_s)
+    request = Net::HTTP::Get.new("#{@request_uri.path}?#{request_parameters_to_s}")
     request.oauth!(@http, @consumer, @token, options)
     assert_equal "http://twitter.com", options[:site]
     assert_equal "http://api.twitter.com", options[:request_endpoint]
