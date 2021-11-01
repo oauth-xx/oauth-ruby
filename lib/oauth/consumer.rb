@@ -383,6 +383,8 @@ module OAuth
       http_object.read_timeout = http_object.open_timeout = @options[:timeout] || 60
       http_object.open_timeout = @options[:open_timeout] if @options[:open_timeout]
       http_object.ssl_version = @options[:ssl_version] if @options[:ssl_version]
+      http_object.cert = @options[:ssl_client_cert] if @options[:ssl_client_cert]
+      http_object.key  = @options[:ssl_client_key] if @options[:ssl_client_key]
       http_object.set_debug_output(debug_output) if debug_output
 
       http_object
