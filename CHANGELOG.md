@@ -32,6 +32,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Fixed Unsafe String Comparison (#156, #209 by @pboling and @drosseau)
 * Fixed typos in Gemspec (#204, #203, #208 by @pboling)
 * Copyright Notice in LICENSE - added correct years (#217, #218 by @pboling)
+* Fixed request proxy Class constant reference scopes - was missing `::` in many places (#225, #226 by @pboling)
 
 ### Removed
 
