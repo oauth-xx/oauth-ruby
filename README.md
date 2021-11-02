@@ -1,5 +1,9 @@
 # Ruby OAuth
 
+**NOTE**
+
+This README, on branch `v0.5-maintenance`, targets 0.5.x series releases.  For later releases please see the `msater` branch README.
+
 ## Status
 
 | Project                    |  Ruby Oauth                |
