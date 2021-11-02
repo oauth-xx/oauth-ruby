@@ -7,6 +7,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 ### Added
 
+
+### Changed
+
+
+### Fixed
+
+
+### Removed
+
+
+## [0.5.7] 2021-11-02
+### Added
+
 * Setup Rubocop (#205, #208 by @pboling)
 * Added CODE_OF_CONDUCT.md (#217, #218 by @pboling)
 * Added FUNDING.yml (#217, #218 by @pboling)
@@ -452,4 +465,8 @@ but please have a look at the unit tests.
 
 [0.5.4]: https://github.com/oauth-xx/oauth-ruby/releases/tag/v0.5.4
 
+[0.5.5]: https://github.com/oauth-xx/oauth-ruby/releases/tag/v0.5.5
+
 [0.5.6]: https://github.com/oauth-xx/oauth-ruby/releases/tag/v0.5.6
+
+[0.5.7]: https://github.com/oauth-xx/oauth-ruby/releases/tag/v0.5.7
