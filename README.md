@@ -9,12 +9,12 @@ This README, on branch `v0.5-maintenance`, targets 0.5.x series releases.  For l
 | Project                    |  Ruby Oauth                |
 |--------------------------- |--------------------------- |
 | name, license, docs        |  [![RubyGems.org](https://img.shields.io/badge/name-oauth-brightgreen.svg?style=flat)][rubygems] [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)][license-ref] [![RubyDoc.info](https://img.shields.io/badge/documentation-rubydoc-brightgreen.svg?style=flat)][documentation] |
-| version & downloads        |  [![Version](https://img.shields.io/gem/v/oauth.svg)][rubygems] [![Downloads Today](https://img.shields.io/gem/rd/oauth.svg)][rubygems] [![Homepage](https://img.shields.io/badge/source-github-brightgreen.svg?style=flat)][source] |
+| version & downloads        |  [![Version](https://img.shields.io/gem/v/oauth.svg)][rubygems] [![Total Downloads](https://img.shields.io/gem/dt/oauth.svg)][rubygems] [![Downloads Today](https://img.shields.io/gem/rd/oauth.svg)][rubygems] [![Homepage](https://img.shields.io/badge/source-github-brightgreen.svg?style=flat)][source] |
 | dependencies & linting     |  [![Depfu](https://badges.depfu.com/badges/d570491bac0ad3b0b65deb3c82028327/count.svg)][depfu] [![lint status](https://github.com/oauth-xx/oauth-ruby/actions/workflows/style.yml/badge.svg)][actions] |
 | unit tests                 |  [![supported rubies](https://github.com/oauth-xx/oauth-ruby/actions/workflows/supported.yml/badge.svg)][actions] [![unsupported status](https://github.com/oauth-xx/oauth-ruby/actions/workflows/unsupported.yml/badge.svg)][actions] |
-| coverage & maintainability |  [![Test Coverage](https://api.codeclimate.com/v1/badges/3cf23270c21e8791d788/test_coverage)][climate_coverage] [![codecov](https://codecov.io/gh/oauth-xx/oauth-ruby/branch/master/graph/badge.svg?token=4ZNAWNxrf9)][codecov_coverage] [![Maintainability](https://api.codeclimate.com/v1/badges/3cf23270c21e8791d788/maintainability)][climate_maintainability] |
-| resources                  |  [![Discussion](https://img.shields.io/badge/discussions-github-brightgreen.svg?style=flat)][gh_discussions] [![Mailing List](https://img.shields.io/badge/group-mailinglist-violet.svg?style=social&logo=google)][mailinglist] [![Join the chat at https://gitter.im/oauth-xx/oauth-ruby](https://badges.gitter.im/Join%20Chat.svg)][chat] [![Blog](https://img.shields.io/badge/blog-railsbling-brightgreen.svg?style=flat)][blogpage] |
-| Spread ~♡ⓛⓞⓥⓔ♡~         |  [![Open Source Helpers](https://www.codetriage.com/oauth-xx/oauth-ruby/badges/users.svg)][code_triage] [![Liberapay Patrons](https://img.shields.io/liberapay/patrons/pboling.svg?logo=liberapay)][liberapay_donate] [🌏][aboutme] [👼][angelme] [💻][coderme] [🌹][politicme] [![Tweet @ Peter][followme-img]][tweetme] |
+| coverage & maintainability |  [![Test Coverage](https://api.codeclimate.com/v1/badges/3cf23270c21e8791d788/test_coverage)][climate_coverage] [![codecov](https://codecov.io/gh/oauth-xx/oauth-ruby/branch/master/graph/badge.svg?token=4ZNAWNxrf9)][codecov_coverage] [![Maintainability](https://api.codeclimate.com/v1/badges/3cf23270c21e8791d788/maintainability)][climate_maintainability] [![Maintenance Policy](https://img.shields.io/badge/maintenance-policy-brightgreen.svg?style=flat)][maintenancee_policy] |
+| resources                  |  [![Discussion](https://img.shields.io/badge/discussions-github-brightgreen.svg?style=flat)][gh_discussions] [![Mailing List](https://img.shields.io/badge/group-mailinglist.svg?style=social&logo=google)][mailinglist] [![Join the chat at https://gitter.im/oauth-xx/oauth-ruby](https://badges.gitter.im/Join%20Chat.svg)][chat] [![Blog](https://img.shields.io/badge/blog-railsbling-brightgreen.svg?style=flat)][blogpage] |
+| Spread ~♡ⓛⓞⓥⓔ♡~         |  [![Open Source Helpers](https://www.codetriage.com/oauth-xx/oauth-ruby/badges/users.svg)][code_triage] [![Liberapay Patrons](https://img.shields.io/liberapay/patrons/pboling.svg?logo=liberapay)][liberapay_donate] [![Sponsor Me](https://img.shields.io/badge/sponsor-pboling.svg?style=social&logo=github)][gh_sponsors] [🌏][aboutme] [👼][angelme] [💻][coderme] [🌹][politicme] [![Tweet @ Peter][followme-img]][tweetme] |
 
 ## What
 
@@ -162,15 +162,9 @@ Comments are welcome. Contact the [OAuth Ruby mailing list (Google Group)][maili
 
 [copyright-notice-explainer]: https://opensource.stackexchange.com/questions/5778/why-do-licenses-such-as-the-mit-license-specify-a-single-year
 
-[gh_discussions]: https://github.com/oauth-xx/oauth-ruby/discussions
-
-[mailinglist]: http://groups.google.com/group/oauth-ruby
-
 [conduct]: https://github.com/oauth-xx/oauth-ruby/blob/master/CODE_OF_CONDUCT.md
 
-[license]: LICENSE
-
-[license-ref]: https://opensource.org/licenses/MIT
+[license]: https://github.com/oauth-xx/oauth-ruby/blob/master/LICENSE
 
 [semver]: http://semver.org/
 
@@ -180,44 +174,58 @@ Comments are welcome. Contact the [OAuth Ruby mailing list (Google Group)][maili
 
 [peterboling]: http://www.peterboling.com
 
+[issues]: https://github.com/oauth-xx/oauth-ruby/issues
+
+[comment]: <> (The following links are used by tables in Homepage only)
+
+[network]: https://github.com/oauth-xx/oauth-ruby/network
+
+[stargazers]: https://github.com/oauth-xx/oauth-ruby/stargazers
+
+[comment]: <> (The following links are used by tables in README and Homepage)
+
+[rubygems]: https://rubygems.org/gems/oauth
+
+[depfu]: https://depfu.com/github/oauth-xx/oauth-ruby?project_id=22868
+
+[actions]: https://github.com/oauth-xx/oauth-ruby/actions
+
+[climate_coverage]: https://codeclimate.com/github/oauth-xx/oauth-ruby/test_coverage
+
+[gh_discussions]: https://github.com/oauth-xx/oauth-ruby/discussions
+
+[code_triage]: https://www.codetriage.com/oauth-xx/oauth-ruby
+
+[license-ref]: https://opensource.org/licenses/MIT
+
+[codecov_coverage]: https://codecov.io/gh/oauth-xx/oauth-ruby
+
+[mailinglist]: http://groups.google.com/group/oauth-ruby
+
+[liberapay_donate]: https://liberapay.com/pboling/donate
+
 [aboutme]: https://about.me/peter.boling
 
 [angelme]: https://angel.co/peter-boling
 
 [coderme]:http://coderwall.com/pboling
 
+[politicme]: https://nationalprogressiveparty.org
+
 [followme-img]: https://img.shields.io/twitter/follow/galtzo.svg?style=social&label=Follow
 
 [tweetme]: http://twitter.com/galtzo
 
-[politicme]: https://nationalprogressiveparty.org
-
-[documentation]: https://rubydoc.info/github/oauth-xx/oauth-ruby/main
+[documentation]: https://rubydoc.info/github/oauth-xx/oauth-ruby
 
 [source]: https://github.com/oauth-xx/oauth-ruby/
 
-[actions]: https://github.com/oauth-xx/oauth-ruby/actions
-
-[issues]: https://github.com/oauth-xx/oauth-ruby/issues
-
 [climate_maintainability]: https://codeclimate.com/github/oauth-xx/oauth-ruby/maintainability
-
-[climate_coverage]: https://codeclimate.com/github/oauth-xx/oauth-ruby/test_coverage
-
-[codecov_coverage]: https://codecov.io/gh/oauth-xx/oauth-ruby
-
-[code_triage]: https://www.codetriage.com/oauth-xx/oauth-ruby
-
-[depfu]: https://depfu.com/github/oauth-xx/oauth-ruby?project_id=22868
-
-[blogpage]: http://www.railsbling.com/tags/oauth/
-
-[rubygems]: https://rubygems.org/gems/oauth
 
 [chat]: https://gitter.im/oauth-xx/oauth-ruby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge
 
-[maintenancee_policy]: https://guides.rubyonrails.org/maintenance_policy.html#security-issues
+[blogpage]: http://www.railsbling.com/tags/oauth/
 
-[liberapay_donate]: https://liberapay.com/pboling/donate
+[maintenancee_policy]: https://guides.rubyonrails.org/maintenance_policy.html#security-issues
 
 [gh_sponsors]: https://github.com/sponsors/pboling
