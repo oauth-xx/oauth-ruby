@@ -17,6 +17,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Removed
 
 
+## [0.5.8] 2021-11-10
+### Added
+
+* Added more documentation files to packaged gem, e.g. SECURITY.md, CODE_OF_CONDUCT.md
+
+### Fixed
+
+* Removed reference to RUBY_VERSION from gemspec, as it depends on rake release, which is problematic on some ruby engines. (by @pboling)
+
 ## [0.5.7] 2021-11-02
 ### Added
 
@@ -470,3 +479,5 @@ but please have a look at the unit tests.
 [0.5.6]: https://github.com/oauth-xx/oauth-ruby/releases/tag/v0.5.6
 
 [0.5.7]: https://github.com/oauth-xx/oauth-ruby/releases/tag/v0.5.7
+
+[0.5.8]: https://github.com/oauth-xx/oauth-ruby/releases/tag/v0.5.8
