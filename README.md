@@ -53,7 +53,7 @@ still at version 0.x.  The `master` branch currently targets 0.6.x releases.
 | 0.6.x                | `master`           | 2.6, 2.7, 3.0                               | 2.3, 2.4, 2.5                 |
 | 0.5.x                | `v0.5-maintenance` | 2.0, 2.1, 2.2, 2.3, 2.4, 2.5, 2.6, 2.7, 3.0 |                               |
 
-NOTE: 0.5.7 is anticipated as last release of the 0.5.x series.
+NOTE: 0.5.8 is anticipated as last release of the 0.5.x series.
 
 ## Basics
 
