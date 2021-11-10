@@ -34,7 +34,3 @@ jobs:
           bundler-cache: true
       - name: Run Rubocop
         run: bundle exec rubocop -DESP
-      - name: Danger
-        uses: danger/danger
-        with:
-          secrets: ${{ secrets.DANGER_GITHUB_API_TOKEN }}
