@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Ideas...
 # 1. Check for hashtags in PR title, and disallow changes to changelog?
 #   e.g. github.pr_title.include? "#trivial"
