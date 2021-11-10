@@ -2,8 +2,6 @@
 
 ## Supported Versions
 
-Which versions of your project are supported with security updates.
-
 | Version | Supported          |
 | ------- | ------------------ |
 | 0.7.x   | :white_check_mark: |
@@ -13,4 +11,6 @@ Which versions of your project are supported with security updates.
 
 ## Reporting a Vulnerability
 
-Peter Boling is the primary maintainer of the oauth gem.  Please find a way to [contact him directly](https://railsbling.com/contact) to report the issue.  Include as much relevant information as possible.
+Peter Boling is the primary maintainer of the this gem.  Please find a way to [contact him directly][contact] to report the issue.  Include as much relevant information as possible.
+
+[contact]: https://railsbling.com/contact
