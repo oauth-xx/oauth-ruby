@@ -56,6 +56,7 @@ Gem::Specification.new do |spec|
     spec.add_development_dependency("rubocop-performance", "~> 1.11")
     spec.add_development_dependency("rubocop-rake", "~> 0.6")
     spec.add_development_dependency("rubocop-thread_safety", "~> 0.4")
+    spec.add_development_dependency("danger", "~> 8.4")
   end
   if coverage
     spec.add_development_dependency("simplecov", "~> 0.21")
