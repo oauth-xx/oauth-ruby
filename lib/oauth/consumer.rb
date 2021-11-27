@@ -64,6 +64,11 @@ module OAuth
       # some_value - uses some_value
       debug_output: nil,
 
+      # Defaults to producing a body_hash as part of the signature but
+      # can be disabled since it's not officially part of the OAuth 1.0
+      # spec. Possible values are true and false
+      body_hash_enabled: true,
+
       oauth_version: "1.0"
     }
 
@@ -78,7 +83,8 @@ module OAuth
     #     :http_method        => :post,
     #     :request_token_path => "/oauth/example/request_token.php",
     #     :access_token_path  => "/oauth/example/access_token.php",
-    #     :authorize_path     => "/oauth/example/authorize.php"
+    #     :authorize_path     => "/oauth/example/authorize.php",
+    #     :body_hash_enabled  => false
     #    })
     #
     # Start the process by requesting a token

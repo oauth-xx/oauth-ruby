@@ -18,7 +18,7 @@ module Net
     # * consumer - OAuth::Consumer instance
     # * token - OAuth::Token instance
     # * options - Request-specific options (e.g. +request_uri+, +consumer+, +token+, +scheme+,
-    #   +signature_method+, +nonce+, +timestamp+)
+    #   +signature_method+, +nonce+, +timestamp+, +body_hash+)
     #
     # This method also modifies the <tt>User-Agent</tt> header to add the OAuth gem version.
     #
@@ -29,7 +29,7 @@ module Net
       helper_options = oauth_helper_options(http, consumer, token, options)
       @oauth_helper = OAuth::Client::Helper.new(self, helper_options)
       @oauth_helper.amend_user_agent_header(self)
-      @oauth_helper.hash_body if oauth_body_hash_required?
+      @oauth_helper.hash_body if oauth_body_hash_required?(helper_options)
       send("set_oauth_#{helper_options[:scheme]}")
     end
 
@@ -51,7 +51,7 @@ module Net
     def signature_base_string(http, consumer = nil, token = nil, options = {})
       helper_options = oauth_helper_options(http, consumer, token, options)
       @oauth_helper = OAuth::Client::Helper.new(self, helper_options)
-      @oauth_helper.hash_body if oauth_body_hash_required?
+      @oauth_helper.hash_body if oauth_body_hash_required?(helper_options)
       @oauth_helper.signature_base_string
     end
 
@@ -64,7 +64,8 @@ module Net
         scheme: "header",
         signature_method: nil,
         nonce: nil,
-        timestamp: nil }.merge(options)
+        timestamp: nil,
+        body_hash_enabled: true }.merge(options)
     end
 
     def oauth_full_request_uri(http, options)
@@ -87,8 +88,8 @@ module Net
       uri.to_s
     end
 
-    def oauth_body_hash_required?
-      !@oauth_helper.token_request? && request_body_permitted? && !content_type.to_s.downcase.start_with?("application/x-www-form-urlencoded")
+    def oauth_body_hash_required?(options)
+      !@oauth_helper.token_request? && request_body_permitted? && !content_type.to_s.downcase.start_with?("application/x-www-form-urlencoded") && options[:body_hash_enabled]
     end
 
     def set_oauth_header
