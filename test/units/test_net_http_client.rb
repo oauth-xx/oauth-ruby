@@ -310,6 +310,16 @@ class NetHTTPClientTest < Minitest::Test
                  signature_base_string
   end
 
+  def test_that_post_bodies_not_signed_if_body_hash_disabled
+    request = Net::HTTP::Post.new(@request_uri.path)
+    request.body = "<?xml version=\"1.0\"?><foo><bar>baz</bar></foo>"
+    request["Content-Type"] = "application/xml"
+    signature_base_string = request.signature_base_string(@http, @consumer, nil,
+                                                          { nonce: @nonce, timestamp: @timestamp, body_hash_enabled: false })
+    assert_equal "POST&http%3A%2F%2Fexample.com%2Ftest&oauth_consumer_key%3Dconsumer_key_86cad9%26oauth_nonce%3D225579211881198842005988698334675835446%26oauth_signature_method%3DHMAC-SHA1%26oauth_timestamp%3D1199645624%26oauth_version%3D1.0",
+                 signature_base_string
+  end
+
   def test_that_site_address_is_not_modified_in_place
     options = { site: "http://twitter.com", request_endpoint: "http://api.twitter.com" }
     request = Net::HTTP::Get.new("#{@request_uri.path}?#{request_parameters_to_s}")
