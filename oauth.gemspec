@@ -21,7 +21,8 @@ Gem::Specification.new do |spec|
     "changelog_uri" => "#{spec.homepage}/blob/master/CHANGELOG.md",
     "documentation_uri" => "https://rubydoc.info/github/oauth-xx/oauth-ruby/master",
     "homepage_uri" => spec.homepage,
-    "source_code_uri" => spec.homepage
+    "source_code_uri" => spec.homepage,
+    "rubygems_mfa_required" => "true"
   }
   spec.files       = Dir.glob("lib/**/*.rb") + ["LICENSE", "README.md", "CHANGELOG.md", "CODE_OF_CONDUCT.md", "SECURITY.md", "CONTRIBUTING.md"]
   spec.extra_rdoc_files = [ "TODO" ]
