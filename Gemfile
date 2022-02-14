@@ -9,6 +9,7 @@ coverage = minimum_version.call("2.6")
 debug = minimum_version.call("2.4")
 if linting
   gem "danger", "~> 8.4"
+  gem "overcommit", "~> 0.58"
   gem "rubocop", "~> 1.22"
   gem "rubocop-faker", "~> 1.1"
   gem "rubocop-md", "~> 1.0"
@@ -20,6 +21,6 @@ if linting
 end
 if coverage
   gem "simplecov", "~> 0.21"
-  gem "simplecov-cobertura", "~> 1.4"
+  gem "simplecov-cobertura", "~> 2.1"
 end
 gem "byebug", "~> 11.1" if debug
