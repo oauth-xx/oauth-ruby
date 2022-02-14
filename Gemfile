@@ -22,6 +22,6 @@ if linting
 end
 if coverage
   gem "simplecov", "~> 0.21"
-  gem "simplecov-cobertura", "~> 1.4"
+  gem "simplecov-cobertura", "~> 2.1"
 end
 gem "byebug", "~> 11.1" if debug
