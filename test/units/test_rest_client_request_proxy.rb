@@ -39,6 +39,17 @@ class RestlClientRequestProxyTest < Minitest::Test
     assert_equal "POST", request_proxy.method
   end
 
+  def test_that_proxy_simple_post_request_ignores_non_form_data_payload
+    request = ::RestClient::Request.new(
+      method: :post, url: "http://example.com/test", payload: '{"key": "value"}', headers: { content_type: :json }
+    )
+    request_proxy = OAuth::RequestProxy.proxy(request, { uri: "http://example.com/test" })
+
+    assert_empty request_proxy.parameters_for_signature
+    assert_equal "http://example.com/test", request_proxy.normalized_uri
+    assert_equal "POST", request_proxy.method
+  end
+
   def test_that_proxy_simple_put_request_works_with_arguments
     request = ::RestClient::Request.new(method: :put, url: "http://example.com/test")
     params = { "key" => "value" }

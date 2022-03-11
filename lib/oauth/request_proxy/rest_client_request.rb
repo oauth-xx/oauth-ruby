@@ -38,7 +38,8 @@ module OAuth
 
         def post_parameters
           # Post params are only used if posting form data
-          if method == "POST" || method == "PUT"
+          is_form_data = request.payload && request.payload.headers["Content-Type"] == "application/x-www-form-urlencoded"
+          if is_form_data && (method == "POST" || method == "PUT")
             OAuth::Helper.stringify_keys(query_string_to_hash(request.payload.to_s) || {})
           else
             {}
