@@ -172,9 +172,9 @@ module Integration
       assert_equal "http://term.ie/oauth/example/request_token.php", @consumer.request_token_url
       assert_equal "http://term.ie/oauth/example/access_token.php", @consumer.access_token_url
 
-      refute @consumer.request_token_url?, "Should not use fully qualified request token url"
-      refute @consumer.access_token_url?, "Should not use fully qualified access token url"
-      refute @consumer.authorize_url?, "Should not use fully qualified url"
+      refute_predicate @consumer.request_token_url?, "Should not use fully qualified request token url"
+      refute_predicate @consumer.access_token_url?, "Should not use fully qualified access token url"
+      refute_predicate @consumer.authorize_url?, "Should not use fully qualified url"
 
       @request_token = @consumer.get_request_token
       assert @request_token
@@ -214,9 +214,9 @@ module Integration
       assert_equal "http://term.ie/oauth/example/request_token.php", @consumer.request_token_url
       assert_equal "http://term.ie/oauth/example/access_token.php", @consumer.access_token_url
 
-      assert @consumer.request_token_url?, "Should use fully qualified request token url"
-      assert @consumer.access_token_url?, "Should use fully qualified access token url"
-      assert @consumer.authorize_url?, "Should use fully qualified url"
+      assert_predicate @consumer.request_token_url?, "Should use fully qualified request token url"
+      assert_predicate @consumer.access_token_url?, "Should use fully qualified access token url"
+      assert_predicate @consumer.authorize_url?, "Should use fully qualified url"
 
       @request_token = @consumer.get_request_token
       assert @request_token
