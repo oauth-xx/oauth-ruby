@@ -1,4 +1,4 @@
-name: Official Support
+name: Windows
 
 on:
   push:
@@ -29,7 +29,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        experimental: [false]
+        experimental: [true]
         rubygems:
           - latest
         bundler:
@@ -38,16 +38,13 @@ jobs:
           - "2.7"
           - "3.0"
           - "3.1"
-          - truffleruby
           - jruby
 
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     continue-on-error: ${{ matrix.experimental || endsWith(matrix.ruby, 'head') }}
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-      - name: Install cURL Headers
-        run: sudo apt-get install libcurl4-openssl-dev
       - name: Setup Ruby & Bundle
         uses: ruby/setup-ruby@v1
         with:

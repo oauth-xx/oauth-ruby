@@ -3,26 +3,35 @@ name: What's up Danger?
 on:
   pull_request:
     branches:
-      - master
+      - 'main'
+      - 'master'
+      - '*-stable'
 
 jobs:
   danger:
     runs-on: ubuntu-latest
-    if: github.event_name  == 'pull_request' # if only run pull request when multiple trigger workflow
+    if: false
+    # if: github.event_name  == 'pull_request' # if only run pull request when multiple trigger workflow
     strategy:
       fail-fast: false
       matrix:
+        rubygems:
+          - latest
+        bundler:
+          - latest
         ruby:
-          - 2.6
+          - "2.7"
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: Install cURL Headers
         run: sudo apt-get install libcurl4-openssl-dev
       - name: Setup Ruby & Bundle
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: ${{ matrix.ruby }}
+          rubygems: ${{ matrix.rubygems }}
+          bundler: ${{ matrix.bundler }}
           bundler-cache: true
       - uses: MeilCli/danger-action@v5
         with:
