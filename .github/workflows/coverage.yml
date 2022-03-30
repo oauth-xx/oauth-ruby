@@ -39,7 +39,7 @@ jobs:
         bundler:
           - latest
         ruby:
-          - "2.6"
+          - "2.7"
 
     runs-on: ubuntu-latest
     continue-on-error: ${{ matrix.experimental || endsWith(matrix.ruby, 'head') }}
@@ -49,7 +49,7 @@ jobs:
 
       - uses: amancevice/setup-code-climate@v0
         name: CodeClimate Install
-        if: matrix.ruby == '2.6' && github.event_name != 'pull_request' && always()
+        if: matrix.ruby == '2.7' && github.event_name != 'pull_request' && always()
         with:
           cc_test_reporter_id: ${{ secrets.CC_TEST_REPORTER_ID }}
 
@@ -66,7 +66,7 @@ jobs:
 
       - name: CodeClimate Pre-build Notification
         run: cc-test-reporter before-build
-        if: matrix.ruby == '2.6' && github.event_name != 'pull_request' && always()
+        if: matrix.ruby == '2.7' && github.event_name != 'pull_request' && always()
         continue-on-error: ${{ matrix.experimental != 'false' }}
 
       - name: Run tests
@@ -74,7 +74,7 @@ jobs:
 
       - name: CodeClimate Post-build Notification
         run: cc-test-reporter after-build
-        if: matrix.ruby == '2.6' && github.event_name != 'pull_request' && always()
+        if: matrix.ruby == '2.7' && github.event_name != 'pull_request' && always()
         continue-on-error: ${{ matrix.experimental != 'false' }}
 
       - name: Code Coverage Summary Report
@@ -93,7 +93,7 @@ jobs:
 
       - name: Add Coverage PR Comment
         uses: marocchino/sticky-pull-request-comment@v2
-        if: matrix.ruby == '2.6' && always()
+        if: matrix.ruby == '2.7' && always()
         with:
           recreate: true
           path: code-coverage-results.md
@@ -101,7 +101,7 @@ jobs:
 
       - name: Coveralls
         uses: coverallsapp/github-action@master
-        if: matrix.ruby == '2.6' && github.event_name != 'pull_request' && always()
+        if: matrix.ruby == '2.7' && github.event_name != 'pull_request' && always()
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
         continue-on-error: ${{ matrix.experimental != 'false' }}
@@ -109,7 +109,7 @@ jobs:
 #      Using the codecov gem instead.
 #      - name: CodeCov
 #        uses: codecov/codecov-action@v2
-#        if: matrix.ruby == '2.6' && github.event_name != 'pull_request' && always()
+#        if: matrix.ruby == '2.7' && github.event_name != 'pull_request' && always()
 #        with:
 #          files: ./coverage/coverage.xml
 #          flags: unittests
