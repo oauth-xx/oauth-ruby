@@ -20,24 +20,11 @@ if RUN_COVERAGE
 
     if ALL_FORMATTERS
       command_name "#{ENV["GITHUB_WORKFLOW"]} Job #{ENV["GITHUB_RUN_ID"]}:#{ENV["GITHUB_RUN_NUMBER"]}"
-
-      SimpleCov::Formatter::LcovFormatter.config do |c|
-        c.report_with_single_file = true
-        c.single_report_path = "coverage/lcov.info"
-      end
-
-      SimpleCov.formatters = [
-        SimpleCov::Formatter::HTMLFormatter,
-        SimpleCov::Formatter::CoberturaFormatter,
-        SimpleCov::Formatter::LcovFormatter,
-        SimpleCov::Formatter::JSONFormatter, # For CodeClimate
-        SimpleCov::Formatter::Codecov # For CodeCov
-      ]
     else
       formatter SimpleCov::Formatter::HTMLFormatter
     end
 
-    minimum_coverage(3)
+    minimum_coverage(66)
   end
 else
   puts "Not running coverage on #{RUBY_ENGINE} #{RUBY_VERSION}"
