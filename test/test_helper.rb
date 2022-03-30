@@ -31,7 +31,12 @@ if DEBUG
   end
 end
 
-require "simplecov" if RUN_COVERAGE
+if RUN_COVERAGE
+  require "simplecov"
+  require "codecov"
+  require "simplecov-lcov"
+  require "simplecov-cobertura"
+end
 
 # This gem
 require "oauth"
