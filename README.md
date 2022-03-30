@@ -176,26 +176,58 @@ Available as part of the Tidelift Subscription.
 
 The maintainers of OAuth2 and thousands of other packages are working with Tidelift to deliver commercial support and maintenance for the open source packages you use to build your applications. Save time, reduce risk, and improve code health, while paying the maintainers of the exact packages you use. [Learn more.](https://tidelift.com/subscription/pkg/rubygems-oauth?utm_source=rubygems-oauth&utm_medium=referral&utm_campaign=enterprise)
 
-## Security contact information
+## Security contact information [![Security Policy][🚎sec-pol-img]][🚎sec-pol]
 
 To report a security vulnerability, please use the [Tidelift security contact](https://tidelift.com/security).
 Tidelift will coordinate the fix and disclosure.
 
-For more see [SECURITY.md][🚎sec-pol] [![Security Policy][🚎sec-pol-img]][🚎sec-pol].
+For more see [SECURITY.md][🚎sec-pol].
 
 ## Compatibility
 
-Targeted ruby compatibility is non-EOL versions of Ruby, currently 2.6, 2.7, and
-3.0. Ruby is limited to 2.0+ in the gemspec, and this may change while the gem is
-still at version 0.x.  The `master` branch currently targets 0.6.x releases.
+Targeted ruby compatibility is non-EOL versions of Ruby, currently 2.7, 3.0, and
+3.1. Ruby is limited to 2.0+ in the gemspec, and this will change with minor version bumps,
+while the gem is still in SemVer 0.x.  The `master` branch will soon target 0.6.x releases.
+See `v0.5-maintenance` branch for older rubies.
 
-| Ruby OAuth Version   | Maintenance Branch | Officially Supported Rubies                 | Unofficially Supported Rubies |
-|--------------------- | ------------------ | ------------------------------------------- | ----------------------------- |
-| 0.7.x (hypothetical) | N/A                | 2.7, 3.0, 3.1                               | 2.6                           |
-| 0.6.x                | `master`           | 2.6, 2.7, 3.0                               | 2.3, 2.4, 2.5                 |
-| 0.5.x                | `v0.5-maintenance` | 2.0, 2.1, 2.2, 2.3, 2.4, 2.5, 2.6, 2.7, 3.0 |                               |
+NOTE: If there is another 0.5.x release it is anticipated to be the last of the 0.5.x series.
 
-NOTE: 0.5.8 is anticipated as last release of the 0.5.x series.
+<details>
+  <summary>Ruby Engine Compatibility Policy</summary>
+
+This gem is tested against MRI, JRuby, and Truffleruby.
+Each of those has varying versions that target a specific version of MRI Ruby.
+This gem should work in the just-listed Ruby engines according to the targeted MRI compatibility in the table below.
+If you would like to add support for additional engines,
+first make sure Github Actions supports the engine,
+then submit a PR to the correct maintenance branch as according to the table below.
+</details>
+
+<details>
+  <summary>Ruby Version Compatibility Policy</summary>
+
+If something doesn't work on one of these interpreters, it's a bug.
+
+This library may inadvertently work (or seem to work) on other Ruby
+implementations, however support will only be provided for the versions listed
+above.
+
+If you would like this library to support another Ruby version, you may
+volunteer to be a maintainer. Being a maintainer entails making sure all tests
+run and pass on that implementation. When something breaks on your
+implementation, you will be responsible for providing patches in a timely
+fashion. If critical issues for a particular implementation exist at the time
+of a major release, support for that Ruby version may be dropped.
+</details>
+
+|     | Ruby OAuth Version | Maintenance Branch | Supported Officially | Supported Unofficially  | Supported Incidentally |
+|:----|--------------------|--------------------|----------------------|-------------------------|------------------------|
+| 1️⃣ | 0.6.x (unreleased) | `master`           | 2.7, 3.0, 3.1        | 2.5, 2.6                | 2.2, 2.3, 2.4          |
+| 2️⃣ | 0.5.x              | `v0.5-maintenance` | 2.6, 2.7, 3.0, 3.1   | 2.1, 2.2, 2.3, 2.4, 2.5 | 2.0                    |
+| 3️⃣ | older              | N/A                | Best of luck to you! | Please upgrade!         |                        |
+
+NOTE: Once 1.0 is released, the 0.x series will only receive critical bug and security updates.
+See [SECURITY.md][🚎sec-pol]
 
 ## Basics
 
