@@ -27,7 +27,7 @@ jobs:
         bundler:
           - latest
         ruby:
-          - "2.7"
+          - "2.6"
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
