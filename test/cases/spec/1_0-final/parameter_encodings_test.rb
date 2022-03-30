@@ -74,7 +74,7 @@ class ParameterEncodingTest < OAuthCase
     unicode.scan(/(U\+(?:[[:xdigit:]]{4,5}|10[[:xdigit:]]{4})|.)/mu) do
       c = Regexp.last_match(1)
       str += if /^U\+/.match?(c)
-               [c[2..].hex].pack("U*")
+               [c[2..-1].hex].pack("U*")
              else
                c
              end
