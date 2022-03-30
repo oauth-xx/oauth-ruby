@@ -45,7 +45,7 @@ if RUN_COVERAGE
 
     SimpleCov.formatters = [
       SimpleCov::Formatter::HTMLFormatter,
-      SimpleCov::Formatter::CoberturaFormatter,
+      SimpleCov::Formatter::CoberturaFormatter, # XML for Jenkins
       SimpleCov::Formatter::LcovFormatter,
       SimpleCov::Formatter::JSONFormatter, # For CodeClimate
       SimpleCov::Formatter::Codecov # For CodeCov
