@@ -5,6 +5,7 @@ module OAuth
     attr_reader :request
 
     def initialize(request = nil)
+      super()
       @request = request
     end
 

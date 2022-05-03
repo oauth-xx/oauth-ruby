@@ -19,7 +19,7 @@ Layout/DotPosition:
   Enabled: true
   EnforcedStyle: trailing
 Metrics/BlockLength:
-  ExcludedMethods:
+  IgnoredMethods:
     - context
     - describe
     - it

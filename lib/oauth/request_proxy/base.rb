@@ -127,7 +127,7 @@ module OAuth
       end
 
       # URI, including OAuth parameters
-      def signed_uri(with_oauth = true)
+      def signed_uri(with_oauth: true)
         if signed?
           params = if with_oauth
                      parameters

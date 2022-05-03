@@ -59,7 +59,7 @@ module OAuth
           puts
         else
           puts "OAuth Request URI: #{request.signed_uri}"
-          puts "Request URI: #{request.signed_uri(false)}"
+          puts "Request URI: #{request.signed_uri(with_oauth: false)}"
           puts "Authorization header: #{request.oauth_header(realm: options[:realm])}"
         end
         puts "Signature:         #{request.oauth_signature}"
