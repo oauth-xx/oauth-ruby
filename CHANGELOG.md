@@ -366,7 +366,7 @@ but please have a look at the unit tests.
 * Moved all non-Rails functionality from the Rails plugin:
   http://code.google.com/p/oauth-plugin/
 
-[Unreleased]: https://github.com/oauth-xx/oauth-ruby/compare/v0.5.8...HEAD
+[Unreleased]: https://github.com/oauth-xx/oauth-ruby/compare/v0.5.8...v0.5-maintenance
 [0.5.8]: https://github.com/oauth-xx/oauth-ruby/releases/tag/v0.5.8
 [0.5.7]: https://github.com/oauth-xx/oauth-ruby/releases/tag/v0.5.7
 [0.5.6]: https://github.com/oauth-xx/oauth-ruby/releases/tag/v0.5.6
