@@ -1,5 +1,5 @@
 # frozen_string_literal: true
 
 module OAuth
-  VERSION = "0.5.7-pre1"
+  VERSION = "0.5.9".freeze
 end
