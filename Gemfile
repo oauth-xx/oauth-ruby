@@ -4,11 +4,6 @@ gemspec
 
 gem "actionpack"
 
-# Those lines need to be added
-plugin 'diffend'
-# Monitor is required for production realtime notifications
-gem 'diffend-monitor', require: %w[diffend/monitor]
-
 ruby_version = Gem::Version.new(RUBY_VERSION)
 minimum_version = ->(version) { ruby_version >= Gem::Version.new(version) && RUBY_ENGINE == "ruby" }
 linting = minimum_version.call("2.0")
@@ -21,6 +16,10 @@ if overcommit
 end
 if danger
   gem "danger", "~> 8.4"
+  # Those lines need to be added
+  plugin 'diffend'
+  # Monitor is required for production realtime notifications
+  gem 'diffend-monitor', require: %w[diffend/monitor]
 end
 if linting
   gem "rubocop-md"
