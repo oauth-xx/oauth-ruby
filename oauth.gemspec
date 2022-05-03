@@ -33,7 +33,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency("iconv")
   spec.add_development_dependency("minitest")
   spec.add_development_dependency("mocha")
-  spec.add_development_dependency("rack", "~> 2.0")
+  spec.add_development_dependency("rack", "~> 1.6")
   spec.add_development_dependency("rack-test")
   spec.add_development_dependency("rake", "~> 12.2")
   spec.add_development_dependency("rest-client")
