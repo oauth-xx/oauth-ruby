@@ -7,7 +7,7 @@
     </a>
 </p>
 
-## What
+# Ruby OAuth
 
 OAuth 1.0 is an industry-standard protocol for authorization.
 
@@ -316,7 +316,7 @@ Made with [contributors-img][contrib-rocks].
 This library aims to adhere to [Semantic Versioning 2.0.0][semver]. Violations of this scheme should be reported as
 bugs. Specifically, if a minor or patch version is released that breaks backward compatibility, a new version should be
 immediately released that restores compatibility. Breaking changes to the public API will only be introduced with new
-major versions.
+major versions.  Compatibility with a major and minor versions of Ruby will only be changed with a major version bump.
 
 As a result of this policy, you can (and should) specify a dependency on this gem using
 the [Pessimistic Version Constraint][pvc] with two digits of precision.
@@ -324,7 +324,7 @@ the [Pessimistic Version Constraint][pvc] with two digits of precision.
 For example:
 
 ```ruby
-spec.add_dependency "oauth", "~> 0.5"
+spec.add_dependency "oauth", "~> 0.6.0"
 ```
 
 ## License
