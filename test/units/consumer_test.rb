@@ -357,7 +357,9 @@ class ConsumerTest < Minitest::Test
   def create_stub_http_response(expected_body = nil)
     stub_http_response = stub
     stub_http_response.stubs(:code).returns(200)
-    stub_http_response.stubs(:body).tap { |expectation| expectation.returns(expected_body) unless expected_body.nil? }
+    stub_http_response.stubs(:body).tap do |expectation|
+      expectation.returns(expected_body) unless expected_body.nil?
+    end
     stub_http_response
   end
 end

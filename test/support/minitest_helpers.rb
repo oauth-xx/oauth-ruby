@@ -6,7 +6,7 @@ module OAuth
       # transform into sorted arrays
       auth_intro, auth_params = actual.split(" ", 2)
       assert_equal("OAuth", auth_intro)
-      expected    = expected.split(/(,|\s)/).reject { |v| v == "" || v =~ /^[,\s]+/ }.sort
+      expected = expected.split(/(,|\s)/).reject { |v| v == "" || v =~ /^[,\s]+/ }.sort
       auth_params = auth_params.split(/(,|\s)/).reject { |v| v == "" || v =~ /^[,\s]+/ }.sort
       assert_equal expected, auth_params
     end

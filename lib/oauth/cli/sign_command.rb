@@ -45,7 +45,9 @@ module OAuth
       def puts_verbose_request(request)
         puts "Method: #{request.method}"
         puts "URI: #{request.uri}"
-        puts "Normalized params: #{request.normalized_parameters}" unless options[:xmpp]
+        unless options[:xmpp]
+          puts "Normalized params: #{request.normalized_parameters}"
+        end
         puts "Signature base string: #{request.signature_base_string}"
 
         if xmpp?
