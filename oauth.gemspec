@@ -25,8 +25,7 @@ Gem::Specification.new do |spec|
   spec.files = Dir.glob("lib/**/*.rb") + ["LICENSE", "README.md", "CHANGELOG.md", "CODE_OF_CONDUCT.md", "SECURITY.md", "CONTRIBUTING.md"]
   spec.extra_rdoc_files = ["TODO"]
 
-  # This gem will work with Ruby 2.3 or greater...
-  spec.required_ruby_version = ">= 2.3"
+  spec.required_ruby_version = ">= 2.4"
 
   spec.add_development_dependency("actionpack", ">= 5.0")
   spec.add_development_dependency("curb")

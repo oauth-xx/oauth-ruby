@@ -10,7 +10,7 @@ gem "rake", "~> 13.0"
 
 ruby_version = Gem::Version.new(RUBY_VERSION)
 minimum_version = ->(version, engine = "ruby") { ruby_version >= Gem::Version.new(version) && RUBY_ENGINE == engine }
-linting = minimum_version.call("2.6")
+linting = minimum_version.call("2.4")
 coverage = minimum_version.call("2.7")
 debug = minimum_version.call("2.4")
 
@@ -25,7 +25,7 @@ platforms :mri do
     gem "rubocop-packaging"
     gem "rubocop-performance"
     gem "rubocop-rake"
-    gem "rubocop-ruby2_3", "~> 1.0"
+    gem "rubocop-ruby2_4", "~> 1.0"
     gem "rubocop-thread_safety"
   end
   if coverage
