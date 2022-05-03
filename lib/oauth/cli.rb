@@ -18,8 +18,8 @@ module OAuth
       "v" => "version",
       "q" => "query",
       "a" => "authorize",
-      "s" => "sign",
-    }
+      "s" => "sign"
+    }.freeze
 
     def initialize(stdout, stdin, stderr, command, arguments)
       klass = get_command_class(parse_command(command))

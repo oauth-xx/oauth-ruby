@@ -3,7 +3,6 @@ require File.expand_path("../../test_helper", __FILE__)
 require "oauth/cli"
 
 class TestCLI < Minitest::Test
-
   def test_parse
     assert_equal "version", parse("-v")
     assert_equal "version", parse("--version")
@@ -18,29 +17,29 @@ class TestCLI < Minitest::Test
 
     assert_equal "help", parse("NotACommand")
 
-    assert_equal "help"      , parse("h")
-    assert_equal "version"   , parse("v")
-    assert_equal "query"     , parse("q")
-    assert_equal "authorize" , parse("a")
-    assert_equal "sign"      , parse("s")
+    assert_equal "help", parse("h")
+    assert_equal "version", parse("v")
+    assert_equal "query", parse("q")
+    assert_equal "authorize", parse("a")
+    assert_equal "sign", parse("s")
 
-    assert_equal "help"      , parse("help")
-    assert_equal "version"   , parse("version")
-    assert_equal "query"     , parse("query")
-    assert_equal "authorize" , parse("authorize")
-    assert_equal "sign"      , parse("sign")
+    assert_equal "help", parse("help")
+    assert_equal "version", parse("version")
+    assert_equal "query", parse("query")
+    assert_equal "authorize", parse("authorize")
+    assert_equal "sign", parse("sign")
 
-    assert_equal "help"      , parse("H")
-    assert_equal "version"   , parse("V")
-    assert_equal "query"     , parse("Q")
-    assert_equal "authorize" , parse("A")
-    assert_equal "sign"      , parse("S")
+    assert_equal "help", parse("H")
+    assert_equal "version", parse("V")
+    assert_equal "query", parse("Q")
+    assert_equal "authorize", parse("A")
+    assert_equal "sign", parse("S")
 
-    assert_equal "help"      , parse("HELP")
-    assert_equal "version"   , parse("VERSION")
-    assert_equal "query"     , parse("QUERY")
-    assert_equal "authorize" , parse("AUTHORIZE")
-    assert_equal "sign"      , parse("SIGN")
+    assert_equal "help", parse("HELP")
+    assert_equal "version", parse("VERSION")
+    assert_equal "query", parse("QUERY")
+    assert_equal "authorize", parse("AUTHORIZE")
+    assert_equal "sign", parse("SIGN")
   end
 
   def test_help_empty
@@ -85,7 +84,7 @@ class TestCLI < Minitest::Test
     response     = MiniTest::Mock.new
 
     consumer_new = lambda { |oauth_consumer_key, oauth_consumer_secret, options|
-      expected_options = {:scheme=>:header}
+      expected_options = { scheme: :header }
       assert_equal "oauth_consumer_key", oauth_consumer_key
       assert_equal "oauth_consumer_secret", oauth_consumer_secret
       assert_equal expected_options, options
@@ -101,22 +100,21 @@ class TestCLI < Minitest::Test
     # mock expects:
     #                    method      return    arguments
     #-------------------------------------------------------------
-    response.expect(    :code    , "!code!")
-    response.expect(    :message , "!message!")
-    response.expect(    :body    , "!body!")
-    access_token.expect(:request , response     , [:post, "http://example.com/oauth/url?oauth_consumer_key=oauth_consumer_key&oauth_nonce=GENERATE_KEY&oauth_timestamp=GENERATE_TIMESTAMP&oauth_token=TOKEN&oauth_signature_method=HMAC-SHA1&oauth_version=1.0"])
+    response.expect(:code, "!code!")
+    response.expect(:message, "!message!")
+    response.expect(:body, "!body!")
+    access_token.expect(:request, response, [:post, "http://example.com/oauth/url?oauth_consumer_key=oauth_consumer_key&oauth_nonce=GENERATE_KEY&oauth_timestamp=GENERATE_TIMESTAMP&oauth_token=TOKEN&oauth_signature_method=HMAC-SHA1&oauth_version=1.0"])
 
     OAuth::Helper.stub(:generate_key, "GENERATE_KEY") do
       OAuth::Helper.stub(:generate_timestamp, "GENERATE_TIMESTAMP") do
         OAuth::AccessToken.stub(:new, access_token_new) do
           OAuth::Consumer.stub(:new, consumer_new) do
             out = run_command %w[query
-              --consumer-key oauth_consumer_key
-              --consumer-secret oauth_consumer_secret
-              --token TOKEN
-              --secret SECRET
-              --uri http://example.com/oauth/url
-            ]
+                                 --consumer-key oauth_consumer_key
+                                 --consumer-secret oauth_consumer_secret
+                                 --token TOKEN
+                                 --secret SECRET
+                                 --uri http://example.com/oauth/url]
 
             assert_equal out, <<-EXPECTED
 http://example.com/oauth/url?oauth_consumer_key=oauth_consumer_key&oauth_nonce=GENERATE_KEY&oauth_timestamp=GENERATE_TIMESTAMP&oauth_token=TOKEN&oauth_signature_method=HMAC-SHA1&oauth_version=1.0
@@ -135,7 +133,7 @@ EXPECTED
     request_token = MiniTest::Mock.new
 
     consumer_new = lambda { |oauth_consumer_key, oauth_consumer_secret, options|
-      expected_options = {:access_token_url=>nil, :authorize_url=>nil, :request_token_url=>nil, :scheme=>:header, :http_method=>:get}
+      expected_options = { access_token_url: nil, authorize_url: nil, request_token_url: nil, scheme: :header, http_method: :get }
       assert_equal "oauth_consumer_key", oauth_consumer_key
       assert_equal "oauth_consumer_secret", oauth_consumer_secret
       assert_equal expected_options, options
@@ -145,22 +143,20 @@ EXPECTED
     # mock expects:
     #                      method                return           arguments
     #----------------------------------------------------------------------
-    access_token.expect(  :params              , {})
-    consumer.expect(      :get_request_token   , request_token , [{:oauth_callback=>nil} , {}])
-    request_token.expect( :callback_confirmed? , false)
-    request_token.expect( :authorize_url       , "!url1!")
-    request_token.expect( :get_access_token    , access_token,   [{:oauth_verifier=>nil}])
+    access_token.expect(:params, {})
+    consumer.expect(:get_request_token, request_token, [{ oauth_callback: nil }, {}])
+    request_token.expect(:callback_confirmed?, false)
+    request_token.expect(:authorize_url, "!url1!")
+    request_token.expect(:get_access_token, access_token, [{ oauth_verifier: nil }])
 
     OAuth::Helper.stub(:generate_key, "GENERATE_KEY") do
       OAuth::Helper.stub(:generate_timestamp, "GENERATE_TIMESTAMP") do
         OAuth::Consumer.stub(:new, consumer_new) do
-
           out = run_command %w[authorize
-            --consumer-key oauth_consumer_key
-            --consumer-secret oauth_consumer_secret
-            --method GET
-            --uri http://example.com/oauth/url
-            ]
+                               --consumer-key oauth_consumer_key
+                               --consumer-secret oauth_consumer_secret
+                               --method GET
+                               --uri http://example.com/oauth/url]
 
           assert_equal out, <<-EXPECTED
 Please visit this url to authorize:
@@ -179,7 +175,7 @@ EXPECTED
     request_token = MiniTest::Mock.new
 
     consumer_new = lambda { |oauth_consumer_key, oauth_consumer_secret, options|
-      expected_options = {:access_token_url=>nil, :authorize_url=>nil, :request_token_url=>nil, :scheme=>:header, :http_method=>:get}
+      expected_options = { access_token_url: nil, authorize_url: nil, request_token_url: nil, scheme: :header, http_method: :get }
       assert_equal "oauth_consumer_key", oauth_consumer_key
       assert_equal "oauth_consumer_secret", oauth_consumer_secret
       assert_equal expected_options, options
@@ -189,36 +185,33 @@ EXPECTED
     # mock expects:
     #                      method                return           arguments
     #----------------------------------------------------------------------
-    access_token.expect(  :params              , {})
-    consumer.expect(      :get_request_token   , request_token , [{:oauth_callback=>nil} , {}])
-    request_token.expect( :callback_confirmed? , false)
-    request_token.expect( :authorize_url       , "!url1!")
-    request_token.expect( :get_access_token    , access_token,   [{:oauth_verifier=>nil}])
+    access_token.expect(:params, {})
+    consumer.expect(:get_request_token, request_token, [{ oauth_callback: nil }, {}])
+    request_token.expect(:callback_confirmed?, false)
+    request_token.expect(:authorize_url, "!url1!")
+    request_token.expect(:get_access_token, access_token, [{ oauth_verifier: nil }])
 
     out = []
 
     OAuth::Helper.stub(:generate_key, "GENERATE_KEY") do
       OAuth::Helper.stub(:generate_timestamp, "GENERATE_TIMESTAMP") do
         OAuth::Consumer.stub(:new, consumer_new) do
+          out.push run_command %w[sign
+                                  --consumer-key oauth_consumer_key
+                                  --consumer-secret oauth_consumer_secret
+                                  --method GET
+                                  --token TOKEN
+                                  --secret SECRET
+                                  --uri http://example.com/oauth/url
+                                  -v]
 
           out.push run_command %w[sign
-            --consumer-key oauth_consumer_key
-            --consumer-secret oauth_consumer_secret
-            --method GET
-            --token TOKEN
-            --secret SECRET
-            --uri http://example.com/oauth/url
-            -v
-            ]
-
-          out.push run_command %w[sign
-            --consumer-key oauth_consumer_key
-            --consumer-secret oauth_consumer_secret
-            --method GET
-            --token TOKEN
-            --secret SECRET
-            --uri http://example.com/oauth/url
-            ]
+                                  --consumer-key oauth_consumer_key
+                                  --consumer-secret oauth_consumer_secret
+                                  --method GET
+                                  --token TOKEN
+                                  --secret SECRET
+                                  --uri http://example.com/oauth/url]
         end
       end
     end
@@ -246,15 +239,11 @@ Authorization header: OAuth oauth_consumer_key=\"oauth_consumer_key\", oauth_non
 Signature:         MujZyJYT5ix2s388yF8sExvPIgA=
 Escaped signature: MujZyJYT5ix2s388yF8sExvPIgA%3D
 EXPECTED
-
   end
-
-
-
 
   private
 
-  def run_command(arguments=[])
+  def run_command(arguments = [])
     s = StringIO.new
     command = arguments.shift
     OAuth::CLI.new(s, StringIO.new, StringIO.new, command, arguments).run
@@ -293,12 +282,12 @@ Usage: oauth <command> [ARGS]
         --xmpp                       Generate XMPP stanzas.
     -v, --verbose                    Be verbose.
 
-  options for authorization
-        --access-token-url URL       Specifies the access token URL.
-        --authorize-url URL          Specifies the authorization URL.
-        --callback-url URL           Specifies a callback URL.
-        --request-token-url URL      Specifies the request token URL.
-        --scope SCOPE                Specifies the scope (Google-specific).
+        options for authorization
+              --access-token-url URL       Specifies the access token URL.
+              --authorize-url URL          Specifies the authorization URL.
+              --callback-url URL           Specifies a callback URL.
+              --request-token-url URL      Specifies the request token URL.
+              --scope SCOPE                Specifies the scope (Google-specific).
 EXPECTED
   end
 end

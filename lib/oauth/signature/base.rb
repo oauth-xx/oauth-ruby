@@ -17,7 +17,7 @@ module OAuth::Signature
     end
 
     def initialize(request, options = {}, &block)
-      raise TypeError unless request.kind_of?(OAuth::RequestProxy::Base)
+      raise TypeError unless request.is_a?(OAuth::RequestProxy::Base)
       @request = request
       @options = options
 
@@ -47,7 +47,7 @@ module OAuth::Signature
     end
 
     def signature
-      Base64.encode64(digest).chomp.gsub(/\n/,"")
+      Base64.encode64(digest).chomp.delete("\n")
     end
 
     def ==(cmp_signature)
@@ -57,7 +57,7 @@ module OAuth::Signature
     end
 
     def verify
-      self == self.request.signature
+      self == request.signature
     end
 
     def signature_base_string
@@ -93,6 +93,5 @@ module OAuth::Signature
     def raise_instantiation_error
       raise NotImplementedError, "Cannot instantiate #{self.class.name} class directly."
     end
-
   end
 end

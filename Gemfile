@@ -10,14 +10,10 @@ debug = minimum_version.call("2.4")
 if linting
   gem "danger", "~> 8.4"
   gem "overcommit", "~> 0.58"
-  gem "rubocop", "~> 1.22"
-  gem "rubocop-faker", "~> 1.1"
-  gem "rubocop-md", "~> 1.0"
-  gem "rubocop-minitest", "~> 0.15"
-  gem "rubocop-packaging", "~> 0.5"
-  gem "rubocop-performance", "~> 1.11"
-  gem "rubocop-rake", "~> 0.6"
-  gem "rubocop-thread_safety", "~> 0.4"
+  gem "rubocop-md"
+  gem "rubocop-minitest"
+  gem "rubocop-ruby2_0", "~> 1.0"
+  gem "rubocop-thread_safety"
 end
 if coverage
   gem "simplecov", "~> 0.21"

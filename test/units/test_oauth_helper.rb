@@ -1,7 +1,6 @@
 require File.expand_path("../../test_helper", __FILE__)
 
 class TestOAuthHelper < Minitest::Test
-
   def test_parse_valid_header
     header = "OAuth " \
              'realm="http://example.com/method", ' \
@@ -72,7 +71,7 @@ class TestOAuthHelper < Minitest::Test
   def test_normalize
     params = {
       "oauth_nonce" => "nonce",
-      "weight" => { :value => "65" },
+      "weight" => { value: "65" },
       "oauth_signature_method" => "HMAC-SHA1",
       "oauth_timestamp" => "1240004133",
       "oauth_consumer_key" => "vince_clortho",
@@ -85,8 +84,8 @@ class TestOAuthHelper < Minitest::Test
   def test_normalize_with_nested_array_of_hashes
     params = {
       "oauth_nonce" => "nonce",
-      "weight" => { :value => "65" },
-      "items" => [{"a" => 1}, {"b" => 2}],
+      "weight" => { value: "65" },
+      "items" => [{ "a" => 1 }, { "b" => 2 }],
       "oauth_signature_method" => "HMAC-SHA1",
       "oauth_timestamp" => "1240004133",
       "oauth_consumer_key" => "vince_clortho",
@@ -98,11 +97,10 @@ class TestOAuthHelper < Minitest::Test
 
   def test_normalize_nested_query
     assert_equal([], OAuth::Helper.normalize_nested_query({}))
-    assert_equal(["foo=bar"], OAuth::Helper.normalize_nested_query({:foo => "bar"}))
-    assert_equal(["prefix%5Bfoo%5D=bar"], OAuth::Helper.normalize_nested_query({:foo => "bar"}, "prefix"))
+    assert_equal(["foo=bar"], OAuth::Helper.normalize_nested_query(foo: "bar"))
+    assert_equal(["prefix%5Bfoo%5D=bar"], OAuth::Helper.normalize_nested_query({ foo: "bar" }, "prefix"))
     assert_equal(["prefix%5Buser%5D%5Bage%5D=12",
-     "prefix%5Buser%5D%5Bdate%5D=2011-10-05",
-     "prefix%5Buser%5D%5Btwitter_id%5D=123"], OAuth::Helper.normalize_nested_query({:user => {:twitter_id => 123, :date => "2011-10-05", :age => 12}}, "prefix"))
+                  "prefix%5Buser%5D%5Bdate%5D=2011-10-05",
+                  "prefix%5Buser%5D%5Btwitter_id%5D=123"], OAuth::Helper.normalize_nested_query({ user: { twitter_id: 123, date: "2011-10-05", age: 12 } }, "prefix"))
   end
-
 end

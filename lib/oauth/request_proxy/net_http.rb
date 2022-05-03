@@ -39,8 +39,8 @@ module OAuth
             # request_params.each{|k,v| request_params[k] = [nil] if v == []}
 
             if options[:parameters]
-              options[:parameters].each do |k,v|
-                if request_params.has_key?(k) && v
+              options[:parameters].each do |k, v|
+                if request_params.key?(k) && v
                   request_params[k] << v
                 else
                   request_params[k] = [v]

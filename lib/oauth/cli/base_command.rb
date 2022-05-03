@@ -1,7 +1,9 @@
 class OAuth::CLI
   class BaseCommand
     def initialize(stdout, stdin, stderr, arguments)
-      @stdout, @stdin, @stderr = stdout, stdin, stderr
+      @stdout = stdout
+      @stdin = stdin
+      @stderr = stderr
 
       @options = {}
       option_parser.parse!(arguments)
@@ -38,11 +40,11 @@ class OAuth::CLI
       options[:verbose]
     end
 
-    def puts(string=nil)
+    def puts(string = nil)
       @stdout.puts(string)
     end
 
-    def alert(string=nil)
+    def alert(string = nil)
       @stderr.puts(string)
     end
 
@@ -50,8 +52,8 @@ class OAuth::CLI
       @parameters ||= begin
         escaped_pairs = options[:params].collect do |pair|
           if pair =~ /:/
-            Hash[*pair.split(":", 2)].collect do |k,v|
-              [CGI.escape(k.strip), CGI.escape(v.strip)] * "="
+            Hash[*pair.split(":", 2)].collect do |k, v|
+              [CGI.escape(k.strip), CGI.escape(v.strip)].join("=")
             end
           else
             pair
@@ -68,7 +70,7 @@ class OAuth::CLI
           "oauth_token"            => options[:oauth_token],
           "oauth_signature_method" => options[:oauth_signature_method],
           "oauth_version"          => options[:oauth_version]
-        }.reject { |_k,v| v.nil? || v == "" }.merge(cli_params)
+        }.reject { |_k, v| v.nil? || v == "" }.merge(cli_params)
       end
     end
 

@@ -19,7 +19,7 @@ module OAuth::Signature::RSA
     end
 
     def body_hash
-      Base64.encode64(OpenSSL::Digest::SHA1.digest(request.body || "")).chomp.gsub(/\n/,"")
+      Base64.encode64(OpenSSL::Digest::SHA1.digest(request.body || "")).chomp.delete("\n")
     end
 
     private
@@ -27,9 +27,9 @@ module OAuth::Signature::RSA
     def decode_public_key
       case consumer_secret
       when /-----BEGIN CERTIFICATE-----/
-        OpenSSL::X509::Certificate.new( consumer_secret).public_key
+        OpenSSL::X509::Certificate.new(consumer_secret).public_key
       else
-        OpenSSL::PKey::RSA.new( consumer_secret)
+        OpenSSL::PKey::RSA.new(consumer_secret)
       end
     end
 

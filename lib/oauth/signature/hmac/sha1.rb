@@ -5,7 +5,7 @@ module OAuth::Signature::HMAC
     implements "hmac-sha1"
 
     def body_hash
-      Base64.encode64(OpenSSL::Digest::SHA1.digest(request.body || "")).chomp.gsub(/\n/,"")
+      Base64.encode64(OpenSSL::Digest::SHA1.digest(request.body || "")).chomp.delete("\n")
     end
 
     private

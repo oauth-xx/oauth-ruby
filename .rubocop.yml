@@ -1,22 +1,23 @@
-inherit_from: .rubocop_todo.yml
-
 require:
   - 'rubocop-md'
-  - 'rubocop-minitest'
-  - 'rubocop-packaging'
-  - 'rubocop-performance'
-  - 'rubocop-rake'
+  - 'rubocop/minitest'
+  - 'rubocop-thread_safety'
+
+inherit_gem:
+  rubocop-ruby2_0: rubocop.yml
+
+inherit_from: .rubocop_todo.yml
 
 AllCops:
-  NewCops: enable
   DisplayCopNames: true # Display the name of the failing cops
-  TargetRubyVersion: 2.6 # Oldest non-EOL Ruby
 
 Gemspec/DateAssignment: # new in 1.10
   Enabled: true
 Layout/DotPosition:
   Enabled: true
   EnforcedStyle: trailing
+Layout/IndentHeredoc:
+  Enabled: false
 Layout/LineEndStringConcatenationIndentation: # new in 1.18
   Enabled: true
 Layout/SpaceBeforeBrackets: # new in 1.7

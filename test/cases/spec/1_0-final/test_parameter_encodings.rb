@@ -61,7 +61,7 @@ class ParameterEncodingTest < OAuthCase
     assert_encoding "%E3%80%81", unicode_to_utf8("U+3001")
   end
 
-protected
+  protected
 
   def unicode_to_utf8(unicode)
     return unicode if unicode =~ /\A[[:space:]]*\z/m
@@ -69,12 +69,12 @@ protected
     str = ""
 
     unicode.scan(/(U\+(?:[[:digit:][:xdigit:]]{4,5}|10[[:digit:][:xdigit:]]{4})|.)/mu) do
-      c = $1
-      if c =~ /^U\+/
-        str << [c[2..-1].hex].pack("U*")
-      else
-        str << c
-      end
+      c = Regexp.last_match(1)
+      str << if c =~ /^U\+/
+               [c[2..-1].hex].pack("U*")
+             else
+               c
+             end
     end
 
     str

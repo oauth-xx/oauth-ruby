@@ -1,7 +1,5 @@
-# -*- encoding: utf-8 -*-
-
 lib = File.expand_path("../lib/", __FILE__)
-$:.unshift lib unless $:.include?(lib)
+$LOAD_PATH.unshift lib unless $LOAD_PATH.include?(lib)
 
 require "oauth/version"
 
@@ -24,8 +22,8 @@ Gem::Specification.new do |spec|
     "source_code_uri" => spec.homepage,
     "rubygems_mfa_required" => "true"
   }
-  spec.files       = Dir.glob("lib/**/*.rb") + ["LICENSE", "README.md", "CHANGELOG.md", "CODE_OF_CONDUCT.md", "SECURITY.md", "CONTRIBUTING.md"]
-  spec.extra_rdoc_files = [ "TODO" ]
+  spec.files = Dir.glob("lib/**/*.rb") + ["LICENSE", "README.md", "CHANGELOG.md", "CODE_OF_CONDUCT.md", "SECURITY.md", "CONTRIBUTING.md"]
+  spec.extra_rdoc_files = ["TODO"]
 
   # This gem will work with Ruby 2.0 or greater...
   spec.required_ruby_version = ">= 2.0"

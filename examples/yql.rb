@@ -12,7 +12,7 @@ require "pp"
 options = {}
 
 option_parser = OptionParser.new do |opts|
-  opts.banner = "Usage: #{$0} [options] <query>"
+  opts.banner = "Usage: #{$PROGRAM_NAME} [options] <query>"
 
   opts.on("--consumer-key KEY", "Specifies the consumer key to use.") do |v|
     options[:consumer_key] = v
@@ -35,7 +35,7 @@ end
 consumer = OAuth::Consumer.new \
   options[:consumer_key],
   options[:consumer_secret],
-  :site => "http://query.yahooapis.com"
+  site: "http://query.yahooapis.com"
 
 access_token = OAuth::AccessToken.new(consumer)
 

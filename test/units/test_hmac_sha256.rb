@@ -11,10 +11,10 @@ class TestSignatureHmacSha256 < Minitest::Test
     consumer = OAuth::Consumer.new("dpf43f3p2l4k3l03", "kd94hf93k423kf44")
     token = OAuth::Token.new("nnch734d00sl2jdk", "pfkkdhi9sl3r4s00")
 
-    signature = OAuth::Signature.sign(request, { :consumer => consumer,
-                                                 :token => token,
-                                                 :uri => "http://photos.example.net/photos",
-                                                 :signature_method => "HMAC-SHA256" } )
+    signature = OAuth::Signature.sign(request, consumer: consumer,
+                                               token: token,
+                                               uri: "http://photos.example.net/photos",
+                                               signature_method: "HMAC-SHA256")
 
     assert_equal "WVPzl1j6ZsnkIjWr7e3OZ3jkenL57KwaLFhYsroX1hg=", signature
   end

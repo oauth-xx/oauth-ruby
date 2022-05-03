@@ -24,11 +24,11 @@ module OAuth
 
     # Generate a random key of up to +size+ bytes. The value returned is Base64 encoded with non-word
     # characters removed.
-    def generate_key(size=32)
+    def generate_key(size = 32)
       Base64.encode64(OpenSSL::Random.random_bytes(size)).gsub(/\W/, "")
     end
 
-    alias_method :generate_nonce, :generate_key
+    alias generate_nonce generate_key
 
     def generate_timestamp #:nodoc:
       Time.now.to_i.to_s
@@ -51,13 +51,13 @@ module OAuth
             normalize_nested_query(values, k)
           else
             values.sort.collect do |v|
-              [escape(k),escape(v)] * "="
+              [escape(k), escape(v)].join("=")
             end
           end
         elsif values.is_a?(Hash)
           normalize_nested_query(values, k)
         else
-          [escape(k),escape(values)] * "="
+          [escape(k), escape(values)].join("=")
         end
       end * "&"
     end
@@ -76,7 +76,7 @@ module OAuth
           normalize_nested_query(v, prefix ? "#{prefix}[#{k}]" : k)
         end.flatten.sort
       else
-        [escape(prefix), escape(value)] * "="
+        [escape(prefix), escape(value)].join("=")
       end
     end
 
@@ -90,10 +90,10 @@ module OAuth
     #
     def parse_header(header)
       # decompose
-      params = header[6,header.length].split(/[,=&]/)
+      params = header[6, header.length].split(/[,=&]/)
 
       # odd number of arguments - must be a malformed header.
-      raise OAuth::Problem.new("Invalid authorization header") if params.size % 2 != 0
+      raise OAuth::Problem, "Invalid authorization header" if params.size.odd?
 
       params.map! do |v|
         # strip and unescape

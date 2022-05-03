@@ -23,16 +23,16 @@ module EventMachine
     #
     # See Also: {OAuth core spec version 1.0, section 5.4.1}[http://oauth.net/core/1.0#rfc.section.5.4.1]
     def oauth!(http, consumer = nil, token = nil, options = {})
-      options = { :request_uri      => normalized_oauth_uri(http),
-                  :consumer         => consumer,
-                  :token            => token,
-                  :scheme           => "header",
-                  :signature_method => nil,
-                  :nonce            => nil,
-                  :timestamp        => nil }.merge(options)
+      options = { request_uri: normalized_oauth_uri(http),
+                  consumer: consumer,
+                  token: token,
+                  scheme: "header",
+                  signature_method: nil,
+                  nonce: nil,
+                  timestamp: nil }.merge(options)
 
       @oauth_helper = OAuth::Client::Helper.new(self, options)
-      self.__send__(:"set_oauth_#{options[:scheme]}")
+      __send__(:"set_oauth_#{options[:scheme]}")
     end
 
     # Create a string suitable for signing for an HTTP request. This process involves parameter
@@ -49,13 +49,13 @@ module EventMachine
     #
     # See Also: {OAuth core spec version 1.0, section 9.1.1}[http://oauth.net/core/1.0#rfc.section.9.1.1]
     def signature_base_string(http, consumer = nil, token = nil, options = {})
-      options = { :request_uri      => normalized_oauth_uri(http),
-                  :consumer         => consumer,
-                  :token            => token,
-                  :scheme           => "header",
-                  :signature_method => nil,
-                  :nonce            => nil,
-                  :timestamp        => nil }.merge(options)
+      options = { request_uri: normalized_oauth_uri(http),
+                  consumer: consumer,
+                  token: token,
+                  scheme: "header",
+                  signature_method: nil,
+                  nonce: nil,
+                  timestamp: nil }.merge(options)
 
       OAuth::Client::Helper.new(self, options).signature_base_string
     end
@@ -77,13 +77,13 @@ module EventMachine
     protected
 
     def combine_query(path, query, uri_query)
-      combined_query = if query.kind_of?(Hash)
-        query.map { |k, v| encode_param(k, v) }.join("&")
-      else
-        query.to_s
+      combined_query = if query.is_a?(Hash)
+                         query.map { |k, v| encode_param(k, v) }.join("&")
+                       else
+                         query.to_s
       end
-      if !uri_query.to_s.empty?
-        combined_query = [combined_query, uri_query].reject {|part| part.empty?}.join("&")
+      unless uri_query.to_s.empty?
+        combined_query = [combined_query, uri_query].reject(&:empty?).join("&")
       end
       combined_query.to_s.empty? ? path : "#{path}?#{combined_query}"
     end
@@ -95,17 +95,17 @@ module EventMachine
       uri.host = http.address
       uri.port = http.port
 
-      if http.respond_to?(:use_ssl?) && http.use_ssl?
-        uri.scheme = "https"
-      else
-        uri.scheme = "http"
-      end
+      uri.scheme = if http.respond_to?(:use_ssl?) && http.use_ssl?
+                     "https"
+                   else
+                     "http"
+                   end
       uri.to_s
     end
 
     def set_oauth_header
-      self.req[:head] ||= {}
-      self.req[:head].merge!("Authorization" => @oauth_helper.header)
+      req[:head] ||= {}
+      req[:head].merge!("Authorization" => @oauth_helper.header)
     end
 
     def set_oauth_body
