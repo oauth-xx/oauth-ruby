@@ -11,18 +11,15 @@ danger = minimum_version.call("2.7")
 coverage = minimum_version.call("2.7")
 debug = minimum_version.call("2.4")
 overcommit = minimum_version.call("2.4")
-if overcommit
-  gem "overcommit", "~> 0.58"
-end
+gem "overcommit", "~> 0.58" if overcommit
 if danger
   gem "danger", "~> 8.4"
   # Those lines need to be added
-  plugin 'diffend'
+  plugin "diffend"
   # Monitor is required for production realtime notifications
-  gem 'diffend-monitor', require: %w[diffend/monitor]
+  gem "diffend-monitor", require: %w[diffend/monitor]
 end
 if linting
-  gem "rubocop-md"
   gem "rubocop-minitest"
   gem "rubocop-ruby2_0", "~> 1.0"
   gem "rubocop-thread_safety"
