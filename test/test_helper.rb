@@ -4,7 +4,7 @@ ENV["RACK_ENV"] = "test"
 
 ruby_version = Gem::Version.new(RUBY_VERSION)
 minimum_version = ->(version) { ruby_version >= Gem::Version.new(version) && RUBY_ENGINE == "ruby" }
-coverage = minimum_version.call("2.6")
+coverage = minimum_version.call("2.7")
 debug = minimum_version.call("2.4")
 
 if coverage
