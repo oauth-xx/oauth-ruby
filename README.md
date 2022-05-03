@@ -43,17 +43,21 @@ Or install it yourself as:
 
 ## Compatibility
 
-Targeted ruby compatibility is non-EOL versions of Ruby, currently 2.6, 2.7, and
-3.0. Ruby is limited to 2.0+ in the gemspec, and this may change while the gem is
-still at version 0.x.  The `master` branch currently targets 0.6.x releases.
+Targeted ruby compatibility is non-EOL versions of Ruby, currently 2.7, 3.0, and
+3.1. Ruby is limited to 2.0+ in the gemspec on this `v0.5-maintenance` branch, and
+this will change with minor version bumps, while the gem is still in 0.x,
+in accordance with the SemVer spec.
 
-| Ruby OAuth Version   | Maintenance Branch | Officially Supported Rubies                 | Unofficially Supported Rubies |
-|--------------------- | ------------------ | ------------------------------------------- | ----------------------------- |
-| 0.7.x (hypothetical) | N/A                | 2.7, 3.0, 3.1                               | 2.6                           |
-| 0.6.x                | `master`           | 2.6, 2.7, 3.0                               | 2.3, 2.4, 2.5                 |
-| 0.5.x                | `v0.5-maintenance` | 2.0, 2.1, 2.2, 2.3, 2.4, 2.5, 2.6, 2.7, 3.0 |                               |
+|     | Ruby OAuth Version | Maintenance Branch | Supported Officially | Supported Unofficially       | Supported Incidentally |
+|:----|--------------------|--------------------|----------------------|------------------------------|------------------------|
+| 1️⃣ | 0.6.x (unreleased) | `master`           | 2.7, 3.0, 3.1        | 2.5, 2.6                     | 2.3, 2.4               |
+| 2️⃣ | 0.5.x              | `v0.5-maintenance` | 2.7, 3.0, 3.1        | 2.1, 2.2, 2.3, 2.4, 2.5, 2.6 | 2.0                    |
+| 3️⃣ | older              | N/A                | Best of luck to you! | Please upgrade!              |                        |
 
-NOTE: 0.5.8 is anticipated as last release of the 0.5.x series.
+The `master` branch now targets 0.6.x releases.
+See `v0.5-maintenance` branch for older rubies.
+
+NOTE: If there is another 0.5.x release it is anticipated to be the last of the 0.5.x series.
 
 ## Basics
 
