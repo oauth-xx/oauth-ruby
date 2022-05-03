@@ -433,52 +433,28 @@ but please have a look at the unit tests.
 * Moved all non-Rails functionality from the Rails plugin:
   http://code.google.com/p/oauth-plugin/
 
-[Unreleased]: https://github.com/oauth-xx/oauth-ruby/compare/v0.5.6...HEAD
-
-[0.3.0]: https://github.com/oauth-xx/oauth-ruby/releases/tag/v0.3.0
-
-[0.3.1]: https://github.com/oauth-xx/oauth-ruby/releases/tag/v0.3.1
-
-[0.3.2]: https://github.com/oauth-xx/oauth-ruby/releases/tag/v0.3.2
-
-[0.3.3]: https://github.com/oauth-xx/oauth-ruby/releases/tag/v0.3.3
-
-[0.3.4]: https://github.com/oauth-xx/oauth-ruby/releases/tag/v0.3.4
-
-[0.3.5]: https://github.com/oauth-xx/oauth-ruby/releases/tag/v0.3.5
-
-[0.3.6]: https://github.com/oauth-xx/oauth-ruby/releases/tag/v0.3.6
-
-[0.4.0]: https://github.com/oauth-xx/oauth-ruby/releases/tag/v0.4.0
-
-[0.4.1]: https://github.com/oauth-xx/oauth-ruby/releases/tag/v0.4.1
-
-[0.4.2]: https://github.com/oauth-xx/oauth-ruby/releases/tag/v0.4.2
-
-[0.4.3]: https://github.com/oauth-xx/oauth-ruby/releases/tag/v0.4.3
-
-[0.4.4]: https://github.com/oauth-xx/oauth-ruby/releases/tag/v0.4.4
-
-[0.4.5]: https://github.com/oauth-xx/oauth-ruby/releases/tag/v0.4.5
-
-[0.4.6]: https://github.com/oauth-xx/oauth-ruby/releases/tag/v0.4.6
-
-[0.4.7]: https://github.com/oauth-xx/oauth-ruby/releases/tag/v0.4.7
-
-[0.5.0]: https://github.com/oauth-xx/oauth-ruby/releases/tag/v0.5.0
-
-[0.5.1]: https://github.com/oauth-xx/oauth-ruby/releases/tag/v0.5.1
-
-[0.5.2]: https://github.com/oauth-xx/oauth-ruby/releases/tag/v0.5.2
-
-[0.5.3]: https://github.com/oauth-xx/oauth-ruby/releases/tag/v0.5.3
-
-[0.5.4]: https://github.com/oauth-xx/oauth-ruby/releases/tag/v0.5.4
-
-[0.5.5]: https://github.com/oauth-xx/oauth-ruby/releases/tag/v0.5.5
-
-[0.5.6]: https://github.com/oauth-xx/oauth-ruby/releases/tag/v0.5.6
-
-[0.5.7]: https://github.com/oauth-xx/oauth-ruby/releases/tag/v0.5.7
-
+[Unreleased]: https://github.com/oauth-xx/oauth-ruby/compare/v0.5.8...HEAD
 [0.5.8]: https://github.com/oauth-xx/oauth-ruby/releases/tag/v0.5.8
+[0.5.7]: https://github.com/oauth-xx/oauth-ruby/releases/tag/v0.5.7
+[0.5.6]: https://github.com/oauth-xx/oauth-ruby/releases/tag/v0.5.6
+[0.5.5]: https://github.com/oauth-xx/oauth-ruby/releases/tag/v0.5.5
+[0.5.4]: https://github.com/oauth-xx/oauth-ruby/releases/tag/v0.5.4
+[0.5.3]: https://github.com/oauth-xx/oauth-ruby/releases/tag/v0.5.3
+[0.5.2]: https://github.com/oauth-xx/oauth-ruby/releases/tag/v0.5.2
+[0.5.1]: https://github.com/oauth-xx/oauth-ruby/releases/tag/v0.5.1
+[0.5.0]: https://github.com/oauth-xx/oauth-ruby/releases/tag/v0.5.0
+[0.4.7]: https://github.com/oauth-xx/oauth-ruby/releases/tag/v0.4.7
+[0.4.6]: https://github.com/oauth-xx/oauth-ruby/releases/tag/v0.4.6
+[0.4.5]: https://github.com/oauth-xx/oauth-ruby/releases/tag/v0.4.5
+[0.4.4]: https://github.com/oauth-xx/oauth-ruby/releases/tag/v0.4.4
+[0.4.3]: https://github.com/oauth-xx/oauth-ruby/releases/tag/v0.4.3
+[0.4.2]: https://github.com/oauth-xx/oauth-ruby/releases/tag/v0.4.2
+[0.4.1]: https://github.com/oauth-xx/oauth-ruby/releases/tag/v0.4.1
+[0.4.0]: https://github.com/oauth-xx/oauth-ruby/releases/tag/v0.4.0
+[0.3.6]: https://github.com/oauth-xx/oauth-ruby/releases/tag/v0.3.6
+[0.3.5]: https://github.com/oauth-xx/oauth-ruby/releases/tag/v0.3.5
+[0.3.4]: https://github.com/oauth-xx/oauth-ruby/releases/tag/v0.3.4
+[0.3.3]: https://github.com/oauth-xx/oauth-ruby/releases/tag/v0.3.3
+[0.3.2]: https://github.com/oauth-xx/oauth-ruby/releases/tag/v0.3.2
+[0.3.1]: https://github.com/oauth-xx/oauth-ruby/releases/tag/v0.3.1
+[0.3.0]: https://github.com/oauth-xx/oauth-ruby/releases/tag/v0.3.0
