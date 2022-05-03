@@ -50,7 +50,7 @@ jobs:
         uses: actions/checkout@v3
       - name: Install cURL Headers
         run: |
-          sudo apt-get -y install libcurl4 libcurl3-gnutls libcurl4-openssl-dev
+          sudo apt-get -y --fix-missing install libcurl4-openssl-dev
       - name: Setup Ruby & Bundle
         uses: ruby/setup-ruby@v1
         with:
