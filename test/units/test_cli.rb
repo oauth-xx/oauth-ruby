@@ -282,12 +282,12 @@ Usage: oauth <command> [ARGS]
         --xmpp                       Generate XMPP stanzas.
     -v, --verbose                    Be verbose.
 
-        options for authorization
-              --access-token-url URL       Specifies the access token URL.
-              --authorize-url URL          Specifies the authorization URL.
-              --callback-url URL           Specifies a callback URL.
-              --request-token-url URL      Specifies the request token URL.
-              --scope SCOPE                Specifies the scope (Google-specific).
+  options for authorization
+        --access-token-url URL       Specifies the access token URL.
+        --authorize-url URL          Specifies the authorization URL.
+        --callback-url URL           Specifies a callback URL.
+        --request-token-url URL      Specifies the request token URL.
+        --scope SCOPE                Specifies the scope (Google-specific).
 EXPECTED
   end
 end
