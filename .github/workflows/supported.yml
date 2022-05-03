@@ -34,9 +34,7 @@ jobs:
         with:
           cc_test_reporter_id: ${{ secrets.CC_TEST_REPORTER_ID }}
       - name: Checkout
-        uses: actions/checkout@v2
-      - name: Install cURL Headers
-        run: sudo apt-get install libcurl4-openssl-dev
+        uses: actions/checkout@v3
       - name: Setup Ruby & Bundle
         uses: ruby/setup-ruby@v1
         with:
