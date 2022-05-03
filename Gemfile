@@ -2,6 +2,8 @@ source "https://rubygems.org"
 
 gemspec
 
+gem "actionpack"
+
 # Those lines need to be added
 plugin 'diffend'
 # Monitor is required for production realtime notifications

@@ -28,7 +28,6 @@ Gem::Specification.new do |spec|
   # This gem will work with Ruby 2.0 or greater...
   spec.required_ruby_version = ">= 2.0"
 
-  spec.add_development_dependency("actionpack", ">= 5.0")
   spec.add_development_dependency("curb")
   spec.add_development_dependency("em-http-request", "~> 1.1.7")
   spec.add_development_dependency("iconv")
