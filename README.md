@@ -186,8 +186,10 @@ For more see [SECURITY.md][🚎sec-pol].
 ## Compatibility
 
 Targeted ruby compatibility is non-EOL versions of Ruby, currently 2.7, 3.0, and
-3.1. Ruby is limited to 2.0+ in the gemspec, and this will change with minor version bumps,
-while the gem is still in SemVer 0.x.  The `master` branch will soon target 0.6.x releases.
+3.1. Ruby is limited to 2.3+ in the gemspec, and this will change with minor version bumps,
+while the gem is still in 0.x, in accordance with the SemVer spec.
+
+The `master` branch now targets 0.6.x releases.
 See `v0.5-maintenance` branch for older rubies.
 
 NOTE: If there is another 0.5.x release it is anticipated to be the last of the 0.5.x series.
@@ -222,7 +224,7 @@ of a major release, support for that Ruby version may be dropped.
 
 |     | Ruby OAuth Version | Maintenance Branch | Supported Officially | Supported Unofficially  | Supported Incidentally |
 |:----|--------------------|--------------------|----------------------|-------------------------|------------------------|
-| 1️⃣ | 0.6.x (unreleased) | `master`           | 2.7, 3.0, 3.1        | 2.5, 2.6                | 2.2, 2.3, 2.4          |
+| 1️⃣ | 0.6.x (unreleased) | `master`           | 2.7, 3.0, 3.1        | 2.5, 2.6                | 2.3, 2.4               |
 | 2️⃣ | 0.5.x              | `v0.5-maintenance` | 2.6, 2.7, 3.0, 3.1   | 2.1, 2.2, 2.3, 2.4, 2.5 | 2.0                    |
 | 3️⃣ | older              | N/A                | Best of luck to you! | Please upgrade!         |                        |
 
