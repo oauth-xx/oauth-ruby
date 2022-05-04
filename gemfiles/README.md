@@ -14,7 +14,7 @@ into a separate gem after the release of version 1.0 of this gem.
 These `gemfiles` help with testing this gem against various versions of Rails-ish-ness.
 
 ```ruby
-gem 'actionpack', ['>= 2', '< 8']
+gem "actionpack", [">= 2", "< 8"]
 ```
 
 # *.gemfile Naming
