@@ -224,7 +224,7 @@ of a major release, support for that Ruby version may be dropped.
 
 |     | Ruby OAuth Version | Maintenance Branch | Supported Officially | Supported Unofficially       | Supported Incidentally |
 |:----|--------------------|--------------------|----------------------|------------------------------|------------------------|
-| 1️⃣ | 0.6.x (unreleased) | `master`           | 2.7, 3.0, 3.1        | 2.5, 2.6                     | 2.4                    |
+| 1️⃣ | 0.6.x              | `master`           | 2.7, 3.0, 3.1        | 2.5, 2.6                     | 2.4                    |
 | 2️⃣ | 0.5.x              | `v0.5-maintenance` | 2.7, 3.0, 3.1        | 2.1, 2.2, 2.3, 2.4, 2.5, 2.6 | 2.0                    |
 | 3️⃣ | older              | N/A                | Best of luck to you! | Please upgrade!              |                        |
 
