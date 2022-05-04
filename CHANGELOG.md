@@ -9,11 +9,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-* Made a new option `body_hash_enabled` which defaults to true to maintain backward compatibility with prior releases. Setting to `false` disables generation of a `oauth_body_hash` component as part of the signature computation.
-
 ### Fixed
 
 ### Removed
+
+## [0.6.0] 2022-05-04
+### Added
+* Made a new option `body_hash_enabled` which defaults to true to maintain backward compatibility with prior releases. Setting to `false` disables generation of a `oauth_body_hash` component as part of the signature computation.
+* Improved documentation of support policy
+
+### Removed
+* Ruby 2.0, 2.1, 2.2, and 2.3 are no longer valid install targets
 
 ## [0.5.10] 2022-05-04
 The "Can it be the end of the line for 0.5.x?" Release
@@ -388,7 +394,8 @@ but please have a look at the unit tests.
 * Moved all non-Rails functionality from the Rails plugin:
   http://code.google.com/p/oauth-plugin/
 
-[Unreleased]: https://github.com/oauth-xx/oauth-ruby/compare/v0.5.10...v0.5-maintenance
+[Unreleased]: https://github.com/oauth-xx/oauth-ruby/compare/v0.6.0...v0.6-maintenance
+[0.6.0]: https://github.com/oauth-xx/oauth-ruby/releases/tag/v0.6.0
 [0.5.10]: https://github.com/oauth-xx/oauth-ruby/releases/tag/v0.5.10
 [0.5.9]: https://github.com/oauth-xx/oauth-ruby/releases/tag/v0.5.9
 [0.5.8]: https://github.com/oauth-xx/oauth-ruby/releases/tag/v0.5.8

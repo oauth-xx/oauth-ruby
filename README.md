@@ -189,8 +189,9 @@ Targeted ruby compatibility is non-EOL versions of Ruby, currently 2.7, 3.0, and
 3.1. Ruby is limited to 2.4+ in the gemspec, and this will change with minor version bumps,
 while the gem is still in 0.x, in accordance with the SemVer spec.
 
-The `master` branch now targets 0.6.x releases.
-See `v0.5-maintenance` branch for older rubies.
+The `master` branch now targets 1.0.x releases.
+See `v0.6-maintenance` branch for Ruby >= 2.4.
+See `v0.5-maintenance` branch for Ruby >= 2.0.
 
 NOTE: If there is another 0.5.x release it is anticipated to be the last of the 0.5.x series.
 
@@ -222,14 +223,17 @@ fashion. If critical issues for a particular implementation exist at the time
 of a major release, support for that Ruby version may be dropped.
 </details>
 
-|     | Ruby OAuth Version | Maintenance Branch | Supported Officially | Supported Unofficially       | Supported Incidentally |
-|:----|--------------------|--------------------|----------------------|------------------------------|------------------------|
-| 1️⃣ | 0.6.x              | `master`           | 2.7, 3.0, 3.1        | 2.5, 2.6                     | 2.4                    |
-| 2️⃣ | 0.5.x              | `v0.5-maintenance` | 2.7, 3.0, 3.1        | 2.1, 2.2, 2.3, 2.4, 2.5, 2.6 | 2.0                    |
-| 3️⃣ | older              | N/A                | Best of luck to you! | Please upgrade!              |                        |
+|     | Ruby OAuth Version | Maintenance Branch | 🚂 Compatibility       | Official 💎          | Unofficial 💎                | Incidental 💎 |
+|:----|--------------------|--------------------|------------------------|----------------------|------------------------------|---------------|
+| 1️⃣ | 1.0.x              | `master`           | Rails 6, 7             | 2.7, 3.0, 3.1        | sorry, not sorry             | nope          |
+| 2️⃣ | 0.6.x              | `v0.6-maintenance` | Rails 5, 6, 7          | 2.7, 3.0, 3.1        | 2.5, 2.6                     | 2.4           |
+| 3️⃣ | 0.5.x              | `v0.5-maintenance` | Rails 2, 3, 4, 5, 6, 7 | 2.7, 3.0, 3.1        | 2.1, 2.2, 2.3, 2.4, 2.5, 2.6 | 2.0           |
+| 4️⃣ | older              | N/A                |                        | Best of luck to you! | Please upgrade!              | noop          |
 
 NOTE: Once 1.0 is released, the 0.x series will only receive critical bug and security updates.
 See [SECURITY.md][🚎sec-pol]
+
+🚂 NOTE: See notes on Rails in next section.
 
 ## Basics
 
@@ -237,13 +241,16 @@ This is a ruby library which is intended to be used in creating Ruby Consumer
 and Service Provider applications. It is NOT a Rails plugin, but could easily
 be used for the foundation for such a Rails plugin.
 
-As a matter of fact it has been pulled out from an OAuth Rails GEM
-(https://rubygems.org/gems/oauth-plugin https://github.com/pelle/oauth-plugin)
-which now uses this gem as a dependency.
+This gem was originally extracted from @pelle's [oauth-plugin](https://github.com/pelle/oauth-plugin)
+gem. After extraction that gem was made to depend on this gem.
+
+Unfortunately, this gem does have some Rails related bits that are
+**optional** to load. You don't need Rails! The Rails bits may be pulled out
+into a separate gem after the release of version 1.0 of this gem.
 
 ## Usage
 
-We need to specify the oauth_callback url explicitly, otherwise it defaults to
+We need to specify the `oauth_callback` url explicitly, otherwise it defaults to
 "oob" (Out of Band)
 
 ```ruby
