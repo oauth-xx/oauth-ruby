@@ -17,6 +17,8 @@ These `gemfiles` help with testing this gem against various versions of Rails-is
 gem 'actionpack', ['>= 2', '< 8']
 ```
 
+# *.gemfile Naming
+
 In the naming of gemfiles, we will use the below shorthand for actionpack and version
 
 | Gem        | Version | Gemfile    |
@@ -27,3 +29,8 @@ In the naming of gemfiles, we will use the below shorthand for actionpack and ve
 | actionpack | ~> 5.0  | a5.gemfile |
 | actionpack | ~> 6.0  | a6.gemfile |
 | actionpack | ~> 7.0  | a7.gemfile |
+
+# References
+
+Compatibility Matrix for Ruby and Rails:
+* https://www.fastruby.io/blog/ruby/rails/versions/compatibility-table.html

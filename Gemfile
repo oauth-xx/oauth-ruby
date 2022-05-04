@@ -6,8 +6,6 @@ gemspec
 
 git_source(:github) { |repo_name| "https://github.com/#{repo_name}" }
 
-gem "rake", "~> 13.0"
-
 ruby_version = Gem::Version.new(RUBY_VERSION)
 minimum_version = ->(version, engine = "ruby") { ruby_version >= Gem::Version.new(version) && RUBY_ENGINE == engine }
 linting = minimum_version.call("2.4")
