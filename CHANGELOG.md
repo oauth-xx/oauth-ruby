@@ -13,6 +13,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Removed
 
+## [0.5.10] 2022-05-04
+The "Can it be the end of the line for 0.5.x?" Release
+
+### Added
+* Major updates to Documentation
+* More CI Hardening
+* Align CI builds with official Ruby Compatibility Matrix
+* Project tooling in preparation for final release of 0.5.x series
+  - diffend
+
 ## [0.5.9] 2022-05-03
 ### Added
 * Documentation related to Ruby compatibility
@@ -376,7 +386,8 @@ but please have a look at the unit tests.
 * Moved all non-Rails functionality from the Rails plugin:
   http://code.google.com/p/oauth-plugin/
 
-[Unreleased]: https://github.com/oauth-xx/oauth-ruby/compare/v0.5.9...v0.5-maintenance
+[Unreleased]: https://github.com/oauth-xx/oauth-ruby/compare/v0.5.10...v0.5-maintenance
+[0.5.10]: https://github.com/oauth-xx/oauth-ruby/releases/tag/v0.5.10
 [0.5.9]: https://github.com/oauth-xx/oauth-ruby/releases/tag/v0.5.9
 [0.5.8]: https://github.com/oauth-xx/oauth-ruby/releases/tag/v0.5.8
 [0.5.7]: https://github.com/oauth-xx/oauth-ruby/releases/tag/v0.5.7
