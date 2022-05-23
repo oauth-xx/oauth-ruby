@@ -1,7 +1,7 @@
 inherit_from: .rubocop_todo.yml
 
 inherit_gem:
-  rubocop-ruby2_4: rubocop.yml
+  rubocop-lts: rubocop-lts.yml
 
 require:
   - 'rubocop-faker'
