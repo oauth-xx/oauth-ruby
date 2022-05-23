@@ -12,6 +12,8 @@ linting = minimum_version.call("2.4")
 coverage = minimum_version.call("2.7")
 diffend = minimum_version.call("2.7")
 debug = minimum_version.call("2.4")
+# Curb has trouble building native extentions on Windows platform
+curb = minimum_version.call("2.4") && !Gem.win_platform?
 
 gem "pry", platforms: %i[mri jruby]
 platforms :mri do
@@ -43,6 +45,9 @@ platforms :mri do
     # Add `byebug` to your code where you want to drop to REPL
     gem "byebug"
     gem "pry-byebug"
+  end
+  if curb
+    gem "curb"
   end
 end
 platforms :jruby do
