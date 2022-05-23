@@ -46,9 +46,7 @@ platforms :mri do
     gem "byebug"
     gem "pry-byebug"
   end
-  if curb
-    gem "curb"
-  end
+  gem "curb" if curb
 end
 platforms :jruby do
   # Add `binding.pry` to your code where you want to drop to REPL
