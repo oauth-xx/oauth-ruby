@@ -2,3 +2,5 @@
 Gemfile.lock
 coverage
 *.gem
+/.idea/
+/.tool-versions
