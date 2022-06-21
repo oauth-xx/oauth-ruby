@@ -57,7 +57,7 @@ appended indicators:
 | 4️⃣ | testing               | [![Open Issues][⛳iss-o-img]][⛳iss-o] [![Closed Issues][🖇iss-c-img]][🖇iss-c] [![Supported][🏘sup-wf-img]][🏘sup-wf] [![Heads][🚎heads-wf-img]][🚎heads-wf] [![Unofficial Support][🖐uns-wf-img]][🖐uns-wf] [![MacOS][🧮mac-wf-img]][🧮mac-wf] [![Windows][📗win-wf-img]][📗win-wf]             |
 | 5️⃣ | coverage & security   | [![CodeClimate][⛳cclim-cov-img♻️]][⛳cclim-cov] [![CodeCov][🖇codecov-img♻️]][🖇codecov] [![Coveralls][🏘coveralls-img]][🏘coveralls] [![Security Policy][🚎sec-pol-img]][🚎sec-pol] [![CodeQL][🖐codeQL-img]][🖐codeQL] [![Code Coverage][🧮cov-wf-img]][🧮cov-wf]                              |
 | 6️⃣ | resources             | [![Discussion][⛳gh-discussions-img]][⛳gh-discussions] [![Get help on Codementor][🖇codementor-img]][🖇codementor] [![Chat][🏘chat-img]][🏘chat] [![Blog][🚎blog-img]][🚎blog] [![Blog][🖐wiki-img]][🖐wiki]                                                                                     |
-| 7️⃣ | spread 💖             | [![Liberapay Patrons][⛳liberapay-img]][⛳liberapay] [![Sponsor Me][🖇sponsor-img]][🖇sponsor] [![Tweet @ Peter][🏘tweet-img]][🏘tweet] [🌏][aboutme] [👼][angelme] [💻][coderme] [🌹][politicme]                                                                                                 |
+| 7️⃣ | spread 💖             | [![Liberapay Patrons][⛳liberapay-img]][⛳liberapay] [![Sponsor Me][🖇sponsor-img]][🖇sponsor] [![Tweet @ Peter][🏘tweet-img]][🏘tweet] [🌏][aboutme] [👼][angelme] [💻][coderme]                                                                                                 |
 
 <!--
 The link tokens in the following sections should be kept ordered by the row and badge numbering scheme
@@ -154,11 +154,6 @@ The link tokens in the following sections should be kept ordered by the row and 
 <!-- Maintainer Contact Links -->
 [railsbling]: http://www.railsbling.com
 [peterboling]: http://www.peterboling.com
-[aboutme]: https://about.me/peter.boling
-[angelme]: https://angel.co/peter-boling
-[coderme]:http://coderwall.com/pboling
-[politicme]: https://nationalprogressiveparty.org
-
 
 ## Installation
 
@@ -375,7 +370,6 @@ Comments are welcome. Contact the [OAuth Ruby mailing list (Google Group)][maili
 [license]: https://github.com/oauth-xx/oauth-ruby/blob/master/LICENSE
 [license-ref]: https://opensource.org/licenses/MIT
 [liberapay_donate]: https://liberapay.com/pboling/donate
-[politicme]: https://nationalprogressiveparty.org
 [pvc]: http://guides.rubygems.org/patterns/#pessimistic-version-constraint
 [rubygems]: https://rubygems.org/gems/oauth
 [security]: https://github.com/oauth-xx/oauth-ruby/blob/master/SECURITY.md
