@@ -9,7 +9,7 @@ git_source(:github) { |repo_name| "https://github.com/#{repo_name}" }
 ruby_version = Gem::Version.new(RUBY_VERSION)
 minimum_version = ->(version, engine = "ruby") { ruby_version >= Gem::Version.new(version) && RUBY_ENGINE == engine }
 coverage = minimum_version.call("2.7")
-diffend = minimum_version.call("2.7")
+# diffend = minimum_version.call("2.7")
 # Curb has trouble building native extentions on Windows platform
 curb = !Gem.win_platform?
 
@@ -38,8 +38,8 @@ platforms :mri do
   end
   # Add `byebug` to your code where you want to drop to REPL
   gem "byebug"
-  gem "pry-byebug"
   gem "curb" if curb
+  gem "pry-byebug"
 end
 platforms :jruby do
   # Add `binding.pry` to your code where you want to drop to REPL
