@@ -36,7 +36,7 @@ platforms :mri do
     gem "simplecov-json" # For CodeClimate
     gem "simplecov-lcov", "~> 0.8", require: false
   end
-  # Add `byebug` to your code where you want to drop to REPL
+  # Add `byebug` to your code where you want to drop to REPL, and add DEBUG=true when running tests
   gem "byebug"
   gem "curb" if curb
   gem "pry-byebug"
