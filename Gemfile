@@ -39,7 +39,7 @@ platforms :mri do
   # Add `byebug` to your code where you want to drop to REPL, and add DEBUG=true when running tests
   gem "byebug"
   # WebMock is known to work with Curb >= 0.7.16, < 0.10, except versions 0.8.7
-  gem "curb", [">= 0.7.16", "< 0.10", "!= 0.8.7"] if curb
+  gem "curb", ">= 0.7.16", "!= 0.8.7", "< 1.1" if curb
   gem "pry-byebug"
 end
 platforms :jruby do
