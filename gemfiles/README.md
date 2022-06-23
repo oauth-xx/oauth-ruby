@@ -23,7 +23,6 @@ In the naming of gemfiles, we will use the below shorthand for actionpack and ve
 
 | Gem        | Version | Gemfile    |
 |------------|---------|------------|
-| actionpack | ~> 2.0  | a2.gemfile |
 | actionpack | ~> 3.0  | a3.gemfile |
 | actionpack | ~> 4.0  | a4.gemfile |
 | actionpack | ~> 5.0  | a5.gemfile |

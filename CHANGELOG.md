@@ -17,6 +17,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 * Made a new option `body_hash_enabled` which defaults to true to maintain backward compatibility with prior releases. Setting to `false` disables generation of a `oauth_body_hash` component as part of the signature computation.
 * Improved documentation of support policy
+* Stop testing against active_support v2
 
 ### Removed
 * Ruby 2.0, 2.1, 2.2, and 2.3 are no longer valid install targets
