@@ -13,6 +13,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Removed
 
+## [0.6.1] 2022-08-24
+### Changed
+* Fixed documentation in SECURITY.md
+* Change references to master => main
+
 ## [0.6.0] 2022-08-23
 ### Added
 * New option `body_hash_enabled` which defaults to true to maintain backward compatibility with prior releases. Setting to `false` disables generation of a `oauth_body_hash` component as part of the signature computation.
