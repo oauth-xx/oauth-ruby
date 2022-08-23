@@ -70,7 +70,7 @@ module OAuth
       body_hash_enabled: true,
 
       oauth_version: "1.0"
-    }
+    }.with_indifferent_access
 
     attr_accessor :options, :key, :secret
     attr_writer   :site, :http
