@@ -20,7 +20,6 @@ platforms :mri do
   #   # Monitor is required for realtime notifications
   #   gem "diffend-monitor", require: %w[diffend/monitor]
   # end
-  gem "danger", "~> 8.4"
   gem "overcommit", "~> 0.58"
   gem "rubocop-faker"
   gem "rubocop-md"
