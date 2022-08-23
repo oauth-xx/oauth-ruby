@@ -16,6 +16,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [1.0.0] 2022-08-23
 ### Changed
 * Dropped support for Ruby < 2.7
+* Dropped support for Rails < 6
 
 ### Added
 * New EOL Policy
