@@ -103,7 +103,9 @@ module OAuth
       @secret = consumer_secret
 
       # ensure that keys are symbols
-      @options = @@default_options.merge(options.transform_keys(&:to_sym))
+      @options = @@default_options.merge(options.each_with_object({}) do |(key, value), opts| 
+        opts[key.to_sym] = value 
+      end)
     end
 
     # The default http method
