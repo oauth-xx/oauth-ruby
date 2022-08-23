@@ -222,12 +222,12 @@ fashion. If critical issues for a particular implementation exist at the time
 of a major release, support for that Ruby version may be dropped.
 </details>
 
-|     | Ruby OAuth Version | Maintenance Branch | 🚂 Compatibility       | Official 💎          | Unofficial 💎                | Incidental 💎 |
-|:----|--------------------|--------------------|------------------------|----------------------|------------------------------|---------------|
-| 1️⃣ | 1.0.x              | `main`             | Rails 6, 7             | 2.7, 3.0, 3.1        | sorry, not sorry             | nope          |
-| 2️⃣ | 0.6.x              | `v0.6-maintenance` | Rails 5, 6, 7          | 2.7, 3.0, 3.1        | 2.5, 2.6                     | 2.4           |
-| 3️⃣ | 0.5.x              | `v0.5-maintenance` | Rails 2, 3, 4, 5, 6, 7 | 2.7, 3.0, 3.1        | 2.1, 2.2, 2.3, 2.4, 2.5, 2.6 | 2.0           |
-| 4️⃣ | older              | N/A                |                        | Best of luck to you! | Please upgrade!              | noop          |
+|     | Ruby OAuth Version | Maintenance Branch | 🚂 Compatibility       | Official 💎          | Unofficial 💎           | Incidental 💎 |
+|:----|--------------------|--------------------|------------------------|----------------------|-------------------------|---------------|
+| 1️⃣ | 1.0.x              | `main`             | Rails 6, 7             | 2.7, 3.0, 3.1        | sorry, not sorry        | nope          |
+| 2️⃣ | 0.6.x              | `v0.6-maintenance` | Rails 5, 6, 7          | 2.7, 3.0, 3.1        | 2.5, 2.6                | 2.4           |
+| 3️⃣ | 0.5.x              | `v0.5-maintenance` | Rails 2, 3, 4, 5, 6, 7 | 2.7, 3.0, 3.1        | 2.2, 2.3, 2.4, 2.5, 2.6 | 2.0, 2.1      |
+| 4️⃣ | older              | N/A                |                        | Best of luck to you! | Please upgrade!         | noop          |
 
 NOTE: Support for version 0.5.x will end in April, 2023
 NOTE: Once 1.0 is released, the 0.x series will only receive critical bug and security updates.
