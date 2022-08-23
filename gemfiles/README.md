@@ -14,7 +14,7 @@ into a separate gem after the release of version 1.0 of this gem.
 These `gemfiles` help with testing this gem against various versions of Rails-ish-ness.
 
 ```ruby
-gem "actionpack", [">= 2", "< 8"]
+gem "actionpack", [">= 6", "< 8"]
 ```
 
 # *.gemfile Naming
@@ -23,9 +23,6 @@ In the naming of gemfiles, we will use the below shorthand for actionpack and ve
 
 | Gem        | Version | Gemfile    |
 |------------|---------|------------|
-| actionpack | ~> 3.0  | a3.gemfile |
-| actionpack | ~> 4.0  | a4.gemfile |
-| actionpack | ~> 5.0  | a5.gemfile |
 | actionpack | ~> 6.0  | a6.gemfile |
 | actionpack | ~> 7.0  | a7.gemfile |
 
