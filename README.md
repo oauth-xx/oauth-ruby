@@ -22,7 +22,9 @@ See the sibling `oauth2` gem for OAuth 2.0 implementations in Ruby.
 
 **NOTE**
 
-This README, on branch `v0.5-maintenance`, targets 0.5.x series releases.  For later releases please see the `master` branch README.
+This README, on branch `v0.5-maintenance`, targets 0.5.x series releases.
+The v0.5.x series of releases will be EOL no later than April, 2023.
+For later releases please see the `master` branch README.
 
 ## Status
 
@@ -53,15 +55,15 @@ appended indicators:
 ♻️ - URL needs to be updated from SASS integration. Find / Replace is insufficient.
 -->
 
-|     | Project               | bundle add oauth2                                                                                                                                                                                                                                                                               |
-|:----|-----------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| 1️⃣ | name, license, docs   | [![RubyGems.org][⛳️name-img]][⛳️gem] [![License: MIT][🖇src-license-img]][🖇src-license] [![FOSSA][🏘fossa-img]][🏘fossa] [![RubyDoc.info][🚎yard-img]][🚎yard] [![InchCI][🖐inch-ci-img]][🚎yard]                                                                                              |
+|     | Project               | bundle add oauth2                                                                                                                                                                                                                                                                              |
+|:----|-----------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 1️⃣ | name, license, docs   | [![RubyGems.org][⛳️name-img]][⛳️gem] [![License: MIT][🖇src-license-img]][🖇src-license] [![FOSSA][🏘fossa-img]][🏘fossa] [![RubyDoc.info][🚎yard-img]][🚎yard] [![InchCI][🖐inch-ci-img]][🚎yard]                                                                                             |
 | 2️⃣ | version & activity    | [![Gem Version][⛳️version-img]][⛳️gem] [![Total Downloads][🖇DL-total-img]][⛳️gem] [![Download Rank][🏘DL-rank-img]][⛳️gem] [![Source Code][🚎src-home-img]][🚎src-home] [![Open PRs][🖐prs-o-img]][🖐prs-o] [![Closed PRs][🧮prs-c-img]][🧮prs-c] <!--[![Next Version][📗next-img]][📗next]--> |
-| 3️⃣ | maintanence & linting | [![Maintainability][⛳cclim-maint-img♻️]][⛳cclim-maint] [![Helpers][🖇triage-help-img]][🖇triage-help] [![Depfu][🏘depfu-img♻️]][🏘depfu♻️] [![Contributors][🚎contributors-img]][🚎contributors] [![Style][🖐style-wf-img]][🖐style-wf] [![Kloc Roll][🧮kloc-img]][🧮kloc]                      |
-| 4️⃣ | testing               | [![Open Issues][⛳iss-o-img]][⛳iss-o] [![Closed Issues][🖇iss-c-img]][🖇iss-c] [![Supported][🏘sup-wf-img]][🏘sup-wf] [![Heads][🚎heads-wf-img]][🚎heads-wf] [![Unofficial Support][🖐uns-wf-img]][🖐uns-wf] [![MacOS][🧮mac-wf-img]][🧮mac-wf] [![Windows][📗win-wf-img]][📗win-wf]             |
-| 5️⃣ | coverage & security   | [![CodeClimate][⛳cclim-cov-img♻️]][⛳cclim-cov] [![CodeCov][🖇codecov-img♻️]][🖇codecov] [![Coveralls][🏘coveralls-img]][🏘coveralls] [![Security Policy][🚎sec-pol-img]][🚎sec-pol] [![CodeQL][🖐codeQL-img]][🖐codeQL] [![Code Coverage][🧮cov-wf-img]][🧮cov-wf]                              |
-| 6️⃣ | resources             | [![Discussion][⛳gh-discussions-img]][⛳gh-discussions] [![Get help on Codementor][🖇codementor-img]][🖇codementor] [![Chat][🏘chat-img]][🏘chat] [![Blog][🚎blog-img]][🚎blog] [![Blog][🖐wiki-img]][🖐wiki]                                                                                     |
-| 7️⃣ | spread 💖             | [![Liberapay Patrons][⛳liberapay-img]][⛳liberapay] [![Sponsor Me][🖇sponsor-img]][🖇sponsor] [![Tweet @ Peter][🏘tweet-img]][🏘tweet] [🌏][aboutme] [👼][angelme] [💻][coderme] [🌹][politicme]                                                                                                 |
+| 3️⃣ | maintenance & linting | [![Maintainability][⛳cclim-maint-img♻️]][⛳cclim-maint] [![Helpers][🖇triage-help-img]][🖇triage-help] [![Depfu][🏘depfu-img♻️]][🏘depfu♻️] [![Contributors][🚎contributors-img]][🚎contributors] [![Style][🖐style-wf-img]][🖐style-wf] [![Kloc Roll][🧮kloc-img]][🧮kloc]                     |
+| 4️⃣ | testing               | [![Open Issues][⛳iss-o-img]][⛳iss-o] [![Closed Issues][🖇iss-c-img]][🖇iss-c] [![Supported][🏘sup-wf-img]][🏘sup-wf] [![Heads][🚎heads-wf-img]][🚎heads-wf] [![Unofficial Support][🖐uns-wf-img]][🖐uns-wf] [![MacOS][🧮mac-wf-img]][🧮mac-wf] [![Windows][📗win-wf-img]][📗win-wf]            |
+| 5️⃣ | coverage & security   | [![CodeClimate][⛳cclim-cov-img♻️]][⛳cclim-cov] [![CodeCov][🖇codecov-img♻️]][🖇codecov] [![Coveralls][🏘coveralls-img]][🏘coveralls] [![Security Policy][🚎sec-pol-img]][🚎sec-pol] [![CodeQL][🖐codeQL-img]][🖐codeQL] [![Code Coverage][🧮cov-wf-img]][🧮cov-wf]                             |
+| 6️⃣ | resources             | [![Discussion][⛳gh-discussions-img]][⛳gh-discussions] [![Get help on Codementor][🖇codementor-img]][🖇codementor] [![Chat][🏘chat-img]][🏘chat] [![Blog][🚎blog-img]][🚎blog] [![Blog][🖐wiki-img]][🖐wiki]                                                                                    |
+| 7️⃣ | spread 💖             | [![Liberapay Patrons][⛳liberapay-img]][⛳liberapay] [![Sponsor Me][🖇sponsor-img]][🖇sponsor] [![Tweet @ Peter][🏘tweet-img]][🏘tweet] [🌏][aboutme] [👼][angelme] [💻][coderme]                                                                                             |
 
 <!--
 The link tokens in the following sections should be kept ordered by the row and badge numbering scheme
@@ -161,7 +163,6 @@ The link tokens in the following sections should be kept ordered by the row and 
 [aboutme]: https://about.me/peter.boling
 [angelme]: https://angel.co/peter-boling
 [coderme]:http://coderwall.com/pboling
-[politicme]: https://nationalprogressiveparty.org
 
 
 ## Installation
@@ -229,10 +230,11 @@ of a major release, support for that Ruby version may be dropped.
 
 |     | Ruby OAuth Version | Maintenance Branch | Supported Officially | Supported Unofficially       | Supported Incidentally |
 |:----|--------------------|--------------------|----------------------|------------------------------|------------------------|
-| 1️⃣ | 0.6.x              | `master`           | 2.7, 3.0, 3.1        | 2.5, 2.6                     | 2.4                    |
+| 1️⃣ | 0.6.x              | `v0.6-maintenance` | 2.7, 3.0, 3.1        | 2.5, 2.6                     | 2.4                    |
 | 2️⃣ | 0.5.x              | `v0.5-maintenance` | 2.7, 3.0, 3.1        | 2.1, 2.2, 2.3, 2.4, 2.5, 2.6 | 2.0                    |
 | 3️⃣ | older              | N/A                | Best of luck to you! | Please upgrade!              |                        |
 
+NOTE: Support for version 0.5.x will end in April, 2023
 NOTE: Once 1.0 is released, the 0.x series will only receive critical bug and security updates.
 See [SECURITY.md][🚎sec-pol]
 
@@ -364,7 +366,6 @@ Comments are welcome. Contact the [OAuth Ruby mailing list (Google Group)][maili
 [license]: https://github.com/oauth-xx/oauth-ruby/blob/master/LICENSE
 [license-ref]: https://opensource.org/licenses/MIT
 [liberapay_donate]: https://liberapay.com/pboling/donate
-[politicme]: https://nationalprogressiveparty.org
 [pvc]: http://guides.rubygems.org/patterns/#pessimistic-version-constraint
 [rubygems]: https://rubygems.org/gems/oauth
 [security]: https://github.com/oauth-xx/oauth-ruby/blob/master/SECURITY.md
