@@ -13,6 +13,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Removed
 
+## [1.0.0] 2022-08-23
+### Changed
+* Dropped support for Ruby < 2.7
+
+### Added
+* New EOL Policy
+  * Non-commercial support for the oldest version of Ruby (which itself is going EOL) will be dropped each year in April
+
 ## [0.6.1] 2022-08-23
 ### Changed
 * Fixed documentation in SECURITY.md
@@ -431,7 +439,8 @@ but please have a look at the unit tests.
 * Moved all non-Rails functionality from the Rails plugin:
   http://code.google.com/p/oauth-plugin/
 
-[Unreleased]: https://github.com/oauth-xx/oauth-ruby/compare/v0.6.1...v0.6-maintenance
+[Unreleased]: https://github.com/oauth-xx/oauth-ruby/compare/v1.0.0...main
+[1.0.0]: https://github.com/oauth-xx/oauth-ruby/releases/tag/v1.0.0
 [0.6.1]: https://github.com/oauth-xx/oauth-ruby/releases/tag/v0.6.1
 [0.6.0]: https://github.com/oauth-xx/oauth-ruby/releases/tag/v0.6.0
 [0.5.13]: https://github.com/oauth-xx/oauth-ruby/releases/tag/v0.5.13

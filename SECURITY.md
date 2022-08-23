@@ -2,11 +2,16 @@
 
 ## Supported Versions
 
-| Version | Supported          |
-|---------|--------------------|
-| 0.6.x   | :white_check_mark: |
-| 0.5.x   | :white_check_mark: |
-| <= 0.5  | :x:                |
+| Version | Supported          | EOL     |
+|---------|--------------------|---------|
+| 1.0.x   | :white_check_mark: | 04/2025 |
+| 0.6.x   | :white_check_mark: | 04/2024 |
+| 0.5.x   | :white_check_mark: | 04/2023 |
+| <= 0.5  | :x:                | :x:     |
+
+### EOL Policy
+
+Non-commercial support for the oldest version of Ruby (which itself is going EOL) will be dropped each year in April.
 
 ## Reporting a Vulnerability
 

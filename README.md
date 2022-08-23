@@ -20,11 +20,17 @@ See the sibling `oauth2` gem for OAuth 2.0 implementations in Ruby.
 [oauth1-spec]: http://oauth.net/core/1.0/
 [sibling-gem]: https://github.com/oauth-xx/oauth-ruby
 
-**NOTE**
+**New EOL Policy**
 
-This README, on branch `v0.6-maintenance`, targets 0.6.x series releases.
-The v0.6.x series of releases will be EOL no later than April, 2024.
-For later releases please see the `main` branch README.
+Versions 1.0.x will be EOL no later than April, 2025.
+Versions 0.6.x will be EOL no later than April, 2024.
+Versions 0.5.x will be EOL no later than April, 2023.
+
+This will facilitate dropping support for old, dead, and crusty versions of Ruby.
+
+Non-commercial support for the oldest version of Ruby (which itself is going EOL) will be dropped each year in April.
+
+Please upgrade to version 1.0.  The only breaking change in 1.0 is dropping old Rubies.
 
 ## Status
 
@@ -57,7 +63,7 @@ appended indicators:
 
 |     | Project               | bundle add oauth                                                                                                                                                                                                                                                                                |
 |:----|-----------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| 1️⃣ | name, license, docs   | [![RubyGems.org][⛳️name-img]][⛳️gem] [![License: MIT][🖇src-license-img]][🖇src-license] [![FOSSA][🏘fossa-img]][🏘fossa] [![RubyDoc.info][🚎yard-img]][🚎yard] [![InchCI][🖐inch-ci-img]][🚎yard]                                                                                              |
+| 1️⃣ | name, license, docs   | [![RubyGems.org][⛳️name-img]][⛳️gem] [![License: MIT][🖇src-license-img]][🖇src-license] [![RubyDoc.info][🚎yard-img]][🚎yard]                                                                                                                                                                  |
 | 2️⃣ | version & activity    | [![Gem Version][⛳️version-img]][⛳️gem] [![Total Downloads][🖇DL-total-img]][⛳️gem] [![Download Rank][🏘DL-rank-img]][⛳️gem] [![Source Code][🚎src-home-img]][🚎src-home] [![Open PRs][🖐prs-o-img]][🖐prs-o] [![Closed PRs][🧮prs-c-img]][🧮prs-c] <!--[![Next Version][📗next-img]][📗next]--> |
 | 3️⃣ | maintenance & linting | [![Maintainability][⛳cclim-maint-img♻️]][⛳cclim-maint] [![Helpers][🖇triage-help-img]][🖇triage-help] [![Depfu][🏘depfu-img♻️]][🏘depfu♻️] [![Contributors][🚎contributors-img]][🚎contributors] [![Style][🖐style-wf-img]][🖐style-wf] [![Kloc Roll][🧮kloc-img]][🧮kloc]                      |
 | 4️⃣ | testing               | [![Open Issues][⛳iss-o-img]][⛳iss-o] [![Closed Issues][🖇iss-c-img]][🖇iss-c] [![Supported][🏘sup-wf-img]][🏘sup-wf] [![Heads][🚎heads-wf-img]][🚎heads-wf] [![Unofficial Support][🖐uns-wf-img]][🖐uns-wf] [![MacOS][🧮mac-wf-img]][🧮mac-wf] [![Windows][📗win-wf-img]][📗win-wf]             |
@@ -74,11 +80,8 @@ The link tokens in the following sections should be kept ordered by the row and 
 [⛳️name-img]: https://img.shields.io/badge/name-oauth-brightgreen.svg?style=flat
 [🖇src-license]: https://opensource.org/licenses/MIT
 [🖇src-license-img]: https://img.shields.io/badge/License-MIT-green.svg
-[🏘fossa]: https://app.fossa.io/projects/git%2Bgithub.com%2Foauth-xx%2Foauth-ruby?ref=badge_shield
-[🏘fossa-img]: https://app.fossa.io/api/projects/git%2Bgithub.com%2Foauth-xx%2Foauth-ruby.svg?type=shield
 [🚎yard]: https://www.rubydoc.info/github/oauth-xx/oauth-ruby
 [🚎yard-img]: https://img.shields.io/badge/documentation-rubydoc-brightgreen.svg?style=flat
-[🖐inch-ci-img]: http://inch-ci.org/github/oauth-xx/oauth-ruby.png
 
 <!-- 2️⃣ version & activity -->
 [⛳️version-img]: http://img.shields.io/gem/v/oauth.svg
@@ -190,9 +193,9 @@ Targeted ruby compatibility is non-EOL versions of Ruby, currently 2.7, 3.0, and
 3.1. Ruby is limited to 2.4+ in the gemspec, and this will change with minor version bumps,
 while the gem is still in 0.x, in accordance with the SemVer spec.
 
-The `main` branch now targets 1.0.x releases.
-See `v0.6-maintenance` branch for Ruby >= 2.4.
-See `v0.5-maintenance` branch for Ruby >= 2.0.
+The `main` branch now targets 1.0.x releases, for Ruby >= 2.7.
+See `v0.6-maintenance` (EOL April, 2024) branch for Ruby >= 2.4.
+See `v0.5-maintenance` (EOL April, 2023) branch for Ruby >= 2.0.
 
 NOTE: No further releases of version < 1.0.x are anticipated.
 
@@ -224,12 +227,12 @@ fashion. If critical issues for a particular implementation exist at the time
 of a major release, support for that Ruby version may be dropped.
 </details>
 
-|     | Ruby OAuth Version | Maintenance Branch | 🚂 Compatibility       | Official 💎          | Unofficial 💎                | Incidental 💎 |
-|:----|--------------------|--------------------|------------------------|----------------------|------------------------------|---------------|
-| 1️⃣ | 1.0.x              | `main`             | Rails 6, 7             | 2.7, 3.0, 3.1        | sorry, not sorry             | nope          |
-| 2️⃣ | 0.6.x              | `v0.6-maintenance` | Rails 5, 6, 7          | 2.7, 3.0, 3.1        | 2.5, 2.6                     | 2.4           |
-| 3️⃣ | 0.5.x              | `v0.5-maintenance` | Rails 2, 3, 4, 5, 6, 7 | 2.7, 3.0, 3.1        | 2.1, 2.2, 2.3, 2.4, 2.5, 2.6 | 2.0           |
-| 4️⃣ | older              | N/A                |                        | Best of luck to you! | Please upgrade!              | noop          |
+|     | Ruby OAuth Version | Maintenance Branch | EOL       | 🚂 Compatibility       | Official 💎          | Unofficial 💎                | Incidental 💎 |
+|:----|--------------------|--------------------|-----------|------------------------|----------------------|------------------------------|---------------|
+| 1️⃣ | 1.0.x              | `main`             |           | Rails 6, 7             | 2.7, 3.0, 3.1        | sorry, not sorry             | nope          |
+| 2️⃣ | 0.6.x              | `v0.6-maintenance` | 04/2024   | Rails 5, 6, 7          | 2.7, 3.0, 3.1        | 2.5, 2.6                     | 2.4           |
+| 3️⃣ | 0.5.x              | `v0.5-maintenance` | 04/2023   | Rails 2, 3, 4, 5, 6, 7 | 2.7, 3.0, 3.1        | 2.1, 2.2, 2.3, 2.4, 2.5, 2.6 | 2.0           |
+| 4️⃣ | older              | N/A                | yesterday |                        | Best of luck to you! | Please upgrade!              | noop          |
 
 NOTE: Once 1.0 is released, the 0.x series will only receive critical bug and security updates.
 See [SECURITY.md][🚎sec-pol]
