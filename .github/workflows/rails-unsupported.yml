@@ -37,8 +37,6 @@ jobs:
         bundler:
           - latest
         gemfile:
-          - a3
-          - a4
           - a5
         ruby:
           - "2.4"
