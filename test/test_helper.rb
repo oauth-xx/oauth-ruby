@@ -18,7 +18,7 @@ actual_version = lambda do |major, minor|
   actual = Gem::Version.new(ruby_version)
   major == actual.segments[0] && minor == actual.segments[1] && RUBY_ENGINE == "ruby"
 end
-debugging = minimum_version.call("2.4") && DEBUG
+debugging = minimum_version.call("2.7") && DEBUG
 RUN_COVERAGE = minimum_version.call("2.7") && (ENV.fetch("COVER_ALL") { ENV.fetch("CI_CODECOV") { ENV["CI"].nil? } })
 ALL_FORMATTERS = actual_version.call(2, 7) && (ENV.fetch("COVER_ALL") do
   ENV.fetch("CI_CODECOV") do
@@ -26,13 +26,7 @@ ALL_FORMATTERS = actual_version.call(2, 7) && (ENV.fetch("COVER_ALL") do
   end
 end)
 
-if DEBUG
-  if debugging
-    require "byebug"
-  elsif minimum_version.call("2.4", "jruby")
-    require "pry-debugger-jruby"
-  end
-end
+require "byebug" if debugging
 
 if RUN_COVERAGE
   require "simplecov" # Config file `.simplecov` is run immediately when simplecov loads

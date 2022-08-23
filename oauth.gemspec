@@ -28,7 +28,7 @@ Gem::Specification.new do |spec|
                                           "CONTRIBUTING.md"]
   spec.extra_rdoc_files = ["TODO"]
 
-  # This gem will work with Ruby 2.4 or greater...
+  # This gem will work with Ruby 2.7 or greater...
   spec.required_ruby_version = ">= 2.7"
   spec.post_install_message = "
 You have installed oauth version #{OAuth::Version::VERSION}, congratulations!

@@ -190,7 +190,7 @@ For more see [SECURITY.md][🚎sec-pol].
 ## Compatibility
 
 Targeted ruby compatibility is non-EOL versions of Ruby, currently 2.7, 3.0, and
-3.1. Ruby is limited to 2.4+ in the gemspec, and this will change with minor version bumps,
+3.1. Ruby is limited to 2.7+ in the gemspec, and this will change with minor version bumps,
 while the gem is still in 0.x, in accordance with the SemVer spec.
 
 The `main` branch now targets 1.0.x releases, for Ruby >= 2.7.
