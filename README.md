@@ -320,6 +320,8 @@ See [CONTRIBUTING.md][contributing]
 
 Made with [contributors-img][contrib-rocks].
 
+[contrib-rocks]: https://contrib.rocks
+
 ## Versioning
 
 This library aims to adhere to [Semantic Versioning 2.0.0][semver]. Violations of this scheme should be reported as

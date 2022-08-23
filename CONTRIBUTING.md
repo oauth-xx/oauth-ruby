@@ -17,7 +17,7 @@ Made with [contributors-img][contrib-rocks].
 [comment]: <> (Following links are used by README, CONTRIBUTING, Homepage)
 
 [conduct]: https://github.com/oauth-xx/oauth-ruby/blob/main/CODE_OF_CONDUCT.md
-[contributing]: https://github.com/oauth-xx/oauth-ruby/blob/main/CONTRIBUTING.md
 [contributors]: https://github.com/oauth-xx/oauth-ruby/graphs/contributors
 [mailinglist]: http://groups.google.com/group/oauth-ruby
 [source]: https://github.com/oauth-xx/oauth-ruby/
+[contrib-rocks]: https://contrib.rocks
