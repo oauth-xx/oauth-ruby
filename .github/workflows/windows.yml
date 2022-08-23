@@ -42,7 +42,6 @@ jobs:
           - "2.7"
           - "3.0"
           - "3.1"
-          - jruby
 
     runs-on: windows-latest
     continue-on-error: ${{ matrix.experimental || endsWith(matrix.ruby, 'head') }}
