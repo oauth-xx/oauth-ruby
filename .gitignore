@@ -4,3 +4,4 @@ coverage
 *.gem
 /.idea/
 /.tool-versions
+gemfiles/*.lock
