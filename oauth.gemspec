@@ -28,6 +28,33 @@ Gem::Specification.new do |spec|
 
   # This gem will work with Ruby 2.0 or greater...
   spec.required_ruby_version = ">= 2.0"
+  spec.post_install_message = "
+You have installed oauth2 version #{OAuth::VERSION}, congratulations!
+
+Support for the 0.5.x series will end in April, 2023. Please upgrade to 0.6.x as soon as possible!
+The only breaking change will be dropped support for Ruby 2.0, 2.1, 2.2, and 2.3.
+
+Please see:
+• https://github.com/oauth-xx/oauth/blob/main/SECURITY.md
+
+Note also that I, and this project, am in the process of leaving Github.
+I wrote about some of the reasons here:
+• https://dev.to/galtzo/im-leaving-github-50ba
+
+If you are a human, please consider a donation as I move toward supporting myself with Open Source work:
+• https://liberapay.com/pboling
+• https://ko-fi.com/pboling
+• https://patreon.com/galtzo
+
+If you are a corporation, please consider supporting this project, and open source work generally, with a TideLift subscription.
+• https://tidelift.com/funding/github/rubygems/oauth
+• Or hire me. I am looking for a job!
+
+Please report issues, and support the project!
+
+Thanks, |7eter l-|. l3oling
+
+"
 
   spec.add_development_dependency("curb")
   spec.add_development_dependency("em-http-request", "~> 1.1.7")
