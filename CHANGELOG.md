@@ -13,6 +13,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Removed
 
+## [0.6.1] 2022-08-23
+### Changed
+* Fixed documentation in SECURITY.md
+* Change references to master => main
+
+### Added
+* Post install note about v0.6.x EOL approaching in April, 2024
+
 ## [0.6.0] 2022-08-23
 ### Added
 * New option `body_hash_enabled` which defaults to true to maintain backward compatibility with prior releases. Setting to `false` disables generation of a `oauth_body_hash` component as part of the signature computation.
@@ -26,6 +34,29 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Removed
 * Ruby 2.0, 2.1, 2.2, and 2.3 are no longer valid install targets
+
+## [0.5.13] 2022-08-23
+The "I think I caught 'em all!" Release
+
+### Fixed
+* Typo oauth2 => oauth as gem name in one more place.
+
+## [0.5.12] 2022-08-23
+The "Typoes are just the worst!" Release
+
+### Fixed
+* Typo oauth2 => oauth as gem name in a couple places.
+
+## [0.5.11] 2022-08-23
+The "Is this the last release with a silly name?" Release
+
+### Added
+* Post install note about v0.5.x EOL approaching in April, 2023
+
+### Changed
+* Improved documentation
+* Switched branch references from master to main
+* CI builds are now all green!
 
 ## [0.5.10] 2022-05-04
 The "Can it be the end of the line for 0.5.x?" Release
@@ -400,8 +431,12 @@ but please have a look at the unit tests.
 * Moved all non-Rails functionality from the Rails plugin:
   http://code.google.com/p/oauth-plugin/
 
-[Unreleased]: https://github.com/oauth-xx/oauth-ruby/compare/v0.6.0...v0.6-maintenance
+[Unreleased]: https://github.com/oauth-xx/oauth-ruby/compare/v0.6.1...v0.6-maintenance
+[0.6.1]: https://github.com/oauth-xx/oauth-ruby/releases/tag/v0.6.1
 [0.6.0]: https://github.com/oauth-xx/oauth-ruby/releases/tag/v0.6.0
+[0.5.13]: https://github.com/oauth-xx/oauth-ruby/releases/tag/v0.5.13
+[0.5.12]: https://github.com/oauth-xx/oauth-ruby/releases/tag/v0.5.12
+[0.5.11]: https://github.com/oauth-xx/oauth-ruby/releases/tag/v0.5.11
 [0.5.10]: https://github.com/oauth-xx/oauth-ruby/releases/tag/v0.5.10
 [0.5.9]: https://github.com/oauth-xx/oauth-ruby/releases/tag/v0.5.9
 [0.5.8]: https://github.com/oauth-xx/oauth-ruby/releases/tag/v0.5.8
