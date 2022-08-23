@@ -43,7 +43,6 @@ jobs:
           - "3.0"
           - "3.1"
           - truffleruby
-          - jruby
 
     runs-on: macos-latest
     continue-on-error: ${{ matrix.experimental || endsWith(matrix.ruby, 'head') }}

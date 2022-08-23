@@ -193,7 +193,7 @@ NOTE: If there is another 0.5.x release it is anticipated to be the last of the 
 <details>
   <summary>Ruby Engine Compatibility Policy</summary>
 
-This gem is tested against MRI, JRuby, and Truffleruby.
+This gem is tested against MRI, and to a lesser extent, against JRuby, and Truffleruby.
 Each of those has varying versions that target a specific version of MRI Ruby.
 This gem should work in the just-listed Ruby engines according to the targeted MRI compatibility in the table below.
 If you would like to add support for additional engines,
