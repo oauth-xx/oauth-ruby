@@ -20,6 +20,12 @@ See the sibling `oauth2` gem for OAuth 2.0 implementations in Ruby.
 [oauth1-spec]: http://oauth.net/core/1.0/
 [sibling-gem]: https://github.com/oauth-xx/oauth-ruby
 
+**NOTE**
+
+This README, on branch `v0.6-maintenance`, targets 0.6.x series releases.
+The v0.6.x series of releases will be EOL no later than April, 2024.
+For later releases please see the `main` branch README.
+
 ## Status
 
 <!--
@@ -188,7 +194,7 @@ The `main` branch now targets 1.0.x releases.
 See `v0.6-maintenance` branch for Ruby >= 2.4.
 See `v0.5-maintenance` branch for Ruby >= 2.0.
 
-NOTE: No further releases of the 0.5.x series are anticipated.
+NOTE: No further releases of version < 1.0.x are anticipated.
 
 <details>
   <summary>Ruby Engine Compatibility Policy</summary>
@@ -241,7 +247,7 @@ gem. After extraction that gem was made to depend on this gem.
 
 Unfortunately, this gem does have some Rails related bits that are
 **optional** to load. You don't need Rails! The Rails bits may be pulled out
-into a separate gem after the release of version 1.0 of this gem.
+into a separate gem with the release of version 1.0 of this gem.
 
 ## Usage
 

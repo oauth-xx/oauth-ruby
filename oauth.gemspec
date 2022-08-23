@@ -27,8 +27,34 @@ Gem::Specification.new do |spec|
   spec.files = Dir.glob("lib/**/*.rb") + ["LICENSE", "README.md", "CHANGELOG.md", "CODE_OF_CONDUCT.md", "SECURITY.md", "CONTRIBUTING.md"]
   spec.extra_rdoc_files = ["TODO"]
 
+  # This gem will work with Ruby 2.4 or greater...
   spec.required_ruby_version = ">= 2.4"
+  spec.post_install_message = "
+You have installed oauth version #{OAuth::Version::VERSION}, congratulations!
 
+Non-commercial support for the 0.6.x series will end in April, 2024. Please upgrade to 1.0.x as soon as possible!
+The only breaking change will be dropped support for Ruby 2.4, 2.5, and 2.6.
+
+Please see:
+• https://github.com/oauth-xx/oauth/blob/main/SECURITY.md
+
+Note also that I, and this project, am in the process of leaving Github.
+I wrote about some of the reasons here:
+• https://dev.to/galtzo/im-leaving-github-50ba
+
+If you are a human, please consider a donation as I move toward supporting myself with Open Source work:
+• https://liberapay.com/pboling
+• https://ko-fi.com/pboling
+• https://patreon.com/galtzo
+
+If you are a corporation, please consider supporting this project, and open source work generally, with a TideLift subscription.
+• https://tidelift.com/funding/github/rubygems/oauth
+• Or hire me. I am looking for a job!
+
+Please report issues, and support the project!
+
+Thanks, |7eter l-|. l3oling
+"
   spec.add_development_dependency("em-http-request", "~> 1.1.7")
   spec.add_development_dependency("iconv")
   spec.add_development_dependency("minitest", "~> 5.15.0")
