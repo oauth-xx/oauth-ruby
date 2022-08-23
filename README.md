@@ -335,7 +335,7 @@ the [Pessimistic Version Constraint][pvc] with two digits of precision.
 For example:
 
 ```ruby
-spec.add_dependency "oauth", "~> 0.6.0"
+spec.add_dependency "oauth", "~> 1.0"
 ```
 
 ## License
