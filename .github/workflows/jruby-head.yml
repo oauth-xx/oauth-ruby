@@ -33,7 +33,7 @@ jobs:
       matrix:
         experimental: [true]
         gemfile:
-          - a5
+          - a6
         rubygems:
           - latest
         bundler:
