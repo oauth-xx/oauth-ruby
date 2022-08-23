@@ -2,6 +2,6 @@
 
 module OAuth
   module Version
-    VERSION = "0.6.1"
+    VERSION = "1.0.0"
   end
 end

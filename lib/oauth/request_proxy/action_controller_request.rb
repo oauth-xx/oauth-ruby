@@ -1,36 +1,15 @@
 # frozen_string_literal: true
 
 require "active_support"
-require "active_support/version"
 require "action_controller"
 require "uri"
 
-if Gem::Version.new(ActiveSupport::VERSION::STRING) < Gem::Version.new("3")
-  # rails 2.x
-  require "action_controller/request"
-  unless ActionController::Request::HTTP_METHODS.include?("patch")
-    ActionController::Request::HTTP_METHODS << "patch"
-    ActionController::Request::HTTP_METHOD_LOOKUP["PATCH"] = :patch
-    ActionController::Request::HTTP_METHOD_LOOKUP["patch"] = :patch
-  end
-
-elsif Gem::Version.new(ActiveSupport::VERSION::STRING) < Gem::Version.new("4")
-  # rails 3.x
-  require "action_dispatch/http/request"
-  unless ActionDispatch::Request::HTTP_METHODS.include?("patch")
-    ActionDispatch::Request::HTTP_METHODS << "patch"
-    ActionDispatch::Request::HTTP_METHOD_LOOKUP["PATCH"] = :patch
-    ActionDispatch::Request::HTTP_METHOD_LOOKUP["patch"] = :patch
-  end
-
-else # rails 4.x and later - already has patch
-  require "action_dispatch/http/request"
-end
+require "action_dispatch/http/request"
 
 module OAuth
   module RequestProxy
     class ActionControllerRequest < OAuth::RequestProxy::Base
-      proxies(defined?(::ActionDispatch::AbstractRequest) ? ::ActionDispatch::AbstractRequest : ::ActionDispatch::Request)
+      proxies(::ActionDispatch::Request)
 
       def method
         request.method.to_s.upcase
@@ -50,7 +29,7 @@ module OAuth
         end
       end
 
-      # Override from OAuth::RequestProxy::Base to avoid roundtrip
+      # Override from OAuth::RequestProxy::Base to avoid round-trip
       # conversion to Hash or Array and thus preserve the original
       # parameter names
       def parameters_for_signature
