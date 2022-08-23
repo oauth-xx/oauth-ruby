@@ -13,6 +13,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Removed
 
+## [0.5.13] 2022-08-23
+The "I think I caught 'em all!" Release
+
+### Fixed
+* Typo oauth2 => oauth as gem name in one more place.
+
 ## [0.5.12] 2022-08-23
 The "Typoes are just the worst!" Release
 
@@ -403,7 +409,8 @@ but please have a look at the unit tests.
 * Moved all non-Rails functionality from the Rails plugin:
   http://code.google.com/p/oauth-plugin/
 
-[Unreleased]: https://github.com/oauth-xx/oauth-ruby/compare/v0.5.12...v0.5-maintenance
+[Unreleased]: https://github.com/oauth-xx/oauth-ruby/compare/v0.5.13...v0.5-maintenance
+[0.5.13]: https://github.com/oauth-xx/oauth-ruby/releases/tag/v0.5.13
 [0.5.12]: https://github.com/oauth-xx/oauth-ruby/releases/tag/v0.5.12
 [0.5.11]: https://github.com/oauth-xx/oauth-ruby/releases/tag/v0.5.11
 [0.5.10]: https://github.com/oauth-xx/oauth-ruby/releases/tag/v0.5.10
