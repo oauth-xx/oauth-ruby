@@ -18,7 +18,7 @@ m = Module.new do
   end
 
   def env_var_version
-    ENV["BUNDLER_VERSION"]
+    ENV.fetch("BUNDLER_VERSION", nil)
   end
 
   def cli_arg_version
@@ -38,7 +38,7 @@ m = Module.new do
   end
 
   def gemfile
-    gemfile = ENV["BUNDLE_GEMFILE"]
+    gemfile = ENV.fetch("BUNDLE_GEMFILE", nil)
     return gemfile if gemfile && !gemfile.empty?
 
     File.expand_path("../Gemfile", __dir__)
@@ -97,7 +97,9 @@ m = Module.new do
     require_error = activation_error_handling do
       require "bundler/version"
     end
-    return if require_error.nil? && Gem::Requirement.new(bundler_requirement).satisfied_by?(Gem::Version.new(Bundler::VERSION))
+    if require_error.nil? && Gem::Requirement.new(bundler_requirement).satisfied_by?(Gem::Version.new(Bundler::VERSION))
+      return
+    end
 
     warn "Activating bundler (#{bundler_requirement}) failed:\n#{gem_error.message}\n\nTo install the version of bundler this project requires, run `gem install bundler -v '#{bundler_requirement}'`"
     exit 42

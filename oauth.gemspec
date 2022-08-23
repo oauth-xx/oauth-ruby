@@ -24,7 +24,8 @@ Gem::Specification.new do |spec|
   spec.metadata["wiki_uri"] = "#{spec.homepage}/wiki"
   spec.metadata["rubygems_mfa_required"] = "true"
 
-  spec.files = Dir.glob("lib/**/*.rb") + ["LICENSE", "README.md", "CHANGELOG.md", "CODE_OF_CONDUCT.md", "SECURITY.md", "CONTRIBUTING.md"]
+  spec.files = Dir.glob("lib/**/*.rb") + ["LICENSE", "README.md", "CHANGELOG.md", "CODE_OF_CONDUCT.md", "SECURITY.md",
+                                          "CONTRIBUTING.md"]
   spec.extra_rdoc_files = ["TODO"]
 
   # This gem will work with Ruby 2.4 or greater...
@@ -63,7 +64,7 @@ Thanks, |7eter l-|. l3oling
   spec.add_development_dependency("rack-test")
   spec.add_development_dependency("rake", "~> 13.0")
   spec.add_development_dependency("rest-client")
-  spec.add_development_dependency("rubocop-lts", "~> 12.0")
+  spec.add_development_dependency("rubocop-lts", "~> 18.0")
   spec.add_development_dependency("typhoeus", ">= 0.1.13")
   spec.add_development_dependency("webmock", "<= 3.14.0")
 end

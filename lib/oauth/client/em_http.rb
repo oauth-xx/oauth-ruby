@@ -84,9 +84,7 @@ module EventMachine
                        else
                          query.to_s
                        end
-      unless uri_query.to_s.empty?
-        combined_query = [combined_query, uri_query].reject(&:empty?).join("&")
-      end
+      combined_query = [combined_query, uri_query].reject(&:empty?).join("&") unless uri_query.to_s.empty?
       combined_query.to_s.empty? ? path : "#{path}?#{combined_query}"
     end
 

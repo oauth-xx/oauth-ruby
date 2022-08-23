@@ -79,7 +79,7 @@ module OAuth
       end
 
       def parameters_for_signature
-        parameters.select { |k, _v| !signature_and_unsigned_parameters.include?(k) }
+        parameters.reject { |k, _v| signature_and_unsigned_parameters.include?(k) }
       end
 
       def oauth_parameters

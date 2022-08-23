@@ -69,9 +69,7 @@ module OAuth
           end
 
           def auth_header_params
-            unless request["Authorization"] && request["Authorization"][0, 5] == "OAuth"
-              return nil
-            end
+            return nil unless request["Authorization"] && request["Authorization"][0, 5] == "OAuth"
 
             request["Authorization"]
           end

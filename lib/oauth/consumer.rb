@@ -159,9 +159,7 @@ module OAuth
     def get_request_token(request_options = {}, *arguments, &block)
       # if oauth_callback wasn't provided, it is assumed that oauth_verifiers
       # will be exchanged out of band
-      unless request_options[:exclude_callback]
-        request_options[:oauth_callback] ||= OAuth::OUT_OF_BAND
-      end
+      request_options[:oauth_callback] ||= OAuth::OUT_OF_BAND unless request_options[:exclude_callback]
 
       response = if block
                    token_request(
@@ -386,13 +384,9 @@ module OAuth
       end
 
       http_object.read_timeout = http_object.open_timeout = @options[:timeout] || 60
-      if @options[:open_timeout]
-        http_object.open_timeout = @options[:open_timeout]
-      end
+      http_object.open_timeout = @options[:open_timeout] if @options[:open_timeout]
       http_object.ssl_version = @options[:ssl_version] if @options[:ssl_version]
-      if @options[:ssl_client_cert]
-        http_object.cert = @options[:ssl_client_cert]
-      end
+      http_object.cert = @options[:ssl_client_cert] if @options[:ssl_client_cert]
       http_object.key = @options[:ssl_client_key] if @options[:ssl_client_key]
       http_object.set_debug_output(debug_output) if debug_output
 
@@ -409,9 +403,7 @@ module OAuth
       # only add if the site host matches the current http object's host
       # (in case we've specified a full url for token requests)
       uri = URI.parse(site)
-      if uri.path && uri.path != "/" && uri.host == http.address
-        path = uri.path + path
-      end
+      path = uri.path + path if uri.path && uri.path != "/" && uri.host == http.address
 
       headers = arguments.first.is_a?(Hash) ? arguments.shift : {}
 

@@ -31,9 +31,7 @@ module OAuth
         @consumer_secret = options[:consumer].secret if options[:consumer]
 
         # presence of :consumer_secret option will override any Consumer that's provided
-        if options[:consumer_secret]
-          @consumer_secret = options[:consumer_secret]
-        end
+        @consumer_secret = options[:consumer_secret] if options[:consumer_secret]
 
         ## token secret was determined beforehand
 
