@@ -3,7 +3,7 @@ name: Ancient Rubies
 on:
   push:
     branches:
-      - master
+      - main
       - '*-maintenance'
       - '*-dev'
     tags:

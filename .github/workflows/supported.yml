@@ -3,7 +3,7 @@ name: Supported Rubies
 on:
   push:
     branches:
-      - master
+      -         main
       - '*-maintenance'
       - '*-dev'
     tags:

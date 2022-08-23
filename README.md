@@ -1,9 +1,9 @@
 <p align="center">
     <a href="http://oauth.net/core/1.0/" target="_blank" rel="noopener">
-      <img width="124px" src="https://github.com/oauth-xx/oauth-ruby/raw/master/docs/images/logo/Oauth_logo.svg?raw=true" alt="OAuth 1.0 Logo by Chris Messina, CC BY-SA 3.0, via Wikimedia Commons">
+      <img width="124px" src="https://github.com/oauth-xx/oauth-ruby/raw/main/docs/images/logo/Oauth_logo.svg?raw=true" alt="OAuth 1.0 Logo by Chris Messina, CC BY-SA 3.0, via Wikimedia Commons">
     </a>
     <a href="https://www.ruby-lang.org/" target="_blank" rel="noopener">
-      <img width="124px" src="https://github.com/oauth-xx/oauth-ruby/raw/master/docs/images/logo/ruby-logo-198px.svg?raw=true" alt="Yukihiro Matsumoto, Ruby Visual Identity Team, CC BY-SA 2.5">
+      <img width="124px" src="https://github.com/oauth-xx/oauth-ruby/raw/main/docs/images/logo/ruby-logo-198px.svg?raw=true" alt="Yukihiro Matsumoto, Ruby Visual Identity Team, CC BY-SA 2.5">
     </a>
 </p>
 
@@ -24,7 +24,7 @@ See the sibling `oauth2` gem for OAuth 2.0 implementations in Ruby.
 
 This README, on branch `v0.5-maintenance`, targets 0.5.x series releases.
 The v0.5.x series of releases will be EOL no later than April, 2023.
-For later releases please see the `master` branch README.
+For later releases please see the `main` branch README.
 
 ## Status
 
@@ -58,7 +58,7 @@ appended indicators:
 |     | Project               | bundle add oauth2                                                                                                                                                                                                                                                                              |
 |:----|-----------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | 1️⃣ | name, license, docs   | [![RubyGems.org][⛳️name-img]][⛳️gem] [![License: MIT][🖇src-license-img]][🖇src-license] [![FOSSA][🏘fossa-img]][🏘fossa] [![RubyDoc.info][🚎yard-img]][🚎yard] [![InchCI][🖐inch-ci-img]][🚎yard]                                                                                             |
-| 2️⃣ | version & activity    | [![Gem Version][⛳️version-img]][⛳️gem] [![Total Downloads][🖇DL-total-img]][⛳️gem] [![Download Rank][🏘DL-rank-img]][⛳️gem] [![Source Code][🚎src-home-img]][🚎src-home] [![Open PRs][🖐prs-o-img]][🖐prs-o] [![Closed PRs][🧮prs-c-img]][🧮prs-c] <!--[![Next Version][📗next-img]][📗next]--> |
+| 2️⃣ | version & activity    | [![Gem Version][⛳️version-img]][⛳️gem] [![Total Downloads][🖇DL-total-img]][⛳️gem] [![Download Rank][🏘DL-rank-img]][⛳️gem] [![Source Code][🚎src-home-img]][🚎src-home] [![Open PRs][🖐prs-o-img]][🖐prs-o] [![Closed PRs][🧮prs-c-img]][🧮prs-c] |
 | 3️⃣ | maintenance & linting | [![Maintainability][⛳cclim-maint-img♻️]][⛳cclim-maint] [![Helpers][🖇triage-help-img]][🖇triage-help] [![Depfu][🏘depfu-img♻️]][🏘depfu♻️] [![Contributors][🚎contributors-img]][🚎contributors] [![Style][🖐style-wf-img]][🖐style-wf] [![Kloc Roll][🧮kloc-img]][🧮kloc]                     |
 | 4️⃣ | testing               | [![Open Issues][⛳iss-o-img]][⛳iss-o] [![Closed Issues][🖇iss-c-img]][🖇iss-c] [![Supported][🏘sup-wf-img]][🏘sup-wf] [![Heads][🚎heads-wf-img]][🚎heads-wf] [![Unofficial Support][🖐uns-wf-img]][🖐uns-wf] [![MacOS][🧮mac-wf-img]][🧮mac-wf] [![Windows][📗win-wf-img]][📗win-wf]            |
 | 5️⃣ | coverage & security   | [![CodeClimate][⛳cclim-cov-img♻️]][⛳cclim-cov] [![CodeCov][🖇codecov-img♻️]][🖇codecov] [![Coveralls][🏘coveralls-img]][🏘coveralls] [![Security Policy][🚎sec-pol-img]][🚎sec-pol] [![CodeQL][🖐codeQL-img]][🖐codeQL] [![Code Coverage][🧮cov-wf-img]][🧮cov-wf]                             |
@@ -126,11 +126,11 @@ The link tokens in the following sections should be kept ordered by the row and 
 <!-- 5️⃣ coverage & security -->
 [⛳cclim-cov]: https://codeclimate.com/github/oauth-xx/oauth-ruby/test_coverage
 [⛳cclim-cov-img♻️]: https://api.codeclimate.com/v1/badges/3cf23270c21e8791d788/test_coverage
-[🖇codecov-img♻️]: https://codecov.io/gh/oauth-xx/oauth-ruby/branch/v0.5-maintenance/graph/badge.svg?token=4ZNAWNxrf9
+[🖇codecov-img♻️]: https://codecov.io/gh/oauth-xx/oauth-ruby/branch/main/graph/badge.svg?token=4ZNAWNxrf9
 [🖇codecov]: https://codecov.io/gh/oauth-xx/oauth-ruby
-[🏘coveralls]: https://coveralls.io/github/oauth-xx/oauth-ruby?branch=v0.5-maintenance
-[🏘coveralls-img]: https://coveralls.io/repos/github/oauth-xx/oauth-ruby/badge.svg?branch=v0.5-maintenance
-[🚎sec-pol]: https://github.com/oauth-xx/oauth-ruby/blob/master/SECURITY.md
+[🏘coveralls]: https://coveralls.io/github/oauth-xx/oauth-ruby?branch=main
+[🏘coveralls-img]: https://coveralls.io/repos/github/oauth-xx/oauth-ruby/badge.svg?branch=main
+[🚎sec-pol]: https://github.com/oauth-xx/oauth-ruby/blob/main/SECURITY.md
 [🚎sec-pol-img]: https://img.shields.io/badge/security-policy-brightgreen.svg?style=flat
 [🖐codeQL]: https://github.com/oauth-xx/oauth-ruby/security/code-scanning
 [🖐codeQL-img]: https://github.com/oauth-xx/oauth-ruby/actions/workflows/codeql-analysis.yml/badge.svg
@@ -160,10 +160,6 @@ The link tokens in the following sections should be kept ordered by the row and 
 <!-- Maintainer Contact Links -->
 [railsbling]: http://www.railsbling.com
 [peterboling]: http://www.peterboling.com
-[aboutme]: https://about.me/peter.boling
-[angelme]: https://angel.co/peter-boling
-[coderme]:http://coderwall.com/pboling
-
 
 ## Installation
 
@@ -191,19 +187,17 @@ For more see [SECURITY.md][🚎sec-pol].
 ## Compatibility
 
 Targeted ruby compatibility is non-EOL versions of Ruby, currently 2.7, 3.0, and
-3.1. Ruby is limited to 2.0+ in the gemspec on this `v0.5-maintenance` branch, and
-this will change with minor version bumps, while the gem is still in 0.x,
-in accordance with the SemVer spec.
+3.1. Ruby is limited to 2.0+ in the gemspec on this `v0.5-maintenance` branch.
 
-The `master` branch now targets 0.6.x releases.
+The `v0.6-maintenance` branch targets 0.6.x releases.
 See `v0.5-maintenance` branch for older rubies.
 
-NOTE: If there is another 0.5.x release it is anticipated to be the last of the 0.5.x series.
+NOTE: No further releases of the 0.5.x series are anticipated.
 
 <details>
   <summary>Ruby Engine Compatibility Policy</summary>
 
-This gem is tested against MRI, JRuby, and Truffleruby.
+This gem is tested against MRI, and to a lesser extent, against JRuby, and Truffleruby.
 Each of those has varying versions that target a specific version of MRI Ruby.
 This gem should work in the just-listed Ruby engines according to the targeted MRI compatibility in the table below.
 If you would like to add support for additional engines,
@@ -228,11 +222,12 @@ fashion. If critical issues for a particular implementation exist at the time
 of a major release, support for that Ruby version may be dropped.
 </details>
 
-|     | Ruby OAuth Version | Maintenance Branch | Supported Officially | Supported Unofficially       | Supported Incidentally |
-|:----|--------------------|--------------------|----------------------|------------------------------|------------------------|
-| 1️⃣ | 0.6.x              | `v0.6-maintenance` | 2.7, 3.0, 3.1        | 2.5, 2.6                     | 2.4                    |
-| 2️⃣ | 0.5.x              | `v0.5-maintenance` | 2.7, 3.0, 3.1        | 2.1, 2.2, 2.3, 2.4, 2.5, 2.6 | 2.0                    |
-| 3️⃣ | older              | N/A                | Best of luck to you! | Please upgrade!              |                        |
+|     | Ruby OAuth Version | Maintenance Branch | 🚂 Compatibility       | Official 💎          | Unofficial 💎                | Incidental 💎 |
+|:----|--------------------|--------------------|------------------------|----------------------|------------------------------|---------------|
+| 1️⃣ | 1.0.x              | `main`             | Rails 6, 7             | 2.7, 3.0, 3.1        | sorry, not sorry             | nope          |
+| 2️⃣ | 0.6.x              | `v0.6-maintenance` | Rails 5, 6, 7          | 2.7, 3.0, 3.1        | 2.5, 2.6                     | 2.4           |
+| 3️⃣ | 0.5.x              | `v0.5-maintenance` | Rails 2, 3, 4, 5, 6, 7 | 2.7, 3.0, 3.1        | 2.1, 2.2, 2.3, 2.4, 2.5, 2.6 | 2.0           |
+| 4️⃣ | older              | N/A                |                        | Best of luck to you! | Please upgrade!              | noop          |
 
 NOTE: Support for version 0.5.x will end in April, 2023
 NOTE: Once 1.0 is released, the 0.x series will only receive critical bug and security updates.
@@ -244,16 +239,21 @@ This is a ruby library which is intended to be used in creating Ruby Consumer
 and Service Provider applications. It is NOT a Rails plugin, but could easily
 be used for the foundation for such a Rails plugin.
 
-As a matter of fact it has been pulled out from an OAuth Rails GEM
-(https://rubygems.org/gems/oauth-plugin https://github.com/pelle/oauth-plugin)
-which now uses this gem as a dependency.
+This gem was originally extracted from @pelle's [oauth-plugin](https://github.com/pelle/oauth-plugin)
+gem. After extraction that gem was made to depend on this gem.
+
+Unfortunately, this gem does have some Rails related bits that are
+**optional** to load. You don't need Rails! The Rails bits may be pulled out
+into a separate gem with the release of version 1.0 of this gem.
 
 ## Usage
 
-We need to specify the oauth_callback url explicitly, otherwise it defaults to
+We need to specify the `oauth_callback` url explicitly, otherwise it defaults to
 "oob" (Out of Band)
 
-    callback_url = "http://127.0.0.1:3000/oauth/callback"
+```ruby
+callback_url = "http://127.0.0.1:3000/oauth/callback"
+```
 
 Create a new `OAuth::Consumer` instance by passing it a configuration hash:
 
@@ -340,8 +340,8 @@ Comments are welcome. Contact the [OAuth Ruby mailing list (Google Group)][maili
 
 [comment]: <> (Following links are used by README, CONTRIBUTING, Homepage)
 
-[conduct]: https://github.com/oauth-xx/oauth-ruby/blob/master/CODE_OF_CONDUCT.md
-[contributing]: https://github.com/oauth-xx/oauth-ruby/blob/master/CONTRIBUTING.md
+[conduct]: https://github.com/oauth-xx/oauth-ruby/blob/main/CODE_OF_CONDUCT.md
+[contributing]: https://github.com/oauth-xx/oauth-ruby/blob/main/CONTRIBUTING.md
 [contributors]: https://github.com/oauth-xx/oauth-ruby/graphs/contributors
 [mailinglist]: http://groups.google.com/group/oauth-ruby
 [source]: https://github.com/oauth-xx/oauth-ruby/
@@ -363,11 +363,11 @@ Comments are welcome. Contact the [OAuth Ruby mailing list (Google Group)][maili
 [followme-img]: https://img.shields.io/twitter/follow/galtzo.svg?style=social&label=Follow
 [gh_discussions]: https://github.com/oauth-xx/oauth-ruby/discussions
 [gh_sponsors]: https://github.com/sponsors/pboling
-[license]: https://github.com/oauth-xx/oauth-ruby/blob/master/LICENSE
+[license]: https://github.com/oauth-xx/oauth-ruby/blob/main/LICENSE
 [license-ref]: https://opensource.org/licenses/MIT
 [liberapay_donate]: https://liberapay.com/pboling/donate
 [pvc]: http://guides.rubygems.org/patterns/#pessimistic-version-constraint
 [rubygems]: https://rubygems.org/gems/oauth
-[security]: https://github.com/oauth-xx/oauth-ruby/blob/master/SECURITY.md
+[security]: https://github.com/oauth-xx/oauth-ruby/blob/main/SECURITY.md
 [semver]: http://semver.org/
 [tweetme]: http://twitter.com/galtzo

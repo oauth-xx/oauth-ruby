@@ -16,8 +16,8 @@ Gem::Specification.new do |spec|
   spec.homepage = "https://github.com/oauth-xx/oauth-ruby"
   spec.metadata = {
     "bug_tracker_uri" => "#{spec.homepage}/issues",
-    "changelog_uri" => "#{spec.homepage}/blob/master/CHANGELOG.md",
-    "documentation_uri" => "https://rubydoc.info/github/oauth-xx/oauth-ruby/master",
+    "changelog_uri" => "#{spec.homepage}/blob/main/CHANGELOG.md",
+    "documentation_uri" => "https://rubydoc.info/github/oauth-xx/oauth-ruby/main",
     "homepage_uri" => spec.homepage,
     "source_code_uri" => spec.homepage,
     "rubygems_mfa_required" => "true"

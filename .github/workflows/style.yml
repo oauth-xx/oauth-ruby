@@ -3,7 +3,7 @@ name: Code Style Checks
 on:
   push:
     branches:
-      - master
+      - main
       - '*-maintenance'
       - '*-dev'
     tags:
