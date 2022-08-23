@@ -28,12 +28,12 @@ Gem::Specification.new do |spec|
   spec.extra_rdoc_files = ["TODO"]
 
   # This gem will work with Ruby 2.4 or greater...
-  spec.required_ruby_version = ">= 2.4"
+  spec.required_ruby_version = ">= 2.7"
   spec.post_install_message = "
 You have installed oauth version #{OAuth::Version::VERSION}, congratulations!
 
-Non-commercial support for the 0.6.x series will end in April, 2024. Please upgrade to 1.0.x as soon as possible!
-The only breaking change will be dropped support for Ruby 2.4, 2.5, and 2.6.
+Non-commercial support for the 1.0.x series will end in April, 2025. Please make a plan to upgrade to the next version prior to that date.
+The only breaking change will be dropped support for Ruby 2.7.
 
 Please see:
 • https://github.com/oauth-xx/oauth/blob/main/SECURITY.md

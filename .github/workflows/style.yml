@@ -24,13 +24,13 @@ jobs:
       matrix:
         experimental: [false]
         gemfile:
-          - a5
+          - a7
         rubygems:
           - latest
         bundler:
           - latest
         ruby:
-          - "2.4"
+          - "2.7"
     runs-on: ubuntu-latest
     steps:
       - name: Checkout

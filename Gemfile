@@ -6,20 +6,12 @@ gemspec
 
 git_source(:github) { |repo_name| "https://github.com/#{repo_name}" }
 
-ruby_version = Gem::Version.new(RUBY_VERSION)
-minimum_version = ->(version, engine = "ruby") { ruby_version >= Gem::Version.new(version) && RUBY_ENGINE == engine }
-coverage = minimum_version.call("2.7")
-# diffend = minimum_version.call("2.7")
 # Curb has trouble building native extentions on Windows platform
 curb = !Gem.win_platform?
 
 gem "pry", platforms: %i[mri jruby]
 platforms :mri do
-  # if diffend
-  #   plugin "diffend"
-  #   # Monitor is required for realtime notifications
-  #   gem "diffend-monitor", require: %w[diffend/monitor]
-  # end
+  gem "codecov", "~> 0.6" # For CodeCov
   gem "overcommit", "~> 0.58"
   gem "rubocop-faker"
   gem "rubocop-md"
@@ -28,13 +20,11 @@ platforms :mri do
   gem "rubocop-performance"
   gem "rubocop-rake"
   gem "rubocop-thread_safety"
-  if coverage
-    gem "codecov", "~> 0.6" # For CodeCov
-    gem "simplecov", "~> 0.21", require: false
-    gem "simplecov-cobertura" # XML for Jenkins
-    gem "simplecov-json" # For CodeClimate
-    gem "simplecov-lcov", "~> 0.8", require: false
-  end
+  gem "simplecov", "~> 0.21", require: false
+  gem "simplecov-cobertura" # XML for Jenkins
+  gem "simplecov-json" # For CodeClimate
+  gem "simplecov-lcov", "~> 0.8", require: false
+
   # Add `byebug` to your code where you want to drop to REPL, and add DEBUG=true when running tests
   gem "byebug"
   # WebMock is known to work with Curb >= 0.7.16, < 0.10, except versions 0.8.7
