@@ -14,14 +14,14 @@ Gem::Specification.new do |spec|
 
   spec.executables = ["oauth"]
   spec.homepage = "https://github.com/oauth-xx/oauth-ruby"
-  spec.metadata = {
-    "bug_tracker_uri" => "#{spec.homepage}/issues",
-    "changelog_uri" => "#{spec.homepage}/blob/master/CHANGELOG.md",
-    "documentation_uri" => "https://rubydoc.info/github/oauth-xx/oauth-ruby/master",
-    "homepage_uri" => spec.homepage,
-    "source_code_uri" => spec.homepage,
-    "rubygems_mfa_required" => "true"
-  }
+  spec.metadata["homepage_uri"] = spec.homepage
+  spec.metadata["source_code_uri"] = "#{spec.homepage}/tree/v#{spec.version}"
+  spec.metadata["changelog_uri"] = "#{spec.homepage}/blob/v#{spec.version}/CHANGELOG.md"
+  spec.metadata["bug_tracker_uri"] = "#{spec.homepage}/issues"
+  spec.metadata["documentation_uri"] = "https://www.rubydoc.info/gems/#{spec.name}/#{spec.version}"
+  spec.metadata["wiki_uri"] = "#{spec.homepage}/wiki"
+  spec.metadata["rubygems_mfa_required"] = "true"
+
   spec.files = Dir.glob("lib/**/*.rb") + ["LICENSE", "README.md", "CHANGELOG.md", "CODE_OF_CONDUCT.md", "SECURITY.md", "CONTRIBUTING.md"]
   spec.extra_rdoc_files = ["TODO"]
 
