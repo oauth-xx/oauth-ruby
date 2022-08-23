@@ -69,7 +69,7 @@ class CliTest < Minitest::Test
   def test_version
     out = run_command(%w[version])
 
-    assert_equal "OAuth Gem #{OAuth::VERSION}\n", out
+    assert_equal "OAuth Gem #{OAuth::Version::VERSION}\n", out
   end
 
   def test_query_empty

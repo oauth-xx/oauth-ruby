@@ -3,8 +3,10 @@
 require_relative "lib/oauth/version"
 
 Gem::Specification.new do |spec|
+  spec.add_dependency("version_gem", "~> 1.1")
+
   spec.name    = "oauth"
-  spec.version = OAuth::VERSION
+  spec.version = OAuth::Version::VERSION
   spec.license = "MIT"
 
   spec.authors     = ["Pelle Braendgaard", "Blaine Cook", "Larry Halff", "Jesse Clark", "Jon Crosby",

@@ -4,7 +4,7 @@ module OAuth
   class CLI
     class VersionCommand < BaseCommand
       def run
-        puts "OAuth Gem #{OAuth::VERSION}"
+        puts "OAuth Gem #{OAuth::Version::VERSION}"
       end
     end
   end

@@ -13,11 +13,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Removed
 
-## [0.6.0] 2022-05-04
+## [0.6.0] 2022-08-23
 ### Added
-* Made a new option `body_hash_enabled` which defaults to true to maintain backward compatibility with prior releases. Setting to `false` disables generation of a `oauth_body_hash` component as part of the signature computation.
-* Improved documentation of support policy
+* New option `body_hash_enabled` which defaults to true to maintain backward compatibility with prior releases. Setting to `false` disables generation of a `oauth_body_hash` component as part of the signature computation.
+* Improved documentation of support policy via Tidelift
 * Stop testing against active_support v2
+
+### Changed
+* Utilize version_gem extracted from oauth2 gem for VERSION
+  * Added new `OAuth::Version` namespace
+  * VERSION constant now at `OAuth::Version::VERSION`
 
 ### Removed
 * Ruby 2.0, 2.1, 2.2, and 2.3 are no longer valid install targets
@@ -297,7 +302,7 @@ The "Can it be the end of the line for 0.5.x?" Release
 
 ## [0.3.4] 2009-05-06
 ### Changed
-* OAuth::Client::Helper uses OAuth::VERSION (chadisfaction)
+* OAuth::Client::Helper uses OAuth::Version::VERSION (chadisfaction)
 
 ### Fixed
 * Fix OAuth::RequestProxy::ActionControllerRequest's handling of params (Tristan Groléat)

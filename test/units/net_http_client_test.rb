@@ -91,7 +91,7 @@ class NetHTTPClientTest < Minitest::Test
     request.set_form_data(@request_parameters)
     request.oauth!(@http, @consumer, @token, { nonce: @nonce, timestamp: @timestamp })
 
-    assert_equal "MyApp (OAuth gem v#{OAuth::VERSION})", request["User-Agent"]
+    assert_equal "MyApp (OAuth gem v#{OAuth::Version::VERSION})", request["User-Agent"]
   end
 
   def test_that_version_is_set_when_no_user_agent
@@ -99,7 +99,7 @@ class NetHTTPClientTest < Minitest::Test
     request.set_form_data(@request_parameters)
     request.oauth!(@http, @consumer, @token, { nonce: @nonce, timestamp: @timestamp })
 
-    assert_equal "OAuth gem v#{OAuth::VERSION}", request["User-Agent"]
+    assert_equal "OAuth gem v#{OAuth::Version::VERSION}", request["User-Agent"]
   end
 
   def test_that_using_get_params_works

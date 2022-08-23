@@ -71,7 +71,7 @@ module OAuth
       end
 
       def amend_user_agent_header(headers)
-        @oauth_ua_string ||= "OAuth gem v#{OAuth::VERSION}"
+        @oauth_ua_string ||= "OAuth gem v#{OAuth::Version::VERSION}"
         # Net::HTTP in 1.9 appends Ruby
         if headers["User-Agent"] && headers["User-Agent"] != "Ruby"
           headers["User-Agent"] += " (#{@oauth_ua_string})"
