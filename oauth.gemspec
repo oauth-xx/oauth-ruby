@@ -29,7 +29,7 @@ Gem::Specification.new do |spec|
   # This gem will work with Ruby 2.0 or greater...
   spec.required_ruby_version = ">= 2.0"
   spec.post_install_message = "
-You have installed oauth2 version #{OAuth::VERSION}, congratulations!
+You have installed oauth version #{OAuth::VERSION}, congratulations!
 
 Support for the 0.5.x series will end in April, 2023. Please upgrade to 0.6.x as soon as possible!
 The only breaking change will be dropped support for Ruby 2.0, 2.1, 2.2, and 2.3.
