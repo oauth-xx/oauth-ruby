@@ -39,5 +39,5 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency("rest-client")
   spec.add_development_dependency("rubocop-lts", "~> 12.0")
   spec.add_development_dependency("typhoeus", ">= 0.1.13")
-  spec.add_development_dependency("webmock", "<= 3.14.0")
+  spec.add_development_dependency("webmock", "<= 3.18.1")
 end
