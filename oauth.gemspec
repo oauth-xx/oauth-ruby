@@ -3,6 +3,10 @@
 require_relative "lib/oauth/version"
 
 Gem::Specification.new do |spec|
+  # "oauth-tty" was extracted from this gem with release 1.1 of this gem
+  # It is now a dependency for backward compatibility.
+  # The dependency will be removed with release 2.0, by April 2023.
+  spec.add_dependency("oauth-tty", ["~> 1.0", ">= 1.0.1"])
   spec.add_dependency("version_gem", "~> 1.1")
 
   spec.name    = "oauth"
@@ -14,7 +18,6 @@ Gem::Specification.new do |spec|
   spec.email       = "oauth-ruby@googlegroups.com"
   spec.summary     = "OAuth Core Ruby implementation"
 
-  spec.executables = ["oauth"]
   spec.homepage = "https://github.com/oauth-xx/oauth-ruby"
   spec.metadata["homepage_uri"] = spec.homepage
   spec.metadata["source_code_uri"] = "#{spec.homepage}/tree/v#{spec.version}"

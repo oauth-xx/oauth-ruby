@@ -26,5 +26,4 @@ module OAuth
   end
 end
 
-# TODO: When dropping support to Ruby 2.0, stop using send
 Minitest::Test.include OAuth::MinitestHelpers

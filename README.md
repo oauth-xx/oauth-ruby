@@ -22,7 +22,7 @@ See the sibling `oauth2` gem for OAuth 2.0 implementations in Ruby.
 
 **New EOL Policy**
 
-Versions 1.0.x will be EOL no later than April, 2025.
+Versions 1.x will be EOL no later than April, 2025.
 Versions 0.6.x will be EOL no later than April, 2024.
 Versions 0.5.x will be EOL no later than April, 2023.
 
@@ -30,7 +30,7 @@ This will facilitate dropping support for old, dead, and crusty versions of Ruby
 
 Non-commercial support for the oldest version of Ruby (which itself is going EOL) will be dropped each year in April.
 
-Please upgrade to version 1.0.  The only breaking change in 1.0 is dropping old Rubies.
+Please upgrade to version 1.1.  The only breaking change in 1.x is dropping old Rubies.
 
 ## Status
 
@@ -191,7 +191,7 @@ Targeted ruby compatibility is non-EOL versions of Ruby, currently 2.7, 3.0, and
 3.1. Ruby is limited to 2.7+ in the gemspec, and this will change with minor version bumps,
 while the gem is still in 0.x, in accordance with the SemVer spec.
 
-The `main` branch now targets 1.0.x releases, for Ruby >= 2.7.
+The `main` branch now targets 1.x releases, for Ruby >= 2.7.
 See `v0.6-maintenance` (EOL April, 2024) branch for Ruby >= 2.4.
 See `v0.5-maintenance` (EOL April, 2023) branch for Ruby >= 2.0.
 
@@ -248,7 +248,11 @@ gem. After extraction that gem was made to depend on this gem.
 
 Unfortunately, this gem does have some Rails related bits that are
 **optional** to load. You don't need Rails! The Rails bits may be pulled out
-into a separate gem with the release of version 1.0 of this gem.
+into a separate gem with the 1.x minor updates of this gem.
+
+## Extensions
+
+* [oauth-tty (on Gitlab)](https://gitlab.com/oauth-xx/oauth-tty) ([rubygems.org](https://rubygems.org/gems/oauth-tty))
 
 ## Usage
 
@@ -335,7 +339,7 @@ the [Pessimistic Version Constraint][pvc] with two digits of precision.
 For example:
 
 ```ruby
-spec.add_dependency "oauth", "~> 1.0"
+spec.add_dependency "oauth", "~> 1.1"
 ```
 
 ## License
