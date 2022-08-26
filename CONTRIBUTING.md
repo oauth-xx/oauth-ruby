@@ -8,6 +8,23 @@ To submit a patch, please fork the project and create a patch with
 tests. Once you're happy with it send a pull request and post a message to the
 [google group][mailinglist].
 
+## Run tests
+
+### Against Rails 6
+
+```bash
+BUNDLE_GEMFILE=gemfiles/a6.gemfile bundle install
+BUNDLE_GEMFILE=gemfiles/a6.gemfile bundle exec rake
+```
+
+
+### Against Rails 7
+
+```bash
+BUNDLE_GEMFILE=gemfiles/a7.gemfile bundle install
+BUNDLE_GEMFILE=gemfiles/a7.gemfile bundle exec rake
+```
+
 ## Contributors
 
 [![Contributors](https://contrib.rocks/image?repo=oauth-xx/oauth-ruby)][contributors]

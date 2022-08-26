@@ -4,7 +4,6 @@ inherit_gem:
   rubocop-lts: rubocop-lts.yml
 
 require:
-  - 'rubocop-faker'
   - 'rubocop-md'
   - 'rubocop-minitest'
   - 'rubocop-packaging'

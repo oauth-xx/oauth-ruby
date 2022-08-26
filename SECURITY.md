@@ -4,6 +4,7 @@
 
 | Version | Supported          | EOL     |
 |---------|--------------------|---------|
+| 1.1.x   | :white_check_mark: | 04/2025 |
 | 1.0.x   | :white_check_mark: | 04/2025 |
 | 0.6.x   | :white_check_mark: | 04/2024 |
 | 0.5.x   | :white_check_mark: | 04/2023 |

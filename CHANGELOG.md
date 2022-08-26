@@ -13,6 +13,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Removed
 
+## [1.1.0] 2022-08-26
+### Changed
+* `OAuth::CLI` has been extracted to a new gem, `oauth-tty`, hosted on [Gitlab](https://gitlab.com/oauth-xx/oauth-tty)
+  * The public API of `oauth-tty` is backwards compatible (meaning `OAuth::CLI`)
+  * The change within the `oauth` gem is backwards compatible as `oauth-tty` has been added as a dependency
+  * Minor version bump is cautionary, as many lines of code have changed.
+
 ## [1.0.0] 2022-08-23
 ### Changed
 * Dropped support for Ruby < 2.7
@@ -440,7 +447,8 @@ but please have a look at the unit tests.
 * Moved all non-Rails functionality from the Rails plugin:
   http://code.google.com/p/oauth-plugin/
 
-[Unreleased]: https://github.com/oauth-xx/oauth-ruby/compare/v1.0.0...main
+[Unreleased]: https://github.com/oauth-xx/oauth-ruby/compare/v1.1.0...main
+[1.1.0]: https://github.com/oauth-xx/oauth-ruby/releases/tag/v1.1.0
 [1.0.0]: https://github.com/oauth-xx/oauth-ruby/releases/tag/v1.0.0
 [0.6.1]: https://github.com/oauth-xx/oauth-ruby/releases/tag/v0.6.1
 [0.6.0]: https://github.com/oauth-xx/oauth-ruby/releases/tag/v0.6.0
