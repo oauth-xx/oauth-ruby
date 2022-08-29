@@ -31,13 +31,14 @@ Gem::Specification.new do |spec|
   spec.post_install_message = "
 You have installed oauth version #{OAuth::VERSION}, congratulations!
 
-Support for the 0.5.x series will end in April, 2023. Please upgrade to 0.6.x as soon as possible!
-The only breaking change will be dropped support for Ruby 2.0, 2.1, 2.2, and 2.3.
+Support for the 0.5.x series will end by April, 2023. Please upgrade to 0.6.x or 1.x as soon as possible!
+For 0.6.x the only breaking change will be dropped support for Ruby 2.0, 2.1, 2.2, and 2.3.
+For 1.x the only breaking change will be dropped support for Ruby 2.4, 2.5, and 2.6.
 
 Please see:
-• https://github.com/oauth-xx/oauth/blob/main/SECURITY.md
+• #{spec.homepage}/blob/main/SECURITY.md
 
-Note also that I, and this project, am in the process of leaving Github.
+Note also that I am, and this project is, in the process of leaving Github.
 I wrote about some of the reasons here:
 • https://dev.to/galtzo/im-leaving-github-50ba
 

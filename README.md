@@ -322,7 +322,7 @@ While on 0.x releases three digits of precision should be used.
 For example:
 
 ```ruby
-spec.add_dependency "oauth", "~> 0.5.10"
+spec.add_dependency "oauth", "~> 0.5.14"
 ```
 
 ## License
