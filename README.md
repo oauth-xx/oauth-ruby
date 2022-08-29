@@ -96,7 +96,7 @@ The link tokens in the following sections should be kept ordered by the row and 
 [📗next]: https://github.com/oauth-xx/oauth-ruby/milestone/1
 [📗next-img]: https://img.shields.io/github/milestones/progress/oauth-xx/oauth-ruby/1?label=Next%20Version
 
-<!-- 3️⃣ maintanence & linting -->
+<!-- 3️⃣ maintenance & linting -->
 [⛳cclim-maint]: https://codeclimate.com/github/oauth-xx/oauth-ruby/maintainability
 [⛳cclim-maint-img♻️]: https://api.codeclimate.com/v1/badges/3cf23270c21e8791d788/maintainability
 [🖇triage-help]: https://www.codetriage.com/oauth-xx/oauth-ruby
@@ -191,7 +191,8 @@ Targeted ruby compatibility is non-EOL versions of Ruby, currently 2.7, 3.0, and
 3.1. Ruby is limited to 2.7+ in the gemspec, and this will change with minor version bumps,
 while the gem is still in 0.x, in accordance with the SemVer spec.
 
-The `main` branch now targets 1.x releases, for Ruby >= 2.7.
+The `main` branch now targets 1.1.x releases, for Ruby >= 2.7.
+See `v1.0-maintenance` (EOL April, 2025) branch for Ruby >= 2.7.
 See `v0.6-maintenance` (EOL April, 2024) branch for Ruby >= 2.4.
 See `v0.5-maintenance` (EOL April, 2023) branch for Ruby >= 2.0.
 
