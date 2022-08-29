@@ -41,7 +41,7 @@ Non-commercial support for the 1.x series will end by April, 2025. Please make a
 The only breaking change will be dropped support for Ruby 2.7 and any other versions which will also have reached EOL by then.
 
 Please see:
-• https://github.com/oauth-xx/oauth/blob/main/SECURITY.md
+• #{spec.homepage}/blob/main/SECURITY.md
 
 Note also that I am, and this project is, in the process of leaving Github.
 I wrote about some of the reasons here:
