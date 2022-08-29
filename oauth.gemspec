@@ -7,6 +7,7 @@ Gem::Specification.new do |spec|
   # It is now a dependency for backward compatibility.
   # The dependency will be removed with release 2.0, by April 2023.
   spec.add_dependency("oauth-tty", ["~> 1.0", ">= 1.0.1"])
+  spec.add_dependency("snaky_hash", "~> 2.0")
   spec.add_dependency("version_gem", "~> 1.1")
 
   spec.name    = "oauth"
