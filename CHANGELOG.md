@@ -27,6 +27,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * New EOL Policy
   * Non-commercial support for the oldest version of Ruby (which itself is going EOL) will be dropped each year in April
 
+## [0.6.2] 2022-08-29
+### Changed
+* `OAuth::Comsumer#options` hash is now handled by `snaky_hash`, which was extracted from `oauth2`
+  * symbolized keys, dot-access and snake-case are now normalized
+
 ## [0.6.1] 2022-08-23
 ### Changed
 * Fixed documentation in SECURITY.md
@@ -48,6 +53,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Removed
 * Ruby 2.0, 2.1, 2.2, and 2.3 are no longer valid install targets
+
+## [0.5.14] 2022-08-29
+The "hopeful last 0.5.x" Release
+
+### Fixed
+* More typos fixed
 
 ## [0.5.13] 2022-08-23
 The "I think I caught 'em all!" Release
@@ -448,8 +459,10 @@ but please have a look at the unit tests.
 [Unreleased]: https://github.com/oauth-xx/oauth-ruby/compare/v1.0.1...main
 [1.0.1]: https://github.com/oauth-xx/oauth-ruby/releases/tag/v1.0.1
 [1.0.0]: https://github.com/oauth-xx/oauth-ruby/releases/tag/v1.0.0
+[0.6.2]: https://github.com/oauth-xx/oauth-ruby/releases/tag/v0.6.2
 [0.6.1]: https://github.com/oauth-xx/oauth-ruby/releases/tag/v0.6.1
 [0.6.0]: https://github.com/oauth-xx/oauth-ruby/releases/tag/v0.6.0
+[0.5.14]: https://github.com/oauth-xx/oauth-ruby/releases/tag/v0.5.14
 [0.5.13]: https://github.com/oauth-xx/oauth-ruby/releases/tag/v0.5.13
 [0.5.12]: https://github.com/oauth-xx/oauth-ruby/releases/tag/v0.5.12
 [0.5.11]: https://github.com/oauth-xx/oauth-ruby/releases/tag/v0.5.11
