@@ -13,12 +13,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Removed
 
-## [1.1.0] 2022-08-26
+## [1.1.0] 2022-08-29
 ### Changed
 * `OAuth::CLI` has been extracted to a new gem, `oauth-tty`, hosted on [Gitlab](https://gitlab.com/oauth-xx/oauth-tty)
   * The public API of `oauth-tty` is backwards compatible (meaning `OAuth::CLI`)
   * The change within the `oauth` gem is backwards compatible as `oauth-tty` has been added as a dependency
   * Minor version bump is cautionary, as many lines of code have changed.
+* `OAuth::Comsumer#options` hash is now handled by `snaky_hash`, which was extracted from `oauth2`
+  * symbolized keys, dot-access and snake-case are now normalized
 
 ## [1.0.0] 2022-08-23
 ### Changed
