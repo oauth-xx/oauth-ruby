@@ -13,6 +13,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Removed
 
+## [1.0.1] 2022-08-29
+### Changed
+* `OAuth::Comsumer#options` hash is now handled by `snaky_hash`, which was extracted from `oauth2`
+  * symbolized keys, dot-access and snake-case are now normalized
+
 ## [1.0.0] 2022-08-23
 ### Changed
 * Dropped support for Ruby < 2.7
@@ -440,7 +445,8 @@ but please have a look at the unit tests.
 * Moved all non-Rails functionality from the Rails plugin:
   http://code.google.com/p/oauth-plugin/
 
-[Unreleased]: https://github.com/oauth-xx/oauth-ruby/compare/v1.0.0...main
+[Unreleased]: https://github.com/oauth-xx/oauth-ruby/compare/v1.0.1...main
+[1.0.1]: https://github.com/oauth-xx/oauth-ruby/releases/tag/v1.0.1
 [1.0.0]: https://github.com/oauth-xx/oauth-ruby/releases/tag/v1.0.0
 [0.6.1]: https://github.com/oauth-xx/oauth-ruby/releases/tag/v0.6.1
 [0.6.0]: https://github.com/oauth-xx/oauth-ruby/releases/tag/v0.6.0
