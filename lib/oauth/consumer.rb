@@ -30,47 +30,49 @@ module OAuth
     end
     CA_FILE = nil unless defined?(CA_FILE)
 
-    @@default_options = {
-      # Signature method used by server. Defaults to HMAC-SHA1
-      signature_method: "HMAC-SHA1",
+    @@default_options = SnakyHash::SymbolKeyed.new(
+      {
+        # Signature method used by server. Defaults to HMAC-SHA1
+        signature_method: "HMAC-SHA1",
 
-      # default paths on site. These are the same as the defaults set up by the generators
-      request_token_path: "/oauth/request_token",
-      authenticate_path: "/oauth/authenticate",
-      authorize_path: "/oauth/authorize",
-      access_token_path: "/oauth/access_token",
+        # default paths on site. These are the same as the defaults set up by the generators
+        request_token_path: "/oauth/request_token",
+        authenticate_path: "/oauth/authenticate",
+        authorize_path: "/oauth/authorize",
+        access_token_path: "/oauth/access_token",
 
-      proxy: nil,
-      # How do we send the oauth values to the server see
-      # https://oauth.net/core/1.0/#consumer_req_param for more info
-      #
-      # Possible values:
-      #
-      #   :header - via the Authorize header (Default) ( option 1. in spec)
-      #   :body - url form encoded in body of POST request ( option 2. in spec)
-      #   :query_string - via the query part of the url ( option 3. in spec)
-      scheme: :header,
+        proxy: nil,
+        # How do we send the oauth values to the server see
+        # https://oauth.net/core/1.0/#consumer_req_param for more info
+        #
+        # Possible values:
+        #
+        #   :header - via the Authorize header (Default) ( option 1. in spec)
+        #   :body - url form encoded in body of POST request ( option 2. in spec)
+        #   :query_string - via the query part of the url ( option 3. in spec)
+        scheme: :header,
 
-      # Default http method used for OAuth Token Requests (defaults to :post)
-      http_method: :post,
+        # Default http method used for OAuth Token Requests (defaults to :post)
+        http_method: :post,
 
-      # Add a custom ca_file for consumer
-      # :ca_file       => '/etc/certs.pem'
+        # Add a custom ca_file for consumer
+        # :ca_file       => '/etc/certs.pem'
 
-      # Possible values:
-      #
-      # nil, false - no debug output
-      # true - uses $stdout
-      # some_value - uses some_value
-      debug_output: nil,
+        # Possible values:
+        #
+        # nil, false - no debug output
+        # true - uses $stdout
+        # some_value - uses some_value
+        debug_output: nil,
 
-      # Defaults to producing a body_hash as part of the signature but
-      # can be disabled since it's not officially part of the OAuth 1.0
-      # spec. Possible values are true and false
-      body_hash_enabled: true,
+        # Defaults to producing a body_hash as part of the signature but
+        # can be disabled since it's not officially part of the OAuth 1.0
+        # spec. Possible values are true and false
+        body_hash_enabled: true,
 
-      oauth_version: "1.0"
-    }
+        oauth_version: "1.0"
+      }
+    )
 
     attr_accessor :options, :key, :secret
     attr_writer   :site, :http
@@ -103,7 +105,8 @@ module OAuth
       @secret = consumer_secret
 
       # ensure that keys are symbols
-      @options = @@default_options.merge(options.transform_keys(&:to_sym))
+      snaky_options = SnakyHash::SymbolKeyed.new(options)
+      @options = @@default_options.merge(snaky_options)
     end
 
     # The default http method

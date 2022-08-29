@@ -3,6 +3,7 @@
 require_relative "lib/oauth/version"
 
 Gem::Specification.new do |spec|
+  spec.add_dependency("snaky_hash", "~> 2.0")
   spec.add_dependency("version_gem", "~> 1.1")
 
   spec.name    = "oauth"
