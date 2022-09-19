@@ -22,7 +22,7 @@ git remote set-url origin git@gitlab.com:oauth-xx/oauth.git
 * Live Chat on Gitter: [![Join the chat at https://gitter.im/oauth-xx/oauth-ruby](https://badges.gitter.im/Join%20Chat.svg)][chat]
 * Maintainer's Blog: [![Blog](https://img.shields.io/badge/blog-railsbling-brightgreen.svg?style=flat)][blogpage]
 
-[documentation]: https://rubydoc.info/github/oauth-xx/oauth-ruby
+[documentation]: https://rubydoc.info/gems/oauth
 [mailinglist]: http://groups.google.com/group/oauth-ruby
 [chat]: https://gitter.im/oauth-xx/oauth-ruby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge
 [blogpage]: http://www.railsbling.com/tags/oauth/
