@@ -10,7 +10,10 @@ Gem::Specification.new do |spec|
   spec.add_dependency("snaky_hash", "~> 2.0")
   spec.add_dependency("version_gem", "~> 1.1")
 
-  spec.name    = "oauth"
+  spec.cert_chain = ["certs/pboling.pem"]
+  spec.signing_key = File.expand_path("~/.ssh/gem-private_key.pem") if $PROGRAM_NAME.end_with?("gem")
+
+  spec.name = "oauth"
   spec.version = OAuth::Version::VERSION
   spec.license = "MIT"
 
