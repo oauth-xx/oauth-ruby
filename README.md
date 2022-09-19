@@ -22,7 +22,8 @@ See the sibling `oauth2` gem for OAuth 2.0 implementations in Ruby.
 
 **New EOL Policy**
 
-Versions 1.x will be EOL no later than April, 2025.
+Versions 1.1.x will be EOL no later than April, 2025.
+Versions 1.0.x will be EOL no later than April, 2023.
 Versions 0.6.x will be EOL no later than April, 2024.
 Versions 0.5.x will be EOL no later than April, 2023.
 
@@ -30,7 +31,8 @@ This will facilitate dropping support for old, dead, and crusty versions of Ruby
 
 Non-commercial support for the oldest version of Ruby (which itself is going EOL) will be dropped each year in April.
 
-Please upgrade to version 1.1.  The only breaking change in 1.x is dropping old Rubies.
+Please upgrade to version 1.1.x.  The only breaking change in 1.0.x is dropping old Rubies,
+while 1.1.x extracts the CLI tool to an external gem dependency (`oauth-tty`).
 
 ## Status
 
@@ -216,12 +218,13 @@ fashion. If critical issues for a particular implementation exist at the time
 of a major release, support for that Ruby version may be dropped.
 </details>
 
-|     | Ruby OAuth Version | Maintenance Branch | EOL       | 🚂 Compatibility       | Official 💎          | Unofficial 💎                | Incidental 💎 |
-|:----|--------------------|--------------------|-----------|------------------------|----------------------|------------------------------|---------------|
-| 1️⃣ | 1.0.x              | `main`             |           | Rails 6, 7             | 2.7, 3.0, 3.1        | sorry, not sorry             | nope          |
-| 2️⃣ | 0.6.x              | `v0.6-maintenance` | 04/2024   | Rails 5, 6, 7          | 2.7, 3.0, 3.1        | 2.5, 2.6                     | 2.4           |
-| 3️⃣ | 0.5.x              | `v0.5-maintenance` | 04/2023   | Rails 2, 3, 4, 5, 6, 7 | 2.7, 3.0, 3.1        | 2.1, 2.2, 2.3, 2.4, 2.5, 2.6 | 2.0           |
-| 4️⃣ | older              | N/A                | yesterday |                        | Best of luck to you! | Please upgrade!              | noop          |
+|     | Ruby OAuth Version | Maintenance Branch | EOL       | 🚂 Compatibility       | Official 💎   | Unofficial 💎                | Incidental 💎 |
+|:----|--------------------|--------------------|-----------|------------------------|---------------|------------------------------|---------------|
+| 1️⃣ | 1.1.x              | `main`             | 05/2025   | Rails 6, 7             | 2.7, 3.0, 3.1 | none                         | none          |
+| 2️⃣ | 1.0.x              | `v1.0-maintenance` | 04/2023   | Rails 6, 7             | 2.7, 3.0, 3.1 | none                         | none          |
+| 3️⃣ | 0.6.x              | `v0.6-maintenance` | 04/2024   | Rails 5, 6, 7          | 2.7, 3.0, 3.1 | 2.5, 2.6                     | 2.4           |
+| 4️⃣ | 0.5.x              | `v0.5-maintenance` | 04/2023   | Rails 2, 3, 4, 5, 6, 7 | 2.7, 3.0, 3.1 | 2.1, 2.2, 2.3, 2.4, 2.5, 2.6 | 2.0           |
+| 5️⃣ | older              | N/A                | yesterday | ?                      | none          | none                         | none          |
 
 NOTE: Once 1.0 is released, the 0.x series will only receive critical bug and security updates.
 See [SECURITY.md][🚎sec-pol]

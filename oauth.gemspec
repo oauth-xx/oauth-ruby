@@ -17,10 +17,11 @@ Gem::Specification.new do |spec|
   spec.version = OAuth::Version::VERSION
   spec.license = "MIT"
 
-  spec.authors     = ["Pelle Braendgaard", "Blaine Cook", "Larry Halff", "Jesse Clark", "Jon Crosby",
-                      "Seth Fitzsimmons", "Matt Sanford", "Aaron Quint", "Peter Boling"]
-  spec.email       = "oauth-ruby@googlegroups.com"
-  spec.summary     = "OAuth Core Ruby implementation"
+  spec.authors = ["Pelle Braendgaard", "Blaine Cook", "Larry Halff", "Jesse Clark", "Jon Crosby",
+                  "Seth Fitzsimmons", "Matt Sanford", "Aaron Quint", "Peter Boling"]
+  spec.email = ["peter.boling@gmail.com", "oauth-ruby@googlegroups.com"]
+  spec.summary = "OAuth 1.0 Core Ruby implementation"
+  spec.description = "A Ruby wrapper for the original OAuth 1.0 spec."
 
   spec.homepage = "https://gitlab.com/oauth-xx/oauth"
   spec.metadata["homepage_uri"] = spec.homepage
@@ -33,25 +34,37 @@ Gem::Specification.new do |spec|
   spec.metadata["funding_uri"] = "https://liberapay.com/pboling"
   spec.metadata["rubygems_mfa_required"] = "true"
 
-  spec.files = Dir.glob("lib/**/*.rb") + ["LICENSE", "README.md", "CHANGELOG.md", "CODE_OF_CONDUCT.md", "SECURITY.md",
-                                          "CONTRIBUTING.md"]
-  spec.extra_rdoc_files = ["TODO"]
+  spec.files = Dir[
+    "lib/**/*",
+    "CHANGELOG.md",
+    "CODE_OF_CONDUCT.md",
+    "CONTRIBUTING.md",
+    "LICENSE.txt",
+    "README.md",
+    "SECURITY.md",
+  ]
 
-  # This gem will work with Ruby 2.7 or greater...
   spec.required_ruby_version = ">= 2.7"
   spec.post_install_message = "
 You have installed oauth version #{OAuth::Version::VERSION}, congratulations!
-
-Non-commercial support for the 1.x series will end by April, 2025. Please make a plan to upgrade to the next version prior to that date.
-The only breaking change will be dropped support for Ruby 2.7 and any other versions which will also have reached EOL by then.
 
 Please see:
 • #{spec.homepage}/-/blob/main/SECURITY.md
 • #{spec.homepage}/-/blob/v#{spec.version}/CHANGELOG.md#111-2022-09-19
 
-Note also that I am, and this project is, in the process of leaving Github.
-I wrote about some of the reasons here:
+Major updates:
+1. master branch renamed to main
+• Update your local: git checkout master; git branch -m master main; git branch --unset-upstream; git branch -u origin/main
+2. Github has been replaced with Gitlab; I wrote about some of the reasons here:
 • https://dev.to/galtzo/im-leaving-github-50ba
+• Update your local: git remote set-url origin git@gitlab.com:oauth-xx/oauth.git
+3. Google Group is active (again)!
+• https://groups.google.com/g/oauth-ruby/c/QA_dtrXWXaE
+4. Gitter Chat is active (still)!
+• https://gitter.im/oauth-xx/
+5. Non-commercial support for the 1.x series will end by April, 2025. Please make a plan to upgrade to the next version prior to that date.
+Support will be dropped for Ruby 2.7 and any other Ruby versions which will also have reached EOL by then.
+6. Gem releases are now cryptographically signed for security.
 
 If you are a human, please consider a donation as I move toward supporting myself with Open Source work:
 • https://liberapay.com/pboling

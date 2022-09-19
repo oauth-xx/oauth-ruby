@@ -5,7 +5,7 @@
 | Version | Supported | EOL     | Post-EOL / Enterprise                 |
 |---------|-----------|---------|---------------------------------------|
 | 1.1.x   | ✅         | 04/2025 | [Tidelift Subscription][tidelift-ref] |
-| 1.0.x   | ✅         | 04/2025 | [Tidelift Subscription][tidelift-ref] |
+| 1.0.x   | ✅         | 04/2023 | [Tidelift Subscription][tidelift-ref] |
 | 0.6.x   | ✅         | 04/2024 | [Tidelift Subscription][tidelift-ref] |
 | 0.5.x   | ✅         | 04/2023 | [Tidelift Subscription][tidelift-ref] |
 | <= 0.5  | ⛔         | ⛔       | ⛔                                     |
