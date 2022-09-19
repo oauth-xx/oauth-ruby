@@ -22,11 +22,11 @@ Gem::Specification.new do |spec|
   spec.email       = "oauth-ruby@googlegroups.com"
   spec.summary     = "OAuth Core Ruby implementation"
 
-  spec.homepage = "https://github.com/oauth-xx/oauth-ruby"
+  spec.homepage = "https://gitlab.com/oauth-xx/oauth"
   spec.metadata["homepage_uri"] = spec.homepage
-  spec.metadata["source_code_uri"] = "#{spec.homepage}/tree/v#{spec.version}"
-  spec.metadata["changelog_uri"] = "#{spec.homepage}/blob/v#{spec.version}/CHANGELOG.md"
-  spec.metadata["bug_tracker_uri"] = "#{spec.homepage}/issues"
+  spec.metadata["source_code_uri"] = "#{spec.homepage}/-/tree/v#{spec.version}"
+  spec.metadata["changelog_uri"] = "#{spec.homepage}/-/blob/v#{spec.version}/CHANGELOG.md"
+  spec.metadata["bug_tracker_uri"] = "#{spec.homepage}/-/issues"
   spec.metadata["documentation_uri"] = "https://www.rubydoc.info/gems/#{spec.name}/#{spec.version}"
   spec.metadata["wiki_uri"] = "#{spec.homepage}/-/wiki"
   spec.metadata["mailing_list_uri"] = "https://groups.google.com/g/oauth-ruby"
@@ -46,7 +46,8 @@ Non-commercial support for the 1.x series will end by April, 2025. Please make a
 The only breaking change will be dropped support for Ruby 2.7 and any other versions which will also have reached EOL by then.
 
 Please see:
-• #{spec.homepage}/blob/main/SECURITY.md
+• #{spec.homepage}/-/blob/main/SECURITY.md
+• #{spec.homepage}/-/blob/v#{spec.version}/CHANGELOG.md#111-2022-09-19
 
 Note also that I am, and this project is, in the process of leaving Github.
 I wrote about some of the reasons here:

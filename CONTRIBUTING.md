@@ -1,6 +1,6 @@
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at [https://github.com/oauth-xx/oauth-ruby][source]. This project is
+Bug reports and pull requests are welcome on GitHub at [https://gitlab.com/oauth-xx/oauth][source]. This project is
 intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to
 the [code of conduct][conduct].
 
@@ -33,8 +33,8 @@ Made with [contributors-img][contrib-rocks].
 
 [comment]: <> (Following links are used by README, CONTRIBUTING, Homepage)
 
-[conduct]: https://github.com/oauth-xx/oauth-ruby/blob/main/CODE_OF_CONDUCT.md
-[contributors]: https://github.com/oauth-xx/oauth-ruby/graphs/contributors
+[conduct]: https://gitlab.com/oauth-xx/oauth/-/blob/main/CODE_OF_CONDUCT.md
+[contributors]: https://gitlab.com/oauth-xx/oauth/-/graphs/main
 [mailinglist]: http://groups.google.com/group/oauth-ruby
-[source]: https://github.com/oauth-xx/oauth-ruby/
+[source]: https://gitlab.com/oauth-xx/oauth/
 [contrib-rocks]: https://contrib.rocks
