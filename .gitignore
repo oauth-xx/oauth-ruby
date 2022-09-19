@@ -1,8 +1,6 @@
 .bundle
-Gemfile.lock
 coverage
 *.gem
 
-gemfiles/*.lock
 /.tool-versions
 /.idea/
