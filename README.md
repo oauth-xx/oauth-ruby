@@ -32,7 +32,7 @@ This will facilitate dropping support for old, dead, and crusty versions of Ruby
 Non-commercial support for the oldest version of Ruby (which itself is going EOL) will be dropped each year in April.
 
 Please upgrade to version 1.1.x.  The only breaking change in 1.0.x is dropping old Rubies,
-while 1.1.x extracts the CLI tool to an external gem dependency (`oauth-tty`).
+while 1.1.x extracts the CLI tool to an external gem dependency ([`oauth-tty`](https://gitlab.com/oauth-xx/oauth-tty)).
 
 ## Status
 
@@ -66,12 +66,12 @@ appended indicators:
 |     | Project               | bundle add oauth                                                                                                                                                                                                                                                   |
 |:----|-----------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | 1️⃣ | name, license, docs   | [![RubyGems.org][⛳️name-img]][⛳️gem] [![License: MIT][🖇src-license-img]][🖇src-license] [![RubyDoc.info][🚎yard-img]][🚎yard] [![SemVer 2.0.0][🧮semver-img]][🧮semver] [![Keep-A-Changelog 1.0.0][📗keep-changelog-img]][📗keep-changelog]                       |
-| 2️⃣ | version & activity    | [![Gem Version][⛳️version-img]][⛳️gem] [![Total Downloads][🖇DL-total-img]][⛳️gem] [![Download Rank][🏘DL-rank-img]][⛳️gem] [![Source Code][🚎src-main-img]][🚎src-main]                                                                                           |
-| 3️⃣ | maintenance & linting | [![Maintainability][⛳cclim-maint-img♻️]][⛳cclim-maint] [![Helpers][🖇triage-help-img]][🖇triage-help] [![Depfu][🏘depfu-img♻️]][🏘depfu♻️] [![Contributors][🚎contributors-img]][🚎contributors] [![Style][🖐style-wf-img]][🖐style-wf]                            |
+| 2️⃣ | version & activity    | [![Gem Version][⛳️version-img]][⛳️gem] [![Total Downloads][🖇DL-total-img]][⛳️gem] [![Download Rank][🏘DL-rank-img]][⛳️gem] [![Source Code][🚎src-main-img]][🚎src-main] [![Contributors][🖐contributors-img]][🖐contributors]                                     |
+| 3️⃣ | maintenance & linting | [![Maintainability][⛳cclim-maint-img♻️]][⛳cclim-maint] [![Helpers][🖇triage-help-img]][🖇triage-help] [![Depfu][🏘depfu-img♻️]][🏘depfu♻️] [![Style][🖐style-wf-img]][🖐style-wf]                                                                                  |
 | 4️⃣ | testing               | [![Supported][🏘sup-wf-img]][🏘sup-wf] [![Heads][🚎heads-wf-img]][🚎heads-wf] [![MacOS][🧮mac-wf-img]][🧮mac-wf] [![Windows][📗win-wf-img]][📗win-wf]                                                                                                              |
 | 5️⃣ | coverage & security   | [![CodeClimate][⛳cclim-cov-img♻️]][⛳cclim-cov] [![CodeCov][🖇codecov-img♻️]][🖇codecov] [![Coveralls][🏘coveralls-img]][🏘coveralls] [![Security Policy][🚎sec-pol-img]][🚎sec-pol] [![CodeQL][🖐codeQL-img]][🖐codeQL] [![Code Coverage][🧮cov-wf-img]][🧮cov-wf] |
-| 6️⃣ | resources             | [![Discussion][⛳gh-discussions-img]][⛳gh-discussions] [![Get help on Codementor][🖇codementor-img]][🖇codementor] [![Chat][🏘chat-img]][🏘chat] [![Blog][🚎blog-img]][🚎blog] [![Blog][🖐wiki-img]][🖐wiki]                                                        |
-| 7️⃣ | spread 💖             | [![Liberapay Patrons][⛳liberapay-img]][⛳liberapay] [![Sponsor Me][🖇sponsor-img]][🖇sponsor] [![Tweet @ Peter][🏘tweet-img]][🏘tweet] [🌏][aboutme] [👼][angelme] [💻][coderme]                                                                                    |
+| 6️⃣ | resources             | [![Mailing List][⛳mail-list-img]][⛳mail-list] [![Get help on Codementor][🖇codementor-img]][🖇codementor] [![Chat][🏘chat-img]][🏘chat] [![Blog][🚎blog-img]][🚎blog] [![Blog][🖐wiki-img]][🖐wiki]                                                                |
+| 7️⃣ | spread 💖             | [![Liberapay Patrons][⛳liberapay-img]][⛳liberapay] [![Sponsor Me][🖇sponsor-img]][🖇sponsor] [![Code of Conduct][🚎code-conduct-img]][🚎code-conduct] [![Tweet @ Peter][🏘tweet-img]][🏘tweet] [🌏][aboutme] [👼][angelme] [💻][coderme]                           |
 
 <!--
 The link tokens in the following sections should be kept ordered by the row and badge numbering scheme
@@ -95,6 +95,8 @@ The link tokens in the following sections should be kept ordered by the row and 
 [🏘DL-rank-img]: https://img.shields.io/gem/rt/oauth.svg
 [🚎src-main]: https://gitlab.com/oauth-xx/oauth/-/tree/main
 [🚎src-main-img]: https://img.shields.io/badge/source-gitlab-blue.svg?style=flat
+[🖐contributors]: https://gitlab.com/oauth-xx/oauth/-/graphs/main
+[🖐contributors-img]: https://img.shields.io/github/contributors-anon/oauth-xx/oauth-ruby
 
 <!-- 3️⃣ maintenance & linting -->
 [⛳cclim-maint]: https://codeclimate.com/github/oauth-xx/oauth-ruby/maintainability
@@ -103,8 +105,6 @@ The link tokens in the following sections should be kept ordered by the row and 
 [🖇triage-help-img]: https://www.codetriage.com/oauth-xx/oauth-ruby/badges/users.svg
 [🏘depfu♻️]: https://depfu.com/github/oauth-xx/oauth-ruby?project_id=22868
 [🏘depfu-img♻️]: https://badges.depfu.com/badges/d570491bac0ad3b0b65deb3c82028327/count.svg
-[🚎contributors]: https://gitlab.com/oauth-xx/oauth/-/graphs/main
-[🚎contributors-img]: https://img.shields.io/github/contributors-anon/oauth-xx/oauth-ruby
 [🖐style-wf]: https://github.com/oauth-xx/oauth-ruby/actions/workflows/style.yml
 [🖐style-wf-img]: https://github.com/oauth-xx/oauth-ruby/actions/workflows/style.yml/badge.svg
 
@@ -133,15 +133,15 @@ The link tokens in the following sections should be kept ordered by the row and 
 [🧮cov-wf-img]: https://github.com/oauth-xx/oauth-ruby/actions/workflows/coverage.yml/badge.svg
 
 <!-- 6️⃣ resources -->
-[⛳gh-discussions]: https://github.com/oauth-xx/oauth-ruby/discussions
-[⛳gh-discussions-img]: https://img.shields.io/github/discussions/oauth-xx/oauth-ruby
+[⛳mail-list]: http://groups.google.com/group/oauth-ruby
+[⛳mail-list-img]: https://img.shields.io/badge/group-mailinglist-violet.svg?style=social&logo=google
 [🖇codementor]: https://www.codementor.io/peterboling?utm_source=github&utm_medium=button&utm_term=peterboling&utm_campaign=github
 [🖇codementor-img]: https://cdn.codementor.io/badges/get_help_github.svg
 [🏘chat]: https://gitter.im/oauth-xx/oauth-ruby
 [🏘chat-img]: https://img.shields.io/gitter/room/oauth-xx/oauth-ruby.svg
 [🚎blog]: http://www.railsbling.com/tags/oauth-ruby/
 [🚎blog-img]: https://img.shields.io/badge/blog-railsbling-brightgreen.svg?style=flat
-[🖐wiki]: https://github.com/oauth-xx/oauth-ruby/wiki
+[🖐wiki]: https://gitlab.com/oauth-xx/oauth/-/wikis/home
 [🖐wiki-img]: https://img.shields.io/badge/wiki-examples-brightgreen.svg?style=flat
 
 <!-- 7️⃣ spread 💖 -->
@@ -151,10 +151,18 @@ The link tokens in the following sections should be kept ordered by the row and 
 [🖇sponsor]: https://github.com/sponsors/pboling
 [🏘tweet-img]: https://img.shields.io/twitter/follow/galtzo.svg?style=social&label=Follow
 [🏘tweet]: http://twitter.com/galtzo
+[🚎code-conduct]: https://gitlab.com/oauth-xx/oauth/-/blob/main/CODE_OF_CONDUCT.md
+[🚎code-conduct-img]: https://img.shields.io/badge/code-conduct-black.svg?style=flat
 
-<!-- Maintainer Contact Links -->
-[railsbling]: http://www.railsbling.com
+<!-- Maintainer Links -->
+[aboutme]: https://about.me/peter.boling
+[angelme]: https://angel.co/peter-boling
+[coderme]:http://coderwall.com/pboling
+[followme-img]: https://img.shields.io/twitter/follow/galtzo.svg?style=social&label=Follow
+[gh_sponsors]: https://github.com/sponsors/pboling
+[liberapay_donate]: https://liberapay.com/pboling/donate
 [peterboling]: http://www.peterboling.com
+[railsbling]: http://www.railsbling.com
 
 ## Installation
 
@@ -182,15 +190,15 @@ For more see [SECURITY.md][🚎sec-pol].
 ## Compatibility
 
 Targeted ruby compatibility is non-EOL versions of Ruby, currently 2.7, 3.0, and
-3.1. Ruby is limited to 2.7+ in the gemspec, and this will change with minor version bumps,
-while the gem is still in 0.x, in accordance with the SemVer spec.
+3.1. Ruby is limited to 2.7+ in the gemspec, and this will change with major version bumps,
+in accordance with the SemVer spec.
 
 The `main` branch now targets 1.1.x releases, for Ruby >= 2.7.
-See `v1.0-maintenance` (EOL April, 2025) branch for Ruby >= 2.7.
-See `v0.6-maintenance` (EOL April, 2024) branch for Ruby >= 2.4.
+See `v1.0-maintenance` (EOL April, 2023) branch for Ruby >= 2.7.
+See `v0.6-maintenance` (EOL April, 2023) branch for Ruby >= 2.4.
 See `v0.5-maintenance` (EOL April, 2023) branch for Ruby >= 2.0.
 
-NOTE: No further releases of version < 1.0.x are anticipated.
+NOTE: No further releases of versions < 1.0.x are anticipated.
 
 <details>
   <summary>Ruby Engine Compatibility Policy</summary>
@@ -220,15 +228,14 @@ fashion. If critical issues for a particular implementation exist at the time
 of a major release, support for that Ruby version may be dropped.
 </details>
 
-|     | Ruby OAuth Version | Maintenance Branch | EOL       | 🚂 Compatibility       | Official 💎   | Unofficial 💎                | Incidental 💎 |
-|:----|--------------------|--------------------|-----------|------------------------|---------------|------------------------------|---------------|
-| 1️⃣ | 1.1.x              | `main`             | 05/2025   | Rails 6, 7             | 2.7, 3.0, 3.1 | none                         | none          |
-| 2️⃣ | 1.0.x              | `v1.0-maintenance` | 04/2023   | Rails 6, 7             | 2.7, 3.0, 3.1 | none                         | none          |
-| 3️⃣ | 0.6.x              | `v0.6-maintenance` | 04/2024   | Rails 5, 6, 7          | 2.7, 3.0, 3.1 | 2.5, 2.6                     | 2.4           |
-| 4️⃣ | 0.5.x              | `v0.5-maintenance` | 04/2023   | Rails 2, 3, 4, 5, 6, 7 | 2.7, 3.0, 3.1 | 2.1, 2.2, 2.3, 2.4, 2.5, 2.6 | 2.0           |
-| 5️⃣ | older              | N/A                | yesterday | ?                      | none          | none                         | none          |
+|     | Ruby OAuth Version | Maintenance Branch | EOL     | 🚂 Compatibility       | Official 💎   | Unofficial 💎                | Incidental 💎 |
+|:----|--------------------|--------------------|---------|------------------------|---------------|------------------------------|---------------|
+| 1️⃣ | 1.1.x              | `main`             | 04/2023 | Rails 6, 7             | 2.7, 3.0, 3.1 | none                         | none          |
+| 2️⃣ | 1.0.x              | `v1.0-maintenance` | 04/2023 | Rails 6, 7             | 2.7, 3.0, 3.1 | none                         | none          |
+| 3️⃣ | 0.6.x              | `v0.6-maintenance` | 04/2023 | Rails 5, 6, 7          | 2.7, 3.0, 3.1 | 2.5, 2.6                     | 2.4           |
+| 4️⃣ | 0.5.x              | `v0.5-maintenance` | 04/2023 | Rails 2, 3, 4, 5, 6, 7 | 2.7, 3.0, 3.1 | 2.1, 2.2, 2.3, 2.4, 2.5, 2.6 | 2.0           |
+| 5️⃣ | older              | ⛔                  | ⛔       | ⛔                      | ⛔             | ⛔                            | ⛔             |
 
-NOTE: Once 1.0 is released, the 0.x series will only receive critical bug and security updates.
 See [SECURITY.md][🚎sec-pol]
 
 🚂 NOTE: See notes on Rails in next section.
@@ -304,27 +311,30 @@ hydra.run
 
 ## More Information
 
-* RubyDoc Documentation: [![RubyDoc.info](https://img.shields.io/badge/documentation-rubydoc-brightgreen.svg?style=flat)][documentation]
-* Mailing List/Google Group: [![Mailing List](https://img.shields.io/badge/group-mailinglist-violet.svg?style=social&logo=google)][mailinglist]
-* GitHub Discussions: [![Discussion](https://img.shields.io/badge/discussions-github-brightgreen.svg?style=flat)][gh_discussions]
-* Live Chat on Gitter: [![Join the chat at https://gitter.im/oauth-xx/oauth-ruby](https://badges.gitter.im/Join%20Chat.svg)][chat]
-* Maintainer's Blog: [![Blog](https://img.shields.io/badge/blog-railsbling-brightgreen.svg?style=flat)][blogpage]
+* RubyDoc Documentation: [![RubyDoc.info][🚎yard-img]][🚎yard]
+* Mailing List/Google Group: [![Mailing List][⛳mail-list-img]][⛳mail-list]
+* Live Chat on Gitter: [![Join the chat at https://gitter.im/oauth-xx/oauth-ruby][🏘chat-img]][🏘chat]
+* Maintainer's Blog: [![Blog][🚎blog-img]][🚎blog]
+
+## Code of Conduct
+
+Everyone interacting in this project's codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct][🚎code-conduct].
 
 ## Contributing
 
-See [CONTRIBUTING.md][contributing]
+Bug reports and pull requests are welcome on GitLab at [https://gitlab.com/oauth-xx/oauth/-/issues][issues].
+
+This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [code of conduct][🚎code-conduct].
+
+See [CONTRIBUTING.md][contributing] for detailed instructions on how to help!
 
 ## Contributors
 
-[![Contributors](https://contrib.rocks/image?repo=oauth-xx/oauth-ruby)][contributors]
-
-Made with [contributors-img][contrib-rocks].
-
-[contrib-rocks]: https://contrib.rocks
+See [https://gitlab.com/oauth-xx/oauth/-/graphs/main][🚎contributors]
 
 ## Versioning
 
-This library aims to adhere to [Semantic Versioning 2.0.0][semver]. Violations of this scheme should be reported as
+This library aims to adhere to [Semantic Versioning 2.0.0][🧮semver]. Violations of this scheme should be reported as
 bugs. Specifically, if a minor or patch version is released that breaks backward compatibility, a new version should be
 immediately released that restores compatibility. Breaking changes to the public API will only be introduced with new
 major versions.  Compatibility with a major and minor versions of Ruby will only be changed with a major version bump.
@@ -341,46 +351,20 @@ spec.add_dependency "oauth", "~> 1.1"
 ## License
 
 The gem is available as open source under the terms of
-the [MIT License][license] [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)][license-ref].
+the [MIT License][license] [![License: MIT][🖇src-license-img]][🖇src-license].
 See [LICENSE.txt][license] for the [Copyright Notice][copyright-notice-explainer].
 
 ## Contact
 
 OAuth Ruby has been created and maintained by a large number of talented
-individuals. The current maintainer is Peter Boling ([@pboling][gh_sponsors]).
+individuals. The current maintainer is Peter Boling (@pboling).  Please
+[support with donations at Liberapay][liberapay_donate]).
 
-Comments are welcome. Contact the [OAuth Ruby mailing list (Google Group)][mailinglist] or [GitHub Discussions][gh_discussions].
+Comments are welcome. Contact the [OAuth Ruby mailing list (Google Group)][⛳mail-list] or [join the live chat at https://gitter.im/oauth-xx/oauth-ruby][🏘chat].
 
-[comment]: <> (Following links are used by README, CONTRIBUTING, Homepage)
-
-[conduct]: https://gitlab.com/oauth-xx/oauth/-/blob/main/CODE_OF_CONDUCT.md
 [contributing]: https://gitlab.com/oauth-xx/oauth/-/blob/main/CONTRIBUTING.md
-[contributors]: https://gitlab.com/oauth-xx/oauth/-/graphs/main
-[mailinglist]: http://groups.google.com/group/oauth-ruby
-[source]: https://github.com/oauth-xx/oauth-ruby/
-
-[comment]: <> (Following links are used by README, Homepage)
-
-[aboutme]: https://about.me/peter.boling
+[copyright-notice-explainer]: https://opensource.stackexchange.com/questions/5778/why-do-licenses-such-as-the-mit-license-specify-a-single-year
 [actions]: https://github.com/oauth-xx/oauth-ruby/actions
-[angelme]: https://angel.co/peter-boling
-[blogpage]: http://www.railsbling.com/tags/oauth/
-[chat]: https://gitter.im/oauth-xx/oauth-ruby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge
-[climate_coverage]: https://codeclimate.com/github/oauth-xx/oauth-ruby/test_coverage
-[climate_maintainability]: https://codeclimate.com/github/oauth-xx/oauth-ruby/maintainability
-[code_triage]: https://www.codetriage.com/oauth-xx/oauth-ruby
-[codecov_coverage]: https://codecov.io/gh/oauth-xx/oauth-ruby
-[coderme]:http://coderwall.com/pboling
-[depfu]: https://depfu.com/github/oauth-xx/oauth-ruby?project_id=22868
-[documentation]: https://rubydoc.info/github/oauth-xx/oauth-ruby
-[followme-img]: https://img.shields.io/twitter/follow/galtzo.svg?style=social&label=Follow
-[gh_discussions]: https://github.com/oauth-xx/oauth-ruby/discussions
-[gh_sponsors]: https://github.com/sponsors/pboling
+[issues]: https://gitlab.com/oauth-xx/oauth/-/issues
 [license]: https://gitlab.com/oauth-xx/oauth/-/blob/main/LICENSE.txt
-[license-ref]: https://opensource.org/licenses/MIT
-[liberapay_donate]: https://liberapay.com/pboling/donate
 [pvc]: http://guides.rubygems.org/patterns/#pessimistic-version-constraint
-[rubygems]: https://rubygems.org/gems/oauth
-[security]: https://gitlab.com/oauth-xx/oauth/-/blob/main/SECURITY.md
-[semver]: http://semver.org/
-[tweetme]: http://twitter.com/galtzo
