@@ -95,8 +95,6 @@ GEM
       parser (>= 3.1.1.0)
     rubocop-lts (18.0.1)
       rubocop-ruby2_7 (~> 1.0.6)
-    rubocop-md (1.0.1)
-      rubocop (>= 1.0)
     rubocop-minitest (0.22.0)
       rubocop (>= 0.90, < 2.0)
     rubocop-packaging (0.5.1)
@@ -164,7 +162,6 @@ DEPENDENCIES
   redcarpet
   rest-client
   rubocop-lts (~> 18.0)
-  rubocop-md
   rubocop-minitest
   rubocop-packaging
   rubocop-performance

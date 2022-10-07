@@ -13,7 +13,8 @@ gem "pry", platforms: %i[mri]
 platforms :mri do
   gem "codecov", "~> 0.6" # For CodeCov
   gem "overcommit", "~> 0.58"
-  gem "rubocop-md"
+  # See: https://github.com/rubocop/rubocop-md/issues/14
+  # gem "rubocop-md"
   gem "rubocop-minitest"
   gem "rubocop-packaging"
   gem "rubocop-performance"

@@ -4,7 +4,8 @@ inherit_gem:
   rubocop-lts: rubocop-lts.yml
 
 require:
-  - 'rubocop-md'
+  # See: https://github.com/rubocop/rubocop-md/issues/14
+  #  - 'rubocop-md'
   - 'rubocop-minitest'
   - 'rubocop-packaging'
   - 'rubocop-performance'
