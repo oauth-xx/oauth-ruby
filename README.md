@@ -22,9 +22,9 @@ See the sibling `oauth2` gem for OAuth 2.0 implementations in Ruby.
 
 **New EOL Policy**
 
-Versions 1.1.x will be EOL no later than April, 2025.
+Versions 1.1.x will be EOL no later than April, 2023.
 Versions 1.0.x will be EOL no later than April, 2023.
-Versions 0.6.x will be EOL no later than April, 2024.
+Versions 0.6.x will be EOL no later than April, 2023.
 Versions 0.5.x will be EOL no later than April, 2023.
 
 This will facilitate dropping support for old, dead, and crusty versions of Ruby.
