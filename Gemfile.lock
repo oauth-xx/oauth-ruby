@@ -53,8 +53,8 @@ GEM
     minitest (5.15.0)
     mocha (1.14.0)
     netrc (0.11.0)
-    oauth-tty (1.0.3)
-      version_gem (~> 1.1)
+    oauth-tty (1.0.5)
+      version_gem (~> 1.1, >= 1.1.1)
     overcommit (0.59.1)
       childprocess (>= 0.6.3, < 5)
       iniparse (~> 1.4)
@@ -131,7 +131,7 @@ GEM
       unf_ext
     unf_ext (0.0.8.2)
     unicode-display_width (2.3.0)
-    version_gem (1.1.0)
+    version_gem (1.1.4)
     webmock (3.18.1)
       addressable (>= 2.8.0)
       crack (>= 0.3.2)
@@ -142,6 +142,7 @@ GEM
 
 PLATFORMS
   x86_64-darwin-21
+  x86_64-linux
 
 DEPENDENCIES
   byebug
