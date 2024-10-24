@@ -368,3 +368,17 @@ Comments are welcome. Contact the [OAuth Ruby mailing list (Google Group)][⛳ma
 [issues]: https://gitlab.com/oauth-xx/oauth/-/issues
 [license]: https://gitlab.com/oauth-xx/oauth/-/blob/main/LICENSE.txt
 [pvc]: http://guides.rubygems.org/patterns/#pessimistic-version-constraint
+
+## 🤑 One more thing
+
+You made it to the bottom of the page,
+so perhaps you'll indulge me for another 20 seconds.
+I maintain many dozens of gems, including this one,
+because I want Ruby to be a great place for people to solve problems, big and small.
+Please consider supporting my efforts via the giant yellow link below,
+or one of the others at the head of this README.
+
+[![Buy me a latte][🖇buyme-img]][🖇buyme]
+
+[🖇buyme-img]: https://img.buymeacoffee.com/button-api/?text=Buy%20me%20a%20latte&emoji=&slug=pboling&button_colour=FFDD00&font_colour=000000&font_family=Cookie&outline_colour=000000&coffee_colour=ffffff
+[🖇buyme]: https://www.buymeacoffee.com/pboling
