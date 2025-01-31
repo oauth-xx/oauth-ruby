@@ -18,7 +18,7 @@ See the sibling `oauth2` gem for OAuth 2.0 implementations in Ruby.
 * [oauth2 sibling gem][sibling-gem] for OAuth 2.0 implementations in Ruby.
 
 [oauth1-spec]: http://oauth.net/core/1.0/
-[sibling-gem]: https://gitlab.com/oauth-xx/oauth
+[sibling-gem]: https://gitlab.com/oauth-xx/oauth2
 
 **New EOL Policy**
 
