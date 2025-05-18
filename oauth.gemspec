@@ -89,5 +89,5 @@ Thanks, |7eter l-|. l3oling
   spec.add_development_dependency("rest-client")
   spec.add_development_dependency("rubocop-lts", "~> 18.0")
   spec.add_development_dependency("typhoeus", ">= 0.1.13")
-  spec.add_development_dependency("webmock", "<= 3.19.0")
+  spec.add_development_dependency("webmock", "<= 3.26.0")
 end
