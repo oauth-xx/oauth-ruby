@@ -9,16 +9,18 @@ PATH
 GEM
   remote: https://rubygems.org/
   specs:
-    addressable (2.8.1)
-      public_suffix (>= 2.0.2, < 6.0)
+    addressable (2.8.7)
+      public_suffix (>= 2.0.2, < 7.0)
     ast (2.4.2)
+    bigdecimal (3.1.9)
     byebug (11.1.3)
     childprocess (4.1.0)
     codecov (0.6.0)
       simplecov (>= 0.15, < 0.22)
     coderay (1.1.3)
     cookiejar (0.3.3)
-    crack (0.4.5)
+    crack (1.0.0)
+      bigdecimal
       rexml
     curb (1.0.6)
     diff-lcs (1.5.1)
@@ -39,7 +41,7 @@ GEM
     eventmachine (1.2.7)
     ffi (1.15.5)
     github-markup (4.0.1)
-    hashdiff (1.0.1)
+    hashdiff (1.1.2)
     hashie (5.0.0)
     http-accept (1.7.0)
     http-cookie (1.0.5)
@@ -73,7 +75,7 @@ GEM
     pry-byebug (3.10.1)
       byebug (~> 11.0)
       pry (>= 0.13, < 0.15)
-    public_suffix (5.0.0)
+    public_suffix (5.1.1)
     racc (1.8.1)
     rack (3.1.15)
     rack-test (2.1.0)
@@ -87,7 +89,7 @@ GEM
       http-cookie (>= 1.0.2, < 2.0)
       mime-types (>= 1.16, < 4.0)
       netrc (~> 0.8)
-    rexml (3.3.9)
+    rexml (3.4.1)
     rubocop (1.66.1)
       json (~> 2.3)
       language_server-protocol (>= 3.17.0)
@@ -175,7 +177,7 @@ GEM
     unf_ext (0.0.8.2)
     unicode-display_width (2.5.0)
     version_gem (1.1.4)
-    webmock (3.18.1)
+    webmock (3.25.1)
       addressable (>= 2.8.0)
       crack (>= 0.3.2)
       hashdiff (>= 0.4.0, < 2.0.0)
@@ -214,7 +216,7 @@ DEPENDENCIES
   simplecov-json
   simplecov-lcov (~> 0.8)
   typhoeus (>= 0.1.13)
-  webmock (<= 3.19.0)
+  webmock (<= 3.26.0)
   yard
 
 BUNDLED WITH
