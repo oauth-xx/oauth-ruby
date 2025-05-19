@@ -40,7 +40,7 @@ GEM
       ffi (>= 1.15.0)
     eventmachine (1.2.7)
     ffi (1.15.5)
-    github-markup (4.0.1)
+    github-markup (4.0.2)
     hashdiff (1.1.2)
     hashie (5.0.0)
     http-accept (1.7.0)
