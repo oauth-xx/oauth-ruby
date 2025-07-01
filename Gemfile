@@ -12,7 +12,7 @@ curb = !Gem.win_platform?
 gem "pry", platforms: %i[mri]
 platforms :mri do
   gem "codecov", "~> 0.6" # For CodeCov
-  gem "overcommit", "~> 0.67"
+  gem "overcommit", "~> 0.68"
   # See: https://github.com/rubocop/rubocop-md/issues/14
   # gem "rubocop-md"
   gem "rubocop-minitest"
